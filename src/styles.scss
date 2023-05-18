@@ -1,1 +1,152 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$midox-primary: mat.define-palette(mat.$indigo-palette);
+$midox-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$midox-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$midox-theme: mat.define-light-theme((
+  color: (
+    primary: $midox-primary,
+    accent: $midox-accent,
+    warn: $midox-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($midox-theme);
+
 /* You can add global styles to this file, and also import other style files */
+@import './app/sass/variables';
+
+@import "~bootstrap/scss/bootstrap";
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$mat-primary: (50: #E7E8EA, 100: #C4C5CA, 200: #9C9FA6, 300: #747982, 400: #575C68, 500: #393F4D, 600: #333946, 700: #2C313D, 800: #242934, 900: #171B25, A100: #6A93FF, A200: #376EFF, A400: #0449FF, A700: #0040EA, contrast: (50: #000000, 100: #000000, 200: #000000, 300: #ffffff, 400: #ffffff, 500: #ffffff, 600: #ffffff, 700: #ffffff, 800: #ffffff, 900: #ffffff, A100: #000000, A200: #ffffff, A400: #ffffff, A700: #ffffff, ));
+$relyfynet-primary: mat-palette($mat-primary);
+$relyfynet-accent: mat-palette($mat-amber, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$relyfynet-warn: mat-palette($mat-red);
+// Create the theme object (a Sass map containing all of the palettes).
+$relyfynet-theme: mat-light-theme($relyfynet-primary, $relyfynet-accent, $relyfynet-warn);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($relyfynet-theme);
+//Include custom typography here
+$custom-typography: mat-typography-config($font-family: 'Roboto, Helvetica Neue, sans-serif', $display-4: mat-typography-level(11.2rem, 11.2rem, 300), $display-3: mat-typography-level(5.6rem, 5.6rem, 400), $display-2: mat-typography-level(4.5rem, 4.8rem, 400), $display-1: mat-typography-level(3.4rem, 4rem, 400), $headline: mat-typography-level(2.4rem, 3.2rem, 400), $title: mat-typography-level(2rem, 3.2rem, 500), $subheading-2: mat-typography-level(1.6rem, 2.8rem, 400), $subheading-1: mat-typography-level(1.5rem, 2.4rem, 400), $body-2: mat-typography-level(1.4rem, 2.4rem, 500), $body-1: mat-typography-level(1.4rem, 2rem, 400), $caption: mat-typography-level(1.2rem, 2rem, 400), $button: mat-typography-level(1.4rem, 1.4rem, 500), // Line-height must be unit-less fraction of the font-size.
+$input: mat-typography-level(1.6rem, 1.25, 400));
+@include mat-core($custom-typography);
+
+/* Global style (Layout structure) */
+
+// ====================================================================================
+body,
+html {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+// Foundation
+// -----------------------------------------------------------
+
+/* Text */
+
+h1 {
+    font-size: 3.2rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+h1,
+h2 {
+    font-weight: lighter;
+}
+
+h4,
+h5 {
+    font-size: 1.4rem;
+}
+
+p,
+span {
+    font-size: 1.4rem;
+}
+
+label {
+    font-size: 1.6rem;
+    outline: none;
+}
+
+small {
+    font-size: 1.2rem;
+}
+
+ol, ul {
+  li {
+    font-size:1.6rem;
+  }
+}
+
+
+/* Hyperlink */
+
+a {
+    text-decoration: none !important;
+    @include prefixer(transition, all 0.2s ease, ("webkit", "moz"));
+    font-size: 1.6rem;
+    &:focus,
+    &:hover {
+        outline: none;
+        color: $secondary-color;
+    }
+}
+
+
+/* Form Fields */
+
+input {
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #BDBDBD;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

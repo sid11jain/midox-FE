@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
-    path:'dashboard', loadChildren:()=>import('./dashboard/dashboard.module').then(mod=>mod.DashboardModule)
+    path:'login', component: LoginComponent
+  },
+  {
+    path:'signup', component: SignupComponent
+  },
+  {
+    path:'', loadChildren:()=>import('./dashboard/dashboard.module').then(mod=>mod.DashboardModule)
   },
   {
     path:'inventory', loadChildren:()=>import('./inventory/inventory.module').then(mod=>mod.InventoryModule)
