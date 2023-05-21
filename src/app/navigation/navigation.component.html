@@ -1,0 +1,52 @@
+<div class="row navigation-row">
+    <a [routerLink]="['/']" class="logo-icon">
+        <img src="" alt="image">
+    </a>
+    <ul class="row tab-list">
+        <a [routerLink]="['/dashboard']" class="d-flex mb-5" routerLinkActive="active">
+            <span class="material-symbols-outlined me-4">
+                dashboard
+            </span>
+            <li>Dashboard</li>
+        </a>
+        <a [routerLink]="['/inventory']" class="d-flex mb-5" routerLinkActive="active">
+            <span class="material-symbols-outlined me-4">
+                bar_chart
+            </span>
+            <li>Inventory</li>
+        </a>
+        <a [routerLink]="['/adda']" class="d-flex mb-5" routerLinkActive="active">
+            <span class="material-symbols-outlined me-4">
+                speaker_notes
+            </span>
+            <li>Adda</li>
+        </a>
+        <a [routerLink]="['/employee']" class="d-flex mb-5" routerLinkActive="active">
+            <span class="material-symbols-outlined me-4">
+                group
+            </span>
+            <li>Employee</li>
+        </a>
+        <a [routerLink]="['/settings']" class="d-flex mb-5" routerLinkActive="active">
+            <span class="material-symbols-outlined me-4">
+                settings
+            </span>
+            <li>Settings</li>
+        </a>
+        <hr>
+
+        <a [routerLink]="['/logout']" class="d-flex mb-50 mt-4" routerLinkActive="active">
+            <span class="material-symbols-outlined me-4">
+                logout
+            </span>
+            <li>Logout</li>
+        </a>
+        <a [routerLink]="['/help']" class="d-flex mb-5" routerLinkActive="active">
+            <span class="material-symbols-outlined me-4">
+                help
+            </span>
+            <li>Help</li>
+        </a>
+        
+    </ul>
+</div>

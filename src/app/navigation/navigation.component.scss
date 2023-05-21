@@ -1,0 +1,34 @@
+@import '../sass/variables';
+
+
+:host {
+    height: 100vh !important;
+    display: flex;
+}
+
+
+.active{
+    background-color: #fff !important;
+    color: $primary-color !important;
+}
+
+.navigation-row {
+    background-color: $primary-color;
+    .logo-icon {
+        height: 40px;
+    }
+
+    .tab-list {
+        list-style-type: none;
+        padding: 0;
+        a{
+            color: #fff;
+            font-weight: 600;
+            padding-left: 35px;
+            align-items: center;
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}

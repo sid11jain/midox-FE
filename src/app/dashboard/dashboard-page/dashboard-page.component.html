@@ -1,1 +1,88 @@
-<p>dashboard-page works!</p>
+<div class="dashboard-page">
+    <div class="row mb-4">
+        <div class="row col-3">
+            <div class="row col-12 top-card">
+                <div class="col-9 card-detail">
+                    <span>Total Adda</span>
+                    <span>500</span>
+                </div>
+                <div class="col-3">
+                    <span class="material-symbols-outlined icon-top">
+                        numbers
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row col-3">
+            <div class="row col-12 top-card">
+                <div class="col-9 card-detail">
+                    <span>Bundle</span>
+                    <span>1500</span>
+                </div>
+                <div class="col-3">
+                    <span class="material-symbols-outlined icon-top">
+                        workspaces
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row col-3">
+            <div class="row col-12 top-card">
+                <div class="col-9 card-detail">
+                    <span>Employees</span>
+                    <span>250</span>
+                </div>
+                <div class="col-3">
+                    <span class="material-symbols-outlined icon-top">
+                        diversity_1
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row col-3">
+            <div class="row col-12 top-card">
+                <div class="col-9 card-detail">
+                    <span>Job Card</span>
+                    <span>3000</span>
+                </div>
+                <div class="col-3">
+                    <span class="material-symbols-outlined icon-top">
+                        redeem
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="row col-3">
+            <div class="row p-0 card col-12 chart-card">
+                <div class="card-header">
+                    <strong>Chart</strong>
+                </div>
+                <div class="card-body">
+                    <canvas baseChart class="chart"
+                        [data]="pieChartData"
+                        [type]="pieChartType"
+                        [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins">
+                    </canvas>
+                </div>
+            </div>  
+        </div>
+        <div class="row col-9">
+            <div class="row col-6">
+                <div class="chart-card">
+
+                </div>
+            </div>
+            <div class="row col-6">
+                <div class="chart-card">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+</div>
