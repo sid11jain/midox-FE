@@ -1,5 +1,5 @@
 <div class="dashboard-page">
-    <div class="row mb-4">
+    <div class="row mb-4 pe-3">
         <div class="row col-3">
             <div class="row col-12 top-card">
                 <div class="col-9 card-detail">
@@ -57,10 +57,10 @@
         <div class="row col-3">
             <div class="row p-0 card col-12 chart-card">
                 <div class="card-header">
-                    <strong>Chart</strong>
+                    <strong>Bundle</strong>
                 </div>
-                <div class="card-body">
-                    <canvas baseChart class="chart"
+                <div class="card-body chart-body-1">
+                    <canvas baseChart class="chart" 
                         [data]="pieChartData"
                         [type]="pieChartType"
                         [options]="pieChartOptions"
@@ -71,18 +71,89 @@
         </div>
         <div class="row col-9">
             <div class="row col-6">
-                <div class="chart-card">
-
+                <div class="row p-0 card col-12 chart-card">
+                    <div class="card-header">
+                        <strong>Add Completed Per Month</strong>
+                    </div>
+                    <div class="card-body chart-body-2">
+                        <canvas baseChart class="chart"
+                            [data]="barChartData"
+                            [options]="barChartOptions"
+                            [plugins]="barChartPlugins"
+                            [type]="barChartType"
+                            (chartHover)="chartHovered($event)">
+                        </canvas>
+                    </div>
                 </div>
             </div>
             <div class="row col-6">
-                <div class="chart-card">
-
+                <div class="row p-0 card col-12 chart-card">
+                    <div class="card-header">
+                        <strong>Bundle</strong>
+                    </div>
+                    <div class="card-body chart-body-2">
+                        <canvas baseChart class="chart"
+                            [data]="barBundleChartData"
+                            [options]="barChartOptions"
+                            [plugins]="barChartPlugins"
+                            [type]="barChartType"
+                            (chartHover)="chartHovered($event)">
+                        </canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        
+    <div class="row mb-4">
+        <div class="row col-3">
+            <div class="row p-0 card col-12 chart-card">
+                <div class="card-header">
+                    <strong>Cloth</strong>
+                </div>
+                <div class="card-body chart-body-1">
+                    <canvas baseChart class="chart" 
+                        [data]="pieChartData"
+                        [type]="pieChartType"
+                        [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins">
+                    </canvas>
+                </div>
+            </div>  
+        </div>
+        <div class="row col-9">
+            <div class="row col-6">
+                <div class="row p-0 card col-12 chart-card">
+                    <div class="card-header">
+                        <strong>Accessories</strong>
+                    </div>
+                    <div class="card-body chart-body-2">
+                        <canvas baseChart class="chart"
+                            [data]="barChartData"
+                            [options]="barChartOptions"
+                            [plugins]="barChartPlugins"
+                            [type]="barChartType"
+                            (chartHover)="chartHovered($event)">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-6">
+                <div class="row p-0 card col-12 chart-card">
+                    <div class="card-header">
+                        <strong>Dispatch</strong>
+                    </div>
+                    <div class="card-body chart-body-2">
+                        <canvas baseChart class="chart"
+                            [datasets]="barStackedChartData"
+                            [labels]="barChartLabels"
+                            [options]="barChartOptions"
+                            [plugins]="barChartPlugins"
+                            [type]="barChartType"
+                            (chartHover)="chartHovered($event)">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
