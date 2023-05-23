@@ -1,34 +1,44 @@
 <div class="row navigation-row">
     <a [routerLink]="['/']" class="logo-icon">
-        <img src="" alt="image">
+        <img src="../../assets/logo.png" alt="logo" class="midox">
     </a>
     <ul class="row tab-list">
         <a [routerLink]="['/dashboard']" class="d-flex mb-5" routerLinkActive="active">
-            <span class="material-symbols-outlined me-4">
+            <span class="material-symbols-outlined me-2">
                 dashboard
             </span>
             <li>Dashboard</li>
         </a>
-        <a [routerLink]="['/inventory']" class="d-flex mb-5" routerLinkActive="active">
-            <span class="material-symbols-outlined me-4">
+        <a [routerLink]="['/inventory']" class="d-flex mb-5" routerLinkActive="active" [matMenuTriggerFor]="menu">
+            <span class="material-symbols-outlined me-2">
                 bar_chart
             </span>
             <li>Inventory</li>
         </a>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>dialpad</mat-icon>
+              <span>Redial</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <span>Disable alerts</span>
+            </button>
+        </mat-menu>
         <a [routerLink]="['/adda']" class="d-flex mb-5" routerLinkActive="active">
-            <span class="material-symbols-outlined me-4">
+            <span class="material-symbols-outlined me-2">
                 speaker_notes
             </span>
             <li>Adda</li>
         </a>
         <a [routerLink]="['/employee']" class="d-flex mb-5" routerLinkActive="active">
-            <span class="material-symbols-outlined me-4">
+            <span class="material-symbols-outlined me-2">
                 group
             </span>
             <li>Employee</li>
         </a>
         <a [routerLink]="['/settings']" class="d-flex mb-5" routerLinkActive="active">
-            <span class="material-symbols-outlined me-4">
+            <span class="material-symbols-outlined me-2">
                 settings
             </span>
             <li>Settings</li>
@@ -36,17 +46,16 @@
         <hr>
 
         <a [routerLink]="['/logout']" class="d-flex mb-50 mt-4" routerLinkActive="active">
-            <span class="material-symbols-outlined me-4">
+            <span class="material-symbols-outlined me-2">
                 logout
             </span>
             <li>Logout</li>
         </a>
         <a [routerLink]="['/help']" class="d-flex mb-5" routerLinkActive="active">
-            <span class="material-symbols-outlined me-4">
+            <span class="material-symbols-outlined me-2">
                 help
             </span>
             <li>Help</li>
         </a>
-        
     </ul>
 </div>

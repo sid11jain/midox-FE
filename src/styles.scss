@@ -36,6 +36,9 @@ $midox-theme: mat.define-light-theme((
 
 @import "devextreme/dist/css/dx.light.css";
 
+@import './app/sass/variables';
+@import './app/sass/helpers';
+
 /* Global style (Layout structure) */
 
 // ====================================================================================
@@ -46,58 +49,6 @@ html {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 62.5%;
 }
-
-body {
-    background-color: #fafafa;
-}
-
-// Foundation
-// -----------------------------------------------------------
-
-/* Text */
-
-h1 {
-    font-size: 3.2rem;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.6rem;
-}
-
-h1,
-h2 {
-    font-weight: lighter;
-}
-
-h4,
-h5 {
-    font-size: 1.4rem;
-}
-
-p,
-span {
-    font-size: 1.4rem;
-}
-
-label {
-    font-size: 1.6rem;
-    outline: none;
-}
-
-small {
-    font-size: 1.2rem;
-}
-
-ol, ul {
-  li {
-    font-size:1.6rem;
-  }
-}
-
 
 /* Hyperlink */
 
@@ -110,6 +61,9 @@ a {
     }
 }
 
+button {
+    font-size: 1rem;
+}
 
 /* Form Fields */
 
@@ -121,5 +75,7 @@ input {
     border: 1px solid #BDBDBD;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.row {
+    margin: 0;
+}
+  

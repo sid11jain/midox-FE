@@ -7,11 +7,11 @@
 }
 .dashboard-page {
     width: 100%;
-    padding: 30px 5px;
+    padding: 15px 10px;
     .top-card {
         background-color: #fff;
         border-radius: 10px;
-        height: 100px;
+        height: 85px;
         justify-content: center;
         align-items: center;
         border-left: 6px solid $primary-color;
@@ -36,7 +36,7 @@
     .chart-card {
         background-color: #fff;
         border-radius: 10px;
-        height: 250px;
+        height: 270px;
         justify-content: center;
         align-items: center;
         padding: 5px;
