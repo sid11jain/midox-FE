@@ -8,6 +8,8 @@ import { SignupComponent } from './signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { SharedModule } from './shared/shared/shared.module';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { SharedModule } from './shared/shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

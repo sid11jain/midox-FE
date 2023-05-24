@@ -17,12 +17,28 @@
         </a>
         <mat-menu #menu="matMenu">
             <button mat-menu-item>
-              <mat-icon>dialpad</mat-icon>
-              <span>Redial</span>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <span>Add Stock</span>
             </button>
             <button mat-menu-item>
               <mat-icon>notifications_off</mat-icon>
-              <span>Disable alerts</span>
+              <span>View</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <span>Stock History</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <span>Finish Goods</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <span>Dispatch</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <span>Dispatch History</span>
             </button>
         </mat-menu>
         <a [routerLink]="['/adda']" class="d-flex mb-link" routerLinkActive="active">
