@@ -1,0 +1,6 @@
+@import '../../sass/variables';
+
+:host ::ng-deep .dx-datagrid-headers{
+    background-color: $primary-color;
+    color: $white;
+}

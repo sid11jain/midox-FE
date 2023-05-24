@@ -18,27 +18,33 @@
         <mat-menu #menu="matMenu">
             <button mat-menu-item>
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <span>Add Stock</span>
+              <!-- <span>Add Stock</span> -->
+              <a [routerLink]="['inventory/add-stock']">Add Stock</a>
             </button>
             <button mat-menu-item>
               <mat-icon>notifications_off</mat-icon>
-              <span>View</span>
+              <a [routerLink]="['inventory/view']">View</a>
+              <!-- <span>View</span> -->
             </button>
             <button mat-menu-item>
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <span>Stock History</span>
+              <!-- <span>Stock History</span> -->
+              <a [routerLink]="['inventory/stock-history']">Stock History</a>
             </button>
             <button mat-menu-item>
               <mat-icon>notifications_off</mat-icon>
-              <span>Finish Goods</span>
+              <!-- <span>Finish Goods</span> -->
+              <a [routerLink]="['inventory/finish-goods']">Finish Goods</a>
             </button>
             <button mat-menu-item>
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <span>Dispatch</span>
+              <!-- <span>Dispatch</span> -->
+              <a [routerLink]="['inventory/dispatch']">Dispatch</a>
             </button>
             <button mat-menu-item>
               <mat-icon>notifications_off</mat-icon>
-              <span>Dispatch History</span>
+              <!-- <span>Dispatch History</span> -->
+              <a [routerLink]="['inventory/dispatch-history']">Dispatch History</a>
             </button>
         </mat-menu>
         <a [routerLink]="['/adda']" class="d-flex mb-link" routerLinkActive="active">
