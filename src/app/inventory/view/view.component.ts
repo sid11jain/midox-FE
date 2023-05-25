@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 
 @Component({
@@ -7,6 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent {
+  showSpinner:boolean = true;
+
+  ngOnInit(){
+    setTimeout(() => {
+      this.showSpinner = false
+    }, 5000);
+  }
 
   viewClothData: any = [
     {
