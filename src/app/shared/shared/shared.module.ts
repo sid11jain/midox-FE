@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DxDataGridModule } from 'devextreme-angular';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,8 @@ import { DxDataGridModule } from 'devextreme-angular';
     MatMenuModule,
     MatIconModule,
     // BrowserModule,
-    DxDataGridModule
+    DxDataGridModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { DxDataGridModule } from 'devextreme-angular';
     MatMenuModule,
     MatIconModule,
     // BrowserModule,
-    DxDataGridModule
+    DxDataGridModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }

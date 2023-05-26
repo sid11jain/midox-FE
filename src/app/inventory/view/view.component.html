@@ -1,5 +1,7 @@
-<div class="view mlr-rem-2">
-  <div class="accordion" id="accordionPanelsStayOpenExample">
+<div class="view mlr-rem-2 flex-center">
+  <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+
+  <div *ngIf=!showSpinner class="accordion" id="accordionPanelsStayOpenExample">
     <div class="cloths mt-10">
       <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">

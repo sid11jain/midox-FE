@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartDataset, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -11,6 +11,13 @@ import { BaseChartDirective } from 'ng2-charts';
 export class DashboardPageComponent {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
 
+  showSpinner:boolean = true;
+
+  ngOnInit(){
+    setTimeout(() => {
+      this.showSpinner = false
+    }, 5000);
+  }
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
