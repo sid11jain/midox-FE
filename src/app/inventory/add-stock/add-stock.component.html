@@ -17,11 +17,11 @@
   
     <!-- Date -->
     <div>
-      <label for="date">Date of Birth:</label>
+      <label for="date">Date</label>
       <input type="date" id="date" formControlName="date" required>
       <div *ngIf="userForm.controls.date.invalid && (userForm.controls.date.dirty || userForm.controls.date.touched)">
         <div *ngIf="userForm.controls.date.errors.required"  class="invalid-red">
-          Date of Birth is required.
+          Date is required.
         </div>
       </div>
     </div>
