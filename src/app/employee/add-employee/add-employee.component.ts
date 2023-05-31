@@ -16,9 +16,7 @@ export class AddEmployeeComponent implements OnInit {
     this.employeeForm = this.formBuilder.group({
       employeeName: ['', [Validators.required, Validators.minLength(3)]],
       dobEmployee: ['', Validators.required],
-      // employeeAdhaar: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]],
       employeeAdhaar: ['', [Validators.required, Validators.pattern(/^[0-9]{12}$/)]],
-      // employeeMobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       employeeMobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       currentFullTimestamp: [''],
       gender: ['', Validators.required],
