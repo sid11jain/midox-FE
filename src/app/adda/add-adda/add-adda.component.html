@@ -69,7 +69,7 @@
 
     <!-- Select Employee -->
     <div>
-        <label for="employeeName">Managing Info:</label>
+        <label for="employeeName">Select Employee:</label>
         <select id="employeeName" formControlName="employeeName" required>
           <option value="">Select</option>
           <option *ngFor="let option of employeeNameData" [value]="option">{{ option }}</option> 
