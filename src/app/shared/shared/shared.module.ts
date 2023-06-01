@@ -8,6 +8,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DxDataGridModule } from 'devextreme-angular';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     // BrowserModule,
     DxDataGridModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   exports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     // BrowserModule,
     DxDataGridModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ]
 })
 export class SharedModule { }
