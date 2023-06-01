@@ -48,18 +48,85 @@
               <a [routerLink]="['inventory/dispatch-history']" class="submenu-link" routerLinkActive="sub-active">Dispatch History</a>
             </button>
         </mat-menu>
-        <a [routerLink]="['/adda']" class="d-flex mb-link" routerLinkActive="active">
+        <!-- <a [routerLink]="['/adda']" class="d-flex mb-link" routerLinkActive="active"> -->
+        <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda">
             <span class="material-symbols-outlined me-2">
                 speaker_notes
             </span>
             <li>Adda</li>
         </a>
-        <a [routerLink]="['/employee']" class="d-flex mb-link" routerLinkActive="active">
+
+        <mat-menu #menuAdda="matMenu">
+            <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <a [routerLink]="['adda/add-adda']">Add Adda</a>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <a [routerLink]="['adda/view-adda']">View</a>
+              <!-- <span>View</span> -->
+            </button>
+            <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <!-- <span>Stock History</span> -->
+              <a [routerLink]="['adda/add-material']">Add Material</a>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <!-- <span>Finish Goods</span> -->
+              <a [routerLink]="['adda/add-pattern']">Add Pattern</a>
+            </button>
+            <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <!-- <span>Dispatch</span> -->
+              <a [routerLink]="['adda/bundle']">Bundle</a>
+            </button>
+            <!-- <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <a [routerLink]="['inventory/dispatch-history']">Dispatch History</a>
+            </button> -->
+        </mat-menu>
+
+        <!-- <a [routerLink]="['/employee']" class="d-flex mb-link" routerLinkActive="active"> -->
+            <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuEmployee">
             <span class="material-symbols-outlined me-2">
                 group
             </span>
             <li>Employee</li>
         </a>
+
+        <!-- For employees -->
+        <mat-menu #menuEmployee="matMenu">
+            <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <a [routerLink]="['employee/add-employee']">Add</a>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <a [routerLink]="['employee/view-employee']">View</a>
+              <!-- <span>View</span> -->
+            </button>
+            <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <!-- <span>Stock History</span> -->
+              <a [routerLink]="['employee/job-history']">Job History</a>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <!-- <span>Finish Goods</span> -->
+              <a [routerLink]="['employee/payment']">Payment</a>
+            </button>
+            <!-- <button mat-menu-item>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              <a [routerLink]="['adda/bundle']">Bundle</a>
+            </button> -->
+            <!-- <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <a [routerLink]="['inventory/dispatch-history']">Dispatch History</a>
+            </button> -->
+        </mat-menu>
+
+
         <a [routerLink]="['/settings']" class="d-flex mb-50" routerLinkActive="active">
             <span class="material-symbols-outlined me-2">
                 settings
@@ -74,11 +141,11 @@
             </span>
             <li>Logout</li>
         </a>
-        <a [routerLink]="['/help']" class="d-flex mb-5" routerLinkActive="active">
+        <!-- <a [routerLink]="['/help']" class="d-flex mb-5" routerLinkActive="active">
             <span class="material-symbols-outlined me-2">
                 help
             </span>
             <li>Help</li>
-        </a>
+        </a> -->
     </ul>
 </div>

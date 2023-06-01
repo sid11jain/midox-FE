@@ -6,7 +6,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 import { JobHistoryComponent } from './job-history/job-history.component';
 import { PaymentEmployeeComponent } from './payment-employee/payment-employee.component';
-
+import { SharedModule } from '../shared/shared/shared.module'; 
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { PaymentEmployeeComponent } from './payment-employee/payment-employee.co
   ],
   imports: [
     CommonModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
+    SharedModule
   ]
 })
 export class EmployeeModule { }

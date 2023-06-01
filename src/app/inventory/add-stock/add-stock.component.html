@@ -1,1 +1,149 @@
-<p>add-stock works!</p>
+<h1>Add Stock</h1>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <!-- billNumber -->
+    <div>
+      <label for="billNumber">Bill Number:</label>
+      <input type="text" id="billNumber" formControlName="billNumber" required>
+      <div *ngIf="userForm.controls.billNumber.invalid && (userForm.controls.billNumber.dirty || userForm.controls.billNumber.touched)"  class="invalid-red">
+        <div *ngIf="userForm.controls.billNumber.errors.required">
+          Bill Number is required.
+        </div>
+        <div *ngIf="userForm.controls.billNumber.errors.minlength">
+          Bill Number must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+  
+    <!-- Date -->
+    <div>
+      <label for="date">Date</label>
+      <input type="date" id="date" formControlName="date" required>
+      <div *ngIf="userForm.controls.date.invalid && (userForm.controls.date.dirty || userForm.controls.date.touched)">
+        <div *ngIf="userForm.controls.date.errors.required"  class="invalid-red">
+          Date is required.
+        </div>
+      </div>
+    </div>
+  
+    <!-- packingSlipNumber -->
+    <div>
+      <label for="packingSlipNumber">Packing Slip Number:</label>
+      <input type="text" id="packingSlipNumber" formControlName="packingSlipNumber" required>
+      <div *ngIf="userForm.controls.packingSlipNumber.invalid && (userForm.controls.packingSlipNumber.dirty || userForm.controls.packingSlipNumber.touched)" class="invalid-red">
+        <div *ngIf="userForm.controls.packingSlipNumber.errors.required">
+          Packing Slip Number is required.
+        </div>
+        <div *ngIf="userForm.controls.packingSlipNumber.errors.minlength">
+          Packing Slip Number must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+  
+    <!-- Supplier -->
+    <div>
+      <label for="supplier">Supplier:</label>
+      <select id="supplier" formControlName="supplier" required>
+        <option value="">Select</option>
+        <option *ngFor="let option of supplierData" [value]="option">{{ option }}</option> 
+      </select>
+      <div *ngIf="userForm.controls.supplier.invalid && (userForm.controls.supplier.dirty || userForm.controls.supplier.touched)"  class="invalid-red">
+        <div *ngIf="userForm.controls.supplier.errors.required">
+          Supplier is required.
+        </div>
+      </div>
+    </div>
+  
+    <!-- isCloth -->
+    <div>
+      <label for="isCloth">isCloth:</label>
+      <select id="isCloth" formControlName="isCloth" required>
+        <option value="">Select</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>  
+      </select>
+      <div *ngIf="userForm.controls.isCloth.invalid && (userForm.controls.isCloth.dirty || userForm.controls.isCloth.touched)"  class="invalid-red">
+        <div *ngIf="userForm.controls.isCloth.errors.required">
+          isCloth is required.
+        </div>
+      </div>
+    </div>
+  
+    <!-- Material -->
+    <div>
+      <label for="material">Material:</label>
+      <select id="material" formControlName="material" required>
+        <option value="">Select</option>
+        <option *ngFor="let option of materialData" [value]="option">{{ option }}</option> 
+      </select>
+      <div *ngIf="userForm.controls.material.invalid && (userForm.controls.material.dirty || userForm.controls.material.touched)"  class="invalid-red">
+        <div *ngIf="userForm.controls.material.errors.required">
+          Material is required.
+        </div>
+      </div>
+    </div>
+    
+    <!-- subCategory -->
+    <div>
+      <label for="subCategory">Sub Category:</label>
+      <select id="subCategory" formControlName="subCategory" required>
+        <option value="">Select</option>
+        <option *ngFor="let option of subCategoryData" [value]="option">{{ option }}</option>
+   
+      </select>
+      <div *ngIf="userForm.controls.subCategory.invalid && (userForm.controls.subCategory.dirty || userForm.controls.subCategory.touched)"  class="invalid-red">
+        <div *ngIf="userForm.controls.subCategory.errors.required">
+          Sub Category is required.
+        </div>
+      </div>
+    </div>
+  
+    <!-- colorFabricCode -->
+    <div>
+      <label for="colorFabricCode">Color Fabric Code:</label>
+      <select id="colorFabricCode" formControlName="colorFabricCode" required>
+        <option value="">Select</option>
+        <option *ngFor="let option of colorFabricCodeData" [value]="option">{{ option }}</option> 
+      </select>
+      <div *ngIf="userForm.controls.colorFabricCode.invalid && (userForm.controls.colorFabricCode.dirty || userForm.controls.colorFabricCode.touched)" class="invalid-red">
+        <div *ngIf="userForm.controls.colorFabricCode.errors.required">
+          Color Fabric Code is required.
+        </div>
+      </div>
+    </div>
+  
+    <!-- measurementType -->
+    <div>
+      <label for="measurementType">Measurement Type:</label>
+      <select id="measurementType" formControlName="measurementType" required>
+        <option value="">Select</option>
+        <option *ngFor="let option of measurementTypeData" [value]="option">{{ option }}</option> 
+      </select>
+      <div *ngIf="userForm.controls.measurementType.invalid && (userForm.controls.measurementType.dirty || userForm.controls.measurementType.touched)" class="invalid-red">
+        <div *ngIf="userForm.controls.measurementType.errors.required">
+          Measurement Type is required.
+        </div>
+      </div>
+    </div>
+  
+    <!-- Quantity -->
+    <div>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" formControlName="quantity">
+      <div *ngIf="userForm.controls.quantity.invalid && userForm.controls.quantity.touched" class="invalid-red">
+        <div *ngIf="userForm.controls.quantity.errors.required">Quantity is required.</div>
+        <div *ngIf="userForm.controls.quantity.errors.min">Quantity must be at least 1.</div>
+      </div>
+    </div>
+  
+    <!-- Amount -->
+    <div>
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" formControlName="amount">
+      <div *ngIf="userForm.controls.amount.invalid && userForm.controls.amount.touched" class="invalid-red">
+        <div *ngIf="userForm.controls.amount.errors.required">Amount is required.</div>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>

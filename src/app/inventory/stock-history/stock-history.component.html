@@ -1,1 +1,35 @@
-<p>stock-history works!</p>
+<h1>Stock History</h1>
+<div class="stock-history mlr-rem-2 flex-center">
+    <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+  
+    <div *ngIf=!showSpinner>
+      <div class="cloths mt-10">
+        <dx-data-grid id="gridContainer"
+                [dataSource]="viewClothData"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                [allowColumnResizing]="true"
+                [allowColumnReordering]="true"
+              >
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+  
+            <dxi-column dataField="cloth" caption="Cloth"></dxi-column>
+            <dxi-column dataField="sub_category" caption="Sub Category"></dxi-column>
+            <dxi-column dataField="measuring_unit" caption="Measuring Unit"></dxi-column>
+            <dxi-column dataField="avl_qty" caption="Available Qty"></dxi-column>  
+            <dxi-column dataField="bill_number" caption="Bill Number" [visible]="false"></dxi-column>
+            <dxi-column dataField="date" caption="Date" [visible]="false"></dxi-column>
+            <dxi-column dataField="packing_slip_number" caption="Packing Slip Number" [visible]="false"></dxi-column>
+            <dxi-column dataField="supplier_name" caption="Supplier Name" [visible]="false"></dxi-column>
+            <dxi-column dataField="material" caption="Material" [visible]="false"></dxi-column>
+            <dxi-column dataField="color_fabric_code" caption="Color Fabric Code" [visible]="false"></dxi-column>
+  
+            <dxo-search-panel [visible]="true"></dxo-search-panel>
+        </dx-data-grid>       
+      </div>
+    </div>
+  </div>
+  
