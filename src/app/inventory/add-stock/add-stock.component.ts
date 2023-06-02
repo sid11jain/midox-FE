@@ -10,11 +10,11 @@ export class AddStockComponent implements OnInit {
 
   userForm:any = FormGroup;
 
-  supplierData:any=["One","Two","Three","Four","Five"];
-  materialData:any=["One","Two","Three","Four","Five"];
-  subCategoryData:any=["One","Two","Three","Four","Five"];
-  measurementTypeData:any=["One","Two","Three","Four","Five"];
-  colorFabricCodeData:any=["One","Two","Three","Four","Five"];
+  supplierData:any=["Midox","Ciana"];
+  materialData:any=["Cotton","Button","Dhaga"];
+  subCategoryData:any=["PC hosiery sinkar fabric","CO hosiery Matty fabric","Cotton hosiery sinkar fabric"];
+  measurementTypeData:any=["KG","Meter"];
+  colorFabricCodeData:any=["m-1516","C-2303"];
 
   constructor(private formBuilder: FormBuilder) { }
 
