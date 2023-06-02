@@ -25,6 +25,12 @@
             <dxi-column dataField="product" caption="Product"></dxi-column>
             <dxi-column dataField="design" caption="Design"></dxi-column>
             <dxi-column dataField="avl_qty" caption="Quantity"></dxi-column>  
+            
+            <!-- <dxi-column caption="Dispatch History" cellTemplate="cellTemplateHyperlink"></dxi-column>  
+            <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+              <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active">View</a>           
+
+            </div> -->
     
             <dxo-search-panel [visible]="true"></dxo-search-panel>
             <dxo-paging [pageSize]="10"> </dxo-paging>              
