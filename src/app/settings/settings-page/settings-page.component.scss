@@ -4,6 +4,8 @@
     background-color: $primary-color !important;
     #navbarSupportedContent{
         ul{
+            width: 100%;
+            justify-content: space-evenly;
             li{
                 a{
                     color: $white !important;
@@ -13,4 +15,9 @@
         }
 
     }
+}
+
+.sub-active {
+    font-weight: 700;
+    border-bottom: 2px solid $white;
 }
