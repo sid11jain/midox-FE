@@ -12,17 +12,34 @@ import { AddMeasurementComponent } from './add-measurement/add-measurement.compo
 import { AddBrandComponent } from './add-brand/add-brand.component';
 
 const routes: Routes = [
-  { path: '', component:  SettingsPageComponent},
-  { path: 'add-material', component:  AddMaterialComponent}, 
-  { path: 'add-subcategory', component:  AddSubcategoryComponent}, 
-  { path: 'add-product', component:  AddProductComponent}, 
-  { path: 'add-color-fabric', component:  AddColorfabricComponent}, 
-  { path: 'add-process', component:  AddProcessComponent}, 
-  { path: 'add-design', component:  AddDesignComponent}, 
-  { path: 'add-supplier', component:  AddSupplierComponent}, 
-  { path: 'add-measurement-type', component:  AddMeasurementComponent}, 
-  { path: 'add-brand', component:  AddBrandComponent}, 
+  { path: '',
+    component:  SettingsPageComponent,
+    children:[
+      { path:'', redirectTo:'add-material', pathMatch:'full'},
+      { path: 'add-material', component:  AddMaterialComponent}, 
+      { path: 'add-subcategory', component:  AddSubcategoryComponent}, 
+      { path: 'add-product', component:  AddProductComponent}, 
+      { path: 'add-color-fabric', component:  AddColorfabricComponent}, 
+      { path: 'add-process', component:  AddProcessComponent}, 
+      { path: 'add-design', component:  AddDesignComponent}, 
+      { path: 'add-supplier', component:  AddSupplierComponent}, 
+      { path: 'add-measurement-type', component:  AddMeasurementComponent}, 
+      { path: 'add-brand', component:  AddBrandComponent}, 
+    ]
+  }
 ];
+// const routes: Routes = [
+//   { path: '', component:  SettingsPageComponent},
+//   { path: 'add-material', component:  AddMaterialComponent}, 
+//   { path: 'add-subcategory', component:  AddSubcategoryComponent}, 
+//   { path: 'add-product', component:  AddProductComponent}, 
+//   { path: 'add-color-fabric', component:  AddColorfabricComponent}, 
+//   { path: 'add-process', component:  AddProcessComponent}, 
+//   { path: 'add-design', component:  AddDesignComponent}, 
+//   { path: 'add-supplier', component:  AddSupplierComponent}, 
+//   { path: 'add-measurement-type', component:  AddMeasurementComponent}, 
+//   { path: 'add-brand', component:  AddBrandComponent}, 
+// ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

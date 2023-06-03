@@ -1,0 +1,16 @@
+@import '../../sass/variables';
+
+#setting-nav{
+    background-color: $primary-color !important;
+    #navbarSupportedContent{
+        ul{
+            li{
+                a{
+                    color: $white !important;
+                }
+
+            }
+        }
+
+    }
+}

@@ -1,1 +1,36 @@
-<p>settings-page works!</p>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="setting-nav">  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a [routerLink]="['add-material']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Material</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-subcategory']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Subcategory</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-product']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Product</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-color-fabric']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Color Fabric</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-process']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Process</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-design']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Design</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-supplier']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Supplier</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-measurement-type']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Measurement Type</a>           
+        </li>
+        <li class="nav-item active">
+          <a [routerLink]="['add-brand']" class="submenu-link nav-link" routerLinkActive="sub-active">Add Brand</a>           
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
