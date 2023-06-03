@@ -1,6 +1,7 @@
 <div class="its-card">
-<h3 class="card-header ps-3">Add Material</h3>
+<h3 class="card-header ps-3 ">Add Material</h3>
 
+<div class="settings-comp">
   <form [formGroup]="materialForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Material Name:</label>
@@ -8,7 +9,7 @@
       <div *ngIf="materialForm.get('name')?.invalid && materialForm.get('name')?.touched" class="error invalid-red">
         Please enter a valid text.
       </div>
-    </div>
+    </div> 
     <div class="form-group">
       <button type="submit" [disabled]="materialForm.invalid" class="btn btn-primary">
         {{ editedMaterialIndex !== null ? 'Update Material' : 'Add Material' }}
@@ -33,6 +34,9 @@
       </tr>
     </tbody>
   </table>
+
+</div>
+
 
 </div>
   
