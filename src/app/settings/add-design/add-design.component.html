@@ -1,1 +1,39 @@
-<p>add-design works!</p>
+<div class="its-card">
+    <h3 class="card-header ps-3">Add Design</h3>
+    
+      <form [formGroup]="designForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Design Name:</label>
+          <input type="text" id="name" formControlName="name" class="form-control">
+          <div *ngIf="designForm.get('name')?.invalid && designForm.get('name')?.touched" class="error invalid-red">
+            Please enter a valid text.
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" [disabled]="designForm.invalid" class="btn btn-primary">
+            {{ editedDesignIndex !== null ? 'Update Design' : 'Add Design' }}
+          </button>
+        </div>
+      </form>
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Design Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of designData; let i = index">
+            <td>{{ data.name }}</td>
+            <td>
+              <button (click)="edit(data, i)" class="btn btn-sm btn-primary">Edit</button>
+              <button (click)="delete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+    </div>
+      
+    

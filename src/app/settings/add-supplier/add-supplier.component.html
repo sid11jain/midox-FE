@@ -1,1 +1,39 @@
-<p>add-supplier works!</p>
+<div class="its-card">
+    <h3 class="card-header ps-3">Add Supplier</h3>
+    
+      <form [formGroup]="supplierForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Supplier Name:</label>
+          <input type="text" id="name" formControlName="name" class="form-control">
+          <div *ngIf="supplierForm.get('name')?.invalid && supplierForm.get('name')?.touched" class="error invalid-red">
+            Please enter a valid text.
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" [disabled]="supplierForm.invalid" class="btn btn-primary">
+            {{ editedSupplierIndex !== null ? 'Update Supplier' : 'Add Supplier' }}
+          </button>
+        </div>
+      </form>
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Supplier Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of supplierData; let i = index">
+            <td>{{ data.name }}</td>
+            <td>
+              <button (click)="edit(data, i)" class="btn btn-sm btn-primary">Edit</button>
+              <button (click)="delete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+    </div>
+      
+    
