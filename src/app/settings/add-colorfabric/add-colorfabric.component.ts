@@ -15,7 +15,8 @@ export class AddColorfabricComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.colorFabricForm = this.formBuilder.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      code: ['', Validators.required],
     });
   }
 
@@ -25,12 +26,14 @@ export class AddColorfabricComponent {
     }
     this.deleteBtnDisabled = false;
     const name = this.colorFabricForm.controls['name'].value;
+    const code = this.colorFabricForm.controls['code'].value;
     
     if (this.editedColorFabricIndex !== null) {
       this.colorFabricData[this.editedColorFabricIndex].name = name;
+      this.colorFabricData[this.editedColorFabricIndex].code = code;
       this.editedColorFabricIndex = null;
     } else {
-      const val = { name: name };
+      const val = { name: name, code:code };
       this.colorFabricData.push(val);
     }
     this.colorFabricForm.reset();
@@ -40,7 +43,8 @@ export class AddColorfabricComponent {
     this.deleteBtnDisabled = true;
     this.editedColorFabricIndex = index;
     this.colorFabricForm.patchValue({
-      name: data.name
+      name: data.name,
+      code: data.code
     });
   }
 
