@@ -10,6 +10,7 @@ export class AddMaterialComponent {
   materialForm: FormGroup;
   materials: any[] = [];
   editedMaterialIndex: number | null = null;
+  deleteBtnDisabled: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
     this.materialForm = this.formBuilder.group({
@@ -21,8 +22,8 @@ export class AddMaterialComponent {
     if (this.materialForm.invalid) {
       return;
     }
+    this.deleteBtnDisabled = false;
     const name = this.materialForm.controls['name'].value;
-    console.log("Material ", name);
     
     if (this.editedMaterialIndex !== null) {
       this.materials[this.editedMaterialIndex].name = name;
@@ -35,6 +36,7 @@ export class AddMaterialComponent {
   }
 
   editMaterial(material: any, index: number) {
+    this.deleteBtnDisabled = true;
     this.editedMaterialIndex = index;
     this.materialForm.patchValue({
       name: material.name

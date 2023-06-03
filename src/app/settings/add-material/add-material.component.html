@@ -28,7 +28,7 @@
         <td>{{ material.name }}</td>
         <td>
           <button (click)="editMaterial(material, i)" class="btn btn-sm btn-primary">Edit</button>
-          <button (click)="deleteMaterial(i)" class="btn btn-sm btn-danger">Delete</button>
+          <button (click)="deleteMaterial(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
         </td>
       </tr>
     </tbody>
