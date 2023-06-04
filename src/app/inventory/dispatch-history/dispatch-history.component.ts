@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-dispatch-history',
@@ -7,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DispatchHistoryComponent {
   showSpinner:boolean = true;
+  disptachDetails: any = [];
+  constructor(private commonService: CommonService){
+    commonService.dispatchData.subscribe(val => {
+      this.disptachDetails = val;
+      console.log(this.disptachDetails);
+      
+    });
+  }
 
   ngOnInit(){
     setTimeout(() => {

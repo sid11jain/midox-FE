@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-finish-goods',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinishGoodsComponent {
   showSpinner:boolean = true;
+  constructor(private common: CommonService){
 
+  }
   ngOnInit(){
     setTimeout(() => {
       this.showSpinner = false
@@ -296,4 +299,8 @@ export class FinishGoodsComponent {
       avl_qty:1500
     },
 ];
+
+sendDispatchData(){
+  this.common.dispatchData.next(this.viewFinishGoodsData);
+}
 }

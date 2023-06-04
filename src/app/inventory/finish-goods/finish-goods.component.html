@@ -21,14 +21,14 @@
             <dxo-group-panel [visible]="true"></dxo-group-panel>
             <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
     
-            <dxi-column dataField="brand" caption="Brand"></dxi-column>
-            <dxi-column dataField="product" caption="Product"></dxi-column>
-            <dxi-column dataField="design" caption="Design"></dxi-column>
-            <dxi-column dataField="avl_qty" caption="Quantity"></dxi-column>  
+            <dxi-column dataField="brand" caption="Brand" alignment="center"></dxi-column>
+            <dxi-column dataField="product" caption="Product" alignment="center"></dxi-column>
+            <dxi-column dataField="design" caption="Design" alignment="center"></dxi-column>
+            <dxi-column dataField="avl_qty" caption="Quantity" alignment="center"></dxi-column>  
             
-            <dxi-column caption="Dispatch History" cellTemplate="cellTemplateHyperlink"></dxi-column>  
-            <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-              <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active">View</a>           
+            <dxi-column caption="Dispatch History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+            <div *dxTemplate="let data of 'cellTemplateHyperlink'" >
+              <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active" (click)="sendDispatchData()"><mat-icon>remove_red_eye</mat-icon></a>           
 
             </div>
     
