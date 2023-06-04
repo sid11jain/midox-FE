@@ -3,27 +3,27 @@
     <div class="settings-comp">
       <form [formGroup]="colorFabricForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="name">Color Name:</label>
+          <label for="name">Color Name</label>
           <input type="text" id="name" formControlName="name" class="form-control">
           <div *ngIf="colorFabricForm.get('name')?.invalid && colorFabricForm.get('name')?.touched" class="error invalid-red">
             Please enter a valid text.
           </div>
         </div>
-        <div class="form-group">
-          <label for="code">Color Fabric Code:</label>
+        <div class="form-group mt-2">
+          <label for="code">Color Fabric Code</label>
           <input type="text" id="code" formControlName="code" class="form-control">
           <div *ngIf="colorFabricForm.get('code')?.invalid && colorFabricForm.get('code')?.touched" class="error invalid-red">
             Please enter a valid text.
           </div>
         </div>
-        <div class="form-group">
-          <button type="submit" [disabled]="colorFabricForm.invalid" class="btn btn-primary">
+        <div class="form-group mt-3">
+          <button type="submit" [disabled]="colorFabricForm.invalid" mat-flat-button color="primary">
             {{ editedColorFabricIndex !== null ? 'Update Color Fabric' : 'Add Color Fabric' }}
           </button>
         </div>
       </form>
       
-      <table class="table">
+      <table class="table mt-4">
         <thead>
           <tr>
             <th>Color Name</th>

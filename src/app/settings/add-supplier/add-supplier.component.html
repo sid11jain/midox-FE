@@ -3,20 +3,20 @@
     <div class="settings-comp">
       <form [formGroup]="supplierForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="name">Supplier Name:</label>
+          <label for="name">Supplier Name</label>
           <input type="text" id="name" formControlName="name" class="form-control">
           <div *ngIf="supplierForm.get('name')?.invalid && supplierForm.get('name')?.touched" class="error invalid-red">
             Please enter a valid text.
           </div>
         </div>
-        <div class="form-group">
-          <button type="submit" [disabled]="supplierForm.invalid" class="btn btn-primary">
+        <div class="form-group mt-3">
+          <button type="submit" [disabled]="supplierForm.invalid" mat-flat-button color="primary">
             {{ editedSupplierIndex !== null ? 'Update Supplier' : 'Add Supplier' }}
           </button>
         </div>
       </form>
       
-      <table class="table">
+      <table class="table mt-4">
         <thead>
           <tr>
             <th>Supplier Name</th>
