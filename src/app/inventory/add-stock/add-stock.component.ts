@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddStockComponent implements OnInit {
 
-  userForm:any = FormGroup;
+  userForm:any = FormGroup;  
   addStocksList:any = [];
   supplierData:any=["Midox","Ciana"];
   materialData:any=["Cloths","Accessories"];
@@ -38,9 +38,13 @@ export class AddStockComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(1);
+    
     if (this.userForm.invalid) {
       return;
     }
+    console.log(2);
+    
     const currentFullTimestamp = new Date();
     this.userForm.patchValue({ currentFullTimestamp });
     
@@ -49,9 +53,11 @@ export class AddStockComponent implements OnInit {
   }
 
   addStocks(data:any){
-    console.log(data);
-    
+    const currentFullTimestamp = new Date();
+    data.currentFullTimestamp = currentFullTimestamp;
     this.addStocksList.push(data);
+
+    console.log("Add stock data ",this.addStocksList);
     this.userForm.reset();
     let dataObj = {
       billNumber: data.billNumber,
@@ -72,7 +78,6 @@ export class AddStockComponent implements OnInit {
       quantity: data.quantity,
       amount: data.amount
     }
- 
     this.userForm.patchValue(dataObj);
   }
 
@@ -89,5 +94,19 @@ export class AddStockComponent implements OnInit {
       this.showClothData = false;
       selectControl.disable();
     } 
+  }
+
+  deleteStock(index: number) {
+    this.addStocksList.splice(index, 1);
+  } 
+
+  submitForm(){
+    this.userForm.reset();
+
+    console.log("Form value : ", this.addStocksList);
+
+    this.addStocksList = [];
+    
+
   }
 }

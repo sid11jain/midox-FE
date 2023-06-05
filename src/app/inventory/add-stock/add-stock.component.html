@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="col-6">
-          <label for="material">Material</label>
+          <label for="material">Material*</label>
           <select id="material" formControlName="material" class="form-control" required 
           (change)="materialBtnClick($event.target)">
             <option value="">Select</option>
@@ -155,14 +155,17 @@
             <td class="text-center">{{data.measurementType}}</td>
             <td class="text-center">{{data.quantity}}</td>
             <td class="text-center">{{data.amount}}</td>
-            <td class="text-center"><mat-icon (click)="setDataInStockForm(data)">edit</mat-icon></td>
+            <td class="text-center">
+              <mat-icon (click)="setDataInStockForm(data)">edit</mat-icon>
+              <mat-icon (click)="deleteStock(i)">delete</mat-icon>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="row" *ngIf="addStocksList.length">
       <div class="col-12 text-end">
-        <button type="button" mat-flat-button color="primary" [disabled]="addStocksList.length == 0">Submit</button>
+        <button type="button" mat-flat-button color="primary" (click)="submitForm()" [disabled]="addStocksList.length == 0">Submit</button>
       </div>
     </div>
   </div>
