@@ -13,6 +13,9 @@ export class AddStockComponent implements OnInit {
   supplierData:any=["Midox","Ciana"];
   materialData:any=["Cloths","Accessories"];
   subCategoryData:any=["PC hosiery sinkar fabric","CO hosiery Matty fabric","Cotton hosiery sinkar fabric"];
+  showClothData:boolean = true;
+  subCategoryClothData:any=["Sinkar fabric","Matty fabric","Wool","Cotton"];
+  subCategoryAccessoryData:any=["Button","Dhaga"];
   measurementTypeData:any=["KG","Meter"];
   colorFabricCodeData:any=["m-1516","C-2303"];
 
@@ -70,5 +73,20 @@ export class AddStockComponent implements OnInit {
     }
  
     this.userForm.patchValue(dataObj);
+  }
+  materialBtnClick(material:any){
+    const selectedMaterialValue = material.value as string;
+    
+    // Disable the select control based on a condition
+    const selectControl = this.userForm.get('colorFabricCode');
+    if(selectedMaterialValue == 'Cloth'){
+      this.showClothData = true;
+      selectControl.enable();
+    }
+    else{
+      this.showClothData = false;
+      selectControl.disable();
+    }
+    console.log("Selected value: ", selectedMaterialValue);    
   }
 }

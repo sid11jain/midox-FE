@@ -56,8 +56,9 @@
           </div>
         </div>
         <div class="col-6">
-          <label for="material">Material*</label>
-          <select id="material" formControlName="material" class="form-control" required>
+          <label for="material">Material</label>
+          <select id="material" formControlName="material" class="form-control" required 
+          (change)="materialBtnClick($event.target)">
             <option value="">Select</option>
             <option *ngFor="let option of materialData" [value]="option">{{ option }}</option>
           </select>
@@ -73,8 +74,7 @@
           <label for="subCategory">Sub Category*</label>
           <select id="subCategory" formControlName="subCategory" class="form-control" required>
             <option value="">Select</option>
-            <option *ngFor="let option of subCategoryData" [value]="option">{{ option }}</option>
-  
+            <option *ngFor="let option of (showClothData ? subCategoryClothData : subCategoryAccessoryData)" [value]="option">{{ option }}</option>
           </select>
           <div
             *ngIf="userForm.controls.subCategory.invalid && (userForm.controls.subCategory.dirty || userForm.controls.subCategory.touched)"
