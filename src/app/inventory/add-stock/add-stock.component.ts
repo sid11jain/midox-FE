@@ -18,6 +18,7 @@ export class AddStockComponent implements OnInit {
   subCategoryAccessoryData:any=["Button","Dhaga"];
   measurementTypeData:any=["KG","Meter"];
   colorFabricCodeData:any=["m-1516","C-2303"];
+  editStockForm:number|null = null;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -55,6 +56,9 @@ export class AddStockComponent implements OnInit {
   addStocks(data:any){
     const currentFullTimestamp = new Date();
     data.currentFullTimestamp = currentFullTimestamp;
+    if (this.editStockForm !== null &&  this.addStocksList.length) {
+      this.addStocksList.splice(this.editStockForm, 1)
+    }
     this.addStocksList.push(data);
 
     console.log("Add stock data ",this.addStocksList);
@@ -65,11 +69,12 @@ export class AddStockComponent implements OnInit {
       date: data.date,
       supplier: data.supplier
     }
- 
     this.userForm.patchValue(dataObj);
+    this.editStockForm = null;
   }
 
-  setDataInStockForm(data:any){
+  setDataInStockForm(data:any, i:any){
+    this.editStockForm = i;
     let dataObj = {
       material: data.material,
       subCategory: data.subCategory,

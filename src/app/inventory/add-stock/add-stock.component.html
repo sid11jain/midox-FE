@@ -130,7 +130,7 @@
       </div>
       <div class="row">
         <div class="col-12 text-end">
-          <button type="button" mat-stroked-button color="primary" [disabled]="userForm.invalid" (click)="addStocks(userForm.value)">Add</button>
+          <button type="button" mat-stroked-button color="primary" [disabled]="userForm.invalid" (click)="addStocks(userForm.value)">{{editStockForm == null ? 'Add' : 'Update'}}</button>
         </div>
       </div>
     </form>
@@ -156,7 +156,7 @@
             <td class="text-center">{{data.quantity}}</td>
             <td class="text-center">{{data.amount}}</td>
             <td class="text-center">
-              <mat-icon (click)="setDataInStockForm(data)">edit</mat-icon>
+              <mat-icon (click)="setDataInStockForm(data, i)">edit</mat-icon>
               <mat-icon (click)="deleteStock(i)">delete</mat-icon>
             </td>
           </tr>
