@@ -45,6 +45,7 @@ export class AddStockComponent implements OnInit {
     this.userForm.patchValue({ currentFullTimestamp });
     
     console.log('Form values:', this.userForm.value);
+    this.userForm.reset();
   }
 
   addStocks(data:any){
@@ -74,19 +75,19 @@ export class AddStockComponent implements OnInit {
  
     this.userForm.patchValue(dataObj);
   }
+
   materialBtnClick(material:any){
-    const selectedMaterialValue = material.value as string;
+    const selectedMaterialValue = material.value as string;    
     
     // Disable the select control based on a condition
     const selectControl = this.userForm.get('colorFabricCode');
-    if(selectedMaterialValue == 'Cloth'){
+    if(selectedMaterialValue == 'Cloths'){
       this.showClothData = true;
       selectControl.enable();
     }
     else{
       this.showClothData = false;
       selectControl.disable();
-    }
-    console.log("Selected value: ", selectedMaterialValue);    
+    } 
   }
 }
