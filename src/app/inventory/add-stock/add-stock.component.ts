@@ -110,8 +110,33 @@ export class AddStockComponent implements OnInit {
 
     console.log("Form value : ", this.addStocksList);
 
-    this.addStocksList = [];
     
 
+    // Extracting the common keys and the remaining fields
+    const commonKeys = ['billNumber', 'date', 'packingSlipNumber', 'supplier'];
+    const extractedData:any = {
+        common: {},
+        data: []
+    };
+
+    this.addStocksList.forEach((item:any) => {
+        const commonData:any = {};
+        const remainingData:any = {};
+
+        Object.entries(item).forEach(([key, value]) => {
+            if (commonKeys.includes(key)) {
+                commonData[key] = value;
+            } else {
+                remainingData[key] = value;
+            }
+        });
+
+        extractedData.common = commonData;
+        extractedData.data.push(remainingData);
+    });
+
+    console.log("Final Data : ",extractedData);    
+
+    this.addStocksList = [];
   }
 }
