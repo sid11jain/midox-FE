@@ -6,14 +6,17 @@
   
     <div *ngIf=!showSpinner>
         <div class="cloths mt-10">
-          <dx-data-grid id="gridContainer"
+          <dx-data-grid id="gridContainer" #grid
                   [dataSource]="viewFinishGoodsData"
+                  keyExpr="unique_id"
                   [showBorders]="true"
                   [rowAlternationEnabled]="true"
                   [allowColumnResizing]="true"
                   [allowColumnReordering]="true"
+                  [selectedRowKeys]="[]"
                 >
             <dxo-scrolling mode="virtual"></dxo-scrolling>
+            <dxo-selection mode="single"></dxo-selection>
             <dxo-filter-row [visible]="true"></dxo-filter-row>
             <dxo-header-filter [visible]="true"></dxo-header-filter>
             <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
@@ -28,8 +31,7 @@
             
             <dxi-column caption="Dispatch History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
             <div *dxTemplate="let data of 'cellTemplateHyperlink'" >
-              <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active" (click)="sendDispatchData()"><mat-icon>remove_red_eye</mat-icon></a>           
-
+              <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active" (click)="getSelectedData()"><mat-icon>remove_red_eye</mat-icon></a>           
             </div>
     
             <dxo-search-panel [visible]="true"></dxo-search-panel>

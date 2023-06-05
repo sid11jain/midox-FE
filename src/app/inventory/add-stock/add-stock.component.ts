@@ -9,9 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddStockComponent implements OnInit {
 
   userForm:any = FormGroup;
-
+  addStocksList:any = [];
   supplierData:any=["Midox","Ciana"];
-  materialData:any=["Cotton","Button","Dhaga"];
+  materialData:any=["Cloths","Accessories"];
   subCategoryData:any=["PC hosiery sinkar fabric","CO hosiery Matty fabric","Cotton hosiery sinkar fabric"];
   measurementTypeData:any=["KG","Meter"];
   colorFabricCodeData:any=["m-1516","C-2303"];
@@ -25,7 +25,6 @@ export class AddStockComponent implements OnInit {
       date: ['', Validators.required],
       currentFullTimestamp: [''],
       supplier: ['', Validators.required],
-      isCloth: ['', Validators.required],
       material: ['', Validators.required],
       subCategory: ['', Validators.required],
       colorFabricCode: ['', Validators.required],
@@ -43,5 +42,33 @@ export class AddStockComponent implements OnInit {
     this.userForm.patchValue({ currentFullTimestamp });
     
     console.log('Form values:', this.userForm.value);
+  }
+
+  addStocks(data:any){
+    console.log(data);
+    
+    this.addStocksList.push(data);
+    this.userForm.reset();
+    let dataObj = {
+      billNumber: data.billNumber,
+      packingSlipNumber: data.packingSlipNumber,
+      date: data.date,
+      supplier: data.supplier
+    }
+ 
+    this.userForm.patchValue(dataObj);
+  }
+
+  setDataInStockForm(data:any){
+    let dataObj = {
+      material: data.material,
+      subCategory: data.subCategory,
+      colorFabricCode: data.colorFabricCode,
+      measurementType: data.measurementType,
+      quantity: data.quantity,
+      amount: data.amount
+    }
+ 
+    this.userForm.patchValue(dataObj);
   }
 }

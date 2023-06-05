@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DxDataGridComponent } from 'devextreme-angular';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -8,6 +9,9 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class FinishGoodsComponent {
   showSpinner:boolean = true;
+  selectedRowsData:any = [];
+  @ViewChild('grid', { static: false }) dataGrid!: DxDataGridComponent;
+  //(click)="sendDispatchData(grid.instance.getSelectedRowsData())"
   constructor(private common: CommonService){
 
   }
@@ -15,6 +19,15 @@ export class FinishGoodsComponent {
     setTimeout(() => {
       this.showSpinner = false
     }, 1000);
+  }
+
+  getSelectedData() {
+    this.selectedRowsData = this.dataGrid.instance.getSelectedRowsData();
+    this.sendDispatchData(this.selectedRowsData)
+    // ===== or when deferred selection is used =====
+    // this.dataGrid.instance.getSelectedRowsData().then((selectedRowsData) => {
+    //     // Your code goes here
+    // });
   }
 
   viewFinishGoodsData: any = [
@@ -300,7 +313,7 @@ export class FinishGoodsComponent {
     },
 ];
 
-sendDispatchData(){
-  this.common.dispatchData.next(this.viewFinishGoodsData);
+sendDispatchData(data:any){
+  this.common.dispatchData.next(data);
 }
 }
