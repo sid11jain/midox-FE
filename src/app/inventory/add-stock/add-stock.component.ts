@@ -54,6 +54,8 @@ export class AddStockComponent implements OnInit {
   }
 
   addStocks(data:any){
+    this.toEnableDisableColorFabric(true);
+
     const currentFullTimestamp = new Date();
     data.currentFullTimestamp = currentFullTimestamp;
     if (this.editStockForm !== null &&  this.addStocksList.length) {
@@ -88,16 +90,13 @@ export class AddStockComponent implements OnInit {
 
   materialBtnClick(material:any){
     const selectedMaterialValue = material.value as string;    
-    
-    // Disable the select control based on a condition
-    const selectControl = this.userForm.get('colorFabricCode');
     if(selectedMaterialValue == 'Cloths'){
       this.showClothData = true;
-      selectControl.enable();
+      this.toEnableDisableColorFabric(true);
     }
     else{
       this.showClothData = false;
-      selectControl.disable();
+      this.toEnableDisableColorFabric(false);
     } 
   }
 
@@ -107,10 +106,7 @@ export class AddStockComponent implements OnInit {
 
   submitForm(){
     this.userForm.reset();
-
-    console.log("Form value : ", this.addStocksList);
-
-    
+    console.log("Form value : ", this.addStocksList);    
 
     // Extracting the common keys and the remaining fields
     const commonKeys = ['billNumber', 'date', 'packingSlipNumber', 'supplier'];
@@ -137,6 +133,18 @@ export class AddStockComponent implements OnInit {
 
     console.log("Final Data : ",extractedData);    
 
+    this.toEnableDisableColorFabric(true);
     this.addStocksList = [];
+  }
+
+  toEnableDisableColorFabric(flag:boolean){
+    // Disable the select control based on a condition
+    const selectControl = this.userForm.get('colorFabricCode');
+    if(flag){
+      selectControl.enable();
+    }
+    else{
+      selectControl.disable();
+    }
   }
 }
