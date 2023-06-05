@@ -1,141 +1,153 @@
-<div class="view mlr-rem-2 flex-center">
-  <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
-
-  <div *ngIf=!showSpinner class="accordion" id="accordionPanelsStayOpenExample">
-    <div class="cloths mt-10">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapseOne"
-            aria-expanded="true"
-            aria-controls="panelsStayOpen-collapseOne"
-          >
-            Cloth
-          </button>
-        </h2>
-        <div
-          id="panelsStayOpen-collapseOne"
-          class="accordion-collapse collapse show"
-          aria-labelledby="panelsStayOpen-headingOne"
-        >
-          <div class="accordion-body">
-            <dx-data-grid
-              id="gridContainer"
-              [dataSource]="viewClothData"
-              [showBorders]="true"
-              [rowAlternationEnabled]="true"
-              [allowColumnResizing]="true"
-              [allowColumnReordering]="true"
+<div class="its-card">
+  <h3 class="card-header ps-3">View Stock</h3>
+  <div class="view card-body flex-center">
+    <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+  
+    <div *ngIf=!showSpinner class="accordion w-100" id="accordionPanelsStayOpenExample">
+      <div class="cloths mt-10">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne"
+              aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne"
             >
-              <dxo-filter-row [visible]="true"></dxo-filter-row>
-              <dxo-header-filter [visible]="true"></dxo-header-filter>
-              <dxo-column-chooser
-                [enabled]="true"
-                mode="select"
-                [allowSearch]="true"
-              ></dxo-column-chooser>
+              Cloth
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="panelsStayOpen-headingOne"
+          >
+            <div class="accordion-body">
+              <dx-data-grid
+                id="gridContainer"
+                [dataSource]="viewClothData"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                [allowColumnResizing]="true"
+                [allowColumnReordering]="true"
+              >
+              <dxo-scrolling mode="virtual"></dxo-scrolling>
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-column-chooser
+                  [enabled]="true"
+                  mode="select"
+                  [allowSearch]="true"
+                ></dxo-column-chooser>
 
-              <dxi-column dataField="cloth" caption="Cloth"></dxi-column>
-              <dxi-column
-                dataField="sub_category"
-                caption="Sub Category"
-              ></dxi-column>
-              <dxi-column
-                dataField="measuring_unit"
-                caption="Measuring Unit"
-              ></dxi-column>
-              <dxi-column
-                dataField="avl_qty"
-                caption="Available Qty"
-              ></dxi-column>
-
-              <dxi-column
-                dataField="bill_number"
-                caption="Bill Number"
-                [visible]="false"
-              ></dxi-column>
-              <dxi-column
-                dataField="date"
-                caption="Date"
-                [visible]="false"
-              ></dxi-column>
-              <dxi-column
-                dataField="packing_slip_number"
-                caption="Packing Slip Number"
-                [visible]="false"
-              ></dxi-column>
-              <dxi-column
-                dataField="supplier_name"
-                caption="Supplier Name"
-                [visible]="false"
-              ></dxi-column>
-              <dxi-column
-                dataField="material"
-                caption="Material"
-                [visible]="false"
-              ></dxi-column>
-              <dxi-column
-                dataField="color_fabric_code"
-                caption="Color Fabric Code"
-                [visible]="false"
-              ></dxi-column>
-
-              <dxo-search-panel [visible]="true"></dxo-search-panel>
-            </dx-data-grid>
+                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+  
+                <dxi-column dataField="cloth" caption="Cloth"></dxi-column>
+                <dxi-column
+                  dataField="sub_category"
+                  caption="Sub Category"
+                ></dxi-column>
+                <dxi-column
+                  dataField="measuring_unit"
+                  caption="Measuring Unit"
+                ></dxi-column>
+                <dxi-column
+                  dataField="avl_qty"
+                  caption="Available Qty"
+                ></dxi-column>
+  
+                <dxi-column
+                  dataField="bill_number"
+                  caption="Bill Number"
+                  [visible]="false"
+                ></dxi-column>
+                <dxi-column
+                  dataField="date"
+                  caption="Date"
+                  [visible]="false"
+                ></dxi-column>
+                <dxi-column
+                  dataField="packing_slip_number"
+                  caption="Packing Slip Number"
+                  [visible]="false"
+                ></dxi-column>
+                <dxi-column
+                  dataField="supplier_name"
+                  caption="Supplier Name"
+                  [visible]="false"
+                ></dxi-column>
+                <dxi-column
+                  dataField="material"
+                  caption="Material"
+                  [visible]="false"
+                ></dxi-column>
+                <dxi-column
+                  dataField="color_fabric_code"
+                  caption="Color Fabric Code"
+                  [visible]="false"
+                ></dxi-column>
+  
+                <dxo-search-panel [visible]="true"></dxo-search-panel>
+              </dx-data-grid>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="accessories mt-20">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#panelsStayOpen-collapseTwo"
-            aria-expanded="false"
-            aria-controls="panelsStayOpen-collapseTwo"
-          >
-            Accessories
-          </button>
-        </h2>
-        <div
-          id="panelsStayOpen-collapseTwo"
-          class="accordion-collapse collapse show"
-          aria-labelledby="panelsStayOpen-headingTwo"
-        >
-          <div class="accordion-body">
-            <dx-data-grid
-              id="gridContainer"
-              [dataSource]="viewAccesoriesData"
-              [showBorders]="true"
-              [rowAlternationEnabled]="true"
-              [allowColumnResizing]="true"
-              [allowColumnReordering]="true"
+  
+      <div class="accessories mt-20">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo"
+              aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo"
             >
-              <dxo-filter-row [visible]="true"></dxo-filter-row>
-              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              Accessories
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseTwo"
+            class="accordion-collapse collapse show"
+            aria-labelledby="panelsStayOpen-headingTwo"
+          >
+            <div class="accordion-body">
+              <dx-data-grid
+                id="gridContainer"
+                [dataSource]="viewAccesoriesData"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true"
+                [allowColumnResizing]="true"
+                [allowColumnReordering]="true"
+              >
+              <dxo-scrolling mode="virtual"></dxo-scrolling>
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
 
-              <dxi-column
-                dataField="accessories"
-                caption="Accessories"
-              ></dxi-column>
-              <dxi-column dataField="amount" caption="Amount"></dxi-column>
-              <dxi-column
-                dataField="avl_amount"
-                caption="Available Amount"
-              ></dxi-column>
-
-              <dxo-search-panel [visible]="true"></dxo-search-panel>
-            </dx-data-grid>
+                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+  
+                <dxi-column
+                  dataField="accessories"
+                  caption="Accessories"
+                ></dxi-column>
+                <dxi-column dataField="amount" caption="Amount"></dxi-column>
+                <dxi-column
+                  dataField="avl_amount"
+                  caption="Available Amount"
+                ></dxi-column>
+  
+                <dxo-search-panel [visible]="true"></dxo-search-panel>
+              </dx-data-grid>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+

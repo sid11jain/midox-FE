@@ -9,12 +9,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddStockComponent implements OnInit {
 
   userForm:any = FormGroup;
+  showClothData:boolean = true;
 
-  supplierData:any=["One","Two","Three","Four","Five"];
-  materialData:any=["One","Two","Three","Four","Five"];
-  subCategoryData:any=["One","Two","Three","Four","Five"];
-  measurementTypeData:any=["One","Two","Three","Four","Five"];
-  colorFabricCodeData:any=["One","Two","Three","Four","Five"];
+  supplierData:any=["Midox","Ciana"];
+  materialData:any=["Cloth","Accessory"];
+  subCategoryClothData:any=["Sinkar fabric","Matty fabric","Wool","Cotton"];
+  subCategoryAccessoryData:any=["Button","Dhaga"];
+  measurementTypeData:any=["KG","Meter"];
+  colorFabricCodeData:any=["m-1516","C-2303"];
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -25,7 +27,6 @@ export class AddStockComponent implements OnInit {
       date: ['', Validators.required],
       currentFullTimestamp: [''],
       supplier: ['', Validators.required],
-      isCloth: ['', Validators.required],
       material: ['', Validators.required],
       subCategory: ['', Validators.required],
       colorFabricCode: ['', Validators.required],
@@ -43,5 +44,21 @@ export class AddStockComponent implements OnInit {
     this.userForm.patchValue({ currentFullTimestamp });
     
     console.log('Form values:', this.userForm.value);
+  }
+
+  materialBtnClick(material:any){
+    const selectedMaterialValue = material.value as string;
+    
+    // Disable the select control based on a condition
+    const selectControl = this.userForm.get('colorFabricCode');
+    if(selectedMaterialValue == 'Cloth'){
+      this.showClothData = true;
+      selectControl.enable();
+    }
+    else{
+      this.showClothData = false;
+      selectControl.disable();
+    }
+    console.log("Selected value: ", selectedMaterialValue);    
   }
 }
