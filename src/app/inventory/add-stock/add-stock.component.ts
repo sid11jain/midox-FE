@@ -9,10 +9,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddStockComponent implements OnInit {
 
   userForm:any = FormGroup;
+  showClothData:boolean = true;
 
   supplierData:any=["Midox","Ciana"];
-  materialData:any=["Cotton","Button","Dhaga"];
-  subCategoryData:any=["PC hosiery sinkar fabric","CO hosiery Matty fabric","Cotton hosiery sinkar fabric"];
+  materialData:any=["Cloth","Accessory"];
+  subCategoryClothData:any=["Sinkar fabric","Matty fabric","Wool","Cotton"];
+  subCategoryAccessoryData:any=["Button","Dhaga"];
   measurementTypeData:any=["KG","Meter"];
   colorFabricCodeData:any=["m-1516","C-2303"];
 
@@ -25,7 +27,6 @@ export class AddStockComponent implements OnInit {
       date: ['', Validators.required],
       currentFullTimestamp: [''],
       supplier: ['', Validators.required],
-      isCloth: ['', Validators.required],
       material: ['', Validators.required],
       subCategory: ['', Validators.required],
       colorFabricCode: ['', Validators.required],
@@ -43,5 +44,21 @@ export class AddStockComponent implements OnInit {
     this.userForm.patchValue({ currentFullTimestamp });
     
     console.log('Form values:', this.userForm.value);
+  }
+
+  materialBtnClick(material:any){
+    const selectedMaterialValue = material.value as string;
+    
+    // Disable the select control based on a condition
+    const selectControl = this.userForm.get('colorFabricCode');
+    if(selectedMaterialValue == 'Cloth'){
+      this.showClothData = true;
+      selectControl.enable();
+    }
+    else{
+      this.showClothData = false;
+      selectControl.disable();
+    }
+    console.log("Selected value: ", selectedMaterialValue);    
   }
 }
