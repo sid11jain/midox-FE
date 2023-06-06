@@ -1,1 +1,42 @@
-<p>view-adda works!</p>
+<div class="its-card">
+    <h3 class="card-header ps-3">View Adda</h3>
+  
+    <div class="finish-goods card-body flex-center">
+      <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+    
+      <div *ngIf=!showSpinner>
+          <div class="cloths mt-10">
+            <dx-data-grid id="gridContainer"
+                    [dataSource]="viewAddaData"
+                    [showBorders]="true"
+                    [rowAlternationEnabled]="true"
+                    [allowColumnResizing]="true"
+                    [allowColumnReordering]="true"
+                  >
+              <dxo-scrolling mode="virtual"></dxo-scrolling>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+  
+              <dxo-group-panel [visible]="true"></dxo-group-panel>
+              <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+      
+              <dxi-column dataField="addNumber" caption="ADDA Number"></dxi-column>
+              <dxi-column dataField="brand" caption="Brand"></dxi-column>
+              <dxi-column dataField="product" caption="Product"></dxi-column>
+              <dxi-column dataField="designNumber" caption="Design Number"></dxi-column>  
+              
+              <dxi-column caption="Add/View Material" cellTemplate="cellTemplateHyperlink"></dxi-column>  
+              <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+                <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active">Add/View</a>           
+  
+              </div>
+      
+              <dxo-search-panel [visible]="true"></dxo-search-panel>
+              <dxo-paging [pageSize]="10"> </dxo-paging>              
+            </dx-data-grid>       
+          </div>
+        </div>
+    </div>
+  
+  </div>

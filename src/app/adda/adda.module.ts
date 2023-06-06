@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared/shared.module'; 
 
 import { AddaRoutingModule } from './adda-routing.module';
 import { AddAddaComponent } from './add-adda/add-adda.component';
@@ -23,7 +24,8 @@ import { StickerComponent } from './sticker/sticker.component';
   ],
   imports: [
     CommonModule,
-    AddaRoutingModule
+    AddaRoutingModule,
+    SharedModule
   ]
 })
 export class AddaModule { }
