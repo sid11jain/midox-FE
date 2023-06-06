@@ -9,10 +9,18 @@ import { Component, OnInit} from '@angular/core';
 export class ViewComponent {
   showSpinner:boolean = true;
 
+  constructor(){
+
+  }
+
   ngOnInit(){
     setTimeout(() => {
       this.showSpinner = false
     }, 2000);
+  }
+
+  getSelectedData(rowData:any) {
+    console.log("rowData ", rowData);    
   }
 
   viewClothData: any = [

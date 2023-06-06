@@ -21,9 +21,17 @@ export class FinishGoodsComponent {
     }, 1000);
   }
 
-  getSelectedData() {
-    this.selectedRowsData = this.dataGrid.instance.getSelectedRowsData();
-    this.sendDispatchData(this.selectedRowsData)
+  getSelectedData(rowData:any) {
+    // this.selectedRowsData = this.dataGrid.instance.getSelectedRowsData();
+    // this.selectedRowsData = this.dataGrid.instance.getRowData(1);
+    // let selectedRowsData1 = this.dataGrid.instance.getVisibleRows();
+    // let temp = selectedRowsData1[index];
+    console.log("rowData ", rowData);
+    // console.log(temp?.values);
+    
+    // console.log(this.selectedRowsData);
+    
+    this.sendDispatchData(rowData)
     // ===== or when deferred selection is used =====
     // this.dataGrid.instance.getSelectedRowsData().then((selectedRowsData) => {
     //     // Your code goes here

@@ -31,7 +31,7 @@
             
             <dxi-column caption="Dispatch History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
             <div *dxTemplate="let data of 'cellTemplateHyperlink'" >
-              <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active" (click)="getSelectedData()"><mat-icon>remove_red_eye</mat-icon></a>           
+              <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>           
             </div>
     
             <dxo-search-panel [visible]="true"></dxo-search-panel>
