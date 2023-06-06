@@ -9,3 +9,12 @@
 #gridContainer{
     max-height: 80vh;
 }
+
+.its-card{
+    .form{
+        height: 85vh;
+        // display: flex;
+        overflow: auto;
+        // align-items: start;
+    }
+}

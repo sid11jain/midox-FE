@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-stock-history',
@@ -7,11 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockHistoryComponent {
   showSpinner:boolean = true;
+  stockHistoryForm:any = FormGroup;  
 
-  ngOnInit(){
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit(){    
+    this.stockHistoryForm = this.formBuilder.group({
+      uniqueId: ['', Validators.required],      
+      currentFullTimestamp: ['']
+    })    
+  }
+
+  onSubmit() {    
+    if (this.stockHistoryForm.invalid) {
+      return;
+    }
+    
+    const currentFullTimestamp = new Date();
+    this.stockHistoryForm.patchValue({ currentFullTimestamp });
+    
+    console.log('Form values:', this.stockHistoryForm.value);
+    this.stockHistoryForm.reset();
+
     setTimeout(() => {
       this.showSpinner = false
-    }, 1000);
+    }, 100);
   }
 
   viewClothData: any = [
