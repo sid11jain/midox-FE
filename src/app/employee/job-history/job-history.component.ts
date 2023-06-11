@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-job-history',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./job-history.component.scss']
 })
 export class JobHistoryComponent {
+  showSpinner:boolean = true;
+  employeeJobHistoryDetails: any = [];
+  constructor(private commonService: CommonService){ 
+    commonService.employeeJobHistoryData.subscribe((val:any) => {
+      this.employeeJobHistoryDetails = val;
+      console.log(this.employeeJobHistoryDetails);
+      
+    });
+  }
 
 }
