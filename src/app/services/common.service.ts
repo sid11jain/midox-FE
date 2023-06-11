@@ -18,5 +18,6 @@ export class CommonService {
   addMaterialData = new BehaviorSubject('');
   stockHistoryData = new BehaviorSubject('');
   employeeJobHistoryData = new BehaviorSubject('');
+  employeePaymentData = new BehaviorSubject('');
   constructor() { }
 }
