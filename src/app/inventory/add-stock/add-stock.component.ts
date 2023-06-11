@@ -38,13 +38,10 @@ export class AddStockComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log(1);
-    
+  onSubmit() {    
     if (this.userForm.invalid) {
       return;
     }
-    console.log(2);
     
     const currentFullTimestamp = new Date();
     this.userForm.patchValue({ currentFullTimestamp });

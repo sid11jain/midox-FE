@@ -83,11 +83,12 @@
                   caption="Material"
                   [visible]="false"
                 ></dxi-column>
-                <dxi-column
-                  dataField="color_fabric_code"
-                  caption="Color Fabric Code"
-                  [visible]="false"
-                ></dxi-column>
+                <dxi-column dataField="color_fabric_code" caption="Color Fabric Code" [visible]="false"></dxi-column>
+                
+                <dxi-column caption="Stock History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+                <div *dxTemplate="let data of 'cellTemplateHyperlink'" >
+                  <a [routerLink]="['../stock-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>           
+                </div>
   
                 <dxo-search-panel [visible]="true"></dxo-search-panel>
               </dx-data-grid>
@@ -131,15 +132,14 @@
                 <dxo-group-panel [visible]="true"></dxo-group-panel>
                 <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
   
-                <dxi-column
-                  dataField="accessories"
-                  caption="Accessories"
-                ></dxi-column>
+                <dxi-column dataField="accessories" caption="Accessories"></dxi-column>
                 <dxi-column dataField="amount" caption="Amount"></dxi-column>
-                <dxi-column
-                  dataField="avl_amount"
-                  caption="Available Amount"
-                ></dxi-column>
+                <dxi-column dataField="avl_amount" caption="Available Amount"></dxi-column>
+                
+                <dxi-column caption="Stock History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+                <div *dxTemplate="let data of 'cellTemplateHyperlink'" >
+                  <a [routerLink]="['../stock-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>           
+                </div>
   
                 <dxo-search-panel [visible]="true"></dxo-search-panel>
               </dx-data-grid>

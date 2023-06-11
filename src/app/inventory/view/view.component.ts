@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 
 @Component({
@@ -9,10 +10,21 @@ import { Component, OnInit} from '@angular/core';
 export class ViewComponent {
   showSpinner:boolean = true;
 
+  constructor(private commonService: CommonService){  }
+
   ngOnInit(){
     setTimeout(() => {
       this.showSpinner = false
     }, 2000);
+  }
+
+  sendDtockHistoryData(data:any){
+    this.commonService.stockHistoryData.next(data);
+  }
+
+  getSelectedData(rowData:any) {
+    console.log("rowData ", rowData);        
+    this.sendDtockHistoryData(rowData);
   }
 
   viewClothData: any = [

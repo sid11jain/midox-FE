@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/services/common.service';
+
 
 @Component({
   selector: 'app-stock-history',
@@ -7,11 +10,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockHistoryComponent {
   showSpinner:boolean = true;
+  stockHistoryForm:any = FormGroup; 
+  
+  stockHistoryDetails: any = [];
+  constructor(private formBuilder: FormBuilder, private commonService: CommonService){ 
+    commonService.stockHistoryData.subscribe((val:any) => {
+      this.stockHistoryDetails = val;
+      console.log(this.stockHistoryDetails);
+      
+    });
+  }
 
-  ngOnInit(){
+  // constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit(){    
+    this.stockHistoryForm = this.formBuilder.group({
+      uniqueId: ['', Validators.required],      
+      currentFullTimestamp: ['']
+    })    
+  }
+
+  onSubmit() {    
+    if (this.stockHistoryForm.invalid) {
+      return;
+    }
+    
+    const currentFullTimestamp = new Date();
+    this.stockHistoryForm.patchValue({ currentFullTimestamp });
+    
+    console.log('Form values:', this.stockHistoryForm.value);
+    this.stockHistoryForm.reset();
+
     setTimeout(() => {
       this.showSpinner = false
-    }, 1000);
+    }, 100);
   }
 
   viewClothData: any = [
