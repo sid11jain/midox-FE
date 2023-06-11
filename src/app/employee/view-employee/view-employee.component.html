@@ -26,6 +26,11 @@
               <dxi-column dataField="paid" caption="Paid"></dxi-column>
               <dxi-column dataField="paymentDue" caption="Payment Due"></dxi-column>
               
+              <dxi-column dataField="gender" caption="Gender" [visible]="false"></dxi-column>
+              <dxi-column dataField="employeeMobile" caption="Mobile" [visible]="false"></dxi-column>
+              <dxi-column dataField="dobEmployee" caption="DOB" [visible]="false"></dxi-column>
+              <dxi-column dataField="employeeAdhaar" caption="Adhaar" [visible]="false"></dxi-column>
+              <dxi-column dataField="employeeAddress" caption="Address" [visible]="false"></dxi-column>
               
               <dxi-column caption="Job History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">
