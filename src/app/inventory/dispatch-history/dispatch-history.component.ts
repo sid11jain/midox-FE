@@ -10,7 +10,7 @@ export class DispatchHistoryComponent {
   showSpinner:boolean = true;
   disptachDetails: any = [];
   constructor(private commonService: CommonService){
-    commonService.dispatchData.subscribe(val => {
+    commonService.dispatchData.subscribe((val:any) => {
       this.disptachDetails = val;
       console.log(this.disptachDetails);
       

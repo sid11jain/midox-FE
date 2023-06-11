@@ -15,5 +15,7 @@ export class CommonService {
   // loginData: any;
   // userName: any;
   dispatchData = new BehaviorSubject('');
+  addMaterialData = new BehaviorSubject('');
+  stockHistoryData = new BehaviorSubject('');
   constructor() { }
 }

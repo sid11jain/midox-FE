@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/services/common.service';
 
 
 @Component({
@@ -9,9 +10,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class StockHistoryComponent {
   showSpinner:boolean = true;
-  stockHistoryForm:any = FormGroup;  
+  stockHistoryForm:any = FormGroup; 
+  
+  stockHistoryDetails: any = [];
+  constructor(private formBuilder: FormBuilder, private commonService: CommonService){ 
+    commonService.stockHistoryData.subscribe((val:any) => {
+      this.stockHistoryDetails = val;
+      console.log(this.stockHistoryDetails);
+      
+    });
+  }
 
-  constructor(private formBuilder: FormBuilder) { }
+  // constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(){    
     this.stockHistoryForm = this.formBuilder.group({
