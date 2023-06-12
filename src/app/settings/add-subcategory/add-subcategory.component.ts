@@ -12,6 +12,9 @@ export class AddSubcategoryComponent {
   subCategoryData: any[] = [];
   editedSubCategoryIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
+  msgValue:string = "Cloth";
+  isCloth:boolean = true;
+  
 
   constructor(private formBuilder: FormBuilder) {
     this.subCategoryForm = this.formBuilder.group({
@@ -46,5 +49,16 @@ export class AddSubcategoryComponent {
 
   delete(index: number) {
     this.subCategoryData.splice(index, 1);
+  }
+
+  //To select cloth or accessory
+  checkBoxFn(event: any){
+    const isChecked = event.checked;
+    if(!isChecked){
+      this.msgValue = "Cloth";
+    }
+    else{
+      this.msgValue = "Accessory";
+    }
   }
 }

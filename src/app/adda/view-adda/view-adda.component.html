@@ -25,10 +25,12 @@
               <dxi-column dataField="brand" caption="Brand"></dxi-column>
               <dxi-column dataField="product" caption="Product"></dxi-column>
               <dxi-column dataField="designNumber" caption="Design Number"></dxi-column>  
+              <dxi-column dataField="quantity" caption="Quantity"></dxi-column>  
               
               <dxi-column caption="Add/View Material" cellTemplate="cellTemplateHyperlink"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active">Add/View</a>           
+                <a [routerLink]="['../add-material']" routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>           
+                <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
   
               </div>
       

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-view-adda',
@@ -7,11 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewAddaComponent {
   showSpinner:boolean = true;
+  
+  constructor(private commonService: CommonService){  }
 
   ngOnInit(){
     setTimeout(() => {
-      this.showSpinner = false
+      this.showSpinner = false 
     }, 1000);
+  }
+
+  
+  sendAddaAddMaterialdata(data:any){
+    this.commonService.addMaterialData.next(data);
+  }
+
+  getSelectedData(rowData:any) {
+    console.log("rowData ", rowData);   
+    this.sendAddaAddMaterialdata(rowData);
   }
 
   viewAddaData: any = [
