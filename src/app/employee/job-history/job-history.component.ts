@@ -12,8 +12,7 @@ export class JobHistoryComponent {
   constructor(private commonService: CommonService){ 
     commonService.employeeJobHistoryData.subscribe((val:any) => {
       this.employeeJobHistoryDetails = val;
-      console.log(this.employeeJobHistoryDetails);
-      
+      console.log(this.employeeJobHistoryDetails);      
     });
   }
 
@@ -31,21 +30,6 @@ export class JobHistoryComponent {
     console.log("rowData ", rowData);   
     this.sendJobHistoryEmployeeData(rowData);
   }
-
-  employeeDetails:any = {
-    unique_id: "165",
-    employeeName: "Bilal",
-    jobPending: 25,
-    paid: 5000,
-    paymentDue: 2000,
-    dobEmployee: "2023-06-01",
-    employeeAdhaar: "123456781199",
-    gender: "Male",
-    employeeAddress: "Abc House, abc city, dex state, India 452101",
-    employeeMobile: "1234456789",
-    
-  }
-
   
   jobHitoryEmployeeData: any = [
     {
