@@ -28,7 +28,7 @@
       <tr *ngFor="let material of materials; let i = index">
         <td>{{ material.name }}</td>
         <td>
-          <button (click)="editMaterial(material, i)" class="btn btn-sm btn-primary">Edit</button>
+          <button (click)="editMaterial(material, i)" class="btn btn-sm me-2 btn-primary">Edit</button>
           <button (click)="deleteMaterial(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
         </td>
       </tr>
