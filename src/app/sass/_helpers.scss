@@ -118,3 +118,47 @@
 .h-40 {
     height: 40%;
 }
+
+//Center
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.invalid-red{
+    color: red;
+}
+
+
+.its-card .card-header{
+    padding: 6px 10px;
+    background-color: $primary-color;
+    border-bottom: 1px solid $primary-color;
+    height: auto;
+}
+.its-card{
+    margin: 1rem;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    padding-bottom: 1rem;
+}
+
+.card-header{
+    color: white;
+    margin-bottom: 0.3rem;
+}
+
+.card-body{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.settings-comp{
+    height: 75vh;
+    overflow: auto;
+}

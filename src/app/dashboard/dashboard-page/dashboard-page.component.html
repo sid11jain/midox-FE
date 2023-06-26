@@ -1,10 +1,12 @@
 <div class="dashboard-page">
-    <div class="row pb-3 pe-3">
+    <div class="row pb-4 pe-3">
         <div class="row col-3">
+            <!-- <mat-spinner></mat-spinner> -->
             <div class="row col-12 top-card">
                 <div class="col-9 card-detail">
                     <span>Total Adda</span>
-                    <span>500</span>
+                    <mat-spinner *ngIf=showSpinner diameter=25></mat-spinner>
+                    <span *ngIf=!showSpinner>500</span>
                 </div>
                 <div class="col-3">
                     <span class="material-symbols-outlined icon-top">
@@ -17,7 +19,8 @@
             <div class="row col-12 top-card">
                 <div class="col-9 card-detail">
                     <span>Bundle</span>
-                    <span>1500</span>
+                    <mat-spinner *ngIf=showSpinner diameter=25></mat-spinner>
+                    <span *ngIf=!showSpinner>1500</span>
                 </div>
                 <div class="col-3">
                     <span class="material-symbols-outlined icon-top">
@@ -30,7 +33,8 @@
             <div class="row col-12 top-card">
                 <div class="col-9 card-detail">
                     <span>Employees</span>
-                    <span>250</span>
+                    <mat-spinner *ngIf=showSpinner diameter=25></mat-spinner>
+                    <span *ngIf=!showSpinner>250</span>
                 </div>
                 <div class="col-3">
                     <span class="material-symbols-outlined icon-top">
@@ -43,7 +47,8 @@
             <div class="row col-12 top-card">
                 <div class="col-9 card-detail">
                     <span>Job Card</span>
-                    <span>3000</span>
+                    <mat-spinner *ngIf=showSpinner diameter=25></mat-spinner>
+                    <span *ngIf=!showSpinner>3000</span>
                 </div>
                 <div class="col-3">
                     <span class="material-symbols-outlined icon-top">
@@ -53,14 +58,15 @@
             </div>
         </div>
     </div>
-    <div class="row pb-3">
+    <div class="row pb-4">
         <div class="row col-3">
             <div class="row p-0 card col-12 chart-card">
                 <div class="card-header">
                     <strong>Bundle</strong>
                 </div>
-                <div class="card-body chart-body-1">
-                    <canvas baseChart class="chart" 
+                <div class="card-body chart-body-1 flex-center">
+                    <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+                    <canvas *ngIf=!showSpinner baseChart class="chart" 
                         [data]="pieChartData"
                         [type]="pieChartType"
                         [options]="pieChartOptions"
@@ -70,13 +76,14 @@
             </div>  
         </div>
         <div class="row col-9">
-            <div class="row col-6">
+            <div class="row col-6 ps-0">
                 <div class="row p-0 card col-12 chart-card">
                     <div class="card-header">
                         <strong>Add Completed Per Month</strong>
                     </div>
-                    <div class="card-body chart-body-2">
-                        <canvas baseChart class="chart"
+                    <div class="card-body chart-body-2 flex-center">
+                        <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+                        <canvas *ngIf=!showSpinner baseChart class="chart"
                             [data]="barChartData"
                             [options]="barChartOptions"
                             [plugins]="barChartPlugins"
@@ -91,8 +98,9 @@
                     <div class="card-header">
                         <strong>Bundle</strong>
                     </div>
-                    <div class="card-body chart-body-2">
-                        <canvas baseChart class="chart"
+                    <div class="card-body chart-body-2 flex-center">
+                        <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+                        <canvas *ngIf=!showSpinner baseChart class="chart"
                             [data]="barBundleChartData"
                             [options]="barChartOptions"
                             [plugins]="barChartPlugins"
@@ -110,8 +118,9 @@
                 <div class="card-header">
                     <strong>Cloth</strong>
                 </div>
-                <div class="card-body chart-body-1">
-                    <canvas baseChart class="chart" 
+                <div class="card-body chart-body-1 flex-center">
+                    <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+                    <canvas *ngIf=!showSpinner baseChart class="chart" 
                         [data]="pieChartData"
                         [type]="pieChartType"
                         [options]="pieChartOptions"
@@ -121,13 +130,14 @@
             </div>  
         </div>
         <div class="row col-9">
-            <div class="row col-6">
+            <div class="row col-6 ps-0">
                 <div class="row p-0 card col-12 chart-card">
                     <div class="card-header">
                         <strong>Accessories</strong>
                     </div>
-                    <div class="card-body chart-body-2">
-                        <canvas baseChart class="chart"
+                    <div class="card-body chart-body-2 flex-center">
+                        <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+                        <canvas *ngIf=!showSpinner baseChart class="chart"
                             [data]="barChartData"
                             [options]="barChartOptions"
                             [plugins]="barChartPlugins"
@@ -142,8 +152,9 @@
                     <div class="card-header">
                         <strong>Dispatch</strong>
                     </div>
-                    <div class="card-body chart-body-2">
-                        <canvas baseChart class="chart"
+                    <div class="card-body chart-body-2 flex-center">
+                        <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+                        <canvas *ngIf=!showSpinner baseChart class="chart"
                             [datasets]="barStackedChartData"
                             [labels]="barChartLabels"
                             [options]="barChartOptions"
@@ -156,4 +167,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> 

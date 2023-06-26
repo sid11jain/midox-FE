@@ -6,11 +6,11 @@ import { PaymentEmployeeComponent } from './payment-employee/payment-employee.co
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'add', pathMatch: 'full'},
-  { path: 'add', component:  AddEmployeeComponent},
+  {path: '', redirectTo: 'add-employee', pathMatch: 'full'},
+  { path: 'add-employee', component:  AddEmployeeComponent}, 
   { path: 'job-history', component:  JobHistoryComponent},
   { path: 'payment', component:  PaymentEmployeeComponent},
-  { path: 'view', component:  ViewEmployeeComponent}
+  { path: 'view-employee', component:  ViewEmployeeComponent}
 ];
 
 @NgModule({

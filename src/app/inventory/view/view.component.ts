@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 
 @Component({
@@ -7,6 +8,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent {
+  showSpinner:boolean = true;
+
+  constructor(private commonService: CommonService){  }
+
+  ngOnInit(){
+    setTimeout(() => {
+      this.showSpinner = false
+    }, 2000);
+  }
+
+  sendDtockHistoryData(data:any){
+    this.commonService.stockHistoryData.next(data); 
+  }
+
+  getSelectedData(rowData:any) {
+    console.log("rowData ", rowData);        
+    this.sendDtockHistoryData(rowData);
+  }
 
   viewClothData: any = [
     {
@@ -54,21 +73,492 @@ export class ViewComponent {
       amount:100,
       is_cloth:true
     },
-];
-  viewAccesoriesData: any = [
     {
-      unique_id:"113",
-      accessories:"Button",
-      amount:50000,
-      avl_amount:30787,
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
     },
     {
-      unique_id:"143",
-      accessories:"Dhaga",
-      amount:40000,
-      avl_amount:7532,
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
     },
-];
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+    {
+      unique_id:"125",
+      bill_number:"12345",
+      date:"12-May-2023",
+      packing_slip_number:"987",
+      supplier_name:"Midox",
+      material:"wool",
+      color_fabric_code:"37",
+      cloth:"White_78_Jyoti",
+      sub_category:"Cotton hosiery sinkar fabric",
+      measuring_unit:"KG",
+      avl_qty: 876,
+      amount:100,
+      is_cloth:true
+    },
+  ];
+    viewAccesoriesData: any = [
+      {
+        unique_id:"113",
+        accessories:"Button",
+        amount:50000,
+        avl_amount:30787,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+      {
+        unique_id:"143",
+        accessories:"Dhaga",
+        amount:40000,
+        avl_amount:7532,
+      },
+  ];
+
+  //For export to excel button
+  onExporting(e:any){
+    let fileName = "View Stock";
+    this.commonService.onExportingData(e,fileName);
+  }
   
 
 }

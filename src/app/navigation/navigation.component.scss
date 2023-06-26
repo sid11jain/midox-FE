@@ -11,6 +11,11 @@
     color: $primary-color !important;
 }
 
+.sub-active {
+    font-weight: 700;
+    background-color: lightcyan;
+}
+
 .navigation-row {
     background-color: $primary-color;
     
@@ -50,4 +55,6 @@
     .mb-link {
         margin-bottom: 30px;
     }
+
+    
 }

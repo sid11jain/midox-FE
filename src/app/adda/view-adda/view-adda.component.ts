@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-view-adda',
@@ -6,5 +7,324 @@ import { Component } from '@angular/core';
   styleUrls: ['./view-adda.component.scss']
 })
 export class ViewAddaComponent {
+  showSpinner:boolean = true;
+  
+  constructor(private commonService: CommonService){  }
 
+  ngOnInit(){
+    setTimeout(() => {
+      this.showSpinner = false 
+    }, 1000);
+  }
+
+  
+  sendAddaAddMaterialdata(data:any){
+    this.commonService.addMaterialData.next(data);
+  }
+
+  getSelectedData(rowData:any) {
+    console.log("rowData ", rowData);   
+    this.sendAddaAddMaterialdata(rowData);
+  }
+
+  viewAddaData: any = [
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+    {
+      unique_id: "165",
+      addNumber: 1001,
+      brand: "Midox",
+      product: "T-shirt",
+      designNumber: "m-5156",
+      quantity: 500,
+      addMaterial: "Add/View",
+    },
+
+  ]
 }
