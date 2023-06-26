@@ -10,6 +10,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -21,7 +25,10 @@ import {MatButtonModule} from '@angular/material/button';
     DxDataGridModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatSelectModule,
+    MatInputModule,
   ],
   exports: [
     CommonModule,
@@ -32,7 +39,10 @@ import {MatButtonModule} from '@angular/material/button';
     DxDataGridModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatSelectModule,
+    MatInputModule,
   ]
 })
 export class SharedModule { }

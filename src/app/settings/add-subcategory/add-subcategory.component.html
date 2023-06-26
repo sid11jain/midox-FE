@@ -28,7 +28,7 @@
           <tr *ngFor="let data of subCategoryData; let i = index">
             <td>{{ data.name }}</td>
             <td>
-              <button (click)="edit(data, i)" class="btn btn-sm btn-primary">Edit</button>
+              <button (click)="edit(data, i)" class="btn btn-sm me-2 btn-primary">Edit</button>
               <button (click)="delete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
             </td>
           </tr>
