@@ -41,6 +41,7 @@ export class StockHistoryComponent {
     });
  
     this.dateSelectorGroup.controls['startDate'].valueChanges.subscribe(value => {
+      console.log('start date changes');
       if(value){
         this.displayStartDate = value;
         // const endDate = moment(this.dateSelectorGroup.controls['endDate'].value);
@@ -57,6 +58,8 @@ export class StockHistoryComponent {
     });
  
     this.dateSelectorGroup.controls['endDate'].valueChanges.subscribe(value => {
+      console.log('end date changes');
+      
       if(value){
         const endDate = moment(value);
         const startDate = moment(this.dateSelectorGroup.controls['startDate'].value);
@@ -65,7 +68,10 @@ export class StockHistoryComponent {
         if(difference < 90){
           this.displayEndDate = value;
         }else{
-          this.dateSelectorGroup.reset();
+          setTimeout(()=>{
+            this.dateSelectorGroup.reset();
+          }, 200)
+          
         }
         
       }
@@ -75,16 +81,12 @@ export class StockHistoryComponent {
     })
   }
 
-  onSubmit() {    
-    if (this.stockHistoryForm.invalid) {
+  onSubmit() { 
+    if (this.dateSelectorGroup.invalid) {
       return;
     }
-    
-    const currentFullTimestamp = new Date();
-    this.stockHistoryForm.patchValue({ currentFullTimestamp });
-    
-    console.log('Form values:', this.stockHistoryForm.value);
-    this.stockHistoryForm.reset();
+    console.log('Form values:', this.dateSelectorGroup.value);
+    this.dateSelectorGroup.reset();
 
     setTimeout(() => {
       this.showSpinner = false
