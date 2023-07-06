@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import * as pdfMake from "pdfmake/build/pdfmake";  
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+import { MsgDialogComponent } from 'src/app/shared/msg-dialog/msg-dialog.component';
 
 @Component({
   selector: 'app-bundle',
@@ -9,6 +11,7 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
   styleUrls: ['./bundle.component.scss']
 })
 export class BundleComponent {
+  constructor(public dialog: MatDialog) {}
   exportPdf(): void {
 
     const docDefinition:any = {
@@ -51,5 +54,17 @@ export class BundleComponent {
     };
 
     pdfMake.createPdf(docDefinition).download("test.pdf");
+  }
+
+  openDialog() {
+    this.dialog.open(MsgDialogComponent, {
+      data: {
+        title: 'Data',
+        message: 'saved successfully!',
+      },
+      width: '30%',
+      height: '30%',
+      panelClass: 'msg-dialog'
+    });
   }
 }
