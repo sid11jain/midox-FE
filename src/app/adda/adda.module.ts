@@ -10,6 +10,7 @@ import { AddPatternComponent } from './add-pattern/add-pattern.component';
 import { BundleComponent } from './bundle/bundle.component';
 import { JobCardComponent } from './job-card/job-card.component';
 import { StickerComponent } from './sticker/sticker.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -26,6 +27,6 @@ import { StickerComponent } from './sticker/sticker.component';
     CommonModule,
     AddaRoutingModule,
     SharedModule
-  ]
+  ],
 })
 export class AddaModule { }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { CommonService } from 'src/app/services/common.service';
-
 
 @Component({
   selector: 'app-stock-history',
@@ -11,6 +11,9 @@ import { CommonService } from 'src/app/services/common.service';
 export class StockHistoryComponent {
   showSpinner:boolean = true;
   stockHistoryForm:any = FormGroup; 
+  dateSelectorGroup!:FormGroup;
+  displayStartDate:string = "N/A";
+  displayEndDate:string = "N/A";
   
   stockHistoryDetails: any = [];
   constructor(private formBuilder: FormBuilder, private commonService: CommonService){ 
@@ -27,19 +30,63 @@ export class StockHistoryComponent {
     this.stockHistoryForm = this.formBuilder.group({
       uniqueId: ['', Validators.required],      
       currentFullTimestamp: ['']
-    })    
+    })  
+    this.initializeForm();  
   }
 
-  onSubmit() {    
-    if (this.stockHistoryForm.invalid) {
+  initializeForm(){
+    this.dateSelectorGroup = this.formBuilder.group({
+      startDate:['', Validators.required],
+      endDate:['', Validators.required]
+    });
+ 
+    this.dateSelectorGroup.controls['startDate'].valueChanges.subscribe(value => {
+      console.log('start date changes');
+      if(value){
+        this.displayStartDate = value;
+        // const endDate = moment(this.dateSelectorGroup.controls['endDate'].value);
+        // const startDate = moment(value);
+        // const difference = endDate.diff(startDate, 'days');
+        // console.log(difference);
+        // if(difference > 90){
+        //   this.displayEndDate = value;
+        // }
+      }
+      else{
+        this.displayStartDate = "N/A"
+      }
+    });
+ 
+    this.dateSelectorGroup.controls['endDate'].valueChanges.subscribe(value => {
+      console.log('end date changes');
+      
+      if(value){
+        const endDate = moment(value);
+        const startDate = moment(this.dateSelectorGroup.controls['startDate'].value);
+        const difference = endDate.diff(startDate, 'days');
+        console.log(difference);
+        if(difference < 90){
+          this.displayEndDate = value;
+        }else{
+          setTimeout(()=>{
+            this.dateSelectorGroup.reset();
+          }, 200)
+          
+        }
+        
+      }
+      else{
+        this.displayEndDate = "N/A"
+      }
+    })
+  }
+
+  onSubmit() { 
+    if (this.dateSelectorGroup.invalid) {
       return;
     }
-    
-    const currentFullTimestamp = new Date();
-    this.stockHistoryForm.patchValue({ currentFullTimestamp });
-    
-    console.log('Form values:', this.stockHistoryForm.value);
-    this.stockHistoryForm.reset();
+    console.log('Form values:', this.dateSelectorGroup.value);
+    this.dateSelectorGroup.reset();
 
     setTimeout(() => {
       this.showSpinner = false
@@ -348,4 +395,8 @@ export class StockHistoryComponent {
       is_cloth:true
     },
 ];
+
+
+
+
 }

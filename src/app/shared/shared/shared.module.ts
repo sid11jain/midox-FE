@@ -9,10 +9,15 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-
-import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [],
@@ -29,6 +34,11 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatSelectModule,
     MatInputModule,
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatNativeDateModule, 
+    MatDatepickerModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -43,6 +53,11 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatSelectModule,
     MatInputModule,
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatNativeDateModule, 
+    MatDatepickerModule,
+    MatDialogModule
   ]
 })
 export class SharedModule { }
