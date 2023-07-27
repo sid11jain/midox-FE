@@ -12,14 +12,26 @@ export class AddSubcategoryComponent {
   subCategoryData: any[] = [];
   editedSubCategoryIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
-  msgValue:string = "Cloth";
-  isCloth:boolean = true;
-  
+  selectedValue: string = 'Cloth';
+  dropDownValue:any = [];
+  showPage:boolean = false;  
 
   constructor(private formBuilder: FormBuilder) {
     this.subCategoryForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
+  }
+
+  ngOnInit(){
+    this.dropDownValue = ["Cloth", "Accesories"];
+    this.onDropdownChange(this.selectedValue);
+    this.showPage = true;
+  }
+
+  onDropdownChange(value: any) {
+    // Update the selectedValue when the dropdown value changes    
+    this.selectedValue = value?.value;
+    console.log('Selected value:', this.selectedValue);
   }
 
   onSubmit() {
@@ -33,8 +45,10 @@ export class AddSubcategoryComponent {
       this.subCategoryData[this.editedSubCategoryIndex].name = name;
       this.editedSubCategoryIndex = null;
     } else {
-      const val = { name: name };
+      const val = { name: name, material: this.selectedValue };
       this.subCategoryData.push(val);
+      console.log(val);
+      
     }
     this.subCategoryForm.reset();
   }
@@ -49,16 +63,5 @@ export class AddSubcategoryComponent {
 
   delete(index: number) {
     this.subCategoryData.splice(index, 1);
-  }
-
-  //To select cloth or accessory
-  checkBoxFn(event: any){
-    const isChecked = event.checked;
-    if(!isChecked){
-      this.msgValue = "Cloth";
-    }
-    else{
-      this.msgValue = "Accessory";
-    }
   }
 }
