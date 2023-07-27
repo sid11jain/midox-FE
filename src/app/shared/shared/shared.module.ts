@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     MatInputModule, 
     MatNativeDateModule, 
     MatDatepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   exports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     MatInputModule, 
     MatNativeDateModule, 
     MatDatepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ]
 })
 export class SharedModule { }
