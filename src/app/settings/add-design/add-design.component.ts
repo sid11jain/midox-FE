@@ -8,43 +8,53 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddDesignComponent {
 
-  designForm: FormGroup;
+  // designForm: FormGroup;
   designData: any[] = [];
   editedDesignIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.designForm = this.formBuilder.group({
-      name: ['', Validators.required]
+  designReactiveForm!: FormGroup;
+  brandDropdownValues: string[] = ["Midox", 'Ciana'];
+  productDropdownValues: string[] = ['T shirt', 'Shirt', 'Boxer'];
+  formEntries: any[] = [];
+  addMsg:boolean = true; 
+
+  constructor(private formBuilder: FormBuilder) {  }
+
+  ngOnInit() {
+    this.designReactiveForm = this.formBuilder.group({
+      brandDropdown: ['', Validators.required],
+      productDropdown: ['', Validators.required],
+      inputField: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
   onSubmit() {
-    if (this.designForm.invalid) {
-      return;
+    if (this.designReactiveForm.valid) {
+      this.addMsg = true;
+      this.deleteBtnDisabled = false;
+      const formEntry = {
+        brandDropdown: this.designReactiveForm.value.brandDropdown,
+        productDropdown: this.designReactiveForm.value.productDropdown,
+        inputField: this.designReactiveForm.value.inputField,
+      };
+      this.formEntries.push(formEntry);
+      console.log("Form: ",formEntry);      
+      this.designReactiveForm.reset();
     }
-    this.deleteBtnDisabled = false;
-    const name = this.designForm.controls['name'].value;
-    
-    if (this.editedDesignIndex !== null) {
-      this.designData[this.editedDesignIndex].name = name;
-      this.editedDesignIndex = null;
-    } else {
-      const val = { name: name };
-      this.designData.push(val);
-    }
-    this.designForm.reset();
+  }
+  
+  onDelete(index: number) {
+    this.formEntries.splice(index, 1);
   }
 
-  edit(data: any, index: number) {
+  onEdit(index: number) {
+    this.addMsg = false;
     this.deleteBtnDisabled = true;
-    this.editedDesignIndex = index;
-    this.designForm.patchValue({
-      name: data.name
-    });
+    const entry = this.formEntries[index];
+    this.designReactiveForm.patchValue(entry);
+    this.onDelete(index); // Remove the entry from the list
   }
 
-  delete(index: number) {
-    this.designData.splice(index, 1);
-  }
+
 }
