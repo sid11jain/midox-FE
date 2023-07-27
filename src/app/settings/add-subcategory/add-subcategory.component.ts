@@ -12,7 +12,7 @@ export class AddSubcategoryComponent {
   subCategoryData: any[] = [];
   editedSubCategoryIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
-  selectedValue: string = 'Cloth';
+  selectedValue: any = {value: "Cloth"};
   dropDownValue:any = [];
   showPage:boolean = false;  
 
