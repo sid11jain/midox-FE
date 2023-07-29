@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,9 @@ const routes: Routes = [
   },
   {
     path:'signup', component: SignupComponent
+  },
+  {
+    path:'profile', component: ProfileComponent
   },
   {
     path:'', loadChildren:()=>import('./dashboard/dashboard.module').then(mod=>mod.DashboardModule)

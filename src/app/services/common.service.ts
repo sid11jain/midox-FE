@@ -13,9 +13,8 @@ import { exportDataGrid } from 'devextreme/excel_exporter';
   providedIn: 'root'
 })
 export class CommonService {
-  // private baseUrl = environment.apiEndpoint;
-  // private payloadUrl: string;
-  // private payload: string;
+  private baseUrl = environment.apiEndpoint;
+  private payloadUrl!: string;
   // loginData: any;
   // userName: any;
   dispatchData = new BehaviorSubject('');
@@ -23,7 +22,13 @@ export class CommonService {
   stockHistoryData = new BehaviorSubject('');
   employeeJobHistoryData = new BehaviorSubject('');
   employeePaymentData = new BehaviorSubject('');
-  constructor() { }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
+    observe: 'response' as 'body'
+  };
+
+  constructor(private http: HttpClient) { }
 
   onExportingData(e:any, fileName:string) {
     const workbook = new Workbook();
@@ -39,5 +44,27 @@ export class CommonService {
       });
     });
     e.cancel = true;
+  }
+
+
+  addStocks(payload:any): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}stock/list`;
+    return this.http.post(this.payloadUrl, payload,  this.httpOptions).pipe(
+      catchError(this.handleError('addStocks', []))
+    );
+  }
+
+  getAllStocks(): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}stock/list`;
+    return this.http.get(this.payloadUrl, this.httpOptions).pipe(
+      catchError(this.handleError('getAllStocks', []))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 }

@@ -1,15 +1,21 @@
 <div class="its-card">
     <h3 class="card-header ps-3">Add Subcategory</h3>
-    <div class="settings-comp">
-      <input type="checkbox" (change)="checkBoxFn($event.target)"> For Accessory
+    <div class="settings-comp" *ngIf="showPage">
+      <!-- <input type="checkbox" (change)="checkBoxFn($event.target)"> For Accessory -->
+      <div class="col-6">
+        <label for="productDropdown">Select material:*</label>
+        <select (change)="onDropdownChange($event.target)" class="form-control">    
+          <option *ngFor="let value of dropDownValue" [value]="value" [selected]="selectedValue === value">{{ value }}</option>
+        </select>
+      </div>
       <form [formGroup]="subCategoryForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="name">Subcategory Name ({{msgValue}})</label>
+        <div class="form-group mt-2">
+          <label for="name">Subcategory Name ({{selectedValue}})</label>
           <input type="text" id="name" formControlName="name" class="form-control">
           <div *ngIf="subCategoryForm.get('name')?.invalid && subCategoryForm.get('name')?.touched" class="error invalid-red">
             Please enter a valid text.
           </div>
-        </div>
+        </div> 
         <div class="form-group mt-3">
           <button type="submit" [disabled]="subCategoryForm.invalid" mat-flat-button color="primary">
             {{ editedSubCategoryIndex !== null ? 'Update SubCategory' : 'Add SubCategory' }}
