@@ -54,6 +54,7 @@
             <th>Product Value</th>
             <th>Design Number</th>
             <th>Action</th>
+            <th>Process</th>
           </tr>
         </thead> 
         <tbody>
@@ -65,10 +66,18 @@
               <button (click)="onEdit(i)" class="btn btn-sm me-2 btn-primary">Edit</button>
               <button (click)="onDelete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
             </td>
+            <td>
+              <button (click)="selectProcess(entry)" class="btn btn-sm me-2 btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Select</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+  <!-- Modal -->
+  <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <app-process-modal [modalValue]="modalValue"></app-process-modal>
+  </div>
     
 </div>
       

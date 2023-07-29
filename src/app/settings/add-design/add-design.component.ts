@@ -19,6 +19,8 @@ export class AddDesignComponent {
   formEntries: any[] = [];
   addMsg:boolean = true; 
 
+  modalValue:any={};
+
   constructor(private formBuilder: FormBuilder) {  }
 
   ngOnInit() {
@@ -56,5 +58,10 @@ export class AddDesignComponent {
     this.onDelete(index); // Remove the entry from the list
   }
 
+  selectProcess(data:any){
+    console.log(data);
+    this.modalValue = data;
+    
+  }
 
 }
