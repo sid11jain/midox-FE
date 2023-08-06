@@ -61,6 +61,20 @@ export class CommonService {
     );
   }
 
+  getStockById(stockId:any): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}stockHistory/get/${stockId}`;
+    return this.http.get(this.payloadUrl, this.httpOptions).pipe(
+      catchError(this.handleError('getStockById', []))
+    );
+  }
+
+  getAllSettingsData(type:any): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}groups/get-entities/${type}`;
+    return this.http.get(this.payloadUrl, this.httpOptions).pipe(
+      catchError(this.handleError('getAllSettingsData', []))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

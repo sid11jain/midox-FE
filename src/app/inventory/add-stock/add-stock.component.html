@@ -1,6 +1,7 @@
 <div class="its-card">
   <h3 class="card-header ps-3">Add Stock</h3>
   <div class="row row-stock">
+    <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <!-- billNumber -->
       <div class="row add-stock">
