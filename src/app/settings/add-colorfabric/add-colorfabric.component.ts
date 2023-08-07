@@ -12,12 +12,28 @@ export class AddColorfabricComponent {
   colorFabricData: any[] = [];
   editedColorFabricIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
+  showDropdown: boolean = true;
+  dropDownValue:any = [];
 
   constructor(private formBuilder: FormBuilder) {
     this.colorFabricForm = this.formBuilder.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
     });
+  }
+  
+  ngOnInit(){
+    this.dropDownValue = ["Red", "Green", "Brown", "Blue"];
+  }
+
+  onCheckboxChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if(target.checked){
+      this.showDropdown = false;
+    }
+    else{
+      this.showDropdown = true;
+    }
   }
 
   onSubmit() {
