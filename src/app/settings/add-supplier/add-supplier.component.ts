@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-supplier.component.scss']
 })
 export class AddSupplierComponent {
-
   suppliers: any[] = [];
   supplierForm!: FormGroup;
   deleteBtnDisabled: boolean = false;
@@ -29,17 +28,10 @@ export class AddSupplierComponent {
   }
 
   onSubmit(): void {
-    // this.deleteBtnDisabled = false;
-    // if (this.supplierForm.valid) {
-    //   const newSupplier = { ...this.supplierForm.value };
-    //   this.suppliers.push(newSupplier);
-    //   this.resetForm();
-    // } else {
-    //   console.log('Form is invalid. Please check the inputs.');
-    // }
     if (this.supplierForm.invalid) {
       return;
     }
+    console.log('Form values:', this.supplierForm.value);
     this.deleteBtnDisabled = false;
     const supplierName = this.supplierForm.controls['supplierName'].value;
     const mobNumber = this.supplierForm.controls['mobNumber'].value;
@@ -70,12 +62,7 @@ export class AddSupplierComponent {
     this.supplierForm.reset();
   }
 
-
-  editSupplier(supplier: any, index:number): void {
-    // Implement the edit functionality here
-    // console.log('Editing supplier:', supplier);
-    // You can pre-fill the form with the selected supplier data for editing.
-    // For example, this.supplierForm.setValue(supplier);
+  editSupplier(supplier: any, index:number): void {    
     this.deleteBtnDisabled = true;
     this.editedMaterialIndex = index;
     this.supplierForm.patchValue({
@@ -100,44 +87,4 @@ export class AddSupplierComponent {
   resetForm(): void {
     this.supplierForm.reset();
   }
-
-  // supplierForm: FormGroup;
-  // supplierData: any[] = [];
-  // editedSupplierIndex: number | null = null;
-  // deleteBtnDisabled: boolean = false;
-
-  // constructor(private formBuilder: FormBuilder) {
-  //   this.supplierForm = this.formBuilder.group({
-  //     name: ['', Validators.required]
-  //   });
-  // }
-
-  // onSubmit() {
-  //   if (this.supplierForm.invalid) {
-  //     return;
-  //   }
-  //   this.deleteBtnDisabled = false;
-  //   const name = this.supplierForm.controls['name'].value;
-    
-  //   if (this.editedSupplierIndex !== null) {
-  //     this.supplierData[this.editedSupplierIndex].name = name;
-  //     this.editedSupplierIndex = null;
-  //   } else {
-  //     const val = { name: name };
-  //     this.supplierData.push(val);
-  //   }
-  //   this.supplierForm.reset();
-  // }
-
-  // edit(data: any, index: number) {
-  //   this.deleteBtnDisabled = true;
-  //   this.editedSupplierIndex = index;
-  //   this.supplierForm.patchValue({
-  //     name: data.name
-  //   });
-  // }
-
-  // delete(index: number) {
-  //   this.supplierData.splice(index, 1);
-  // }
 }
