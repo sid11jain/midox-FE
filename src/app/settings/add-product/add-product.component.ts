@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-product',
@@ -10,13 +12,19 @@ export class AddProductComponent {
 
   productForm: FormGroup;
   productData: any[] = [];
+  productArray: any[] = [];
   editedProductIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
+  showSpinner: boolean = true;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
+  }
+
+  ngOnInit(){
+    this.getProduct();
   }
 
   onSubmit() {
@@ -40,11 +48,28 @@ export class AddProductComponent {
     this.deleteBtnDisabled = true;
     this.editedProductIndex = index;
     this.productForm.patchValue({
-      name: data.name
+      name: data.displayValue
     });
   }
 
   delete(index: number) {
     this.productData.splice(index, 1);
+  }
+
+  //API Call
+  getProduct(){
+    console.log("API Call");
+    
+    this.common.getAllSettingsData("MID_PROD").subscribe((responseData:any)=>{
+      let response = responseData?.body;
+      if (responseData.status === 200) {
+        this.productArray = response;
+        console.log(response);        
+      }
+      else{
+        console.log("Error code: ",responseData?.status);        
+      }
+      this.showSpinner = false;
+    });
   }
 }

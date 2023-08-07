@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-process-modal',
@@ -16,7 +18,7 @@ export class ProcessModalComponent {
   
   processDropdownValues: string[] = ["Process-1", 'Process-2'];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.processModalForm = this.formBuilder.group({
       process: ['', Validators.required],
       wages: ['', Validators.required],

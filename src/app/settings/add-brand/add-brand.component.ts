@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-brand',
@@ -12,7 +14,7 @@ export class AddBrandComponent {
   deleteBtnDisabled: boolean = false;
   editedMaterialIndex: number | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.initForm();
   }
 

@@ -8,24 +8,28 @@
           <div *ngIf="processForm.get('name')?.invalid && processForm.get('name')?.touched" class="error invalid-red">
             Please enter a valid text.
           </div>
-        </div>
+        </div> 
         <div class="form-group mt-3">
           <button type="submit" [disabled]="processForm.invalid" mat-flat-button color="primary">
             {{ editedProcessIndex !== null ? 'Update Process' : 'Add Process' }}
           </button>
         </div>
       </form>
+
+      <div class="flex-center">
+        <mat-spinner *ngIf="showSpinner" diameter=125></mat-spinner>
+      </div>
       
-      <table class="table mt-4">
+      <table class="table mt-4" *ngIf="!showSpinner">
         <thead>
           <tr>
-            <th>Subcategory Name</th>
+            <th>Process Name</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of processData; let i = index">
-            <td>{{ data.name }}</td>
+          <tr *ngFor="let data of processArray; let i = index">
+            <td>{{ data.displayValue }}</td>
             <td>
               <button (click)="edit(data, i)" class="btn btn-sm btn-primary me-2">Edit</button>
               <button (click)="delete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
