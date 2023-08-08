@@ -30,7 +30,6 @@ export class AddMeasurementComponent {
 
   ngOnInit(){
     this.getMeasrurementType();
-    // this.deleteMeasurementType("UNIT_KG3");
   }
 
   onSubmit() {
