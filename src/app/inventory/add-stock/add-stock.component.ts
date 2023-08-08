@@ -27,7 +27,7 @@ export class AddStockComponent implements OnInit {
   dialogTitle!: string;
   dialogMessage!: string;
 
-  supplierData:any[] = [{name: 'midox', id: '1'}];
+  supplierData:any[] = [{name: 'Midox', id: '1'}];
   materialData!:any[];
   //subCategoryData!:any[];
   colorFabricCodeData!:any[];
