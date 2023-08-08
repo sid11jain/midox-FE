@@ -48,7 +48,7 @@ export class CommonService {
 
 
   addStocks(payload:any): Observable<any> {
-    this.payloadUrl = `${this.baseUrl}stock/list`;
+    this.payloadUrl = `${this.baseUrl}stock/save`;
     return this.http.post(this.payloadUrl, payload,  this.httpOptions).pipe(
       catchError(this.handleError('addStocks', []))
     );
