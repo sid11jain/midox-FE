@@ -15,7 +15,7 @@ export class AddColorfabricComponent {
   colorFabricArray: any[] = []; 
   editedColorFabricIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
-  showDropdown: boolean = true;
+  // showDropdown: boolean = true;
   showSpinner:boolean = true;
   showSpinnerTable:boolean = true;
   dropDownValue:any = [];
@@ -32,18 +32,18 @@ export class AddColorfabricComponent {
     this.getColorFabricCode();
   }
 
-  onCheckboxChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    if(target.checked){
-      this.showDropdown = false;
-      this.colorFabricForm.patchValue({
-        name: ""
-      });
-    }
-    else{
-      this.showDropdown = true;
-    }
-  }
+  // onCheckboxChange(event: Event) {
+  //   const target = event.target as HTMLInputElement;
+  //   if(target.checked){
+  //     this.showDropdown = false;
+  //     this.colorFabricForm.patchValue({
+  //       name: ""
+  //     });
+  //   }
+  //   else{
+  //     this.showDropdown = true;
+  //   }
+  // }
 
   onSubmit() {
     if (this.colorFabricForm.invalid) {
