@@ -30,7 +30,7 @@ export class AddMeasurementComponent {
 
   ngOnInit(){
     this.getMeasrurementType();
-    // this.deleteMeasurementType("UNIT_KG1");
+    // this.deleteMeasurementType("UNIT_KG3");
   }
 
   onSubmit() {
@@ -89,8 +89,11 @@ export class AddMeasurementComponent {
     });
   }
 
-  delete(index: number) {
-    this.measurementTypeData.splice(index, 1);
+  delete(apiData: any) {
+    // this.measurementTypeData.splice(index, 1);
+      this.showSpinner = true; 
+    let entityCd = apiData?.entityCd;
+    this.deleteMeasurementType(entityCd);
   }
 
   //API Call
@@ -120,6 +123,7 @@ export class AddMeasurementComponent {
         // this.materials = response;
         // console.log(response);        
         
+        this.getMeasrurementType();
         this.dialogTitle = 'Measurement Unit';
         this.dialogMessage = 'Measurement unit delete successfully.'; 
       }
@@ -128,7 +132,7 @@ export class AddMeasurementComponent {
         this.dialogTitle = 'Measurement Unit';
         this.dialogMessage = 'Measurement unit failed to delete.';        
       }
-      // this.showSpinner = false; 
+      this.showSpinner = false; 
       this.openDialog();
     });
   }
