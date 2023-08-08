@@ -14,6 +14,7 @@ import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { AddMeasurementComponent } from './add-measurement/add-measurement.component';
 import { AddBrandComponent } from './add-brand/add-brand.component';
 import { ProcessModalComponent } from './add-design/process-modal/process-modal.component';
+import { AddColorComponent } from './add-color/add-color.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ProcessModalComponent } from './add-design/process-modal/process-modal.
     AddSupplierComponent,
     AddMeasurementComponent,
     AddBrandComponent,
-    ProcessModalComponent
+    ProcessModalComponent,
+    AddColorComponent
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,7 @@ import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { AddMeasurementComponent } from './add-measurement/add-measurement.component';
 import { AddBrandComponent } from './add-brand/add-brand.component';
 import { SignupComponent } from '../signup/signup.component';
+import { AddColorComponent } from './add-color/add-color.component';
 
 const routes: Routes = [
   { path: '',
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'add-material', component:  AddMaterialComponent}, 
       { path: 'add-subcategory', component:  AddSubcategoryComponent}, 
       { path: 'add-product', component:  AddProductComponent}, 
+      { path: 'add-color', component:  AddColorComponent}, 
       { path: 'add-color-fabric', component:  AddColorfabricComponent}, 
       { path: 'add-process', component:  AddProcessComponent}, 
       { path: 'add-design', component:  AddDesignComponent}, 
