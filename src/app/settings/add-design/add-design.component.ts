@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-design',
@@ -21,7 +23,7 @@ export class AddDesignComponent {
 
   modalValue:any={};
 
-  constructor(private formBuilder: FormBuilder) {  }
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {  }
 
   ngOnInit() {
     this.designReactiveForm = this.formBuilder.group({

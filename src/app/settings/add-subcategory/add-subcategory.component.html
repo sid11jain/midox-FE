@@ -1,11 +1,14 @@
 <div class="its-card">
     <h3 class="card-header ps-3">Add Subcategory</h3>
-    <div class="settings-comp" *ngIf="showPage">
+    <div class="flex-center">
+      <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+    </div>
+    <div class="settings-comp" *ngIf="!showSpinner">
       <!-- <input type="checkbox" (change)="checkBoxFn($event.target)"> For Accessory -->
       <div class="col-6">
         <label for="productDropdown">Select material:*</label>
         <select (change)="onDropdownChange($event.target)" class="form-control">    
-          <option *ngFor="let value of dropDownValue" [value]="value" [selected]="selectedValue === value">{{ value }}</option>
+          <option *ngFor="let value of dropDownValue" [value]="value.displayValue" [selected]="selectedValue === value.displayValue">{{ value.displayValue }}</option>
         </select>
       </div>
       <form [formGroup]="subCategoryForm" (ngSubmit)="onSubmit()">
@@ -22,8 +25,11 @@
           </button>
         </div>
       </form>
-      
-      <table class="table mt-4">
+
+      <div class="flex-center">
+        <mat-spinner *ngIf="showSpinnerTable" diameter=125></mat-spinner>
+      </div>      
+      <table class="table mt-4" *ngIf="!showSpinnerTable">
         <thead>
           <tr>
             <th>Subcategory Name</th>
@@ -31,8 +37,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of subCategoryData; let i = index">
-            <td>{{ data.name }}</td>
+          <tr *ngFor="let data of subCategoryArray; let i = index">
+            <td>{{ data.displayValue }}</td>
             <td>
               <button (click)="edit(data, i)" class="btn btn-sm me-2 btn-primary">Edit</button>
               <button (click)="delete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>

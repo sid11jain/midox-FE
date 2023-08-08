@@ -8,15 +8,19 @@
           <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error invalid-red">
             Please enter a valid text.
           </div>
-        </div>
+        </div> 
         <div class="form-group mt-3">
           <button type="submit" [disabled]="productForm.invalid" mat-flat-button color="primary">
             {{ editedProductIndex !== null ? 'Update product' : 'Add product' }}
           </button>
         </div>
       </form>
+
+      <div class="flex-center">
+        <mat-spinner *ngIf="showSpinner" diameter=125></mat-spinner>
+      </div>
       
-      <table class="table mt-4">
+      <table class="table mt-4" *ngIf="!showSpinner">
         <thead>
           <tr>
             <th>Product Name</th>
@@ -24,8 +28,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of productData; let i = index">
-            <td>{{ data.name }}</td>
+          <tr *ngFor="let data of productArray; let i = index">
+            <td>{{ data.displayValue }}</td>
             <td>
               <button (click)="edit(data, i)" class="btn btn-sm btn-primary me-2">Edit</button>
               <button (click)="delete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
