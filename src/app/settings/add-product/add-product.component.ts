@@ -66,7 +66,7 @@ export class AddProductComponent {
         "masterCd": "MID_PROD",
         "displayValue": "Kg8"
       }
-      obj.entityCd = "UNIT_"+currTime;
+      obj.entityCd = "PROD_"+currTime;
       obj.displayValue = inputVal;
       let data = [obj]
       console.log(data);    
