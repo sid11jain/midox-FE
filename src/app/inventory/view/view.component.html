@@ -41,16 +41,16 @@
                 <dxo-group-panel [visible]="true"></dxo-group-panel>
                 <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
   
-                <dxi-column dataField="cloth" caption="Material"></dxi-column>
+                <dxi-column dataField="materialCd" caption="Material"></dxi-column>
                 <dxi-column dataField="subcategoryCd" caption="Sub Category"></dxi-column>
                 <dxi-column dataField="unit" caption="Measuring Unit"></dxi-column>
                 <dxi-column dataField="availableQuantity" caption="Available Qty"></dxi-column>  
-                <dxi-column dataField="bill_number" caption="Bill Number" [visible]="false"></dxi-column>
-                <dxi-column dataField="date" caption="Date" [visible]="false"></dxi-column>
+                <dxi-column dataField="billNo" caption="Bill Number" [visible]="false"></dxi-column>
+                <dxi-column dataField="billDate" caption="Date" [visible]="false"></dxi-column>
                 <dxi-column dataField="packing_slip_number" caption="Packing Slip Number" [visible]="false"></dxi-column>
-                <dxi-column dataField="supplier_name" caption="Supplier Name" [visible]="false"></dxi-column>
-                <dxi-column dataField="material" caption="Material" [visible]="false"></dxi-column>
-                <dxi-column dataField="color_fabric_code" caption="Color Fabric Code" [visible]="false"></dxi-column>
+                <dxi-column dataField="supplier" caption="Supplier Name" [visible]="false"></dxi-column>
+                <!-- <dxi-column dataField="materialCd" caption="Material" [visible]="false"></dxi-column> -->
+                <dxi-column dataField="colorFabricCd" caption="Color Fabric Code"></dxi-column>
                 
                 <dxi-column caption="Stock History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
                 <div *dxTemplate="let data of 'cellTemplateHyperlink'" >
