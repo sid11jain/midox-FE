@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from 'src/app/services/common.service';
+import { MsgDialogComponent } from 'src/app/shared/msg-dialog/msg-dialog.component';
 
 @Component({
   selector: 'app-add-measurement',
@@ -17,6 +18,9 @@ export class AddMeasurementComponent {
   deleteBtnDisabled: boolean = false;
   showSpinner: boolean = true;
   editObject:any = {};
+  
+  dialogTitle!: string;
+  dialogMessage!: string;
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.measurementTypeForm = this.formBuilder.group({
@@ -25,8 +29,8 @@ export class AddMeasurementComponent {
   }
 
   ngOnInit(){
-    // this.getMeasrurementType();
-    this.deleteMeasurementType("UNIT_KG1");
+    this.getMeasrurementType();
+    // this.deleteMeasurementType("UNIT_KG1");
   }
 
   onSubmit() {
@@ -90,6 +94,8 @@ export class AddMeasurementComponent {
   }
 
   //API Call
+
+  // Get
   getMeasrurementType(){    
     this.common.getAllSettingsData("MID_UNIT").subscribe((responseData:any)=>{
       let response = responseData?.body;
@@ -104,6 +110,7 @@ export class AddMeasurementComponent {
     });
   }
 
+  // Delete
   deleteMeasurementType(entityCd:any){
     console.log("API Call");    
     this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
@@ -112,41 +119,74 @@ export class AddMeasurementComponent {
       if (responseData.status === 200) {
         // this.materials = response;
         // console.log(response);        
+        
+        this.dialogTitle = 'Measurement Unit';
+        this.dialogMessage = 'Measurement unit delete successfully.'; 
       }
       else{
-        console.log("Error code: ",responseData?.status);        
+        console.log("Error code: ",responseData?.status); 
+        this.dialogTitle = 'Measurement Unit';
+        this.dialogMessage = 'Measurement unit failed to delete.';        
       }
-      // this.showSpinner = false;
+      // this.showSpinner = false; 
+      this.openDialog();
     });
   }
 
+  // Add
   addMeasurementType(data:any){
     console.log("Post API Call");
     this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
       let response = responseData?.body;   
       if (responseData.status === 201) {
         console.log(response);       
-        this.getMeasrurementType();     
+        this.getMeasrurementType();    
+        
+        this.dialogTitle = 'Measurement Unit';
+        this.dialogMessage = 'Measurement unit saved successfully.'; 
       }
       else{
-        console.log("Error code: ",responseData?.status);        
-      }
+        console.log("Error code: ",responseData?.status);      
+        
+        this.dialogTitle = 'Measurement Unit';
+        this.dialogMessage = 'Measurement unit failed to save.'; 
+      }      
       this.showSpinner = false;  
+      this.openDialog();
     });
   }
 
+  // Edit
   editMeasurementType(data:any){
     console.log("Edit API Call");
     this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
       let response = responseData?.body;   
       if (responseData.status === 200) {
         console.log(response);       
-        this.getMeasrurementType();     
+        this.getMeasrurementType();   
+        
+        this.dialogTitle = 'Measurement Unit';
+        this.dialogMessage = 'Measurement unit update successfully.'; 
       }
       else{
-        console.log("Error code: ",responseData?.status);        
+        console.log("Error code: ",responseData?.status); 
+        this.dialogTitle = 'Measurement Unit';
+        this.dialogMessage = 'Measurement unit failed to update.';        
       }
       this.showSpinner = false;  
+      this.openDialog();
+    });
+  }
+
+  //Modal 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MsgDialogComponent, {
+      width: '400px',
+      data: { title: this.dialogTitle, message: this.dialogMessage }
+    });
+
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log('The dialog was closed');
     });
   }
 }
