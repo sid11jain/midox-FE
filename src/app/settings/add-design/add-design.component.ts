@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-design',
@@ -19,7 +21,9 @@ export class AddDesignComponent {
   formEntries: any[] = [];
   addMsg:boolean = true; 
 
-  constructor(private formBuilder: FormBuilder) {  }
+  modalValue:any={};
+
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {  }
 
   ngOnInit() {
     this.designReactiveForm = this.formBuilder.group({
@@ -56,5 +60,10 @@ export class AddDesignComponent {
     this.onDelete(index); // Remove the entry from the list
   }
 
+  selectProcess(data:any){
+    console.log(data);
+    this.modalValue = data;
+    
+  }
 
 }

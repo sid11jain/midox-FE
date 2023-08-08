@@ -1,0 +1,83 @@
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Select Process</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="design-value">
+          <div class="row">
+            <div class="form-group col-4">
+              <h4>Brand: {{modalValue.brandDropdown}}</h4>
+            </div>
+            <div class="form-group col-4">
+              <h4>Product: {{modalValue.productDropdown}}</h4>
+            </div>
+            <div class="form-group col-4">
+              <h4>Design No.: {{modalValue.inputField}}</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="its-card"> -->
+          <!-- <h3 class="card-header ps-3">Add Color Fabric</h3> -->
+          <div class="settings-comp mt-10">
+            <form [formGroup]="processModalForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="process">Process</label>
+                <!-- <input type="text" id="process" formControlName="process" class="form-control"> -->
+                <select id="process" formControlName="process" class="form-control">              
+                  <option value="">Select</option>
+                  <option *ngFor="let option of processDropdownValues" [value]="option">{{ option }}</option>
+                </select>
+                <div *ngIf="processModalForm.get('process')?.invalid && processModalForm.get('process')?.touched" class="error invalid-red">
+                  Please enter a valid option.
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <label for="wages">Wages</label>
+                <!-- <input type="text" id="wages" formControlName="wages" class="form-control"> -->
+                
+                <input type="number" id="wages" formControlName="wages" class="form-control">
+                <div *ngIf="processModalForm.get('wages')?.invalid && processModalForm.get('wages')?.touched" class="error invalid-red">
+                  Wages is required
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <button type="submit" [disabled]="processModalForm.invalid" mat-flat-button color="primary">
+                  {{ editedProcessModalIndex !== null ? 'Update Process' : 'Add Process' }}
+                </button>
+              </div>
+            </form>
+            
+            <table class="table mt-4">
+              <thead>
+                <tr>
+                  <th>Process</th>
+                  <th>Wages</th>
+                  <th>Action</th>
+                </tr>
+              </thead> 
+              <tbody>
+                <tr *ngFor="let data of processModalData; let i = index">
+                  <td>{{ data.process }}</td>
+                  <td>{{ data.wages }}</td>
+                  <td>
+                    <button (click)="edit(data, i)" class="btn btn-sm me-2 btn-primary">Edit</button>
+                    <button (click)="delete(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        <!-- </div> -->
+            
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="apiCallSaveData()">Save changes</button>
+      </div>
+    </div>
+  </div>

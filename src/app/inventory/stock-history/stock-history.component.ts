@@ -18,9 +18,8 @@ export class StockHistoryComponent {
   stockHistoryDetails: any = [];
   constructor(private formBuilder: FormBuilder, private commonService: CommonService){ 
     commonService.stockHistoryData.subscribe((val:any) => {
-      this.stockHistoryDetails = val;
+      this.stockHistoryDetails = val?.data;
       console.log(this.stockHistoryDetails);
-      
     });
   }
 
@@ -31,7 +30,14 @@ export class StockHistoryComponent {
       uniqueId: ['', Validators.required],      
       currentFullTimestamp: ['']
     })  
-    this.initializeForm();  
+    this.initializeForm();
+    
+    this.commonService.getStockById(this.stockHistoryDetails?.unique_id).subscribe((responseData)=>{
+      let response = responseData.body;
+      if (responseData.status === 200) {
+        this.viewClothData = response;
+      }
+    });
   }
 
   initializeForm(){

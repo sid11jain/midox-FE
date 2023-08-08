@@ -13,6 +13,7 @@ import { AddDesignComponent } from './add-design/add-design.component';
 import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 import { AddMeasurementComponent } from './add-measurement/add-measurement.component';
 import { AddBrandComponent } from './add-brand/add-brand.component';
+import { ProcessModalComponent } from './add-design/process-modal/process-modal.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AddBrandComponent } from './add-brand/add-brand.component';
     AddDesignComponent,
     AddSupplierComponent,
     AddMeasurementComponent,
-    AddBrandComponent
+    AddBrandComponent,
+    ProcessModalComponent
   ],
   imports: [
     CommonModule,
