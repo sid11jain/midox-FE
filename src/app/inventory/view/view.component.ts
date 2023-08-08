@@ -20,9 +20,11 @@ export class ViewComponent {
     this.commonService.getAllStocks()
     .subscribe((response:any) => {
       if (response.status === 200) {
-        let dataList = response;
-        this.viewClothData = dataList.filter((x:any) => x.materialCd == "MAT_CLOTH");
-        this.viewAccesoriesData = dataList.filter((x:any) => x.materialCd == "MAT_ACC");;
+        this.viewClothData = response.body;
+        console.log("viewClothData",  this.viewClothData);
+        
+        // this.viewClothData = dataList.filter((x:any) => x.materialCd == "MAT_CLOTH");
+        // this.viewAccesoriesData = dataList.filter((x:any) => x.materialCd == "MAT_ACC");;
       }
     });
   }
