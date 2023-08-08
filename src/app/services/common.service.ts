@@ -68,10 +68,36 @@ export class CommonService {
     );
   }
 
+  // Get
   getAllSettingsData(type:any): Observable<any> {
     this.payloadUrl = `${this.baseUrl}groups/get-entities/${type}`;
     return this.http.get(this.payloadUrl, this.httpOptions).pipe(
       catchError(this.handleError('getAllSettingsData', []))
+    );
+  }
+
+  // Delete
+  deleteAllSettingsData(type:any): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}groups/delete-entity/${type}`;
+    return this.http.delete(this.payloadUrl, this.httpOptions).pipe(
+      catchError(this.handleError('deleteAllSettingsData', []))
+    );
+  }
+
+  // Add
+  addAllSettingsData(data:any): Observable<any> {
+    // this.payloadUrl = `${this.baseUrl}groups/save-entity/${type}`;
+    this.payloadUrl = `${this.baseUrl}groups/save-entity`;
+    return this.http.post(this.payloadUrl, data, this.httpOptions).pipe(
+      catchError(this.handleError('addAllSettingsData', []))
+    );
+  }
+
+  // Edit
+  editAllSettingsData(data:any): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}groups/edit-entity`;
+    return this.http.post(this.payloadUrl, data, this.httpOptions).pipe(
+      catchError(this.handleError('editAllSettingsData', []))
     );
   }
 
