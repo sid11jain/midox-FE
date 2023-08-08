@@ -94,7 +94,7 @@ export class AddSubcategoryComponent {
     this.editObject = data;
     this.editedSubCategoryIndex = index;
     this.subCategoryForm.patchValue({
-      material: data.displayValue,
+      material: data.parentEntityCd,
       name: data.displayValue
     });
     
@@ -140,7 +140,6 @@ export class AddSubcategoryComponent {
       this.showSpinnerTable = false;
     });
   }
-
   
   // Delete
   deleteSubCategory(entityCd:any){
