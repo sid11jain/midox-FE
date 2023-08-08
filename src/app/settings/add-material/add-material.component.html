@@ -19,7 +19,7 @@
   
   <div class="flex-center">
     <mat-spinner *ngIf="showSpinner" diameter=125></mat-spinner>
-  </div>
+  </div> 
   <table class="table mt-4" *ngIf=!showSpinner>
     <thead>
       <tr>
@@ -31,8 +31,8 @@
       <tr *ngFor="let material of materials; let i = index">
         <td>{{ material.displayValue }}</td>
         <td>
-          <button (click)="editMaterial(material, i)" class="btn btn-sm me-2 btn-primary">Edit</button>
-          <button (click)="deleteMaterial(i)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
+          <button (click)="edit(material, i)" class="btn btn-sm me-2 btn-primary">Edit</button>
+          <button (click)="delete(material)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
         </td>
       </tr>
     </tbody>
