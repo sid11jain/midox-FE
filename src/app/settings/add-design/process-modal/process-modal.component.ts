@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from 'src/app/services/common.service';
@@ -15,8 +15,10 @@ export class ProcessModalComponent {
   processModalData: any[] = [];
   editedProcessModalIndex: number | null = null;
   deleteBtnDisabled: boolean = false;
+  showSpinner: boolean = true;
   
-  processDropdownValues: string[] = ["Process-1", 'Process-2'];
+  // processDropdownValues: string[] = ["Process-1", 'Process-2'];
+  processDropdownValues: any = [];
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.processModalForm = this.formBuilder.group({
@@ -25,10 +27,20 @@ export class ProcessModalComponent {
     });
   }
 
+  ngOnInit(){
+    this.getProcess();
+  }
+
   onSubmit() {
     if (this.processModalForm.invalid) {
       return;
     }
+
+    
+    const selectControl = this.processModalForm.get('process');
+    selectControl?.enable();
+
+
     this.deleteBtnDisabled = false;
     const process = this.processModalForm.controls['process'].value;
     const wages = this.processModalForm.controls['wages'].value;
@@ -51,6 +63,10 @@ export class ProcessModalComponent {
       process: data.process,
       wages: data.wages
     });
+
+    
+    const selectControl = this.processModalForm.get('process');
+    selectControl?.disable();
   }
 
   delete(index: number) {
@@ -61,6 +77,21 @@ export class ProcessModalComponent {
     let finalData = {designData:this.modalValue, processData:this.processModalData};
     console.log("final processModalData: ",finalData);
     
+  }
+
+  //API Call
+  getProcess(){    
+    this.common.getAllSettingsData("MID_PROC").subscribe((responseData:any)=>{
+      let response = responseData?.body;
+      if (responseData.status === 200) {
+        this.processDropdownValues = response;
+        console.log(response);        
+      }
+      else{
+        console.log("Error code: ",responseData?.status);        
+      }
+      this.showSpinner = false;
+    });
   }
 
 }

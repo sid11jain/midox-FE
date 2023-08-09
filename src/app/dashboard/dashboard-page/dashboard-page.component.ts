@@ -16,7 +16,7 @@ export class DashboardPageComponent {
   ngOnInit(){
     setTimeout(() => {
       this.showSpinner = false
-    }, 5000);
+    }, 2000);
   }
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {

@@ -17,15 +17,18 @@ export class AddDesignComponent {
 
   designReactiveForm!: FormGroup;
   brandDropdownValues: string[] = ["Midox", 'Ciana'];
-  productDropdownValues: string[] = ['T shirt', 'Shirt', 'Boxer'];
+  // productDropdownValues: string[] = ['T shirt', 'Shirt', 'Boxer'];
+  productDropdownValues: any = [];
   formEntries: any[] = [];
   addMsg:boolean = true; 
+  showSpinner:boolean = true; 
 
   modalValue:any={};
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {  }
 
   ngOnInit() {
+    this.getProduct();
     this.designReactiveForm = this.formBuilder.group({
       brandDropdown: ['', Validators.required],
       productDropdown: ['', Validators.required],
@@ -34,6 +37,14 @@ export class AddDesignComponent {
   }
 
   onSubmit() {
+
+    
+    const selectControl1 = this.designReactiveForm.get('brandDropdown');
+    const selectControl2 = this.designReactiveForm.get('productDropdown');
+    selectControl1?.enable();
+    selectControl2?.enable();
+
+
     if (this.designReactiveForm.valid) {
       this.addMsg = true;
       this.deleteBtnDisabled = false;
@@ -58,12 +69,33 @@ export class AddDesignComponent {
     const entry = this.formEntries[index];
     this.designReactiveForm.patchValue(entry);
     this.onDelete(index); // Remove the entry from the list
+
+    
+    const selectControl1 = this.designReactiveForm.get('brandDropdown');
+    const selectControl2 = this.designReactiveForm.get('productDropdown');
+    selectControl1?.disable();
+    selectControl2?.disable();
   }
 
   selectProcess(data:any){
     console.log(data);
     this.modalValue = data;
     
+  }
+
+  //API Call
+  getProduct(){    
+    this.common.getAllSettingsData("MID_PROD").subscribe((responseData:any)=>{
+      let response = responseData?.body;
+      if (responseData.status === 200) {
+        this.productDropdownValues = response;
+        console.log(response);        
+      }
+      else{
+        console.log("Error code: ",responseData?.status);        
+      }
+      this.showSpinner = false;
+    });
   }
 
 }

@@ -1,9 +1,13 @@
 <div class="its-card">
     <h3 class="card-header ps-3">Add Design</h3>
-    <div class="settings-comp">
+    
+    <div class="flex-center">
+      <mat-spinner *ngIf="showSpinner" diameter=125></mat-spinner>
+    </div>
+    <div class="settings-comp" *ngIf="!showSpinner">
 
       <div [formGroup]="designReactiveForm">
-        <div class="row">
+        <div class="row"> 
           <div class="form-group col-6">
             <label for="brandDropdown">Select brand:*</label>
             <select id="brandDropdown" formControlName="brandDropdown" class="form-control">              
@@ -19,7 +23,7 @@
             <label for="productDropdown">Select product:*</label>
             <select id="productDropdown" formControlName="productDropdown" class="form-control">            
               <option value="">Select</option>
-              <option *ngFor="let option of productDropdownValues" [value]="option">{{ option }}</option>
+              <option *ngFor="let option of productDropdownValues" [value]="option.entityCd">{{ option.displayValue }}</option>
             </select>
             <div *ngIf="designReactiveForm.get('productDropdown')?.invalid && designReactiveForm.get('productDropdown')?.touched">
               <span style="color: red;">Product is required.</span>
