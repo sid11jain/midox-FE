@@ -10,6 +10,7 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class AddSupplierComponent {
   suppliers: any[] = [];
+  dropDownValue:any = ["ACTIVE","INACTIVE"]
   supplierForm!: FormGroup;
   deleteBtnDisabled: boolean = false;
   editedMaterialIndex: number | null = null;
@@ -21,10 +22,12 @@ export class AddSupplierComponent {
   initForm(): void {
     this.supplierForm = this.fb.group({
       supplierName: ['', [Validators.required, Validators.minLength(3)]],
+      contactPerson: ['', [Validators.required, Validators.minLength(3)]],
       mobNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10)]],
       gstin: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9]{15}$')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
+      status: ['', Validators.required],
       remark: ['', Validators.required]
     });
   }
@@ -36,27 +39,33 @@ export class AddSupplierComponent {
     console.log('Form values:', this.supplierForm.value);
     this.deleteBtnDisabled = false;
     const supplierName = this.supplierForm.controls['supplierName'].value;
+    const contactPerson = this.supplierForm.controls['contactPerson'].value;
     const mobNumber = this.supplierForm.controls['mobNumber'].value;
     const gstin = this.supplierForm.controls['gstin'].value;
     const email = this.supplierForm.controls['email'].value;
     const address = this.supplierForm.controls['address'].value;
+    const status = this.supplierForm.controls['status'].value;
     const remark = this.supplierForm.controls['remark'].value;
     
     if (this.editedMaterialIndex !== null) {
       this.suppliers[this.editedMaterialIndex].supplierName = supplierName;
+      this.suppliers[this.editedMaterialIndex].contactPerson = contactPerson;
       this.suppliers[this.editedMaterialIndex].mobNumber = mobNumber;
       this.suppliers[this.editedMaterialIndex].gstin = gstin;
       this.suppliers[this.editedMaterialIndex].email = email;
       this.suppliers[this.editedMaterialIndex].address = address;
+      this.suppliers[this.editedMaterialIndex].status = status;
       this.suppliers[this.editedMaterialIndex].remark = remark;
       this.editedMaterialIndex = null;
     } else {
       const newMaterial = { 
         supplierName: supplierName, 
+        contactPerson: contactPerson, 
         mobNumber: mobNumber, 
         gstin: gstin, 
         email: email, 
         address: address, 
+        status: status, 
         remark: remark, 
       };
       this.suppliers.push(newMaterial);
@@ -69,10 +78,12 @@ export class AddSupplierComponent {
     this.editedMaterialIndex = index;
     this.supplierForm.patchValue({
       supplierName: supplier.supplierName,
+      contactPerson: supplier.contactPerson,
       mobNumber: supplier.mobNumber,
       gstin: supplier.gstin,
       email: supplier.email,
       address: supplier.address,
+      status: supplier.status,
       remark: supplier.remark
     });
   }
