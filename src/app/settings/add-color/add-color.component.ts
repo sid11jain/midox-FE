@@ -64,14 +64,13 @@ export class AddColorComponent {
       this.showSpinner = false;
     }
     else{
-      let currTime = Date.now();
+      // let currTime = Date.now();
       let obj = {    
-        "entityCd": "UNIT_KG8",
         "parentEntityCd": null,
         "masterCd": "MID_COL",
         "displayValue": "Kg8"
       }
-      obj.entityCd = "COL_"+currTime;
+      // obj.entityCd = "COL_"+currTime;
       obj.displayValue = inputVal;
       let data = [obj]
       console.log(data);    

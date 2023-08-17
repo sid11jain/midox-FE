@@ -22,6 +22,8 @@ export class AddSubcategoryComponent {
   dialogTitle: string = "Sub Category";
   dialogMessage!: string;  
   editObject:any = {};
+  key:string = "MID_SUB";
+  key2:string = "MID_MAT";
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.subCategoryForm = this.formBuilder.group({
@@ -30,16 +32,21 @@ export class AddSubcategoryComponent {
     });
   }
 
-  ngOnInit(){
-    this.getMaterial();
-    this.getSubCategory();
+  async ngOnInit(){
+    // this.getMaterial();
+    
+    this.dropDownValue = await this.common.getDataFn(this.key2);
+    this.showSpinner = false;
+    this.subCategoryArray = await this.common.getDataFn(this.key);
+    // this.getSubCategory();    
+    this.showSpinnerTable = false;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.subCategoryForm.invalid) {
       return;
-    }
-    
+    }    
+    this.showSpinner = true;
     const selectControl = this.subCategoryForm.get('material');
     selectControl?.enable();
     console.log(this.subCategoryForm.value);    
@@ -65,25 +72,30 @@ export class AddSubcategoryComponent {
       obj.displayValue = inputVal;
       // console.log("Obj ", obj);
       
-      this.editSubCategory(obj);
+      // this.editSubCategory(obj);
+      
+      this.subCategoryArray = await this.common.editDataFn(obj,this.dialogTitle,this.key);
+      this.showSpinner = false;
     }
     else{
-      let currTime = Date.now();
+      // let currTime = Date.now();
       let obj = {    
-        "entityCd": "",
         "parentEntityCd": "",
         "masterCd": "MID_SUB",
         "displayValue": ""
       }
-      obj.entityCd = "SUB_"+currTime;
+      // obj.entityCd = "SUB_"+currTime;
       obj.parentEntityCd = materialVal;
       obj.displayValue = inputVal;
       let data = [obj]
       console.log(data);    
 
-      this.addSubCategory(data);
+      // this.addSubCategory(data);      
+      // Post API call
+      this.subCategoryArray = await this.common.addDataFn(data,this.dialogTitle,this.key);
+      this.showSpinner = false;
     }
-    this.showSpinner = true;
+    // this.showSpinner = true;
     
     this.editedSubCategoryIndex = null;
     this.subCategoryForm.reset();
@@ -102,107 +114,111 @@ export class AddSubcategoryComponent {
     selectControl?.disable();
   }
 
-  delete(apiData: any) {
+  async delete(apiData: any) {
     
     this.showSpinner = true; 
     let entityCd = apiData?.entityCd;
-    this.deleteSubCategory(entityCd);
+    // this.deleteSubCategory(entityCd);
+    
+    // Delete API call
+    this.subCategoryArray = await this.common.deleteDataFn(entityCd,this.dialogTitle,this.key);
+    this.showSpinner = false;
   }
 
   //API Call Get material
-  getMaterial(){
-    console.log("API Call");    
-    this.common.getAllSettingsData("MID_MAT").subscribe((responseData:any)=>{
-      let response = responseData?.body;
-      if (responseData.status === 200) {
-        this.dropDownValue = response;        
-        console.log(response);        
-      }
-      else{
-        console.log("Error code: ",responseData?.status);        
-      }
-      this.showSpinner = false;
-    });
-  }
+  // getMaterial(){
+  //   console.log("API Call");    
+  //   this.common.getAllSettingsData("MID_MAT").subscribe((responseData:any)=>{
+  //     let response = responseData?.body;
+  //     if (responseData.status === 200) {
+  //       this.dropDownValue = response;        
+  //       console.log(response);        
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status);        
+  //     }
+  //     this.showSpinner = false;
+  //   });
+  // }
 
   //API Call Get sub category
-  getSubCategory(){
-    console.log("API Call");    
-    this.common.getAllSettingsData("MID_SUB").subscribe((responseData:any)=>{
-      let response = responseData?.body;
-      if (responseData.status === 200) {
-        this.subCategoryArray = response;        
-        console.log(response);        
-      }
-      else{
-        console.log("Error code: ",responseData?.status);        
-      }
-      this.showSpinnerTable = false;
-    });
-  }
+  // getSubCategory(){
+  //   console.log("API Call");    
+  //   this.common.getAllSettingsData("MID_SUB").subscribe((responseData:any)=>{
+  //     let response = responseData?.body;
+  //     if (responseData.status === 200) {
+  //       this.subCategoryArray = response;        
+  //       console.log(response);        
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status);        
+  //     }
+  //     this.showSpinnerTable = false;
+  //   });
+  // }
   
   // Delete
-  deleteSubCategory(entityCd:any){
-    console.log("API Call");    
-    this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
-      // let response = responseData?.body;
-      console.log(responseData);        
-      if (responseData.status === 200) {
-        this.getSubCategory();
-        this.dialogMessage = 'Sub Category delete successfully.'; 
-      }
-      else{
-        console.log("Error code: ",responseData?.status); 
-        this.dialogMessage = 'Sub Category failed to delete.';        
-      }
-      this.showSpinner = false; 
+  // deleteSubCategory(entityCd:any){
+  //   console.log("API Call");    
+  //   this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
+  //     // let response = responseData?.body;
+  //     console.log(responseData);        
+  //     if (responseData.status === 200) {
+  //       this.getSubCategory();
+  //       this.dialogMessage = 'Sub Category delete successfully.'; 
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status); 
+  //       this.dialogMessage = 'Sub Category failed to delete.';        
+  //     }
+  //     this.showSpinner = false; 
 
-      // To open modal
-      this.common.openDialog(this.dialogTitle,this.dialogMessage);
-    });
-  }
+  //     // To open modal
+  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
+  //   });
+  // }
 
   // Add
-  addSubCategory(data:any){
-    console.log("Post API Call");
-    this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
-      let response = responseData?.body;   
-      if (responseData.status === 201) {
-        console.log(response);       
-        this.getSubCategory();    
+  // addSubCategory(data:any){
+  //   console.log("Post API Call");
+  //   this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
+  //     let response = responseData?.body;   
+  //     if (responseData.status === 201) {
+  //       console.log(response);       
+  //       this.getSubCategory();    
         
-        this.dialogMessage = 'Sub Category saved successfully.'; 
-      }
-      else{
-        console.log("Error code: ",responseData?.status);    
-        this.dialogMessage = 'Sub Category failed to save.'; 
-      }      
-      this.showSpinner = false;  
+  //       this.dialogMessage = 'Sub Category saved successfully.'; 
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status);    
+  //       this.dialogMessage = 'Sub Category failed to save.'; 
+  //     }      
+  //     this.showSpinner = false;  
 
-      // To open modal
-      this.common.openDialog(this.dialogTitle,this.dialogMessage);
-    });
-  }
+  //     // To open modal
+  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
+  //   });
+  // }
 
   // Edit
-  editSubCategory(data:any){
-    console.log("Edit API Call");
-    this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
-      let response = responseData?.body;   
-      if (responseData.status === 200) {
-        console.log(response);       
-        this.getSubCategory();   
-        this.dialogMessage = 'Sub Category update successfully.'; 
-      }
-      else{
-        console.log("Error code: ",responseData?.status); 
-        this.dialogMessage = 'Sub Category failed to update.';        
-      }
-      this.showSpinner = false;  
+  // editSubCategory(data:any){
+  //   console.log("Edit API Call");
+  //   this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
+  //     let response = responseData?.body;   
+  //     if (responseData.status === 200) {
+  //       console.log(response);       
+  //       this.getSubCategory();   
+  //       this.dialogMessage = 'Sub Category update successfully.'; 
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status); 
+  //       this.dialogMessage = 'Sub Category failed to update.';        
+  //     }
+  //     this.showSpinner = false;  
 
-      // To open modal
-      this.common.openDialog(this.dialogTitle,this.dialogMessage);
-    });
-  }
+  //     // To open modal
+  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
+  //   });
+  // }
 
 }

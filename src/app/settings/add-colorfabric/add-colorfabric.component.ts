@@ -113,14 +113,13 @@ export class AddColorfabricComponent {
       this.showSpinner = false;
     }
     else{
-      let currTime = Date.now();
+      // let currTime = Date.now();
       let obj = {    
-        "entityCd": "",
         "parentEntityCd": "",
         "masterCd": "MID_CFC",
         "displayValue": ""
       }
-      obj.entityCd = "CFC_"+currTime;
+      // obj.entityCd = "CFC_"+currTime;
       obj.parentEntityCd = colorVal;
       obj.displayValue = colorCodeVal;
       let data = [obj]
