@@ -7,6 +7,8 @@ import { environment } from '../../environments/environment';
 import { saveAs } from 'file-saver-es';
 import { Workbook } from 'exceljs';
 import { exportDataGrid } from 'devextreme/excel_exporter';
+import { MsgDialogComponent } from '../shared/msg-dialog/msg-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Injectable({
@@ -28,7 +30,7 @@ export class CommonService {
     observe: 'response' as 'body'
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   onExportingData(e:any, fileName:string) {
     const workbook = new Workbook();
@@ -107,4 +109,130 @@ export class CommonService {
       return of(result as T);
     };
   }
+
+// ==============================================================================
+// For common functions
+// ==============================================================================
+
+  // For modal
+  openDialog(dialogTitle:string, dialogMessage:string): void {
+    const dialogRef = this.dialog.open(MsgDialogComponent, {
+      width: '400px',
+      data: { title: dialogTitle, message: dialogMessage }
+    });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  // Get api call function for setting pages
+  
+  // async getDataFn1(key:string){
+  //   // console.log("Get API Call");    
+  //   await (await this.getAllSettingsData(key)).subscribe((responseData:any)=>{
+  //     let response:any = "";
+  //     if (responseData?.status === 200) {
+  //       response = responseData?.body;
+  //       console.log("response ",response);        
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status);        
+  //     }
+  //     return response;
+  //     // this.showSpinner = false;
+  //   });
+  // }
+
+  async getDataFn(key:string){
+    console.log("Get API Call");    
+    try{
+      let response = await this.getAllSettingsData(key).toPromise();   
+      if (response?.status === 200) {
+        console.log(response.body);        
+        return response?.body;      
+      }
+      else{
+        console.log("Error code: ",response?.status);        
+      }      
+    }
+    catch(error){
+      console.log("Error ", error);      
+    }
+  }
+  
+  // Edit api call function for setting pages
+  async editDataFn(data:any, dialogTitle:string, key:string){
+    console.log("Edit API Call");    
+    try{
+      let response = await this.editAllSettingsData(data).toPromise();        
+      let dialogMessage = dialogTitle; 
+      if (response?.status === 200) {
+        let responseData = await this.getDataFn(key);
+        dialogMessage += ' update successfully.';         
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+        return responseData;      
+      }
+      else{
+        console.log("Error code: ",response?.status);   
+        dialogMessage += ' failed to update.';             
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+      }        
+    }
+    catch(error){
+      console.log("Error ", error);      
+    }
+  }
+  
+  // Delete api call function for setting pages
+  async deleteDataFn(entityCd:any, dialogTitle:string, key:string){
+    console.log("Delete API Call");    
+    try{
+      let response = await this.deleteAllSettingsData(entityCd).toPromise();        
+      let dialogMessage = dialogTitle; 
+      if (response?.status === 200) {
+        let responseData = await this.getDataFn(key);
+        dialogMessage += ' delete successfully.';         
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+        return responseData;      
+      }
+      else{
+        console.log("Error code: ",response?.status);   
+        dialogMessage += ' failed to delete.';             
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+      }        
+    }
+    catch(error){
+      console.log("Error ", error);      
+    }
+  }
+  
+  // Post  api call function for setting pages
+  async addDataFn(data:any, dialogTitle:string, key:string){
+    console.log("Post API Call");    
+    try{
+      let response = await this.addAllSettingsData(data).toPromise();        
+      let dialogMessage = dialogTitle; 
+      if (response?.status === 201) {
+        let responseData = await this.getDataFn(key);
+        dialogMessage += ' saved successfully.';         
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+        return responseData;      
+      }
+      else{
+        console.log("Error code: ",response?.status);   
+        dialogMessage += ' failed to saved.';             
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+      }        
+    }
+    catch(error){
+      console.log("Error ", error);      
+    }
+  }
+
 }

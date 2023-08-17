@@ -156,7 +156,9 @@ export class AddSubcategoryComponent {
         this.dialogMessage = 'Sub Category failed to delete.';        
       }
       this.showSpinner = false; 
-      this.openDialog();
+
+      // To open modal
+      this.common.openDialog(this.dialogTitle,this.dialogMessage);
     });
   }
 
@@ -176,7 +178,9 @@ export class AddSubcategoryComponent {
         this.dialogMessage = 'Sub Category failed to save.'; 
       }      
       this.showSpinner = false;  
-      this.openDialog();
+
+      // To open modal
+      this.common.openDialog(this.dialogTitle,this.dialogMessage);
     });
   }
 
@@ -195,19 +199,9 @@ export class AddSubcategoryComponent {
         this.dialogMessage = 'Sub Category failed to update.';        
       }
       this.showSpinner = false;  
-      this.openDialog();
-    });
-  }
 
-  //Modal 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(MsgDialogComponent, {
-      width: '400px',
-      data: { title: this.dialogTitle, message: this.dialogMessage }
-    });
-
-    dialogRef.afterClosed().subscribe((result:any) => {
-      console.log('The dialog was closed');
+      // To open modal
+      this.common.openDialog(this.dialogTitle,this.dialogMessage);
     });
   }
 
