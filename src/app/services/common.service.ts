@@ -63,10 +63,10 @@ export class CommonService {
     );
   }
 
-  getStockById(stockId:any): Observable<any> {
-    this.payloadUrl = `${this.baseUrl}stockHistory/get/${stockId}`;
-    return this.http.get(this.payloadUrl, this.httpOptions).pipe(
-      catchError(this.handleError('getStockById', []))
+  getStockHistory(payload:any): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}stockHistory/get-history-with-criteria`;
+    return this.http.post(this.payloadUrl, payload, this.httpOptions).pipe(
+      catchError(this.handleError('getStockHistory', []))
     );
   }
 
