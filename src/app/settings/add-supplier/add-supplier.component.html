@@ -1,6 +1,8 @@
 <div class="its-card">
   <h3 class="card-header ps-3">Add Supplier</h3>
   <div class="row settings-comp">
+    
+  <div class="form-input-sticky">
     <form [formGroup]="supplierForm" (ngSubmit)="onSubmit()">
       <div class="row">        
           <div class="form-group col-3">
@@ -30,25 +32,25 @@
           </div>          
       
           <div class="form-group col-3">
-            <label for="mobNumber">Mobile Number: (+91)</label>
-            <input type="text" id="mobNumber" formControlName="mobNumber" maxlength="10" class="form-control"/>
-            <div *ngIf="supplierForm.get('mobNumber')?.invalid && supplierForm.get('mobNumber')?.touched" class="error invalid-red">        
-              <div *ngIf="supplierForm.get('mobNumber')?.errors?.['required']">
+            <label for="contactNo">Mobile Number: (+91)</label>
+            <input type="text" id="contactNo" formControlName="contactNo" maxlength="10" class="form-control"/>
+            <div *ngIf="supplierForm.get('contactNo')?.invalid && supplierForm.get('contactNo')?.touched" class="error invalid-red">        
+              <div *ngIf="supplierForm.get('contactNo')?.errors?.['required']">
                 Mobile number is required
               </div>
-              <div *ngIf="supplierForm.get('mobNumber')?.errors?.['pattern']">
+              <div *ngIf="supplierForm.get('contactNo')?.errors?.['pattern']">
                 It only accept numbers
               </div>
-              <div *ngIf="supplierForm.get('mobNumber')?.errors?.['minlength']">
+              <div *ngIf="supplierForm.get('contactNo')?.errors?.['minlength']">
                 Mobile number should be 10 digits long.
               </div>
             </div>
           </div>
 
           <div class="form-group col-3">
-            <label for="gstin">GSTIN:</label>
-            <input type="text" id="gstin" formControlName="gstin" maxlength="15" class="form-control"/>
-            <div *ngIf="supplierForm.get('gstin')?.invalid && supplierForm.get('gstin')?.touched" class="error invalid-red">
+            <label for="supplierUID">GSTIN:</label>
+            <input type="text" id="supplierUID" formControlName="supplierUID" maxlength="15" class="form-control"/>
+            <div *ngIf="supplierForm.get('supplierUID')?.invalid && supplierForm.get('supplierUID')?.touched" class="error invalid-red">
               Invalid GSTIN. It should be 15 alphanumeric characters long.
             </div>
           </div>
@@ -71,13 +73,13 @@
           </div>
       
           <div class="form-group col-3">
-            <label for="remark">Remark:</label>
-            <!-- <input type="text" id="remark" formControlName="remark" /> -->
-            <textarea name="" id="remark" cols="30" rows="1" formControlName="remark" class="form-control"></textarea>
-            <div *ngIf="supplierForm.get('remark')?.invalid && supplierForm.get('remark')?.touched" class="error invalid-red">
-              Remark is required.
+            <label for="description">description:</label>
+            <!-- <input type="text" id="description" formControlName="description" /> -->
+            <textarea name="" id="description" cols="30" rows="1" formControlName="description" class="form-control"></textarea>
+            <div *ngIf="supplierForm.get('description')?.invalid && supplierForm.get('description')?.touched" class="error invalid-red">
+              description is required.
             </div>
-          </div>
+          </div> 
 
           <div class="form-group col-3">
             <label for="status">Select Status: </label>
@@ -97,9 +99,15 @@
         </button>
       </div>
     </form>
+  </div>
 
-    <div class="row col-12 p-3">
-      <table class="table table-bordered table-striped mt-4" *ngIf="suppliers.length">
+    
+  <div class="flex-center">
+    <mat-spinner *ngIf="showSpinner" diameter=125></mat-spinner>
+  </div> 
+    <!-- <div class="row col-12 p-3"> -->
+      <!-- <table class="table table-bordered table-striped mt-4"> -->
+      <table class="table mt-4" *ngIf=!showSpinner>
         <thead>
           <tr>
             <th class="text-center">Supplier Name</th>
@@ -108,7 +116,7 @@
             <th class="text-center">GSTIN</th>
             <th class="text-center">Email</th>
             <th class="text-center">Address</th>
-            <th class="text-center">Remark</th>
+            <th class="text-center">Description</th>
             <th class="text-center">Actions</th>
           </tr>
         </thead>
@@ -117,20 +125,20 @@
           <tr *ngFor="let supplier of suppliers; let i = index">
             <td class="text-center">{{ supplier.supplierName }}</td>
             <td class="text-center">{{ supplier.contactPerson }}</td>
-            <td class="text-center">{{ supplier.mobNumber }}</td>
-            <td class="text-center">{{ supplier.gstin }}</td>
+            <td class="text-center">{{ supplier.contactNo }}</td>
+            <td class="text-center">{{ supplier.supplierUID }}</td>
             <td class="text-center">{{ supplier.email }}</td>
             <td class="text-center">{{ supplier.address }}</td>
-            <td class="text-center">{{ supplier.remark }}</td>
+            <td class="text-center">{{ supplier.description }}</td>
             <td>
-              <button (click)="editSupplier(supplier,i)" class="btn btn-sm me-2 btn-primary">Edit</button>
-              <button (click)="deleteSupplier(supplier)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button>
+              <button (click)="edit(supplier,i)" class="btn btn-sm me-2 btn-primary">Edit</button>
+              <!-- <button (click)="deleteSupplier(supplier)" class="btn btn-sm btn-danger" [disabled]="deleteBtnDisabled">Delete</button> -->
             </td>
           </tr>
         </tbody>
       </table>
 
-    </div>
+    <!-- </div> -->
   </div> 
 </div>
       

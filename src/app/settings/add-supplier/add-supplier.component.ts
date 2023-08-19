@@ -13,7 +13,11 @@ export class AddSupplierComponent {
   dropDownValue:any = ["ACTIVE","INACTIVE"]
   supplierForm!: FormGroup;
   deleteBtnDisabled: boolean = false;
+  showSpinner: boolean = false;
   editedMaterialIndex: number | null = null;
+  dialogTitle: string = "Supplier";
+  dialogMessage!: string;  
+  supplierId:any = "";
 
   constructor(private fb: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.initForm();
@@ -23,81 +27,121 @@ export class AddSupplierComponent {
     this.supplierForm = this.fb.group({
       supplierName: ['', [Validators.required, Validators.minLength(3)]],
       contactPerson: ['', [Validators.required, Validators.minLength(3)]],
-      mobNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10)]],
-      gstin: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9]{15}$')]],
+      contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10)]],
+      supplierUID: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9]{15}$')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       status: ['', Validators.required],
-      remark: ['', Validators.required]
+      description: ['', Validators.required]
     });
   }
+
+  async ngOnInit(){
+    this.getSupplier({});
+  }  
 
   onSubmit(): void {
     if (this.supplierForm.invalid) {
       return;
     }
-    console.log('Form values:', this.supplierForm.value);
-    this.deleteBtnDisabled = false;
-    const supplierName = this.supplierForm.controls['supplierName'].value;
-    const contactPerson = this.supplierForm.controls['contactPerson'].value;
-    const mobNumber = this.supplierForm.controls['mobNumber'].value;
-    const gstin = this.supplierForm.controls['gstin'].value;
-    const email = this.supplierForm.controls['email'].value;
-    const address = this.supplierForm.controls['address'].value;
-    const status = this.supplierForm.controls['status'].value;
-    const remark = this.supplierForm.controls['remark'].value;
     
-    if (this.editedMaterialIndex !== null) {
-      this.suppliers[this.editedMaterialIndex].supplierName = supplierName;
-      this.suppliers[this.editedMaterialIndex].contactPerson = contactPerson;
-      this.suppliers[this.editedMaterialIndex].mobNumber = mobNumber;
-      this.suppliers[this.editedMaterialIndex].gstin = gstin;
-      this.suppliers[this.editedMaterialIndex].email = email;
-      this.suppliers[this.editedMaterialIndex].address = address;
-      this.suppliers[this.editedMaterialIndex].status = status;
-      this.suppliers[this.editedMaterialIndex].remark = remark;
-      this.editedMaterialIndex = null;
-    } else {
-      const newMaterial = { 
-        supplierName: supplierName, 
-        contactPerson: contactPerson, 
-        mobNumber: mobNumber, 
-        gstin: gstin, 
-        email: email, 
-        address: address, 
-        status: status, 
-        remark: remark, 
-      };
-      this.suppliers.push(newMaterial);
+    this.showSpinner = true;
+    console.log('Form values:', this.supplierForm.value);    
+    
+    if(this.editedMaterialIndex !== null){
+      //For update
+      let tempObj = this.supplierForm?.value;
+      tempObj.supplierId = this.supplierId;
+      console.log(tempObj);
+      this.addEditSupplierApi(tempObj,"supplier","edit");     
     }
+    else{
+      // For add -  Post API call
+      this.addEditSupplierApi(this.supplierForm?.value, "supplier", "add");      
+    }
+    
+    this.deleteBtnDisabled = false;
+    this.editedMaterialIndex = null;
     this.supplierForm.reset();
   }
 
-  editSupplier(supplier: any, index:number): void {    
-    this.deleteBtnDisabled = true;
-    this.editedMaterialIndex = index;
-    this.supplierForm.patchValue({
-      supplierName: supplier.supplierName,
-      contactPerson: supplier.contactPerson,
-      mobNumber: supplier.mobNumber,
-      gstin: supplier.gstin,
-      email: supplier.email,
-      address: supplier.address,
-      status: supplier.status,
-      remark: supplier.remark
+  getSupplier(data:any){
+    this.common.addSupplierOrBrandSettingsData(data,"supplier","get-suppliers").subscribe(async (responseData:any)=>{
+      let response = responseData?.body;   
+      if (responseData.status === 200) {
+        console.log(response);     
+        this.suppliers = response;
+      }
+      else{
+        console.log("Error code: ",responseData?.status);  
+      }      
+      this.showSpinner = false;  
     });
   }
 
-  deleteSupplier(supplier: any): void {
-    // Implement the delete functionality here
-    console.log('Deleting supplier:', supplier);
-    const index = this.suppliers.indexOf(supplier);
-    if (index !== -1) {
-      this.suppliers.splice(index, 1);
-    }
+  addEditSupplierApi(data:any, key1:string, key2: string){
+    this.common.addSupplierOrBrandSettingsData(data,key1,key2).subscribe(async (responseData:any)=>{
+      let response = responseData?.body;   
+      if (responseData.status === 201) {
+        console.log(response);    
+        this.getSupplier({});    
+        this.dialogMessage = `Supplier ${key2} successfully.`; 
+      }
+      else{
+        console.log("Error code: ",responseData?.status);    
+        this.dialogMessage = `Supplier failed to ${key2}.`; 
+      }      
+      this.showSpinner = false;  
+      // To open modal
+      this.common.openDialog(this.dialogTitle,this.dialogMessage);
+    });
   }
 
-  resetForm(): void {
-    this.supplierForm.reset();
+  edit(supplier: any, index:number): void {    
+    this.deleteBtnDisabled = true;
+    this.editedMaterialIndex = index;
+    console.log("supplier ",supplier);
+    this.supplierId = supplier?.supplierId;
+    
+    this.supplierForm.patchValue({
+      supplierName: supplier.supplierName,
+      contactPerson: supplier.contactPerson,
+      contactNo: supplier.contactNo,
+      supplierUID: supplier.supplierUID,
+      email: supplier.email,
+      address: supplier.address,
+      status: supplier.status,
+      description: supplier.description
+    });
   }
+
+  // addSupplier(data:any){
+  //   this.common.addSupplierOrBrandSettingsData(data,"supplier","add").subscribe(async (responseData:any)=>{
+  //     let response = responseData?.body;   
+  //     if (responseData.status === 201) {
+  //       console.log(response);    
+  //       this.getSupplier({});    
+  //       this.dialogMessage = 'Supplier saved successfully.'; 
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status);    
+  //       this.dialogMessage = 'Supplier failed to save.'; 
+  //     }      
+  //     this.showSpinner = false;  
+  //     // To open modal
+  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
+  //   });
+  // }
+
+  
+
+  // deleteSupplier(supplier: any): void {
+  //   // Implement the delete functionality here
+  //   console.log('Deleting supplier:', supplier);
+  //   const index = this.suppliers.indexOf(supplier);
+  //   if (index !== -1) {
+  //     this.suppliers.splice(index, 1);
+  //   }
+  // }
+
 }

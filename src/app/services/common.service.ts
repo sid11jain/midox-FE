@@ -78,6 +78,14 @@ export class CommonService {
     );
   }
 
+  // getAllSupplierSettingsData(): Observable<any> {
+  //   // this.payloadUrl = `${this.baseUrl}supplier/get-suppliers`;
+  //   this.payloadUrl = "http://203.161.56.56:8080/midoxapp/supplier/get-suppliers";
+  //   return this.http.get(this.payloadUrl, this.httpOptions).pipe(
+  //     catchError(this.handleError('getAllSupplierSettingsData', []))
+  //   );
+  // }
+
   // Delete
   deleteAllSettingsData(type:any): Observable<any> {
     this.payloadUrl = `${this.baseUrl}groups/delete-entity/${type}`;
@@ -90,6 +98,14 @@ export class CommonService {
   addAllSettingsData(data:any): Observable<any> {
     // this.payloadUrl = `${this.baseUrl}groups/save-entity/${type}`;
     this.payloadUrl = `${this.baseUrl}groups/save-entity`;
+    return this.http.post(this.payloadUrl, data, this.httpOptions).pipe(
+      catchError(this.handleError('addAllSettingsData', []))
+    );
+  }
+
+  addSupplierOrBrandSettingsData(data:any, key1:string, key2:string): Observable<any> {
+    // this.payloadUrl = `${this.baseUrl}groups/save-entity/${type}`;
+    this.payloadUrl = `${this.baseUrl}${key1}/${key2}`;
     return this.http.post(this.payloadUrl, data, this.httpOptions).pipe(
       catchError(this.handleError('addAllSettingsData', []))
     );
