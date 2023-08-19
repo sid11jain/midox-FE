@@ -16,7 +16,8 @@ export class AddDesignComponent {
   deleteBtnDisabled: boolean = false;
 
   designReactiveForm!: FormGroup;
-  brandDropdownValues: string[] = ["Midox", 'Ciana'];
+  // brandDropdownValues: string[] = ["Midox", 'Ciana'];
+  brandDropdownValues: any = [];
   // productDropdownValues: string[] = ['T shirt', 'Shirt', 'Boxer'];
   productDropdownValues: any = [];
   formEntries: any[] = [];
@@ -28,6 +29,7 @@ export class AddDesignComponent {
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {  }
 
   ngOnInit() {
+    this.getBrand({});
     this.getProduct();
     this.designReactiveForm = this.formBuilder.group({
       brandDropdown: ['', Validators.required],
@@ -95,6 +97,20 @@ export class AddDesignComponent {
         console.log("Error code: ",responseData?.status);        
       }
       this.showSpinner = false;
+    });
+  }
+
+  getBrand(data:any){
+    this.common.addSupplierOrBrandSettingsData(data,"brand","get-brands").subscribe(async (responseData:any)=>{
+      let response = responseData?.body;   
+      if (responseData.status === 200) {
+        console.log("Brand",response);     
+        this.brandDropdownValues = response;
+      }
+      else{
+        console.log("Error code: ",responseData?.status);  
+      }      
+      this.showSpinner = false;  
     });
   }
 

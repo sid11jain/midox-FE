@@ -12,7 +12,7 @@
             <label for="brandDropdown">Select brand:*</label>
             <select id="brandDropdown" formControlName="brandDropdown" class="form-control">              
               <option value="">Select</option>
-              <option *ngFor="let option of brandDropdownValues" [value]="option">{{ option }}</option>
+              <option *ngFor="let option of brandDropdownValues" [value]="option">{{ option?.brandName }}</option>
             </select>
             <div *ngIf="designReactiveForm.get('brandDropdown')?.invalid && designReactiveForm.get('brandDropdown')?.touched">
               <span style="color: red;">Brand is required.</span>
