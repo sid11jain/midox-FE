@@ -13,7 +13,7 @@ export class AddSupplierComponent {
   dropDownValue:any = ["ACTIVE","INACTIVE"]
   supplierForm!: FormGroup;
   deleteBtnDisabled: boolean = false;
-  showSpinner: boolean = false;
+  showSpinner: boolean = true;
   editedMaterialIndex: number | null = null;
   dialogTitle: string = "Supplier";
   dialogMessage!: string;  
