@@ -46,6 +46,7 @@ export class StockHistoryComponent {
   getStockHistory(stockObj:any) {
     this.showSpinner = true;
     this.commonService.getStockHistory(stockObj).subscribe((responseData)=>{
+      this.viewClothData = [];
       this.showSpinner = false;
       this.isTable = true;
       let response = responseData.body;

@@ -48,7 +48,7 @@
           <label for="supplier">Supplier*</label>
           <select id="supplier" formControlName="supplier" class="form-control" required>
             <option value="">Select</option>
-            <option *ngFor="let option of supplierData" [value]="option.id">{{ option.name }}</option>
+            <option *ngFor="let option of supplierData" [value]="option.supplierId">{{ option.supplierName }}</option>
           </select>
           <div
             *ngIf="userForm.controls.supplier.invalid && (userForm.controls.supplier.dirty || userForm.controls.supplier.touched)"

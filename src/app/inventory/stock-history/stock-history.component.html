@@ -40,17 +40,17 @@
             <dxo-group-panel [visible]="true"></dxo-group-panel>
             <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
 
-            <dxi-column dataField="cloth" caption="Cloth"></dxi-column>
-            <dxi-column dataField="subcategoryCd" caption="Sub Category"></dxi-column>
-            <dxi-column dataField="unit" caption="Measuring Unit"></dxi-column>
-            <dxi-column dataField="availableQuantity" caption="Available Qty"></dxi-column>
+            <dxi-column dataField="stockDetails.materialCd.displayValue" caption="Cloth"></dxi-column>
+            <dxi-column dataField="stockDetails.subcategoryCd.displayValue" caption="Sub Category"></dxi-column>
+            <dxi-column dataField="stockDetails.unit.displayValue" caption="Measuring Unit"></dxi-column>
+            <dxi-column dataField="stockDetails.availableQuantity" caption="Available Qty"></dxi-column>
             <dxi-column dataField="amount" caption="Amount"></dxi-column>
+            <!-- <dxi-column dataField="quantity" caption="Quantity"></dxi-column> -->
             <dxi-column dataField="billNo" caption="Bill Number" [visible]="false"></dxi-column>
             <dxi-column dataField="billDate" caption="Date" [visible]="false"></dxi-column>
-            <dxi-column dataField="packing_slip_number" caption="Packing Slip Number" [visible]="false"></dxi-column>
-            <dxi-column dataField="supplier" caption="Supplier Name" [visible]="false"></dxi-column>
-            <dxi-column dataField="materialCd" caption="Material" [visible]="false"></dxi-column>
-            <dxi-column dataField="colorFabricCd" caption="Color Fabric Code" [visible]="false"></dxi-column>
+            <!-- <dxi-column dataField="packing_slip_number" caption="Packing Slip Number" [visible]="false"></dxi-column> -->
+            <dxi-column dataField="supplierDetails.supplierName" caption="Supplier Name" [visible]="false"></dxi-column>=
+            <dxi-column dataField="stockDetails.colorFabricCd.displayValue" caption="Color Fabric Code" [visible]="false"></dxi-column>
 
             <dxo-search-panel [visible]="true"></dxo-search-panel>
           </dx-data-grid>

@@ -78,13 +78,12 @@ export class CommonService {
     );
   }
 
-  // getAllSupplierSettingsData(): Observable<any> {
-  //   // this.payloadUrl = `${this.baseUrl}supplier/get-suppliers`;
-  //   this.payloadUrl = "http://203.161.56.56:8080/midoxapp/supplier/get-suppliers";
-  //   return this.http.get(this.payloadUrl, this.httpOptions).pipe(
-  //     catchError(this.handleError('getAllSupplierSettingsData', []))
-  //   );
-  // }
+  getAllSupplierListData(payload:any): Observable<any> {
+      this.payloadUrl = `${this.baseUrl}supplier/get-suppliers`;
+      return this.http.post(this.payloadUrl, payload, this.httpOptions).pipe(
+        catchError(this.handleError('getAllSupplierListData', []))
+      );
+  }
 
   // Delete
   deleteAllSettingsData(type:any): Observable<any> {

@@ -80,12 +80,13 @@ export class AddStockComponent implements OnInit {
         this.measurementTypeData = response;
       }
     });
-    // this.common.getAllSettingsData("MID_SUP").subscribe((responseData)=>{
-    //   let response = responseData.body;
-    //   if (responseData.status === 200) {
-    //     this.supplierData = response;
-    //   }
-    // });
+    this.common.getAllSupplierListData({}).subscribe((responseData)=>{
+      let response = responseData.body;
+      if (responseData.status === 200) {
+        this.supplierData = response;
+      }
+    });
+    
   }
 
   onSubmit() {    
