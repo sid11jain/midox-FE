@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { CommonService } from 'src/app/services/common.service';
 import { MsgDialogComponent } from 'src/app/shared/msg-dialog/msg-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-stock',
@@ -35,7 +36,7 @@ export class AddStockComponent implements OnInit {
   subCategoryClothData!:any[];
   subCategoryAccessoryData!:any[];
 
-  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog, public route: Router) { }
 
   ngOnInit() {
     this.getAllSettingData();
@@ -144,6 +145,9 @@ export class AddStockComponent implements OnInit {
       this.showClothData = true;
       this.toEnableDisableColorFabric(true);
     }
+    else if(selectedMaterialValue == 'add-material'){
+      this.route.navigate(['./settings/add-material']);
+    }
     else{
       this.showClothData = false;
       this.toEnableDisableColorFabric(false);
@@ -240,5 +244,13 @@ export class AddStockComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result:any) => {
       console.log('The dialog was closed');
     });
+  }
+
+  fnForRedirectSettings(data1:any){ 
+    const pageURL = data1.value as string;  
+    console.log(pageURL);    
+    if(pageURL == "add-color-fabric" || pageURL == "add-supplier" || pageURL == "add-subcategory" || pageURL == "add-measurement-type" ){      
+      this.route.navigate([`./settings/${pageURL}`]);
+    }
   }
 }

@@ -7,13 +7,13 @@
 }
 
 .active{
-    background-color: #fff !important;
+    background-color: $white !important;
     color: $primary-color !important;
 }
 
 .sub-active {
     font-weight: 700;
-    background-color: lightcyan;
+    background-color: lightcyan; 
 }
 
 .navigation-row {
@@ -57,4 +57,12 @@
     }
 
     
+}
+
+.a-tag{
+    // background-color: red;
+    a{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 }

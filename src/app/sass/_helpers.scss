@@ -1,3 +1,5 @@
+@import './variables';
+
 // Padding classes 
 // [{Padding-top = pt-} {Padding-bottom = pb-} {Padding-left = pl-} {Padding-right = pr-}]
 // [{Padding-top/bottom = ptb-} {Padding-left/right = plr-}]
@@ -173,4 +175,10 @@
     top: 0;
     padding: 1rem;
     z-index: 999;
+}
+
+.add-things{
+    // color: $primary-color;
+    background-color: $primary-color;
+    color: $white;
 }
