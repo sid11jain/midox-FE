@@ -24,6 +24,7 @@ export class CommonService {
   stockHistoryData = new BehaviorSubject('');
   employeeJobHistoryData = new BehaviorSubject('');
   employeePaymentData = new BehaviorSubject('');
+  isStockHistoryClick = new BehaviorSubject(false);
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'}),

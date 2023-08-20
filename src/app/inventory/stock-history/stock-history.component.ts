@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { CommonService } from 'src/app/services/common.service';
@@ -8,7 +8,7 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './stock-history.component.html',
   styleUrls: ['./stock-history.component.scss']
 })
-export class StockHistoryComponent {
+export class StockHistoryComponent implements OnDestroy {
   showSpinner:boolean = false;
   isTable:boolean = false;
   stockHistoryForm:any = FormGroup; 
@@ -16,13 +16,19 @@ export class StockHistoryComponent {
   displayStartDate:string = "N/A";
   displayEndDate:string = "N/A";
   viewClothData!: any[];
+  isCalendarVisible:boolean = true;
   
   stockHistoryDetails: any = [];
   isStockHistoryById:boolean = false;
+  subscriber:any;
   constructor(private formBuilder: FormBuilder, private commonService: CommonService){ 
     commonService.stockHistoryData.subscribe((val:any) => {
       this.stockHistoryDetails = val?.data;
       console.log(this.stockHistoryDetails);
+    });
+    this.subscriber = commonService.isStockHistoryClick.subscribe((val:any) => {
+      this.isCalendarVisible = val;
+      this.viewClothData = [];
     });
   }
 
@@ -118,6 +124,11 @@ export class StockHistoryComponent {
     this.getStockHistory(stockObj);
     console.log('Form values:', this.dateSelectorGroup.value);
     this.dateSelectorGroup.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.commonService.isStockHistoryClick.next(false);
+    this.subscriber.unsubscribe();
   }
 
 

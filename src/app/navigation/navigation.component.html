@@ -40,7 +40,7 @@
               <a [routerLink]="['inventory/view']" class="submenu-link" routerLinkActive="sub-active">View</a>
             </button> -->
 
-            <a [routerLink]="['inventory/stock-history']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+            <a [routerLink]="['inventory/stock-history']" (click)="stockHistoryClick()" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat">history</mat-icon>
               <span>
                 Stock History

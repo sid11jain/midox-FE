@@ -1,7 +1,7 @@
 <div class="its-card">
   <h3 class="card-header ps-3">Stock History</h3>
   <div class="form p-3 pt-4">
-    <div *ngIf="!isStockHistoryById">
+    <div *ngIf="!isStockHistoryById || isCalendarVisible">
       <form [formGroup]="dateSelectorGroup" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-3">
@@ -29,7 +29,7 @@
       <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
 
       <div *ngIf=isTable>
-        <div class="cloths mt-10">
+        <div class="cloths mt-10" *ngIf="viewClothData.length">
           <dx-data-grid id="gridContainer" [dataSource]="viewClothData" [showBorders]="true"
             [rowAlternationEnabled]="true" [allowColumnResizing]="true" [allowColumnReordering]="true">
             <dxo-scrolling mode="virtual"></dxo-scrolling>
