@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -9,29 +11,87 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddEmployeeComponent implements OnInit {
 
   employeeForm:any = FormGroup;
+  genderValue:any = ["MALE","FEMALE", "OTHER"];
+  statusValue:any = ["EMP_ACTIVE","EMP_INACTIVE"];
+  designationValue:any = ["WORKER","SUPERVISOR","MANAGER","ADMIN"];  
+  employeeId:any = "";
+  employeeData:any = [];
+  showSpinner:boolean = true;
+  dialogTitle:string = "Employee";
+  editedMaterialIndex: number | null = null;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.employeeForm = this.formBuilder.group({
-      employeeName: ['', [Validators.required, Validators.minLength(3)]],
-      dobEmployee: ['', Validators.required],
-      employeeAdhaar: ['', [Validators.required, Validators.pattern(/^[0-9]{12}$/)]],
-      employeeMobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      currentFullTimestamp: [''],
+      empName: ['', [Validators.required, Validators.minLength(3)]],
+      joiningDate: ['', Validators.required],
+      empDOB: ['', Validators.required],
       gender: ['', Validators.required],
-      employeeAddress: ['', Validators.required],
+      contact_no: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      address: ['', Validators.required],
+      status: ['', Validators.required],
+      identificationNo: ['', [Validators.required, Validators.pattern(/^[0-9]{12}$/)]],
+      designation: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      description: ['', Validators.required],
     });
+
+    // API call to get all employees
+    this.employeeData = await this.common.getDataFn1({}, "employee", "get-employees");
+    this.showSpinner = false;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.employeeForm.invalid) {
       return;
     }
-    const currentFullTimestamp = new Date();
-    this.employeeForm.patchValue({ currentFullTimestamp });
-    
     console.log('Emp Form values:', this.employeeForm.value);
+    this.showSpinner = true;
+    if(this.editedMaterialIndex !== null){
+      //For update
+      let tempObj = this.employeeForm?.value;
+      tempObj.empId = this.employeeId;
+      console.log(tempObj);
+      
+      let temp = await this.common.addDataFn1(this.employeeForm?.value, "employee", "edit", "get-employees", this.dialogTitle);
+      if(temp){
+        this.employeeData = temp;
+      }
+      this.showSpinner = false;
+    }
+    else{
+      //For add
+      let temp = await this.common.addDataFn1(this.employeeForm?.value, "employee", "save", "get-employees", this.dialogTitle);
+      if(temp){
+        this.employeeData = temp;
+      }
+      this.showSpinner = false;
+    }
+    this.editedMaterialIndex = null;
+    this.employeeForm.reset();    
+  }
+
+  edit(data: any, index:number): void {    
+    // this.deleteBtnDisabled = true;
+    this.editedMaterialIndex = index;
+    this.employeeId = data?.empId;
+    console.log(data);
+    
+    
+    this.employeeForm.patchValue({
+      empName: data.empName,
+      joiningDate: data.joiningDate,
+      empDOB: data.empDOB,
+      gender: data.gender,
+      contact_no: data.contact_no,
+      address: data.address,
+      status: data.status,
+      identificationNo: data.identificationNo,
+      designation: data.designation,
+      email: data.email,
+      description: data.description
+    });
   }
  
 }

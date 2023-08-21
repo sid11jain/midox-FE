@@ -175,6 +175,23 @@ export class CommonService {
       console.log("Error ", error);      
     }
   }
+
+  async getDataFn1(data:any, key1:string, key2:string){
+    console.log("Get API Call");    
+    try{
+      let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();   
+      if (response?.status === 200) {
+        console.log(response.body);        
+        return response?.body;      
+      }
+      else{
+        console.log("Error code: ",response?.status);        
+      }      
+    }
+    catch(error){
+      console.log("Error ", error);      
+    }
+  }
   
   // Edit api call function for setting pages
   async editDataFn(data:any, dialogTitle:string, key:string){
@@ -250,5 +267,47 @@ export class CommonService {
       console.log("Error ", error);      
     }
   }
+
+  async addDataFn1(data:any, key1:string, key2: string, key3: string, dialogTitle:string){
+    console.log("Post API Call");    
+    try{
+      let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();        
+      let dialogMessage = dialogTitle; 
+      if (response?.status === 200) {
+        let responseData = await this.getDataFn1({},key1,key3);
+        dialogMessage += ' saved successfully.';         
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+        return responseData;      
+      }
+      else{
+        console.log("Error code: ",response?.status);   
+        dialogMessage += ' failed to saved.';             
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);  
+      }        
+    }
+    catch(error){
+      console.log("Error ", error);      
+    }
+  }
+
+  // addEditSupplierApi(data:any, key1:string, key2: string){
+  //   // this.common.addSupplierOrBrandSettingsData(data,key1,key2).subscribe(async (responseData:any)=>{
+  //     let response = responseData?.body;   
+  //     if (responseData.status === 201) {
+  //       console.log(response);    
+  //       this.getSupplier({});    
+  //       this.dialogMessage = `Supplier ${key2} successfully.`; 
+  //     }
+  //     else{
+  //       console.log("Error code: ",responseData?.status);    
+  //       this.dialogMessage = `Supplier failed to ${key2}.`; 
+  //     }      
+  //     this.showSpinner = false;  
+  //     // To open modal
+  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
+  //   });
+  // }
 
 }
