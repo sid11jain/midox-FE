@@ -6,7 +6,7 @@
     <form [formGroup]="brandForm" (ngSubmit)="onSubmit()">
       <div class="row">        
           <div class="form-group col-3">
-            <label for="brandName">Brand Name:</label>
+            <label for="brandName">Brand</label>
             <input type="text" id="brandName" formControlName="brandName" class="form-control"/>
             <div *ngIf="brandForm.get('brandName')?.invalid && brandForm.get('brandName')?.touched" class="error invalid-red">
               <div *ngIf="brandForm.get('brandName')?.errors?.['required']">
@@ -19,7 +19,7 @@
           </div>
 
           <div class="form-group col-3">
-            <label for="contactPerson">Contact Person:</label>
+            <label for="contactPerson">Contact Person</label>
             <input type="text" id="contactPerson" formControlName="contactPerson" class="form-control"/>
             <div *ngIf="brandForm.get('contactPerson')?.invalid && brandForm.get('contactPerson')?.touched" class="error invalid-red">
               <div *ngIf="brandForm.get('contactPerson')?.errors?.['required']">
@@ -32,7 +32,7 @@
           </div>          
       
           <div class="form-group col-3">
-            <label for="contactNo">Mobile Number: (+91)</label>
+            <label for="contactNo">Mobile Number (+91)</label>
             <input type="text" id="contactNo" formControlName="contactNo" maxlength="10" class="form-control"/>
             <div *ngIf="brandForm.get('contactNo')?.invalid && brandForm.get('contactNo')?.touched" class="error invalid-red">        
               <div *ngIf="brandForm.get('contactNo')?.errors?.['required']">
@@ -48,7 +48,7 @@
           </div>
 
           <div class="form-group col-3">
-            <label for="brandUID">GSTIN:</label>
+            <label for="brandUID">GSTIN</label>
             <input type="text" id="brandUID" formControlName="brandUID" maxlength="15" class="form-control"/>
             <div *ngIf="brandForm.get('brandUID')?.invalid && brandForm.get('brandUID')?.touched" class="error invalid-red">
               Invalid GSTIN. It should be 15 alphanumeric characters long.
@@ -56,7 +56,7 @@
           </div>
       
           <div class="form-group col-3">
-            <label for="email">Email:</label>
+            <label for="email">Email</label>
             <input type="email" id="email" formControlName="email" class="form-control"/>
             <div *ngIf="brandForm.get('email')?.invalid && brandForm.get('email')?.touched" class="error invalid-red">
               Invalid email address.
@@ -64,7 +64,7 @@
           </div>
       
           <div class="form-group col-3">
-            <label for="address">Address:</label>
+            <label for="address">Address</label>
             <!-- <input type="text" id="address" formControlName="address" /> -->
             <textarea name="" id="address" cols="30" rows="1" formControlName="address" class="form-control"></textarea>
             <div *ngIf="brandForm.get('address')?.invalid && brandForm.get('address')?.touched" class="error invalid-red">
@@ -73,7 +73,7 @@
           </div>
       
           <div class="form-group col-3">
-            <label for="description">Description:</label>
+            <label for="description">Description</label>
             <!-- <input type="text" id="description" formControlName="description" /> -->
             <textarea name="" id="description" cols="30" rows="1" formControlName="description" class="form-control"></textarea>
             <div *ngIf="brandForm.get('description')?.invalid && brandForm.get('description')?.touched" class="error invalid-red">
@@ -82,7 +82,7 @@
           </div> 
 
           <div class="form-group col-3">
-            <label for="status">Select Status: </label>
+            <label for="status">Status </label>
               <select id="status" formControlName="status" class="form-control">
                 <option value="">Select</option>
                 <option *ngFor="let option of dropDownValue" [value]="option">{{ option }}</option>
@@ -95,7 +95,7 @@
 
       <div class="form-group mt-3">
         <button type="submit" mat-flat-button color="primary" [disabled]="brandForm.invalid">
-          {{ editedMaterialIndex !== null ? 'Update Brand' : 'Add Brand' }}
+          {{ editedMaterialIndex !== null ? 'Update Brand'  : 'Add Brand' }}
         </button>
       </div>
     </form>
@@ -110,9 +110,9 @@
       <table class="table" *ngIf=!showSpinner>
         <thead>
           <tr>
-            <th class="text-center">Brand Name</th>
-            <th class="text-center">Contact Person</th>
-            <th class="text-center">Mobile Number</th>
+            <th class="text-center">Brand</th>
+            <th class="text-center">Cont. Person</th>
+            <th class="text-center">Mobile</th>
             <th class="text-center">GSTIN</th>
             <th class="text-center">Email</th>
             <th class="text-center">Address</th>

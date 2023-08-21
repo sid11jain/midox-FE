@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="col-6">
-          <label for="quantity">Quantity:</label>
+          <label for="quantity">Quantity</label>
           <input type="number" id="quantity" formControlName="quantity" class="form-control">
           <div *ngIf="addAddaForm.controls.quantity.invalid && addAddaForm.controls.quantity.touched"
             class="invalid-red">
@@ -55,7 +55,7 @@
           </div>
         </div>
         <div class="col-6">
-          <label for="managingInfo">Managing Info:</label>
+          <label for="managingInfo">Managing Info</label>
           <select id="managingInfo" formControlName="managingInfo" class="form-control" required>
             <option value="">Select</option>
             <option *ngFor="let option of managingInfoData" [value]="option">{{ option }}</option>
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="col-6">
-          <label for="employeeName">Select Employee:</label>
+          <label for="employeeName">Select Employee</label>
           <select id="employeeName" formControlName="employeeName" class="form-control" required>
             <option value="">Select</option>
             <option *ngFor="let option of employeeNameData" [value]="option">{{ option }}</option>

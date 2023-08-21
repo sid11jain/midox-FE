@@ -93,7 +93,7 @@ a {
 }
 
 .submenu-link {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .midox-menu.mat-mdc-menu-item {
@@ -101,6 +101,9 @@ a {
     padding: 2px 10px;
 }
 
+.mat-mdc-menu-content {
+  padding: 8px;
+}
 
 // .its-card .card-header{
 //     padding: 6px 10px;
