@@ -181,7 +181,7 @@ export class CommonService {
     try{
       let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();   
       if (response?.status === 200) {
-        console.log(response.body);        
+        console.log(key2, " : ",response.body);        
         return response?.body;      
       }
       else{
@@ -273,7 +273,7 @@ export class CommonService {
     try{
       let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();        
       let dialogMessage = dialogTitle; 
-      if (response?.status === 200) {
+      if (response?.status === 200 || response?.status === 201) {
         let responseData = await this.getDataFn1({},key1,key3);
         dialogMessage += ' saved successfully.';         
         // To open modal

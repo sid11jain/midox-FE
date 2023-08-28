@@ -11,7 +11,7 @@ import { CommonService } from 'src/app/services/common.service';
 
 export class AddBrandComponent {
   brands: any[] = [];
-  dropDownValue:any = ["ACTIVE","INACTIVE"]
+  dropDownValue:any = ["ACTIVE","INACTIVE"];
   brandForm!: FormGroup;
   deleteBtnDisabled: boolean = false;
   showSpinner: boolean = true;

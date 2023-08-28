@@ -6,20 +6,20 @@
       </div>
 
       
-    <div class="flex-center">
+    <div class="flex-center"> 
       <mat-spinner *ngIf="showSpinner" diameter=125></mat-spinner>
     </div>
       <div class="modal-body" *ngIf="!showSpinner">
         <div class="design-value">
           <div class="row">
             <div class="form-group col-4">
-              <h6 class="font-weight-bold">Brand: {{modalValue.brandDropdown}}</h6>
+              <h6 class="font-weight-bold">Brand: {{modalValue.brandId}}</h6>
             </div>
             <div class="form-group col-4">
-              <h6 class="font-weight-bold">Product: {{modalValue.productDropdown}}</h6>
+              <h6 class="font-weight-bold">Product: {{modalValue?.productCd?.displayValue}}</h6>
             </div>
             <div class="form-group col-4">
-              <h6 class="font-weight-bold">Design No.: {{modalValue.inputField}}</h6>
+              <h6 class="font-weight-bold">Design No.: {{modalValue.designNo}}</h6>
             </div>
           </div>
         </div>

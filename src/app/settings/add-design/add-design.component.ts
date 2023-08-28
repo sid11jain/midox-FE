@@ -12,8 +12,11 @@ export class AddDesignComponent {
 
   // designForm: FormGroup;
   designData: any[] = [];
-  editedDesignIndex: number | null = null;
-  deleteBtnDisabled: boolean = false;
+  editedDesignIndex: number | null = null;  
+  dropDownValue:any = ["ACTIVE","INACTIVE"];
+  dialogTitle:string = "Design";
+
+  processBtnDisabled: boolean = false;
 
   designReactiveForm!: FormGroup;
   // brandDropdownValues: string[] = ["Midox", 'Ciana'];
@@ -21,68 +24,87 @@ export class AddDesignComponent {
   // productDropdownValues: string[] = ['T shirt', 'Shirt', 'Boxer'];
   productDropdownValues: any = [];
   formEntries: any[] = [];
-  addMsg:boolean = true; 
+  // addMsg:boolean = true; 
+  
+  editedMaterialIndex: number | null = null;
   showSpinner:boolean = true; 
+  showSpinnerTable:boolean = true; 
 
   modalValue:any={};
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {  }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.getBrand({});
     this.getProduct();
     this.designReactiveForm = this.formBuilder.group({
-      brandDropdown: ['', Validators.required],
-      productDropdown: ['', Validators.required],
-      inputField: ['', [Validators.required, Validators.minLength(3)]],
+      brandId: ['', Validators.required],
+      productCd: ['', Validators.required],
+      designNo: ['', [Validators.required, Validators.minLength(3)]],
+      details: ['', [Validators.required, Validators.minLength(3)]],
+      status: ['', Validators.required],
     });
+    
+    this.formEntries = await this.common.getDataFn1({}, "design", "get-designs");
+    this.showSpinnerTable = false;
   }
 
-  onSubmit() {
-
-    
-    const selectControl1 = this.designReactiveForm.get('brandDropdown');
-    const selectControl2 = this.designReactiveForm.get('productDropdown');
+  async onSubmit() {
+    if (this.designReactiveForm.invalid) {
+      return;
+    }
+    this.showSpinnerTable = true;    
+    const selectControl1 = this.designReactiveForm.get('brandId');    
+    const selectControl2 = this.designReactiveForm.get('productCd');
     selectControl1?.enable();
     selectControl2?.enable();
 
+    console.log("Form: ",this.designReactiveForm.value);   
 
-    if (this.designReactiveForm.valid) {
-      this.addMsg = true;
-      this.deleteBtnDisabled = false;
-      const formEntry = {
-        brandDropdown: this.designReactiveForm.value.brandDropdown,
-        productDropdown: this.designReactiveForm.value.productDropdown,
-        inputField: this.designReactiveForm.value.inputField,
-      };
-      this.formEntries.push(formEntry);
-      console.log("Form: ",formEntry);      
-      this.designReactiveForm.reset();
+    if(this.editedMaterialIndex !== null){
+      //For update
+      this.showSpinnerTable = false;
     }
-  }
-  
-  onDelete(index: number) {
-    this.formEntries.splice(index, 1);
-  }
-
-  onEdit(index: number) {
-    this.addMsg = false;
-    this.deleteBtnDisabled = true;
-    const entry = this.formEntries[index];
-    this.designReactiveForm.patchValue(entry);
-    this.onDelete(index); // Remove the entry from the list
+    else{
+      //For add
+      let temp = await this.common.addDataFn1(this.designReactiveForm?.value, "design", "add", "get-designs", this.dialogTitle);
+      if(temp){
+        this.formEntries = temp;
+      }
+      this.showSpinnerTable = false;
+    }
 
     
-    const selectControl1 = this.designReactiveForm.get('brandDropdown');
-    const selectControl2 = this.designReactiveForm.get('productDropdown');
+    // this.formEntries.push(this.designReactiveForm?.value);     
+    
+    this.editedMaterialIndex = null;
+    this.processBtnDisabled = false;
+    this.designReactiveForm.reset();
+  }
+
+  onEdit(index: number) {    
+    this.processBtnDisabled = true;
+    this.editedMaterialIndex = index;
+    let entry:any = {};
+    entry = {...this.formEntries[index]};
+    console.log(entry);
+    entry.productCd = entry?.productCd?.entityCd;
+    
+    this.designReactiveForm.patchValue(entry);
+
+    console.log(this.designReactiveForm.value);
+    
+    
+    const selectControl1 = this.designReactiveForm.get('brandId');
+    const selectControl2 = this.designReactiveForm.get('productCd');
     selectControl1?.disable();
     selectControl2?.disable();
   }
 
+  // Modal open
   selectProcess(data:any){
     console.log(data);
-    this.modalValue = data;
-    
+    this.modalValue = data;    
   }
 
   //API Call
