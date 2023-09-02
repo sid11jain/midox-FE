@@ -24,12 +24,12 @@
           </div>        
           <!-- Mobile -->
           <div class="col-3">
-            <label for="contact_no">Mobile Number</label>
-            <input type="text" id="contact_no" formControlName="contact_no" class="form-control" maxlength="10">
-            <div *ngIf="employeeForm.controls.contact_no.invalid && employeeForm.controls.contact_no.touched"
+            <label for="contactNo">Mobile Number</label>
+            <input type="text" id="contactNo" formControlName="contactNo" class="form-control" maxlength="10">
+            <div *ngIf="employeeForm.controls.contactNo.invalid && employeeForm.controls.contactNo.touched"
               class="invalid-red">
-              <div *ngIf="employeeForm.controls.contact_no.errors.required">Employee Mobile is required.</div>
-              <div *ngIf="employeeForm.controls.contact_no.errors.pattern">
+              <div *ngIf="employeeForm.controls.contactNo.errors.required">Employee Mobile is required.</div>
+              <div *ngIf="employeeForm.controls.contactNo.errors.pattern">
                 Mobile Number must be 10 digits long (Only numbers).
               </div>
             </div>
@@ -180,7 +180,7 @@
           <tbody>
             <tr *ngFor="let data of employeeData; let i = index">
               <td class="text-center">{{ data.empName }}</td>
-              <td class="text-center">{{ data.contact_no }}</td>
+              <td class="text-center">{{ data.contactNo }}</td>
               <!-- <td class="text-center">{{ data.empDOB }}</td> -->
               <td class="text-center">{{ data.joiningDate }}</td>
               <!-- <td class="text-center">{{ data.gender }}</td> -->
