@@ -29,6 +29,7 @@ export class AddDesignComponent {
   editedMaterialIndex: number | null = null;
   showSpinner:boolean = true; 
   showSpinnerTable:boolean = true; 
+  designId:any = "";
 
   modalValue:any={};
 
@@ -63,6 +64,13 @@ export class AddDesignComponent {
 
     if(this.editedMaterialIndex !== null){
       //For update
+      let editObj = this.designReactiveForm?.value;
+      editObj.designId = this.designId;
+      console.log("editObj : ",editObj);
+      let temp = await this.common.addDataFn1(this.designReactiveForm?.value, "design", "edit", "get-designs", this.dialogTitle);
+      if(temp){
+        this.formEntries = temp;
+      }      
       this.showSpinnerTable = false;
     }
     else{
@@ -73,10 +81,6 @@ export class AddDesignComponent {
       }
       this.showSpinnerTable = false;
     }
-
-    
-    // this.formEntries.push(this.designReactiveForm?.value);     
-    
     this.editedMaterialIndex = null;
     this.processBtnDisabled = false;
     this.designReactiveForm.reset();
@@ -87,12 +91,14 @@ export class AddDesignComponent {
     this.editedMaterialIndex = index;
     let entry:any = {};
     entry = {...this.formEntries[index]};
-    console.log(entry);
+    console.log("edit ",entry);
+    this.designId = entry?.designId;
     entry.productCd = entry?.productCd?.entityCd;
+    entry.brandId = entry?.brandDetails?.brandId;
     
     this.designReactiveForm.patchValue(entry);
 
-    console.log(this.designReactiveForm.value);
+    console.log("edit : ",this.designReactiveForm.value);
     
     
     const selectControl1 = this.designReactiveForm.get('brandId');
@@ -101,9 +107,16 @@ export class AddDesignComponent {
     selectControl2?.disable();
   }
 
+  changeSpinner(data: boolean) {
+    // this.items.push(newItem);
+    console.log(data);
+    
+    this.showSpinnerTable = data;
+  }
+
   // Modal open
   selectProcess(data:any){
-    console.log(data);
+    // console.log(data);
     this.modalValue = data;    
   }
 

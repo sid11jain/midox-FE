@@ -99,8 +99,8 @@
         </thead> 
         <tbody>
           <tr *ngFor="let entry of formEntries; let i = index">
-            <td>{{ entry.brandId }}</td>
-            <td>{{ entry.productCd.displayValue }}</td>
+            <td>{{ entry.brandDetails?.brandName }}</td>
+            <td>{{ entry.productCd?.displayValue }}</td>
             <td>{{ entry.status }}</td>
             <td>{{ entry.designNo }}</td>
             <td>{{ entry.details }}</td>
@@ -118,7 +118,7 @@
 
   <!-- Modal -->
   <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <app-process-modal [modalValue]="modalValue"></app-process-modal>
+    <app-process-modal [modalValue]="modalValue" (newItemEvent)="changeSpinner($event)"></app-process-modal>
   </div>
     
 </div>
