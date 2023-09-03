@@ -31,10 +31,10 @@ export class ProcessModalComponent {
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) {
     this.processModalForm = this.formBuilder.group({
       processCd: ['', Validators.required],
-      ratePerPeice: ['1', Validators.required],
-      details: ['111', [Validators.required, Validators.minLength(3)]],
-      status: ['ACTIVE', Validators.required],
-      priority: ['2', Validators.required],
+      ratePerPeice: ['', Validators.required],
+      details: ['', [Validators.required, Validators.minLength(3)]],
+      status: ['', Validators.required],
+      priority: ['', Validators.required],
     });    
   }  
 
