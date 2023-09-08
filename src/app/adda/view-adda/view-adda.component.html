@@ -27,10 +27,11 @@
               <dxi-column dataField="designNo" caption="Design Number"></dxi-column>  
               <dxi-column dataField="quantity" caption="Quantity"></dxi-column>  
               
-              <dxi-column caption="Add/View Material" cellTemplate="cellTemplateHyperlink"></dxi-column>  
+              <dxi-column caption="Edit / Details" cellTemplate="cellTemplateHyperlink"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                <a [routerLink]="['../add-material']" routerLinkActive="sub-active" (click)="getSelectedData(data)">Edit</a>           
-                <a [routerLink]="['../add-material']" routerLinkActive="sub-active" (click)="getSelectedData(data)">Details</a>           
+                <a [routerLink]="['../add-adda']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon class="icon-mat">history</mat-icon></a>      
+                
+                <a [routerLink]="['../details-adda']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>           
                 <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
   
               </div>
@@ -41,5 +42,3 @@
           </div>
         </div>
     </div>
-  
-  </div>

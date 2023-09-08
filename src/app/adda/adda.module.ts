@@ -11,6 +11,7 @@ import { BundleComponent } from './bundle/bundle.component';
 import { JobCardComponent } from './job-card/job-card.component';
 import { StickerComponent } from './sticker/sticker.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DetailsAddaComponent } from './details-adda/details-adda.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     AddPatternComponent,
     BundleComponent,
     JobCardComponent,
-    StickerComponent
+    StickerComponent,
+    DetailsAddaComponent
   ],
   imports: [
     CommonModule,
