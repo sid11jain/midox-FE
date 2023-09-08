@@ -268,6 +268,7 @@ export class CommonService {
     }
   }
 
+  // Key1 -> Module(Adda/design)     Key2 -> edit/delete    key3 -> get-design/get-addas
   async addDataFn1(data:any, key1:string, key2: string, key3: string, dialogTitle:string){
     console.log("Post API Call");    
     try{
