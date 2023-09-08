@@ -4,10 +4,10 @@
     <div class="finish-goods card-body flex-center">
       <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
     
-      <div *ngIf=!showSpinner>
+      <div *ngIf=!showSpinner> 
           <div class="cloths mt-10">
             <dx-data-grid id="gridContainer"
-                    [dataSource]="viewAddaData"
+                    [dataSource]="addaData"
                     [showBorders]="true"
                     [rowAlternationEnabled]="true"
                     [allowColumnResizing]="true"
@@ -21,15 +21,16 @@
               <dxo-group-panel [visible]="true"></dxo-group-panel>
               <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
       
-              <dxi-column dataField="addNumber" caption="ADDA Number"></dxi-column>
-              <dxi-column dataField="brand" caption="Brand"></dxi-column>
-              <dxi-column dataField="product" caption="Product"></dxi-column>
-              <dxi-column dataField="designNumber" caption="Design Number"></dxi-column>  
+              <dxi-column dataField="addaNo" caption="ADDA Number"></dxi-column>
+              <dxi-column dataField="brandDetails.brandName" caption="Brand"></dxi-column>
+              <dxi-column dataField="productCd.displayValue" caption="Product"></dxi-column>
+              <dxi-column dataField="designNo" caption="Design Number"></dxi-column>  
               <dxi-column dataField="quantity" caption="Quantity"></dxi-column>  
               
               <dxi-column caption="Add/View Material" cellTemplate="cellTemplateHyperlink"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                <a [routerLink]="['../add-material']" routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>           
+                <a [routerLink]="['../add-material']" routerLinkActive="sub-active" (click)="getSelectedData(data)">Edit</a>           
+                <a [routerLink]="['../add-material']" routerLinkActive="sub-active" (click)="getSelectedData(data)">Details</a>           
                 <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
   
               </div>
