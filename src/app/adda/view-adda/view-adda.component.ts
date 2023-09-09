@@ -9,6 +9,7 @@ import { CommonService } from 'src/app/services/common.service';
 export class ViewAddaComponent {
   showSpinner:boolean = true;
   addaData:any;
+  editAddaData:any = "";
   
   constructor(private commonService: CommonService){  }
 
@@ -23,7 +24,15 @@ export class ViewAddaComponent {
 
   getSelectedData(rowData:any) {
     console.log("rowData ", rowData);   
-    this.sendAddaAddMaterialdata(rowData);
+    // this.sendAddaAddMaterialdata(rowData);
+    this.editAddaData = rowData?.data;
+
+  }
+
+  dataFromAddAdda(data: any) {
+    console.log(data);
+    this.showSpinner = true;
+    this.ngOnInit();    
   }
 
 }

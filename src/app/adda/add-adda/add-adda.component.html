@@ -1,7 +1,15 @@
 <div class="its-card">
-  <h3 class="card-header ps-3">Add Adda</h3>
+  <h3 class="card-header ps-3">{{addaTitle}}    
+    <button type="button" class="btn-close" id="addAddaModalBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+  </h3>
+
+
   <div class="row pt-3">
-    <form [formGroup]="addAddaForm" (ngSubmit)="onSubmit()">
+    
+    <div class="flex-center">
+      <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+    </div> 
+    <form [formGroup]="addAddaForm" (ngSubmit)="onSubmit()" *ngIf=!showSpinner>
       <div class="row add-adda">
                 
         <!-- addaNo -->

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-add-adda',
@@ -10,8 +11,17 @@ import { CommonService } from 'src/app/services/common.service';
 export class AddAddaComponent implements OnInit {
 
   // addAddaForm:any = FormGroup;
+
+  //To get data from parent for edit
+  @Input() forEditAdda:any = '';
+
+  // To send data from child to parent
+  @Output() forViewAddReload = new EventEmitter<any>();
+
+  addaId:any = 0;
   addAddaForm!:FormGroup;
   showSpinner:boolean = true;
+  addaTitle:string = "Add ADDA";
   // statusDropDownValue:any = ["ACTIVE","INACTIVE"];
   statusDropDownValue:any = [
     {displayValue:"To be started", entityCd:"PROC_STAT_TBS"},
@@ -28,6 +38,36 @@ export class AddAddaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private common: CommonService) { 
     this.initForm();
+  }
+
+  ngOnChanges(){
+    console.log("forEditAdda ",this.forEditAdda);    
+    this.addAddaForm.reset();
+    this.initForm();
+    this.ngOnInit();
+
+    if(this.forEditAdda){
+      this.addaTitle = "Edit ADDA";
+      console.log("Edit");
+      this.addAddaForm.get('status')?.enable();
+      this.addaId = this.forEditAdda?.addaId;
+      // this.addAddaForm.patchValue(this.forEditAdda);
+      this.addAddaForm.patchValue({
+        addaNo: this.forEditAdda.addaNo,
+        brandId: this.forEditAdda.brandDetails.brandId,
+        designId: this.forEditAdda.designNo,
+        quantity: this.forEditAdda.quantity,
+        remarks: this.forEditAdda.remarks,
+        completionDate: this.forEditAdda.completionDate,
+        status: this.forEditAdda.status.entityCd
+      });
+    }
+    else{
+      console.log("Add");
+      this.addaTitle = "Add ADDA";
+    }
+    
+
   }
 
   initForm(): void {
@@ -75,6 +115,7 @@ export class AddAddaComponent implements OnInit {
     if (this.addAddaForm.invalid) {
       return;
     }
+    this.showSpinner = true;
     console.log('Dispatch Inventory Form values:', this.addAddaForm.value);
   //   let temp1:any = {
   //     addaNo:"Adda third Taes1t133",
@@ -87,12 +128,22 @@ export class AddAddaComponent implements OnInit {
   //     // status:null
   
   // }
-    let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "add", "get-addas", this.dialogTitle);
-    // let temp = await this.common.addDataFn1(temp1, "adda", "add", "get-addas", this.dialogTitle);
-    // console.log(temp);
+
+  if(this.forEditAdda){
+    console.log("Edit API Called");
+    console.log(this.addAddaForm?.value);
+    this.addAddaForm.value.addaId = this.addaId;
+    let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "edit", "get-addas", this.dialogTitle);
+    }
+    else{
+      console.log("Add API Called");
+      let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "add", "get-addas", this.dialogTitle);
+    }
     
-    
+    this.showSpinner = false;
     this.addAddaForm.reset();
+    document.getElementById("addAddaModalBtn")?.click();
+    this.forViewAddReload.emit(true);
   }
 
  
