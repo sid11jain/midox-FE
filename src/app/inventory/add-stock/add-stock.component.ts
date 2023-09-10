@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import * as _ from 'lodash'; 
+import * as moment from 'moment';
 import { CommonService } from 'src/app/services/common.service';
 import { MsgDialogComponent } from 'src/app/shared/msg-dialog/msg-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-stock',
@@ -26,7 +28,7 @@ export class AddStockComponent implements OnInit {
   dialogTitle!: string;
   dialogMessage!: string;
 
-  supplierData!:any[];
+  supplierData:any[] = [{name: 'Midox', id: '1'}];
   materialData!:any[];
   //subCategoryData!:any[];
   colorFabricCodeData!:any[];
@@ -34,7 +36,7 @@ export class AddStockComponent implements OnInit {
   subCategoryClothData!:any[];
   subCategoryAccessoryData!:any[];
 
-  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog, public route: Router) { }
 
   ngOnInit() {
     this.getAllSettingData();
@@ -63,11 +65,11 @@ export class AddStockComponent implements OnInit {
     this.common.getAllSettingsData("MID_SUB").subscribe((responseData)=>{
       let response = responseData.body;
       if (responseData.status === 200) {
-        this.subCategoryAccessoryData = response;
-        this.subCategoryClothData = response;
+        this.subCategoryAccessoryData = response?.filter((x:any)=>x.parentEntityCd == "MAT_ACC");
+        this.subCategoryClothData = response?.filter((x:any)=>x.parentEntityCd == "MAT_CLOTH");
       }
     });
-    this.common.getAllSettingsData("MID_PC").subscribe((responseData)=>{
+    this.common.getAllSettingsData("MID_CFC").subscribe((responseData)=>{
       let response = responseData.body;
       if (responseData.status === 200) {
         this.colorFabricCodeData = response;
@@ -79,12 +81,13 @@ export class AddStockComponent implements OnInit {
         this.measurementTypeData = response;
       }
     });
-    this.common.getAllSettingsData("MID_SUP").subscribe((responseData)=>{
+    this.common.getAllSupplierListData({}).subscribe((responseData)=>{
       let response = responseData.body;
       if (responseData.status === 200) {
         this.supplierData = response;
       }
     });
+    
   }
 
   onSubmit() {    
@@ -135,10 +138,15 @@ export class AddStockComponent implements OnInit {
   }
 
   materialBtnClick(material:any){
+    console.log(material);
+    
     const selectedMaterialValue = material.value as string;    
-    if(selectedMaterialValue == 'Cloths'){
+    if(selectedMaterialValue == 'MAT_CLOTH'){
       this.showClothData = true;
       this.toEnableDisableColorFabric(true);
+    }
+    else if(selectedMaterialValue == 'add-material'){
+      this.route.navigate(['./settings/add-material']);
     }
     else{
       this.showClothData = false;
@@ -174,11 +182,12 @@ export class AddStockComponent implements OnInit {
         };
         newObj.stockHistory = {
           "billNo" : item.billNumber,
-          "quantity" : item.quantity,
-          "amount" : item.amount,
+          "quantity" : item.quantity?.toString(),
+          "amount" : item.amount?.toString(),
           "supplierId" : item.supplier,
-          "billDate" : item.date
+          "billDate" : moment(item.date).format('YYYY-MM-DD')
         };
+
         newDataList.push(newObj);
 
         // Object.entries(item).forEach(([key, value]) => {
@@ -202,12 +211,12 @@ export class AddStockComponent implements OnInit {
     this.common.addStocks(newDataList).subscribe((responseData)=>{
       let response = responseData.body;
       this.showSpinner = false;
-      if (responseData.status === 200) {
+      if (responseData.status === 201) {
         this.dialogTitle = 'Stock';
-        this.dialogMessage = 'Stock details saved successfully.';
+        this.dialogMessage = 'Stock added successfully.';
       }else{
         this.dialogTitle = 'Stock';
-        this.dialogMessage = 'Stock details failed to save.';
+        this.dialogMessage = 'Stock details failed to add.';
       }
       this.openDialog();
     });
@@ -235,5 +244,13 @@ export class AddStockComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result:any) => {
       console.log('The dialog was closed');
     });
+  }
+
+  fnForRedirectSettings(data1:any){ 
+    const pageURL = data1.value as string;  
+    console.log(pageURL);    
+    if(pageURL == "add-color-fabric" || pageURL == "add-supplier" || pageURL == "add-subcategory" || pageURL == "add-measurement-type" ){      
+      this.route.navigate([`./settings/${pageURL}`]);
+    }
   }
 }

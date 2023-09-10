@@ -7,13 +7,13 @@
 }
 
 .active{
-    background-color: #fff !important;
+    background-color: $white !important;
     color: $primary-color !important;
 }
 
 .sub-active {
     font-weight: 700;
-    background-color: lightcyan;
+    background-color: lightcyan; 
 }
 
 .navigation-row {
@@ -25,7 +25,6 @@
         margin: 0 auto;
         font-size: 21px;
         margin-top: 45px;
-        margin-right: 10px;
         color: #fff;
         font-weight: 600;
         border-radius: 50%;
@@ -44,7 +43,8 @@
             color: #fff;
             font-weight: 600;
             font-size: 11px;
-            padding-left: 6px;
+            padding: 10px;
+            padding-left: 30px;
             align-items: center;
             &:hover {
                 color: #fff;
@@ -53,8 +53,19 @@
     }
 
     .mb-link {
-        margin-bottom: 30px;
+        margin-bottom: 15px;
     }
 
     
+}
+
+.a-tag{
+    // background-color: red;
+    a{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    :hover{
+        background-color: lightgray;
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { CommonService } from 'src/app/services/common.service';
@@ -8,18 +8,27 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './stock-history.component.html',
   styleUrls: ['./stock-history.component.scss']
 })
-export class StockHistoryComponent {
-  showSpinner:boolean = true;
+export class StockHistoryComponent implements OnDestroy {
+  showSpinner:boolean = false;
+  isTable:boolean = false;
   stockHistoryForm:any = FormGroup; 
   dateSelectorGroup!:FormGroup;
   displayStartDate:string = "N/A";
   displayEndDate:string = "N/A";
+  viewClothData!: any[];
+  isCalendarVisible:boolean = true;
   
   stockHistoryDetails: any = [];
+  isStockHistoryById:boolean = false;
+  subscriber:any;
   constructor(private formBuilder: FormBuilder, private commonService: CommonService){ 
     commonService.stockHistoryData.subscribe((val:any) => {
       this.stockHistoryDetails = val?.data;
       console.log(this.stockHistoryDetails);
+    });
+    this.subscriber = commonService.isStockHistoryClick.subscribe((val:any) => {
+      this.isCalendarVisible = val;
+      this.viewClothData = [];
     });
   }
 
@@ -31,8 +40,21 @@ export class StockHistoryComponent {
       currentFullTimestamp: ['']
     })  
     this.initializeForm();
-    
-    this.commonService.getStockById(this.stockHistoryDetails?.unique_id).subscribe((responseData)=>{
+    if(this.stockHistoryDetails?.stockId){
+      this.isStockHistoryById = true;
+      let stockObj:any  = {
+        "stockId":this.stockHistoryDetails?.stockId
+      }
+      this.getStockHistory(stockObj);
+    }
+  }
+
+  getStockHistory(stockObj:any) {
+    this.showSpinner = true;
+    this.commonService.getStockHistory(stockObj).subscribe((responseData)=>{
+      this.viewClothData = [];
+      this.showSpinner = false;
+      this.isTable = true;
       let response = responseData.body;
       if (responseData.status === 200) {
         this.viewClothData = response;
@@ -91,318 +113,23 @@ export class StockHistoryComponent {
     if (this.dateSelectorGroup.invalid) {
       return;
     }
+    let formValue = this.dateSelectorGroup.value;
+    let startDate = moment(formValue.startDate).format('YYYY-MM-DD');
+    let endDate = moment(formValue.endDate).format('YYYY-MM-DD');
+    let stockObj:any  = {
+      "stockId":this.stockHistoryDetails?.stockId,
+      "fromDate":startDate,
+      "toDate":endDate,
+    }
+    this.getStockHistory(stockObj);
     console.log('Form values:', this.dateSelectorGroup.value);
     this.dateSelectorGroup.reset();
-
-    setTimeout(() => {
-      this.showSpinner = false
-    }, 100);
   }
 
-  viewClothData: any = [
-    {
-      unique_id:"123",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"Win2_37_Ciana",
-      sub_category:"PC hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 439,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"124",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"Blue_45_Jyoti",
-      sub_category:"CO hosiery Matty fabric",
-      measuring_unit:"Meter",
-      avl_qty: 225,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-    {
-      unique_id:"125",
-      bill_number:"12345",
-      date:"12-May-2023",
-      packing_slip_number:"987",
-      supplier_name:"Midox",
-      material:"wool",
-      color_fabric_code:"37",
-      cloth:"White_78_Jyoti",
-      sub_category:"Cotton hosiery sinkar fabric",
-      measuring_unit:"KG",
-      avl_qty: 876,
-      amount:100,
-      is_cloth:true
-    },
-];
-
-
+  ngOnDestroy(): void {
+    this.commonService.isStockHistoryClick.next(false);
+    this.subscriber.unsubscribe();
+  }
 
 
 }
