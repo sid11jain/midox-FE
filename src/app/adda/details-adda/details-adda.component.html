@@ -4,7 +4,11 @@
     </h3>
     
     <div class="finish-goods card-body flex-center">
-        <div class="details-adda-parent wp-100 flex-row">
+        
+      <div class="flex-center">
+        <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+      </div> 
+        <div *ngIf=!showSpinner class="details-adda-parent wp-100 flex-row">
            <div class="left wp-55 hv-85">
             <div class="material hv-40">
                 <div class="its-card">

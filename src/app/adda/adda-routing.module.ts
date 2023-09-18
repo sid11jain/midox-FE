@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'job-card', component:  JobCardComponent},
   { path: 'sticker', component:  StickerComponent},
   { path: 'view-adda', component:  ViewAddaComponent},
-  { path: 'details-adda', component:  DetailsAddaComponent},
+  // { path: 'details-adda', component:  DetailsAddaComponent},
+  { path: 'details-adda/:addaId', component:  DetailsAddaComponent},
 ];
 
 @NgModule({

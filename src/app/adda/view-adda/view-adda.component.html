@@ -51,7 +51,8 @@
                 </button>   -->
                 
                 
-                <a [routerLink]="['../details-adda']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>           
+                <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>           
+                <!-- <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>            -->
                 <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
   
               </div>
