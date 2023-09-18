@@ -16,7 +16,32 @@
                     <span>Material</span> 
                     </h6>                    
                     <div class="finish-goods card-body flex-center">
-                        2                        
+                        
+                        <div class="cloths mt-10">
+                            <dx-data-grid id="gridContainer"
+                                    [dataSource]="addaMaterialData"
+                                    [showBorders]="true"
+                                    [rowAlternationEnabled]="true"
+                                    [allowColumnResizing]="true"
+                                    [allowColumnReordering]="true"
+                                >
+                            <dxo-scrolling mode="virtual"></dxo-scrolling>
+                            <dxo-filter-row [visible]="true"></dxo-filter-row>
+                            <dxo-header-filter [visible]="true"></dxo-header-filter>
+                            <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+                
+                            <dxo-group-panel [visible]="true"></dxo-group-panel>
+                            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+                    
+                            <dxi-column dataField="stockDetails.stockName" caption="Name"></dxi-column>
+                            <dxi-column dataField="stockDetails.unit.displayValue" caption="Unit"></dxi-column>  
+                            <dxi-column dataField="quantity" caption="Qty"></dxi-column>
+                            <dxi-column dataField="stockDetails.availableQuantity" caption="Avl Qty"></dxi-column>
+
+                            <dxo-search-panel [visible]="true"></dxo-search-panel>
+                            <dxo-paging [pageSize]="10"> </dxo-paging>              
+                            </dx-data-grid>       
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,7 +51,45 @@
                     <span>Pattern</span> 
                     </h6>                    
                     <div class="finish-goods card-body flex-center">
-                        2                        
+                         
+                        <div class="cloths mt-10">
+                            <dx-data-grid id="gridContainer"
+                                    [dataSource]="addaPatternsData"
+                                    [showBorders]="true"
+                                    [rowAlternationEnabled]="true"
+                                    [allowColumnResizing]="true"
+                                    [allowColumnReordering]="true"
+                                >
+                            <dxo-scrolling mode="virtual"></dxo-scrolling>
+                            <dxo-filter-row [visible]="true"></dxo-filter-row>
+                            <dxo-header-filter [visible]="true"></dxo-header-filter>
+                            <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+                
+                            <dxo-group-panel [visible]="true"></dxo-group-panel>
+                            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+                    
+                            <dxi-column dataField="color.displayValue" caption="Name"></dxi-column>
+                            <dxi-column dataField="quantity" caption="Qty"></dxi-column>
+                            <dxi-column dataField="size.displayValue" caption="Unit"></dxi-column>  
+                            <dxi-column dataField="bundleSize" caption="Bundle Qty"></dxi-column>
+
+                            
+                            <!-- <dxi-column caption="Edit / Details" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+                            <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+
+                                <a data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData(data)">
+                                <mat-icon class="me-2">edit</mat-icon>
+                                </a>  
+                                <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>           
+                
+                            </div> -->
+                    
+                            <dxo-search-panel [visible]="true"></dxo-search-panel>
+                            <dxo-paging [pageSize]="10"> </dxo-paging>              
+                            </dx-data-grid>       
+                        </div>
+
+
                     </div>
                 </div>
             </div>
