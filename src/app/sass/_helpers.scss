@@ -112,11 +112,29 @@
 
 //width classess
 //------------------------------------------------------------------------------------------------------------------------------
+.wp-100{
+    width: 100%;
+}
 .wp-85{
     width: 85%;
 }
 .wp-80{
     width: 80%;
+}
+.wp-65{
+    width: 65%;
+}
+.wp-60{
+    width: 60%;
+}
+.wp-55{
+    width: 55%;
+}
+.wp-50{
+    width: 50%;
+}
+.wp-45{
+    width: 45%;
 }
 .wp-40{
     width: 40%;
@@ -129,6 +147,33 @@
 }
 
 //height
+.hv-100 {
+    height: 100vh;
+}
+.hv-90 {
+    height: 90vh;
+}
+.hv-85 {
+    height: 85vh;
+}
+.hv-80 {
+    height: 80vh;
+}
+.hv-70 {
+    height: 70vh;
+}
+.hv-60 {
+    height: 60vh;
+}
+.hv-50 {
+    height: 50vh;
+}
+.hv-40 {
+    height: 40vh;
+}
+.hv-30 {
+    height: 30vh;
+}
 .h-40 {
     height: 40%;
 }
@@ -138,6 +183,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
 }
 
 .cursor-pointer{
