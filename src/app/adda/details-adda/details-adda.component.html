@@ -1,1 +1,150 @@
-<p>details-adda works!</p>
+<div class="its-card">
+    <h3 class="card-header ps-3 d-flex justify-content-between">
+      <span>Details Adda</span> 
+    </h3>
+    
+    <div class="finish-goods card-body flex-center">
+        
+      <div class="flex-center">
+        <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+      </div> 
+        <div *ngIf=!showSpinner class="details-adda-parent wp-100 flex-row">
+           <div class="left wp-55 hv-85">
+            <div class="material hv-40">
+                <div class="its-card">
+                    <h6 class="card-header ps-3 d-flex justify-content-between">
+                    <span>Material</span> 
+                    <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addMaterialFn()">Add Material</button>
+
+                       <!-- Button trigger modal -->
+                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Launch demo modal
+                    </button> -->
+                    <!-- <button class="btn btn-sm me-2 btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData('')">Add Material</button> -->
+
+                    </h6>                    
+                    <div class="finish-goods card-body flex-center">
+                        
+                        <div class="cloths mt-10">
+                            <dx-data-grid id="gridContainer"
+                                    [dataSource]="addaMaterialData"
+                                    [showBorders]="true"
+                                    [rowAlternationEnabled]="true"
+                                    [allowColumnResizing]="true"
+                                    [allowColumnReordering]="true"
+                                >
+                            <dxo-scrolling mode="virtual"></dxo-scrolling>
+                            <dxo-filter-row [visible]="true"></dxo-filter-row>
+                            <dxo-header-filter [visible]="true"></dxo-header-filter>
+                            <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+                
+                            <dxo-group-panel [visible]="true"></dxo-group-panel>
+                            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+                    
+                            <dxi-column dataField="stockDetails.stockName" caption="Name"></dxi-column>
+                            <dxi-column dataField="stockDetails.unit.displayValue" caption="Unit"></dxi-column>  
+                            <dxi-column dataField="quantity" caption="Qty"></dxi-column>
+                            <dxi-column dataField="stockDetails.availableQuantity" caption="Avl Qty"></dxi-column>
+
+                            <dxo-search-panel [visible]="true"></dxo-search-panel>
+                            <dxo-paging [pageSize]="10"> </dxo-paging>              
+                            </dx-data-grid>       
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pattern hv-40">
+                <div class="its-card">
+                    <h6 class="card-header ps-3 d-flex justify-content-between">
+                    <span>Pattern</span> 
+                    
+                    <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModalPattern" (click)="addPaternFn()">Add Pattern</button>
+                    </h6>                    
+                    <div class="finish-goods card-body flex-center">
+                         
+                        <div class="cloths mt-10">
+                            <dx-data-grid id="gridContainer"
+                                    [dataSource]="addaPatternsData"
+                                    [showBorders]="true"
+                                    [rowAlternationEnabled]="true"
+                                    [allowColumnResizing]="true"
+                                    [allowColumnReordering]="true"
+                                >
+                            <dxo-scrolling mode="virtual"></dxo-scrolling>
+                            <dxo-filter-row [visible]="true"></dxo-filter-row>
+                            <dxo-header-filter [visible]="true"></dxo-header-filter>
+                            <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+                
+                            <dxo-group-panel [visible]="true"></dxo-group-panel>
+                            <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+                    
+                            <dxi-column dataField="color.displayValue" caption="Name"></dxi-column>
+                            <dxi-column dataField="quantity" caption="Qty"></dxi-column>
+                            <dxi-column dataField="size.displayValue" caption="Unit"></dxi-column>  
+                            <dxi-column dataField="bundleSize" caption="Bundle Qty"></dxi-column>
+
+                            
+                            <!-- <dxi-column caption="Edit / Details" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+                            <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+
+                                <a data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData(data)">
+                                <mat-icon class="me-2">edit</mat-icon>
+                                </a>  
+                                <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>           
+                
+                            </div> -->
+                    
+                            <dxo-search-panel [visible]="true"></dxo-search-panel>
+                            <dxo-paging [pageSize]="10"> </dxo-paging>              
+                            </dx-data-grid>       
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+       
+           </div>
+           <div class="right wp-45 hv-85">
+                <div class="its-card">
+                    <h6 class="card-header ps-3 d-flex justify-content-between">
+                    <span>Details Adda</span> 
+                    </h6>                    
+                    <div class="finish-goods card-body flex-center">
+                        2                        
+                    </div>
+                </div>
+           </div>
+        </div>
+
+    </div>
+
+ 
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <app-adda-add-material></app-adda-add-material>
+      <!-- <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- For add pattern -->
+  <div class="modal fade" id="exampleModalPattern" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <app-adda-add-pattern></app-adda-add-pattern>
+    </div>
+  </div>
+ 
