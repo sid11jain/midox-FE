@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import * as _ from 'lodash'; 
+import * as moment from 'moment';
+import { CommonService } from 'src/app/services/common.service';
+import { MsgDialogComponent } from 'src/app/shared/msg-dialog/msg-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-stock',
@@ -7,22 +13,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-stock.component.scss']
 })
 export class AddStockComponent implements OnInit {
-
+  showSpinner:boolean = false;
   userForm:any = FormGroup;  
   addStocksList:any = [];
-  supplierData:any=["Midox","Ciana"];
-  materialData:any=["Cloths","Accessories"];
-  subCategoryData:any=["PC hosiery sinkar fabric","CO hosiery Matty fabric","Cotton hosiery sinkar fabric"];
+  //supplierData:any=["Midox","Ciana"];
+  //materialData:any=["Cloths","Accessories"];
+  //subCategoryData:any=["PC hosiery sinkar fabric","CO hosiery Matty fabric","Cotton hosiery sinkar fabric"];
   showClothData:boolean = true;
-  subCategoryClothData:any=["Sinkar fabric","Matty fabric","Wool","Cotton"];
-  subCategoryAccessoryData:any=["Button","Dhaga"];
-  measurementTypeData:any=["KG","Meter"];
-  colorFabricCodeData:any=["m-1516","C-2303"];
+  // subCategoryClothData:any=["Sinkar fabric","Matty fabric","Wool","Cotton"];
+  // subCategoryAccessoryData:any=["Button","Dhaga"];
+  // measurementTypeData:any=["KG","Meter"];
+  // colorFabricCodeData:any=["m-1516","C-2303"];
   editStockForm:number|null = null;
+  dialogTitle!: string;
+  dialogMessage!: string;
 
-  constructor(private formBuilder: FormBuilder) { }
+  supplierData:any[] = [{name: 'Midox', id: '1'}];
+  materialData!:any[];
+  //subCategoryData!:any[];
+  colorFabricCodeData!:any[];
+  measurementTypeData!:any[];
+  subCategoryClothData!:any[];
+  subCategoryAccessoryData!:any[];
+
+  constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog, public route: Router) { }
 
   ngOnInit() {
+    this.getAllSettingData();
     this.userForm = this.formBuilder.group({
       billNumber: ['', [Validators.required, Validators.minLength(3)]],
       packingSlipNumber: ['', [Validators.required, Validators.minLength(3)]],
@@ -38,13 +55,48 @@ export class AddStockComponent implements OnInit {
     });
   }
 
+  getAllSettingData(){
+    this.common.getAllSettingsData("MID_MAT").subscribe((responseData)=>{
+      let response = responseData.body;
+      if (responseData.status === 200) {
+        this.materialData = response;
+      }
+    });
+    this.common.getAllSettingsData("MID_SUB").subscribe((responseData)=>{
+      let response = responseData.body;
+      if (responseData.status === 200) {
+        this.subCategoryAccessoryData = response?.filter((x:any)=>x.parentEntityCd == "MAT_ACC");
+        this.subCategoryClothData = response?.filter((x:any)=>x.parentEntityCd == "MAT_CLOTH");
+      }
+    });
+    this.common.getAllSettingsData("MID_CFC").subscribe((responseData)=>{
+      let response = responseData.body;
+      if (responseData.status === 200) {
+        this.colorFabricCodeData = response;
+      }
+    });
+    this.common.getAllSettingsData("MID_UNIT").subscribe((responseData)=>{
+      let response = responseData.body;
+      if (responseData.status === 200) {
+        this.measurementTypeData = response;
+      }
+    });
+    this.common.getAllSupplierListData({}).subscribe((responseData)=>{
+      let response = responseData.body;
+      if (responseData.status === 200) {
+        this.supplierData = response;
+      }
+    });
+    
+  }
+
   onSubmit() {    
     if (this.userForm.invalid) {
       return;
     }
     
-    const currentFullTimestamp = new Date();
-    this.userForm.patchValue({ currentFullTimestamp });
+    // const currentFullTimestamp = new Date();
+    // this.userForm.patchValue({ currentFullTimestamp });
     
     console.log('Form values:', this.userForm.value);
     this.userForm.reset();
@@ -86,10 +138,15 @@ export class AddStockComponent implements OnInit {
   }
 
   materialBtnClick(material:any){
+    console.log(material);
+    
     const selectedMaterialValue = material.value as string;    
-    if(selectedMaterialValue == 'Cloths'){
+    if(selectedMaterialValue == 'MAT_CLOTH'){
       this.showClothData = true;
       this.toEnableDisableColorFabric(true);
+    }
+    else if(selectedMaterialValue == 'add-material'){
+      this.route.navigate(['./settings/add-material']);
     }
     else{
       this.showClothData = false;
@@ -102,34 +159,67 @@ export class AddStockComponent implements OnInit {
   } 
 
   submitForm(){
+    this.showSpinner = true;
     this.userForm.reset();
     console.log("Form value : ", this.addStocksList);    
 
-    // Extracting the common keys and the remaining fields
-    const commonKeys = ['billNumber', 'date', 'packingSlipNumber', 'supplier'];
-    const extractedData:any = {
-        common: {},
-        data: []
-    };
-
+    // // Extracting the common keys and the remaining fields
+    // const commonKeys = ['billNumber', 'date', 'packingSlipNumber', 'supplier'];
+    // const extractedData:any = {
+    //     common: {},
+    //     data: []
+    // };
+    let newDataList:any = [];
     this.addStocksList.forEach((item:any) => {
-        const commonData:any = {};
-        const remainingData:any = {};
+        let newObj:any = {}
+        // const commonData:any = {};
+        // const remainingData:any = {};
+        newObj.stock = {
+          "materialCd": item.material,
+          "subcategoryCd": item.subCategory,
+          "colorFabricCd": item.colorFabricCode,
+          "unit": item.measurementType
+        };
+        newObj.stockHistory = {
+          "billNo" : item.billNumber,
+          "quantity" : item.quantity?.toString(),
+          "amount" : item.amount?.toString(),
+          "supplierId" : item.supplier,
+          "billDate" : moment(item.date).format('YYYY-MM-DD')
+        };
 
-        Object.entries(item).forEach(([key, value]) => {
-            if (commonKeys.includes(key)) {
-                commonData[key] = value;
-            } else {
-                remainingData[key] = value;
-            }
-        });
+        newDataList.push(newObj);
 
-        extractedData.common = commonData;
-        extractedData.data.push(remainingData);
+        // Object.entries(item).forEach(([key, value]) => {
+        //     if (commonKeys.includes(key)) {
+        //         commonData[key] = value;
+        //     } else {
+        //         remainingData[key] = value;
+        //     }
+        // });
+
+    //     extractedData.common = commonData;
+    //     extractedData.data.push(remainingData);
+     });
+
+    // console.log("Final Data : ",extractedData);
+    
+    
+
+    console.log("newDataList", newDataList);
+      
+    this.common.addStocks(newDataList).subscribe((responseData)=>{
+      let response = responseData.body;
+      this.showSpinner = false;
+      if (responseData.status === 201) {
+        this.dialogTitle = 'Stock';
+        this.dialogMessage = 'Stock added successfully.';
+      }else{
+        this.dialogTitle = 'Stock';
+        this.dialogMessage = 'Stock details failed to add.';
+      }
+      this.openDialog();
     });
-
-    console.log("Final Data : ",extractedData);    
-
     this.toEnableDisableColorFabric(true);
     this.addStocksList = [];
   }
@@ -142,6 +232,25 @@ export class AddStockComponent implements OnInit {
     }
     else{
       selectControl.disable();
+    }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MsgDialogComponent, {
+      width: '400px',
+      data: { title: this.dialogTitle, message: this.dialogMessage }
+    });
+
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  fnForRedirectSettings(data1:any){ 
+    const pageURL = data1.value as string;  
+    console.log(pageURL);    
+    if(pageURL == "add-color-fabric" || pageURL == "add-supplier" || pageURL == "add-subcategory" || pageURL == "add-measurement-type" ){      
+      this.route.navigate([`./settings/${pageURL}`]);
     }
   }
 }

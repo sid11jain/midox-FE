@@ -9,6 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { SharedModule } from './shared/shared/shared.module';
 import {MatIconModule} from '@angular/material/icon';
+import { ProfileComponent } from './profile/profile.component';
+import { MsgDialogComponent } from './shared/msg-dialog/msg-dialog.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -16,7 +19,9 @@ import {MatIconModule} from '@angular/material/icon';
     AppComponent,
     LoginComponent,
     SignupComponent,
-    NavigationComponent
+    NavigationComponent,
+    ProfileComponent,
+    MsgDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,7 @@ import {MatIconModule} from '@angular/material/icon';
     SharedModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [],  //{provide:MatDialogRef , useValue:{} },{ provide: MAT_DIALOG_DATA, useValue: {} }
   bootstrap: [AppComponent]
 })
 export class AppModule { }

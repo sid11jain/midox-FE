@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: ''
+  apiEndpoint: 'http://203.161.56.56:8080/midoxapp/'
 };

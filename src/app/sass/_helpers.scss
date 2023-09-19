@@ -1,3 +1,5 @@
+@import './variables';
+
 // Padding classes 
 // [{Padding-top = pt-} {Padding-bottom = pb-} {Padding-left = pl-} {Padding-right = pr-}]
 // [{Padding-top/bottom = ptb-} {Padding-left/right = plr-}]
@@ -110,11 +112,68 @@
 
 //width classess
 //------------------------------------------------------------------------------------------------------------------------------
+.wp-100{
+    width: 100%;
+}
+.wp-85{
+    width: 85%;
+}
+.wp-80{
+    width: 80%;
+}
+.wp-65{
+    width: 65%;
+}
+.wp-60{
+    width: 60%;
+}
+.wp-55{
+    width: 55%;
+}
+.wp-50{
+    width: 50%;
+}
+.wp-45{
+    width: 45%;
+}
 .wp-40{
     width: 40%;
 }
+.wp-20{
+    width: 20%;
+}
+.wp-15{
+    width: 15%;
+}
 
 //height
+.hv-100 {
+    height: 100vh;
+}
+.hv-90 {
+    height: 90vh;
+}
+.hv-85 {
+    height: 85vh;
+}
+.hv-80 {
+    height: 80vh;
+}
+.hv-70 {
+    height: 70vh;
+}
+.hv-60 {
+    height: 60vh;
+}
+.hv-50 {
+    height: 50vh;
+}
+.hv-40 {
+    height: 40vh;
+}
+.hv-30 {
+    height: 30vh;
+}
 .h-40 {
     height: 40%;
 }
@@ -124,6 +183,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
 }
 
 .cursor-pointer{
@@ -162,3 +225,36 @@
     height: 75vh;
     overflow: auto;
 }
+
+.col-6, .col-3{
+    margin-bottom: 10px;
+}
+
+.form-input-sticky{
+    background-color: white;
+    position: sticky;
+    top: 0;
+    padding: 1rem;
+    z-index: 999;
+}
+
+.add-things{
+    // color: $primary-color;
+    background-color: $primary-color;
+    color: $white;
+}
+
+
+//font
+
+.fs-14 {
+    font-size: 14px;
+}
+
+// For extra small btn
+.btn-group-xs > .btn, .btn-xs {
+    padding: .25rem .4rem;
+    font-size: .875rem;
+    line-height: .5;
+    border-radius: .2rem;
+  }

@@ -45,7 +45,12 @@
         }
     }
     .chart-card {
-        background-color: #fff;
+        .chart{
+            height: 30vh !important;
+        }
+        .card-header{
+            color: #000;
+        }
         // border-radius: 10px;
         border-radius: 0.8rem;
         // height: 270px;

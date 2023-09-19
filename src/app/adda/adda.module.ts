@@ -10,6 +10,10 @@ import { AddPatternComponent } from './add-pattern/add-pattern.component';
 import { BundleComponent } from './bundle/bundle.component';
 import { JobCardComponent } from './job-card/job-card.component';
 import { StickerComponent } from './sticker/sticker.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DetailsAddaComponent } from './details-adda/details-adda.component';
+import { AddaAddMaterialComponent } from './details-adda/adda-add-material/adda-add-material.component';
+import { AddaAddPatternComponent } from './details-adda/adda-add-pattern/adda-add-pattern.component';
 
 
 @NgModule({
@@ -20,12 +24,15 @@ import { StickerComponent } from './sticker/sticker.component';
     AddPatternComponent,
     BundleComponent,
     JobCardComponent,
-    StickerComponent
+    StickerComponent,
+    DetailsAddaComponent,
+    AddaAddMaterialComponent,
+    AddaAddPatternComponent
   ],
   imports: [
     CommonModule,
     AddaRoutingModule,
     SharedModule
-  ]
+  ],
 })
 export class AddaModule { }

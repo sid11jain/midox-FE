@@ -50,6 +50,25 @@ html {
     overflow: hidden;
 }
 
+/* Scrollbar style */
+body::-webkit-scrollbar,
+.activity-content-scroll::-webkit-scrollbar,
+*::-webkit-scrollbar
+{
+  width: 10px;
+  border-radius: 3px;
+  background-color: lightgray;
+}
+ 
+body::-webkit-scrollbar-thumb,
+.activity-content-scroll::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb
+{
+  background-color: darkgray;
+  border-radius: 5px;
+}
+
+
 /* Hyperlink */
 
 a {
@@ -74,7 +93,7 @@ a {
 }
 
 .submenu-link {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .midox-menu.mat-mdc-menu-item {
@@ -82,6 +101,9 @@ a {
     padding: 2px 10px;
 }
 
+.mat-mdc-menu-content {
+  padding: 8px;
+}
 
 // .its-card .card-header{
 //     padding: 6px 10px;
