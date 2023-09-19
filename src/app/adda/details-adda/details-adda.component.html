@@ -78,21 +78,17 @@
                             <dxo-group-panel [visible]="true"></dxo-group-panel>
                             <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
                     
-                            <dxi-column dataField="color.displayValue" caption="Name"></dxi-column>
+                            <!-- <dxi-column dataField="color.displayValue" caption="Name"></dxi-column> -->
+                            <dxi-column caption="Name" cellTemplate="cellTemplateHyperlink" alignment="left"></dxi-column>  
+                            <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+                                <a [routerLink]="['../../bundle-adda', data?.data?.patternId]" routerLinkActive="sub-active">
+                                    <p>{{data.data.color.displayValue}}</p>
+                                </a>     
+                            </div>
+
                             <dxi-column dataField="quantity" caption="Qty"></dxi-column>
                             <dxi-column dataField="size.displayValue" caption="Unit"></dxi-column>  
                             <dxi-column dataField="bundleSize" caption="Bundle Qty"></dxi-column>
-
-                            
-                            <!-- <dxi-column caption="Edit / Details" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
-                            <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-
-                                <a data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData(data)">
-                                <mat-icon class="me-2">edit</mat-icon>
-                                </a>  
-                                <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>           
-                
-                            </div> -->
                     
                             <dxo-search-panel [visible]="true"></dxo-search-panel>
                             <dxo-paging [pageSize]="10"> </dxo-paging>              

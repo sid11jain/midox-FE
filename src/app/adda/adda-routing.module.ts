@@ -8,6 +8,7 @@ import { JobCardComponent } from './job-card/job-card.component';
 import { StickerComponent } from './sticker/sticker.component';
 import { ViewAddaComponent } from './view-adda/view-adda.component';
 import { DetailsAddaComponent } from './details-adda/details-adda.component';
+import { AddaBundleComponent } from './details-adda/adda-bundle/adda-bundle.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'add-adda', pathMatch: 'full'},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'view-adda', component:  ViewAddaComponent},
   // { path: 'details-adda', component:  DetailsAddaComponent},
   { path: 'details-adda/:addaId', component:  DetailsAddaComponent},
+  { path: 'bundle-adda/:patternId', component:  AddaBundleComponent},
 ];
 
 @NgModule({

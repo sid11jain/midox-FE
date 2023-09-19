@@ -14,6 +14,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DetailsAddaComponent } from './details-adda/details-adda.component';
 import { AddaAddMaterialComponent } from './details-adda/adda-add-material/adda-add-material.component';
 import { AddaAddPatternComponent } from './details-adda/adda-add-pattern/adda-add-pattern.component';
+import { AddaBundleComponent } from './details-adda/adda-bundle/adda-bundle.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AddaAddPatternComponent } from './details-adda/adda-add-pattern/adda-ad
     StickerComponent,
     DetailsAddaComponent,
     AddaAddMaterialComponent,
-    AddaAddPatternComponent
+    AddaAddPatternComponent,
+    AddaBundleComponent
   ],
   imports: [
     CommonModule,
