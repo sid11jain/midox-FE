@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import {NgFor, AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -74,7 +75,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatNativeDateModule, 
     MatDatepickerModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatAutocompleteModule
   ]
 })
 export class SharedModule { }
