@@ -14,6 +14,8 @@ export class DetailsAddaComponent {
   addaPatternsData:any;
   addaMaterialData:any;
   
+  dialogTitle:string = "Adda";
+  
   constructor(private commonService: CommonService, private route: ActivatedRoute){  }
 
   async ngOnInit(){    
@@ -39,13 +41,29 @@ export class DetailsAddaComponent {
     console.log("addPaternFn called");    
   }
   
-  deleteMaterial(data1: any){
-    console.log(data1.addaMaterialId);
-    
+  async deleteMaterial(data1: any){
+    console.log(data1.addaMaterialId);    
+    this.showSpinner = true; 
+    let temp = await this.commonService.deleteDataFn1({"addaMaterialId": data1.addaMaterialId}, "adda", "delete-material", this.dialogTitle);
+    console.log(temp);
+    if(temp){
+      this.ngOnInit();
+    }
+    else{
+      this.showSpinner = false;      
+    }    
   }
-  deletePattern(data2: any){
-    console.log(data2.patternId);
-    
+
+  async deletePattern(data2: any){  
+    this.showSpinner = true; 
+    let temp = await this.commonService.deleteDataFn1({"patternId": data2.patternId}, "adda", "delete-pattern", this.dialogTitle);
+    console.log(temp);
+    if(temp){
+      this.ngOnInit();
+    }
+    else{
+      this.showSpinner = false;      
+    }
   }
 
   editMaterial(data3:any){
