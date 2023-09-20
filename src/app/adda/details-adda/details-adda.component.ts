@@ -38,5 +38,25 @@ export class DetailsAddaComponent {
   addPaternFn(){
     console.log("addPaternFn called");    
   }
+  
+  deleteMaterial(data1: any){
+    console.log(data1.addaMaterialId);
+    
+  }
+  deletePattern(data2: any){
+    console.log(data2.patternId);
+    
+  }
+
+  editMaterial(data3:any){
+    console.log("Edit ",data3);
+    
+  }
+
+  editPattern(data4:any){
+    console.log("Edit ",data4);
+    
+  }
+
 
 }

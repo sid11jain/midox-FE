@@ -40,14 +40,7 @@
                      <div class="its-card">
                          <h6 class="card-header ps-3 d-flex justify-content-between">
                          <span>Material</span> 
-                         <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addMaterialFn()">Add Material</button>
-     
-                            <!-- Button trigger modal -->
-                         <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                             Launch demo modal
-                         </button> -->
-                         <!-- <button class="btn btn-sm me-2 btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData('')">Add Material</button> -->
-     
+                         <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addMaterialFn()">Add Material</button>     
                          </h6>                    
                          <div class="finish-goods card-body flex-center">
                              
@@ -70,6 +63,14 @@
                                  <dxi-column dataField="stockDetails.stockName" caption="Name"></dxi-column>
                                  <dxi-column dataField="stockDetails.unit.displayValue" caption="Unit"></dxi-column>  
                                  <dxi-column dataField="quantity" caption="Qty"></dxi-column>
+                                 
+                                <dxi-column caption="Edit / Delete" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+                                <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+                                  <a data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editMaterial(data.data)">
+                                  <mat-icon class="me-2">edit</mat-icon>
+                                  </a>       
+                                  <mat-icon class="icon-mat" (click)="deleteMaterial(data.data)">delete</mat-icon>
+                                </div>
      
                                  <dxo-search-panel [visible]="true"></dxo-search-panel>
                                  <dxo-paging [pageSize]="10"> </dxo-paging>              
@@ -81,15 +82,6 @@
             
                 </div>
                 <div class="right wp-50 hv-50">
-                     <!-- <div class="its-card">
-                         <h6 class="card-header ps-3 d-flex justify-content-between">
-                         <span>Details Adda</span> 
-                         </h6>                    
-                         <div class="finish-goods card-body flex-center">
-                             2                        
-                         </div>
-                     </div> -->
-                     
                  <div class="pattern hv-70">
                      <div class="its-card">
                          <h6 class="card-header ps-3 d-flex justify-content-between">
@@ -126,6 +118,14 @@
                                  <dxi-column dataField="quantity" caption="Qty"></dxi-column>
                                  <dxi-column dataField="size.displayValue" caption="Unit"></dxi-column>  
                                  <dxi-column dataField="bundleSize" caption="Bundle Qty"></dxi-column>
+                                 
+                                <dxi-column caption="Edit / Delete" cellTemplate="cellTemplateHyperlink1" alignment="center"></dxi-column>  
+                                <div *dxTemplate="let data2 of 'cellTemplateHyperlink1'">
+                                  <a data-bs-toggle="modal" data-bs-target="#exampleModalPattern" (click)="editPattern(data2.data)">
+                                  <mat-icon class="me-2">edit</mat-icon>
+                                  </a>       
+                                  <mat-icon class="icon-mat" (click)="deletePattern(data2.data)">delete</mat-icon>
+                                </div>
                          
                                  <dxo-search-panel [visible]="true"></dxo-search-panel>
                                  <dxo-paging [pageSize]="10"> </dxo-paging>              
