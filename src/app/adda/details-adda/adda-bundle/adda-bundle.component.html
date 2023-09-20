@@ -1,9 +1,11 @@
+
 <div class="its-card">
     <h3 class="card-header ps-3 d-flex justify-content-between">
       <span>Bundle</span> 
     </h3>
     
     <div class="finish-goods card-body flex-center">        
+        <div class="flex-center">
         <div class="flex-center">
             <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
         </div> 
@@ -28,44 +30,91 @@
                     </div>
                   </div>
             </div>
-            
-          <div class="cloths mt-10">
-            <dx-data-grid id="gridContainer"
-                    [dataSource]="bundleAddaData"
-                    [showBorders]="true"
-                    [rowAlternationEnabled]="true"
-                    [allowColumnResizing]="true"
-                    [allowColumnReordering]="true"
-                  >
-              <dxo-scrolling mode="virtual"></dxo-scrolling>
-              <dxo-filter-row [visible]="true"></dxo-filter-row>
-              <dxo-header-filter [visible]="true"></dxo-header-filter>
-              <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
-  
-              <dxo-group-panel [visible]="true"></dxo-group-panel>
-              <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
-      
-              <dxi-column dataField="bundleName" caption="Name"></dxi-column>
-              <dxi-column dataField="quantity" caption="Quantity"></dxi-column>  
-              <dxi-column dataField="currentProcessStatus.displayValue" caption="Status"></dxi-column>
-              <dxi-column dataField="currentProcessCd.displayValue" caption="Process"></dxi-column>
-              <dxi-column dataField="currentEmployeeId" caption="Employee"></dxi-column>
+            <div class="row">
+                <div class="col-8 ">                    
+                    <div class="its-card hv-55">
+                        <h6 class="card-header ps-3 d-flex justify-content-between">
+                        <span>Bundle Table</span> 
+                        </h6>
+                        <div class="finish-goods card-body flex-center">
+                            <div class="cloths mt-10">
+                            <dx-data-grid id="gridContainer"
+                                    [dataSource]="bundleAddaData"
+                                    [showBorders]="true"
+                                    [rowAlternationEnabled]="true"
+                                    [allowColumnResizing]="true"
+                                    [allowColumnReordering]="true"
+                                    >
+                                <dxo-scrolling mode="virtual"></dxo-scrolling>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+                    
+                                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                                <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+                        
+                                <dxi-column dataField="bundleName" caption="Name"></dxi-column>
+                                <dxi-column dataField="quantity" caption="Quantity" [alignment]="'left'"></dxi-column>  
+                                <dxi-column dataField="currentProcessStatus.displayValue" caption="Status"></dxi-column>
+                                <dxi-column dataField="currentProcessCd.displayValue" caption="Process"></dxi-column>
+                                <dxi-column dataField="currentEmployeeId" caption="Employee"></dxi-column>
+                
+                                
+                                <dxi-column caption="Job Card" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+                                <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+                                <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData(data)">
+                                </a>   -->
+                                <mat-icon class="me-2">print</mat-icon>
+                                <!-- <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>            -->
+                    
+                                </div>
+                        
+                                <dxo-search-panel [visible]="true"></dxo-search-panel>
+                                <dxo-paging [pageSize]="10"> </dxo-paging>              
+                            </dx-data-grid>       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 ">
+                    <div class="its-card hv-55">
+                        <h6 class="card-header ps-3 d-flex justify-content-between">
+                        <span>Process Table</span> 
+                        </h6>
+                        
+                        <div class="finish-goods card-body flex-center">
+                            <div class="cloths mt-10">
+                            <dx-data-grid id="gridContainer"
+                                    [dataSource]="processData"
+                                    [showBorders]="true"
+                                    [rowAlternationEnabled]="true"
+                                    [allowColumnResizing]="true"
+                                    [allowColumnReordering]="true"
+                                    >
+                                <dxo-scrolling mode="virtual"></dxo-scrolling>
+                                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                                <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>                    
+                                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                                <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+                        
+                                <!-- <dxi-column dataField="" caption="S. No."></dxi-column> -->
+                                <dxi-column dataField="processCd.displayValue" caption="Process Name"></dxi-column>
+                                <dxi-column dataField="priority" caption="Priority" [alignment]="'left'"></dxi-column>  
+                                <dxi-column dataField="details" caption="Details"></dxi-column>  
+                                                        
+                                <dxo-search-panel [visible]="true"></dxo-search-panel>
+                                <dxo-paging [pageSize]="10"> </dxo-paging>              
+                            </dx-data-grid>       
+                            </div>
+                        </div>
+                    </div>
 
-              
-              <dxi-column caption="Job Card" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
-              <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData(data)">
-                </a>   -->
-                <mat-icon class="me-2">print</mat-icon>
-                <!-- <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>            -->
-  
-              </div>
-      
-              <dxo-search-panel [visible]="true"></dxo-search-panel>
-              <dxo-paging [pageSize]="10"> </dxo-paging>              
-            </dx-data-grid>       
-          </div>
+                </div>
+            </div>
         </div>
+
+    </div>
 
     </div>
 </div>

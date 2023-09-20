@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'view-adda', component:  ViewAddaComponent},
   // { path: 'details-adda', component:  DetailsAddaComponent},
   { path: 'details-adda/:addaId', component:  DetailsAddaComponent},
-  { path: 'bundle-adda/:patternId', component:  AddaBundleComponent},
+  { path: 'bundle-adda/:patternId/:brandId', component:  AddaBundleComponent},
 ];
 
 @NgModule({

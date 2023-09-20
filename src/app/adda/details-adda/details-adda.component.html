@@ -26,7 +26,7 @@
                             <div class="col-3"><strong class="heading-strong">Product:</strong> {{detailAddaData[0].productCd.displayValue}}</div>
                             <div class="col-3"><strong class="heading-strong">Quantity:</strong> {{detailAddaData[0].quantity}}</div>
                             <div class="col-3"><strong class="heading-strong">Completion Date:</strong> {{detailAddaData[0].completionDate}}</div>
-                            <div class="col-3"><strong class="heading-strong">Job Process:</strong> {{detailAddaData[0].status.displayValue}}</div>
+                            <div class="col-3"><strong class="heading-strong">Status:</strong> {{detailAddaData[0].status.displayValue}}</div>
                             <div class="col-3"><strong class="heading-strong">Remarks:</strong> {{detailAddaData[0].remarks}}</div>
                           </div>
                         </div>
@@ -110,7 +110,7 @@
                                  <!-- <dxi-column dataField="color.displayValue" caption="Name"></dxi-column> -->
                                  <dxi-column caption="Name" cellTemplate="cellTemplateHyperlink" alignment="left"></dxi-column>  
                                  <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                                     <a [routerLink]="['../../bundle-adda', data?.data?.patternId]" routerLinkActive="sub-active">
+                                     <a [routerLink]="['../../bundle-adda', data?.data?.patternId, brandId]" routerLinkActive="sub-active">
                                          <p>{{data.data.color.displayValue}}</p>
                                      </a>     
                                  </div>
