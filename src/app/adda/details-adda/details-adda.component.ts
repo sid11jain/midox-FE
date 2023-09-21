@@ -17,6 +17,7 @@ export class DetailsAddaComponent {
   
   dialogTitle:string = "Adda";
   editAddaMaterialData:any = "";
+  editAddaPatternData:any = "";
   
   constructor(private commonService: CommonService, private route: ActivatedRoute){  }
 
@@ -42,13 +43,20 @@ export class DetailsAddaComponent {
 
   }
 
+  getSelectedData1(rowData:any) {
+    console.log("rowData ", rowData);   
+    // this.sendAddaAddMaterialdata(rowData);
+    this.editAddaPatternData = rowData?.data;
+
+  }
+
   // addMaterialFn(){
   //   console.log("addMaterialFn called");    
   // }
 
-  addPaternFn(){
-    console.log("addPaternFn called");    
-  }
+  // addPaternFn(){
+  //   console.log("addPaternFn called");    
+  // }
   
   async deleteMaterial(data1: any){
     console.log(data1.addaMaterialId);    
@@ -75,18 +83,24 @@ export class DetailsAddaComponent {
     }
   }
 
-  editMaterial(data3:any){
-    console.log("Edit ",data3);
+  // editMaterial(data3:any){
+  //   console.log("Edit ",data3);
     
-  }
+  // }
 
-  editPattern(data4:any){
-    console.log("Edit ",data4);
+  // editPattern(data4:any){
+  //   console.log("Edit ",data4);
     
-  }
+  // }
 
   
   dataFromAddaMaterial(data: any) {
+    console.log(data);
+    this.showSpinner = true;
+    this.ngOnInit();    
+  }
+
+  dataFromAddaPattern(data: any) {
     console.log(data);
     this.showSpinner = true;
     this.ngOnInit();    

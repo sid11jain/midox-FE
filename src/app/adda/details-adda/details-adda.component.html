@@ -87,7 +87,7 @@
                          <h6 class="card-header ps-3 d-flex justify-content-between">
                          <span>Pattern</span> 
                          
-                         <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModalPattern" (click)="addPaternFn()">Add Pattern</button>
+                         <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModalPattern"  (click)="getSelectedData1('')">Add Pattern</button>
                          </h6>                    
                          <div class="finish-goods card-body flex-center">
                               
@@ -121,7 +121,7 @@
                                  
                                 <dxi-column caption="Edit / Delete" cellTemplate="cellTemplateHyperlink1" alignment="center"></dxi-column>  
                                 <div *dxTemplate="let data2 of 'cellTemplateHyperlink1'">
-                                  <a data-bs-toggle="modal" data-bs-target="#exampleModalPattern" (click)="editPattern(data2.data)">
+                                  <a data-bs-toggle="modal" data-bs-target="#exampleModalPattern" (click)="getSelectedData1(data2)">
                                   <mat-icon class="me-2">edit</mat-icon>
                                   </a>       
                                   <mat-icon class="icon-mat" (click)="deletePattern(data2.data)">delete</mat-icon>
@@ -168,7 +168,7 @@
   <!-- For add pattern -->
   <div class="modal fade" id="exampleModalPattern" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <app-adda-add-pattern></app-adda-add-pattern>
+        <app-adda-add-pattern [forEditAddaPattern]="editAddaPatternData" (forDetailAddReloadPattern)="dataFromAddaPattern($event)"></app-adda-add-pattern>
     </div>
   </div>
  
