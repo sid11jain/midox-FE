@@ -76,5 +76,12 @@ export class DetailsAddaComponent {
     
   }
 
+  
+  dataFromAddaMaterial(data: any) {
+    console.log(data);
+    this.showSpinner = true;
+    this.ngOnInit();    
+  }
+
 
 }

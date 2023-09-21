@@ -12,6 +12,7 @@ import { MatAutocomplete } from '@angular/material/autocomplete';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-adda-add-material',
@@ -27,6 +28,10 @@ export class AddaAddMaterialComponent {
   stockDataFull:any;
   maxQuantiy:any;
   addaId:any;
+  dialogTitle:string = "Adda Material";
+  
+  // To send data from child to parent
+  @Output() forDetailAddReloadMaterial = new EventEmitter<any>();
   
   addaMaterialForm: FormGroup;
 
@@ -37,22 +42,8 @@ export class AddaAddMaterialComponent {
       quantity: ['', [Validators.required, Validators.min(1)]],
     });
   }
-
   
-  async onSubmit() {
-    if (this.addaMaterialForm.invalid) {
-      return;
-    }   
-    console.log(this.addaMaterialForm.value);
-    this.addaMaterialForm.reset();
-    this.myControl.reset();
-    this.maxQuantiy = -1;
-
-    
-  }
-
-  async ngOnInit(){
-    
+  async ngOnInit(){    
     await this.route.params.subscribe(async (params) => {
       this.addaId = params['addaId'];
     })
@@ -66,6 +57,25 @@ export class AddaAddMaterialComponent {
       );
       this.showSpinner = false;
   }
+  
+  async onSubmit() {
+    if (this.addaMaterialForm.invalid) {
+      return;
+    }  
+    this.showSpinner = true; 
+    console.log(this.addaMaterialForm.value);
+    
+    console.log("Add API Called");
+    let temp = await this.common.addDataFn1(this.addaMaterialForm?.value, "adda", "add-material", "get-addas", this.dialogTitle);
+    this.resetForm();
+    this.showSpinner = false;
+    this.forDetailAddReloadMaterial.emit(true);
+    this.ngOnInit();
+    document.getElementById("addAddaMaterialBtn")?.click();
+    
+  }
+
+
 
   private _filter(value: any): any {
     console.log("v ",value);
@@ -80,6 +90,7 @@ export class AddaAddMaterialComponent {
 
     return this.options.filter((val:any) => val?.stockName?.toLowerCase().includes(filterValue));
   }
+
   optionSelected(event: any): void {
     const selectedOptionValue = event.option.value;
     console.log('Selected Option Value:', selectedOptionValue);
@@ -88,6 +99,12 @@ export class AddaAddMaterialComponent {
     this.maxQuantiy = this.stockDataObj.availableQuantity;
     this.addaMaterialForm?.get('stockId')?.patchValue(this.stockDataObj.stockId);  
     this.addaMaterialForm?.get('addaId')?.patchValue(this.addaId);  
+  }
+  
+  resetForm(){
+    this.addaMaterialForm.reset();
+    this.myControl.reset();
+    this.maxQuantiy = -1;
   }
 
 }
