@@ -16,6 +16,7 @@ export class DetailsAddaComponent {
   brandId:any;
   
   dialogTitle:string = "Adda";
+  editAddaMaterialData:any = "";
   
   constructor(private commonService: CommonService, private route: ActivatedRoute){  }
 
@@ -33,9 +34,17 @@ export class DetailsAddaComponent {
     
   }
 
-  addMaterialFn(){
-    console.log("addMaterialFn called");    
+  
+  getSelectedData(rowData:any) {
+    console.log("rowData ", rowData);   
+    // this.sendAddaAddMaterialdata(rowData);
+    this.editAddaMaterialData = rowData?.data;
+
   }
+
+  // addMaterialFn(){
+  //   console.log("addMaterialFn called");    
+  // }
 
   addPaternFn(){
     console.log("addPaternFn called");    

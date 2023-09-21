@@ -40,7 +40,7 @@
                      <div class="its-card">
                          <h6 class="card-header ps-3 d-flex justify-content-between">
                          <span>Material</span> 
-                         <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addMaterialFn()">Add Material</button>     
+                         <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getSelectedData('')">Add Material</button>     
                          </h6>                    
                          <div class="finish-goods card-body flex-center">
                              
@@ -66,7 +66,7 @@
                                  
                                 <dxi-column caption="Edit / Delete" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
                                 <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                                  <a data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editMaterial(data.data)">
+                                  <a data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getSelectedData(data)">
                                   <mat-icon class="me-2">edit</mat-icon>
                                   </a>       
                                   <mat-icon class="icon-mat" (click)="deleteMaterial(data.data)">delete</mat-icon>
@@ -148,7 +148,7 @@
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-        <app-adda-add-material (forDetailAddReloadMaterial)="dataFromAddaMaterial($event)"></app-adda-add-material>
+        <app-adda-add-material [forEditAddaMaterial]="editAddaMaterialData" (forDetailAddReloadMaterial)="dataFromAddaMaterial($event)"></app-adda-add-material>
       <!-- <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
