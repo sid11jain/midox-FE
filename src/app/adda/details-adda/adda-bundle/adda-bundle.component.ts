@@ -131,6 +131,8 @@ export class AddaBundleComponent {
   }
   exportPdf(data:any): void {
     let detail = data?.data;
+    console.log("PDF detail ", detail);
+    
     
     const docDefinition: any =  {
       pageOrientation: "portrait",
@@ -176,7 +178,7 @@ export class AddaBundleComponent {
                   bold: true
                 },
                 {
-                  text: detail?.createdBy?.empName
+                  text: detail?.currentEmployeeId?.empName
                 }
               ],
               style: "column",
