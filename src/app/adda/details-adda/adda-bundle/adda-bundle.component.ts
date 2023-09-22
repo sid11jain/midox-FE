@@ -87,8 +87,8 @@ export class AddaBundleComponent {
     console.log(tempObj);
     
     this.statusForm.reset();
-    // let temp = await this.commonService.addDataFn1(tempObj, "bundle", "assign-employee", "get-bundles", this.dialogTitle);
-    // this.ngOnInit();
+    let temp = await this.commonService.addDataFn1(tempObj, "bundle", "update-status", "get-bundles", this.dialogTitle);
+    this.ngOnInit();
     
     
   }

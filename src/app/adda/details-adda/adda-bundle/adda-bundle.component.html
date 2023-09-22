@@ -58,11 +58,11 @@
           <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
           <dxo-group-panel [visible]="true"></dxo-group-panel>
           <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
-          <!-- <dxi-column dataField="bundleName" caption="Bundle Name" [width]="150"></dxi-column> -->
-          <dxi-column dataField="quantity" caption="Quantity" [alignment]="'left'"></dxi-column>  
+          <dxi-column dataField="bundleName" caption="Bundle Name" [width]="150"></dxi-column>
+          <dxi-column dataField="quantity" caption="Qty" [alignment]="'left'"></dxi-column>  
           <!-- <dxi-column dataField="currentProcessStatus.displayValue" caption="Status" [minWidth]="120"></dxi-column> -->
 										                
-          <dxi-column caption="Status" cellTemplate="cellTemplateHyperlink2" alignment="center" [minWidth]="170"></dxi-column>  
+          <dxi-column caption="Status" cellTemplate="cellTemplateHyperlink2" alignment="left" [minWidth]="140"></dxi-column>  
           <div *dxTemplate="let data of 'cellTemplateHyperlink2'">
 											<div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockStatus">
 												<!-- <div class="form-group">
@@ -85,11 +85,7 @@
 													<!-- <label for="status">Status </label> -->
 															<select id="status" formControlName="status" class="form-control" (change)="statusChangefn($event, data.data)">
 																	<!-- <option value="">Select</option> -->
-																	<option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd" [selected]="option?.entityCd == data?.data?.currentProcessStatus?.entityCd ? 'true' : 'false'">{{option?.entityCd}} : {{ data?.data?.currentProcessStatus?.entityCd }} {{option?.entityCd == data?.data?.currentProcessStatus?.entityCd }}</option>
-																	<!-- <option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd"> -->
-																		<!-- {{option?.entityCd}} : {{ data?.data?.currentProcessStatus?.entityCd }} {{option?.entityCd == data?.data?.currentProcessStatus?.entityCd }} -->
-																		<!-- <ng-container *ngIf="" -->
-																	<!-- </option> -->
+																	<option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd" [selected]="option?.entityCd == data?.data?.currentProcessStatus?.entityCd">{{ option?.displayValue }}</option>
 																	<!-- <option *ngFor="let option of statusDropDownValue" [value]="data.data.currentProcessStatus.entityCd">{{ option?.displayValue }}</option> -->
 																	<!-- <option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd">{{ data.data.currentProcessStatus.displayValue }}</option> -->
 															</select>
@@ -104,7 +100,7 @@
 												{{data.data.currentProcessStatus.displayValue}}
 										</ng-template>
           </div>
-          <!-- <dxi-column dataField="currentProcessCd.displayValue" caption="Process" [width]="150"></dxi-column> -->
+          <dxi-column dataField="currentProcessCd.displayValue" caption="Process" [width]="150"></dxi-column>
           <!-- <dxi-column dataField="currentEmployeeId.empName" caption="Employee" [minWidth]="150"></dxi-column> -->
                                 
           <dxi-column caption="Select Employee" cellTemplate="cellTemplateHyperlink1" alignment="center" [minWidth]="170"></dxi-column>  
