@@ -69,7 +69,24 @@
           	<!-- <mat-icon class="me-2" (click)="exportPdf(data)">print</mat-icon> -->
 											<div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockEmployee">{{data.data.currentEmployeeId.empName}}</div>
 											<ng-template class="dropdown" #elseBlockEmployee>
-												Dropdown
+												
+            <div class="form-group">
+													<!-- <mat-form-field class="example-full-width"> -->
+															<!-- <mat-label>Stock Name*</mat-label> -->
+															<input type="text"
+																					placeholder="Select Employee"
+																					aria-label="Number"
+																					matInput
+																					[formControl]="myControlEmployee"
+																					[matAutocomplete]="auto" class="form-control"
+																					>
+																					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedEmployee($event,data.data)" >
+																	<mat-option *ngFor="let option of filteredOptionsEmployee | async" [value]="option.empName">
+																			{{option.empName}}
+																	</mat-option>
+															</mat-autocomplete>
+													<!-- </mat-form-field> -->
+											</div>
 											</ng-template>
           </div>
 

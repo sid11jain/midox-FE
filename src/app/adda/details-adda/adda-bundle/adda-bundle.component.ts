@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 import { ActivatedRoute } from '@angular/router';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {NgFor, AsyncPipe} from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
@@ -17,10 +25,16 @@ export class AddaBundleComponent {
   employeeData: any = [];
   processData: any = [];
   detailAddaData:any;
+  
+  filteredOptionsEmployee!: Observable<any[]>;
+  myControlEmployee = new FormControl('');
+  optionsEmployee: any[] = ['One', 'Two', 'Three'];
+  dialogTitle:string = "Employee Assign"
 
   constructor(private commonService: CommonService, private route: ActivatedRoute) { }
 
   async ngOnInit() { 
+    this.showSpinner = true;
     await this.route.params.subscribe(async (params) => {
       const patternId = params['patternId'];
       const brandId = params['brandId'];
@@ -34,11 +48,45 @@ export class AddaBundleComponent {
       this.processData = this.processData[0].processes;
       console.log("processData ", this.processData);
 
+      
+      this.optionsEmployee = [...this.employeeData];
+      this.filteredOptionsEmployee = this.myControlEmployee.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '')),
+      );
+
       this.showSpinner = false;
-
-
     });
+  }
 
+  private _filter(value: any): any {
+    console.log(value);
+    let filterValue:any;
+    filterValue = value.toLowerCase();
+    return this.optionsEmployee.filter((val:any) => val?.empName?.toLowerCase().includes(filterValue));
+  }
+
+  async optionSelectedEmployee(event: any, data:any){
+    const selectedOptionValue = event.option.value;
+    console.log('Selected Option Value:', selectedOptionValue);
+    let employeeObj = this.employeeData.find((option: any) => option.empName === selectedOptionValue);
+    // console.log('Selected Option:', employeeObj);
+    let currentEmployeeId = employeeObj.empId;
+    // console.log("Row data ", data);
+    let bundleId = data.bundleId;
+    let tempObj = {"bundleId":bundleId, "currentEmployeeId":currentEmployeeId}
+    // console.log("currentEmployeeId ",currentEmployeeId);
+    // console.log("bundleId ",bundleId);
+    console.log("tempObj ",tempObj);
+    this.showSpinner = true;
+    this.myControlEmployee.reset();
+    let temp = await this.commonService.addDataFn1(tempObj, "bundle", "assign-employee", "get-bundles", this.dialogTitle);
+    this.ngOnInit();
+    
+
+    // this.maxQuantiy = this.stockDataObj.availableQuantity;
+    // this.addaMaterialForm?.get('stockId')?.patchValue(this.stockDataObj.stockId);  
+    // this.addaMaterialForm?.get('addaId')?.patchValue(this.addaId);  
   }
 
   printStickerFn(){
