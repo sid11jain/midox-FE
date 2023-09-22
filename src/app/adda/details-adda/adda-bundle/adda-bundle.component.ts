@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
@@ -29,12 +30,23 @@ export class AddaBundleComponent {
   filteredOptionsEmployee!: Observable<any[]>;
   myControlEmployee = new FormControl('');
   optionsEmployee: any[] = ['One', 'Two', 'Three'];
-  dialogTitle:string = "Employee Assign"
+  dialogTitle:string = "Employee Assign";
+  statusDropDownValue:any = [
+    {displayValue:"To be started", entityCd:"PROC_STAT_TBS"},
+    {displayValue:"In Progress", entityCd:"PROC_STAT_INP"},
+    {displayValue:"Hold", entityCd:"PROC_STAT_HOLD"},
+    {displayValue:"Finished", entityCd:"PROC_STAT_FIN"},
+  ];
+  
+  statusForm!:FormGroup;
 
-  constructor(private commonService: CommonService, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private commonService: CommonService, private route: ActivatedRoute) { }
 
   async ngOnInit() { 
     this.showSpinner = true;
+    this.statusForm = this.formBuilder.group({
+      status: ['PROC_STAT_TBS', Validators.required]
+    });
     await this.route.params.subscribe(async (params) => {
       const patternId = params['patternId'];
       const brandId = params['brandId'];
@@ -56,6 +68,8 @@ export class AddaBundleComponent {
       );
 
       this.showSpinner = false;
+      
+    // this.statusForm.get('status')?.disable(); 
     });
   }
 
@@ -65,6 +79,28 @@ export class AddaBundleComponent {
     filterValue = value.toLowerCase();
     return this.optionsEmployee.filter((val:any) => val?.empName?.toLowerCase().includes(filterValue));
   }
+
+  async statusChangefn(val:any, data:any){
+    // console.log(val.target.value);
+    this.showSpinner = true;
+    let tempObj = {"bundleId": data.bundleId, "currentProcessStatus":val.target.value};
+    console.log(tempObj);
+    
+    this.statusForm.reset();
+    // let temp = await this.commonService.addDataFn1(tempObj, "bundle", "assign-employee", "get-bundles", this.dialogTitle);
+    // this.ngOnInit();
+    
+    
+  }
+  
+  // async onSubmit() {
+  //   if (this.statusForm.invalid) {
+  //     return;
+  //   }
+  //   // this.showSpinner = true;
+  //   console.log('statusForm Form values:', this.statusForm.value);
+
+  // }
 
   async optionSelectedEmployee(event: any, data:any){
     const selectedOptionValue = event.option.value;
