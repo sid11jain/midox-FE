@@ -126,7 +126,7 @@ export class AddaBundleComponent {
   }
 
   printStickerFn() {
-
+    console.log("All Bundle : ", this.bundleAddaData);
     const docDefinition: any = {
       //pageOrientation: "portrait",
       pageMargins: [10, 12, 10, 12],
@@ -138,60 +138,29 @@ export class AddaBundleComponent {
       content: [
         {
           columns: [
-            {
-              text: [{ text: "DATE", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],
-
-            },
-            {
-              text: [{ text: "ADDA NO.", bold: true }, { text: " : " }, { text: "2974", bold: true }],
-
-            },
-            {
-              text: [{ text: "SR NO.", bold: true }, { text: " : " }, { text: "1", bold: true }],
-
-            },
+            { text: [{ text: "DATE", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
+            { text: [{ text: "ADDA NO.", bold: true }, { text: " : " }, { text: "2974", bold: true }],},
+            { text: [{ text: "SR NO.", bold: true }, { text: " : " }, { text: "1", bold: true }],},
           ],
           style: "row"
         },
         {
           columns: [
-            {
-              text: [{ text: "BUNDLE NO.", bold: true }, { text: " : " }, { text: "545434", bold: true }],
-
-            },
-            {
-              text: [{ text: "PRODUCT", bold: true }, { text: " : " }, { text: "T-SHIRT H/S", bold: true }],
-
-            },
-            {
-              text: [{ text: "QTY", bold: true }, { text: " : " }, { text: "40", bold: true }],
-
-            },
+            { text: [{ text: "BUNDLE NO.", bold: true }, { text: " : " }, { text: "545434", bold: true }],},
+            { text: [{ text: "PRODUCT", bold: true }, { text: " : " }, { text: "T-SHIRT H/S", bold: true }],},
+            { text: [{ text: "QTY", bold: true }, { text: " : " }, { text: "40", bold: true }],},
           ],
           style: "row"
         },
         {
           columns: [
-            {
-              text: [{ text: "COLOR", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],
-
-            },
-            {
-              text: [{ text: "DESIGN NO.", bold: true }, { text: " : " }, { text: "1047", bold: true }],
-
-            },
-            {
-              text: [{ text: "SIZE", bold: true }, { text: " : " }, { text: "S", bold: true }],
-
-            },
+            { text: [{ text: "COLOR", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
+            { text: [{ text: "DESIGN NO.", bold: true }, { text: " : " }, { text: "1047", bold: true }],},
+            { text: [{ text: "SIZE", bold: true }, { text: " : " }, { text: "S", bold: true }],},
           ],
           style: "row"
         },
-        {
-          text: [{ text: "ST. PROS.", bold: true, fontSize: 10 }],
-          style: "row"
-
-        },
+        { text: [{ text: "ST. PROS.", bold: true, fontSize: 10 }], style: "row"},
         {
           style: 'table',
           table: {
@@ -199,35 +168,62 @@ export class AddaBundleComponent {
             body: [
               [{ text: 'Z', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
               [{ text: 'L', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
-
             ]
           },
           layout: 'noBorders'
         },
-        //{text: '', pageBreak: 'after'},
+        {text: '', pageBreak: 'after'},
+        // {
+        //   columns: [
+        //     { text: [{ text: "DATE", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
+        //     { text: [{ text: "ADDA NO.", bold: true }, { text: " : " }, { text: "2974", bold: true }],},
+        //     { text: [{ text: "SR NO.", bold: true }, { text: " : " }, { text: "1", bold: true }],},
+        //   ],
+        //   style: "row"
+        // },
+        // {
+        //   columns: [
+        //     { text: [{ text: "BUNDLE NO.", bold: true }, { text: " : " }, { text: "545434", bold: true }],},
+        //     { text: [{ text: "PRODUCT", bold: true }, { text: " : " }, { text: "T-SHIRT H/S", bold: true }],},
+        //     { text: [{ text: "QTY", bold: true }, { text: " : " }, { text: "40", bold: true }],},
+        //   ],
+        //   style: "row"
+        // },
+        // {
+        //   columns: [
+        //     { text: [{ text: "COLOR", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
+        //     { text: [{ text: "DESIGN NO.", bold: true }, { text: " : " }, { text: "1047", bold: true }],},
+        //     { text: [{ text: "SIZE", bold: true }, { text: " : " }, { text: "S", bold: true }],},
+        //   ],
+        //   style: "row"
+        // },
+        // { text: [{ text: "ST. PROS.", bold: true, fontSize: 10 }], style: "row"},
+        // {
+        //   style: 'table',
+        //   table: {
+        //     //headerRows: 1,
+        //     body: [
+        //       [{ text: 'Z', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
+        //       [{ text: 'L', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
+        //     ]
+        //   },
+        //   layout: 'noBorders'
+        // },
         
       ],
-
       styles: {
-        row: {
-          margin: [2, 2, 0, 8],
-          fontSize: 8.5
-        },
-        table: {
-          margin: [0, 0, 0, 10],
-          bold: true
-        },
-        tableHeader: {
-          margin: [60, 0, 30, 8]
-        },
+        row: { margin: [2, 2, 0, 8], fontSize: 8.5},
+        table: { margin: [0, 0, 0, 10], bold: true },
+        tableHeader: { margin: [60, 0, 30, 8]},
       }
     };
     pdfMake.createPdf(docDefinition).open();
-
   }
   exportPdf(data: any): void {
     let detail = data?.data;
     console.log("PDF detail ", detail);
+    console.log("PDF detail ", this.detailAddaData);
+    console.log("processData ", this.processData);
     const docDefinition: any = {
       pageOrientation: "portrait",
       pageMargins: [40, 30, 20, 20],
@@ -258,7 +254,7 @@ export class AddaBundleComponent {
         },
         {
           style: "row",
-          text: [{ text: "Employee", bold: true }, { text: " :   " }, { text: detail?.currentProcessCd?.displayValue }],
+          text: [{ text: "Employee", bold: true }, { text: " :   " }, { text: detail?.currentEmployeeId?.empName }],
 
         },
         {
@@ -268,17 +264,17 @@ export class AddaBundleComponent {
         },
         {
           style: "row",
-          text: [{ text: "Adda No.", bold: true }, { text: " :   " }, { text: detail?.currentProcessCd?.displayValue }],
+          text: [{ text: "Adda No.", bold: true }, { text: " :   " }, { text: this.detailAddaData[0]?.addaNo }],
 
         },
         {
           style: "row",
-          text: [{ text: "Item", bold: true }, { text: " :   " }, { text: detail?.currentProcessCd?.displayValue }],
+          text: [{ text: "Item", bold: true }, { text: " :   " }, { text: this.detailAddaData[0]?.productCd.displayValue }],
 
         },
         {
           style: "row",
-          text: [{ text: "Product", bold: true }, { text: " :   " }, { text: detail?.bundleName }],
+          text: [{ text: "Product", bold: true }, { text: " :   " }, { text: this.detailAddaData[0]?.productCd.displayValue }],
 
         },
         {
@@ -293,7 +289,7 @@ export class AddaBundleComponent {
         },
         {
           style: "row",
-          text: [{ text: "Design", bold: true }, { text: " :   " }, { text: detail?.currentProcessCd?.displayValue }],
+          text: [{ text: "Design", bold: true }, { text: " :   " }, { text: this.detailAddaData[0]?.designNo }],
 
         },
         {
@@ -338,12 +334,12 @@ export class AddaBundleComponent {
         },
         {
           style: "row",
-          text: [{ text: "Status", bold: true }, { text: " :   " }, { text: detail?.currentProcessCd?.displayValue }],
+          text: [{ text: "Status", bold: true }, { text: " :   " }, { text: detail?.status?.displayValue }],
 
         },
         {
           style: "row",
-          text: [{ text: "Last Modified By", bold: true }, { text: " :   " }, { text: detail?.updatedBy?.empName }],
+          text: [{ text: "Last Modified By", bold: true }, { text: " :   " }, { text: `${detail?.updatedBy?.empName} ${detail?.updatedAt}`}],
 
         }
       ],
