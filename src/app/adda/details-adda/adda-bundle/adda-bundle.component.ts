@@ -136,8 +136,8 @@ export class AddaBundleComponent {
     
     const docDefinition: any =  {
       pageOrientation: "portrait",
-      //pageMargins: [20, 10, 20, 40],
-      pageSize: "A4",
+      pageMargins: [40, 30, 20, 20],
+      pageSize: "A6",
     //   header: {
     //     margin: 25.5,
     //     columns: [
@@ -151,299 +151,121 @@ export class AddaBundleComponent {
     // },
 
     footer: function (currentPage:any, pageCount:any) {
-      return [{ text: 'Page ' + currentPage.toString() + ' of ' + pageCount, alignment: 'center' }];
+      return [{ text: 'Page ' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', fontSize: 9 }];
     },
       
-      content: [
-        { text: "JC-2713", style: "header" },
-        {
-            
-          canvas: [
-              { type: 'line', x1: 0, y1: -15, x2: 520, y2: -15, lineWidth: 2 }, //Bottom line
-          ]
-        },
-        {
-          alignment: 'justify',
+    content: [
+      { text: "JC-2713", style: "header" },
+      {
+          
+        canvas: [
+            { type: 'line', x1: 0, y1: -7, x2: 220, y2: -7, lineWidth: 1 }, //Bottom line
+        ]
+      },
+      {
           style: "row",
-          columns: [
-            {
-              // columns: [
-              //   {
-              //     text: [{text:"Employee", bold:true},{text:":     "}, {text:"Pooja"}],
-              //   }
-              // ],
-              columns: [
-                {
-                  text: "Employee",
-                  bold: true
-                },
-                {
-                  text: detail?.currentEmployeeId?.empName
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-                {
-                  text: "Job Assigned",
-                  bold: true
-                },
-                {
-                  text: detail?.currentProcessCd?.displayValue
-                }
-              ]
-            }
-          ]
-        },
-        {
-          alignment: 'justify',
+          text: [{text:"Employee", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Adda No.",
-                  bold: true
-                },
-                {
-                  text: detail?.currentProcessCd?.displayValue
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-                {
-                  text: "Item",
-                  bold: true
-                },
-                {
-                  text: "F4"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          alignment: 'justify',
+          text: [{text:"Job Assigned", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Product",
-                  bold: true
-                },
-                {
-                  text: detail?.bundleName
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-                {
-                  text: "Size",
-                  bold: true
-                },
-                {
-                  text: detail?.bundleName
-                }
-              ]
-            }
-          ]
-        },
-        {
-          alignment: 'justify',
+          text: [{text:"Adda No.", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Bundle",
-                  bold: true
-                },
-                {
-                  text: detail?.bundleName
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-                {
-                  text: "Design",
-                  bold: true
-                },
-                {
-                  text: detail?.currentProcessCd?.displayValue
-                }
-              ]
-            }
-          ]
-        },
-        {
-          alignment: 'justify',
+          text: [{text:"Item", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Quantity",
-                  bold: true
-                },
-                {
-                  text: detail?.quantity
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-                {
-                  text: "Wage to Provide",
-                  bold: true
-                },
-                {
-                  text: detail?.quantity
-                }
-              ]
-            }
-          ]
-        },
-        {
-          alignment: 'justify',
+          text: [{text:"Product", bold:true}, {text:" :   "}, {text: detail?.bundleName}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Rate",
-                  bold: true
-                },
-                {
-                  text: detail?.quantity
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-                {
-                  text: "Job Flow Number",
-                  bold: true
-                },
-                {
-                  text: detail?.currentProcessCd?.displayValue
-                }
-              ]
-            }
-          ]
-        },
-        {
-          text: "Job Details",
-          style: "subheader"
-        },
-        {
-            
-          canvas: [
-              { type: 'line', x1: 0, y1: -15, x2: 520, y2: -15, lineWidth: 1 }, //Bottom line
-          ]
-        },
-        {
-          alignment: 'justify',
+          text: [{text:"Size", bold:true}, {text:" :   "}, {text: detail?.bundleName}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Product Job",
-                  bold: true
-                },
-                {
-                  text: detail?.displayValue
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-
-              ]
-            }
-          ]
-        },
-
-        {
-          alignment: 'justify',
+          text: [{text:"Bundle", bold:true}, {text:" :   "}, {text: detail?.bundleName}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Status",
-                  bold: true
-                },
-                {
-                  text: detail?.status?.displayValue
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-
-              ]
-            }
-          ]
-        },
-
-        {
-          alignment: 'justify',
+          text: [{text:"Design", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
           style: "row",
-          columns: [
-            {
-              columns: [
-                {
-                  text: "Last Modified By",
-                  bold: true
-                },
-                {
-                  text: detail?.updatedBy?.empName
-                }
-              ],
-              style: "column",
-            },
-            {
-              columns: [
-
-              ]
-            }
-          ]
-        },
-      ],
-
-      styles: {
-        header: {
-          fontSize: 20,
-          bold: true,
-          margin: [0, 0, 0, 20]
-        },
-        subheader: {
-          fontSize: 15,
-          bold: true,
-          margin: [0, 30, 0, 20],
-          fillColor: '#cccccc'
-        },
-        row: {
-          margin: [20,0, 0, 0],
-          fontSize: 10,
-        },
-        column: {
-          margin: [10, 0, 10, 10]
-        }
+          text: [{text:"Quantity", bold:true}, {text:" :   "}, {text: detail?.quantity}],
+        
+      },
+      {
+          style: "row",
+          text: [{text:"Wage to Provide", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
+          style: "row",
+          text: [{text:"Rate", bold:true}, {text:" :   "}, {text: detail?.quantity}],
+        
+      },
+      {
+          style: "row",
+          text: [{text:"Job Flow Number", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
+        text: "Job Details",
+        style: "subheader"
+      },
+      {
+          
+        canvas: [
+            { type: 'line', x1: 0, y1: -7, x2: 220, y2: -7, lineWidth: 1 }, //Bottom line
+        ]
+      },
+      {
+          style: "row",
+          text: [{text:"Product Job", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
+          style: "row",
+          text: [{text:"Status", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
+        
+      },
+      {
+          style: "row",
+          text: [{text:"Last Modified By", bold:true}, {text:" :   "}, {text: detail?.updatedBy?.empName}],
+        
       }
+    ],
+
+    styles: {
+      header: {
+        fontSize: 13,
+        bold: true,
+        margin: [0, 0, 0, 8]
+      },
+      subheader: {
+        fontSize: 13,
+        bold: true,
+        margin: [0, 15, 0, 8],
+        fillColor: '#cccccc'
+      },
+      row: {
+        margin: [2, 6, 0, 0],
+        fontSize: 9
+      }
+    }
     };
     pdfMake.createPdf(docDefinition).open();
   }
