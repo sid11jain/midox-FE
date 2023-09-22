@@ -126,7 +126,7 @@ export class AddaBundleComponent {
   }
 
   printStickerFn(){
-    console.log("Print sticker fn clicked");
+    
     
   }
   exportPdf(data:any): void {
@@ -222,6 +222,11 @@ export class AddaBundleComponent {
           text: [{text:"Job Flow Number", bold:true}, {text:" :   "}, {text: detail?.currentProcessCd?.displayValue}],
         
       },
+      {
+        style: "row",
+        text: [{text:"Total", bold:true}, {text:" :   "}, {text: detail?.quantity * detail?.quantity}], //rate *  qty
+      
+    },
       {
         text: "Job Details",
         style: "subheader"
