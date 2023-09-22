@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -29,6 +29,11 @@ export class AddaAddMaterialComponent {
   maxQuantiy:any;
   addaId:any;
   dialogTitle:string = "Adda Material";
+  addaMaterialId:string = "";
+  addaMaterialTitle:string = "Add Adda Material";
+  
+  //To get data from parent for edit
+  @Input() forEditAddaMaterial:any = '';
   
   // To send data from child to parent
   @Output() forDetailAddReloadMaterial = new EventEmitter<any>();
@@ -63,22 +68,55 @@ export class AddaAddMaterialComponent {
       return;
     }  
     this.showSpinner = true; 
-    console.log(this.addaMaterialForm.value);
-    
-    console.log("Add API Called");
-    let temp = await this.common.addDataFn1(this.addaMaterialForm?.value, "adda", "add-material", "get-addas", this.dialogTitle);
+  if(this.forEditAddaMaterial){
+    let tempObj = {...this.addaMaterialForm.value};
+    tempObj.addaMaterialId = this.addaMaterialId;
+    console.log("Edit ",tempObj);    
+    let temp = await this.common.addDataFn1(tempObj, "adda", "update-material", "get-addas", this.dialogTitle);
+    }
+    else{
+      console.log("Add ",this.addaMaterialForm.value);
+      let temp = await this.common.addDataFn1(this.addaMaterialForm?.value, "adda", "add-material", "get-addas", this.dialogTitle);
+    }    
     this.resetForm();
     this.showSpinner = false;
     this.forDetailAddReloadMaterial.emit(true);
     this.ngOnInit();
-    document.getElementById("addAddaMaterialBtn")?.click();
-    
+    document.getElementById("addAddaMaterialBtn")?.click();    
   }
 
+  
+  ngOnChanges(){
+    console.log("forEditAddaMaterial ",this.forEditAddaMaterial);    
+    this.resetForm();
+    // this.initForm();
+    this.ngOnInit();
 
+    if(this.forEditAddaMaterial){
+      this.addaMaterialTitle = "Edit Adda Material";
+      console.log("Edit"); 
+      this.addaMaterialId = this.forEditAddaMaterial.addaMaterialId; 
+      this.myControl.setValue(this.forEditAddaMaterial.stockDetails.stockName); 
+      this.myControl.disable();    
+      // this.addaMaterialForm.get('stockId')?.disable();
+      //   this.addaId = this.forEditAdda?.addaId;
+      //   // this.addAddaForm.patchValue(this.forEditAdda);
+      this.addaMaterialForm.patchValue({
+        addaId: this.forEditAddaMaterial.addaId,
+        stockId: this.forEditAddaMaterial.stockDetails.stockId,
+        quantity: this.forEditAddaMaterial.quantity,
+      });
+      this.maxQuantiy = this.forEditAddaMaterial.stockDetails.availableQuantity;
+    }
+    else{
+      this.myControl.enable();    
+      console.log("Add");
+      this.addaMaterialTitle = "Add Adda Material";
+    }
+  }
 
   private _filter(value: any): any {
-    console.log("v ",value);
+    console.log(value);
     let filterValue:any;
     // if(value.stockName){
     //   filterValue = value.stockName.toLowerCase();
@@ -101,7 +139,8 @@ export class AddaAddMaterialComponent {
     this.addaMaterialForm?.get('addaId')?.patchValue(this.addaId);  
   }
   
-  resetForm(){
+  resetForm(){    
+    // this.addaMaterialForm.get('stockId')?.enable();
     this.addaMaterialForm.reset();
     this.myControl.reset();
     this.maxQuantiy = -1;
