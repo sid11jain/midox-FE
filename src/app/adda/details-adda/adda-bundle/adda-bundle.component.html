@@ -60,38 +60,15 @@
           <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
           <dxi-column dataField="bundleName" caption="Bundle Name" [width]="150"></dxi-column>
           <dxi-column dataField="quantity" caption="Qty" [alignment]="'left'"></dxi-column>  
-          <!-- <dxi-column dataField="currentProcessStatus.displayValue" caption="Status" [minWidth]="120"></dxi-column> -->
-										                
           <dxi-column caption="Status" cellTemplate="cellTemplateHyperlink2" alignment="left" [minWidth]="140"></dxi-column>  
           <div *dxTemplate="let data of 'cellTemplateHyperlink2'">
 											<div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockStatus">
-												<!-- <div class="form-group">
-															<input type="text"
-																					placeholder="Select Employee"
-																					aria-label="Number"
-																					matInput
-																					[formControl]="myControlEmployee"
-																					[matAutocomplete]="auto" class="form-control"
-																					>
-																					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedEmployee($event,data.data)" >
-																	<mat-option *ngFor="let option of filteredOptionsEmployee | async" [value]="option.empName">
-																			{{option.empName}}
-																	</mat-option>
-															</mat-autocomplete>
-											</div> -->
 											
-											<form [formGroup]="statusForm">
+											<form>
 												<div class="form-group">
-													<!-- <label for="status">Status </label> -->
-															<select id="status" formControlName="status" class="form-control" (change)="statusChangefn($event, data.data)">
-																	<!-- <option value="">Select</option> -->
+															<select id="status" class="form-control" (change)="statusChangefn($event, data.data)">
 																	<option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd" [selected]="option?.entityCd == data?.data?.currentProcessStatus?.entityCd">{{ option?.displayValue }}</option>
-																	<!-- <option *ngFor="let option of statusDropDownValue" [value]="data.data.currentProcessStatus.entityCd">{{ option?.displayValue }}</option> -->
-																	<!-- <option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd">{{ data.data.currentProcessStatus.displayValue }}</option> -->
 															</select>
-													<!-- <div *ngIf="addAddaForm.get('status')?.invalid && addAddaForm.get('status')?.touched" class="error invalid-red">
-															Please select a valid input.
-													</div> -->
 												</div>
 
 											</form>
@@ -101,8 +78,6 @@
 										</ng-template>
           </div>
           <dxi-column dataField="currentProcessCd.displayValue" caption="Process" [width]="150"></dxi-column>
-          <!-- <dxi-column dataField="currentEmployeeId.empName" caption="Employee" [minWidth]="150"></dxi-column> -->
-                                
           <dxi-column caption="Select Employee" cellTemplate="cellTemplateHyperlink1" alignment="center" [minWidth]="170"></dxi-column>  
           <div *dxTemplate="let data of 'cellTemplateHyperlink1'">
 											<div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockEmployee">{{data.data.currentEmployeeId.empName}}</div>
