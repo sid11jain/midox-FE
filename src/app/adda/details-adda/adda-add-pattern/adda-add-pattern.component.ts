@@ -14,9 +14,9 @@ export class AddaAddPatternComponent {
   showSpinner:boolean = true;  
   patternAddaAddForm!: FormGroup;
   colorArray: any[] = [];
-  measurementTypeArray: any[] = [];
+  sizeArray: any[] = [];
   key: string = "MID_COL";
-  key1: string = "MID_UNIT";
+  key1: string = "MID_SIZE";
   addaId:any;
   dialogTitle:string = "Adda Pattern";
   addaPatternTitle:string = "Add Adda Pattern";
@@ -48,7 +48,7 @@ export class AddaAddPatternComponent {
     });
     
     this.colorArray = await this.common.getDataFn(this.key);
-    this.measurementTypeArray = await this.common.getDataFn(this.key1);
+    this.sizeArray = await this.common.getDataFn(this.key1);
     console.log("Color array ", this.colorArray);
     
     this.showSpinner = false; 

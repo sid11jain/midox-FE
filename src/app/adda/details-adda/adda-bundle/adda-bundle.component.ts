@@ -16,14 +16,18 @@ export class AddaBundleComponent {
   bundleAddaData: any;
   employeeData: any = [];
   processData: any = [];
+  detailAddaData:any;
 
   constructor(private commonService: CommonService, private route: ActivatedRoute) { }
 
-  async ngOnInit() {
+  async ngOnInit() { 
     await this.route.params.subscribe(async (params) => {
       const patternId = params['patternId'];
       const brandId = params['brandId'];
+      const addaId = params['addaId'];
       console.log('Received ID:', patternId);
+      
+      this.detailAddaData = await this.commonService.getDataFn1({"addaId":addaId}, "adda", "get-addas");
       this.bundleAddaData = await this.commonService.getDataFn1({ "patternId": patternId }, "bundle", "get-bundles");
       this.employeeData = await this.commonService.getDataFn1({}, "employee", "get-employees");
       this.processData = await this.commonService.getDataFn1({ "brandId": brandId }, "design", "get-designs");
@@ -37,13 +41,17 @@ export class AddaBundleComponent {
 
   }
 
+  printStickerFn(){
+    console.log("Print sticker fn clicked");
+    
+  }
   exportPdf(data:any): void {
     let detail = data?.data;
     
     const docDefinition: any =  {
       pageOrientation: "portrait",
       //pageMargins: [20, 10, 20, 40],
-      pageSize: "A6",
+      pageSize: "A4",
     //   header: {
     //     margin: 25.5,
     //     columns: [

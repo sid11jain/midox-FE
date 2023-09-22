@@ -46,7 +46,7 @@
                   <label for="size">Select Size:*</label>
                   <select id="size" formControlName="size" class="form-control">              
                     <option value="">Select</option>
-                    <option *ngFor="let option of measurementTypeArray" [value]="option.entityCd">{{ option?.displayValue }}</option>
+                    <option *ngFor="let option of sizeArray" [value]="option.entityCd">{{ option?.displayValue }}</option>
                   </select>
                   <div *ngIf="patternAddaAddForm.get('size')?.invalid && patternAddaAddForm.get('size')?.touched">
                     <span style="color: red;">Size is required.</span>

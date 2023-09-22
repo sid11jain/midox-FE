@@ -14,6 +14,7 @@ export class DetailsAddaComponent {
   addaPatternsData:any;
   addaMaterialData:any;
   brandId:any;
+  addaId:any;
   
   dialogTitle:string = "Adda";
   editAddaMaterialData:any = "";
@@ -23,8 +24,8 @@ export class DetailsAddaComponent {
 
   async ngOnInit(){    
     await this.route.params.subscribe(async (params) => {
-      const addaId = params['addaId'];
-      this.detailAddaData = await this.commonService.getDataFn1({"addaId":addaId}, "adda", "get-addas");
+      this.addaId = params['addaId'];
+      this.detailAddaData = await this.commonService.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
       this.brandId = this.detailAddaData[0].brandDetails.brandId;
       this.addaMaterialData = [...this.detailAddaData[0].addaMaterials];
       this.addaPatternsData = [...this.detailAddaData[0].addaPatterns];
