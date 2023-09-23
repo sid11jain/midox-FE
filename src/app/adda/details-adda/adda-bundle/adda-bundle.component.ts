@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
@@ -22,7 +23,7 @@ import * as pdfFonts from "pdfmake/build/vfs_fonts";
 })
 export class AddaBundleComponent {
   showSpinner: boolean = true;
-  bundleAddaData: any;
+  bundleAddaData!: any[];
   employeeData: any = [];
   processData: any = [];
   detailAddaData: any;
@@ -127,6 +128,59 @@ export class AddaBundleComponent {
 
   printStickerFn() {
     console.log("All Bundle : ", this.bundleAddaData);
+    let contentArr:any = [];
+    this.bundleAddaData.forEach((data:any, index:number) => {
+      let firstRow = {
+        columns: [
+          { text: [{ text: "DATE", bold: true }, { text: " : " }, { text: moment(data?.createdAt).format('DD/MM/YYYY'), bold: true }],},
+          { text: [{ text: "ADDA NO.", bold: true }, { text: " : " }, { text: "2974", bold: true }],},
+          { text: [{ text: "SR NO.", bold: true }, { text: " : " }, { text: index+1, bold: true }],margin:[10,0,0,0]},
+        ],
+        style: "row"
+      };
+
+      let secondRow = {
+        columns: [
+          { text: [{ text: "BUNDLE", bold: true }, { text: " : " }, { text: data?.bundleName, bold: true }],},
+          { text: [{ text: "PRODUCT", bold: true }, { text: " : " }, { text: data?.currentProcessCd?.displayValue, bold: true }]},
+          { text: [{ text: "QTY", bold: true }, { text: " : " }, { text: data?.quantity, bold: true }],margin:[10,0,0,0]},
+        ],
+        style: "row"
+      };
+
+      let thirdRow = {
+        columns: [
+          { text: [{ text: "COLOR", bold: true }, { text: " : " }, { text: "RED", bold: true }],},
+          { text: [{ text: "DESIGN NO.", bold: true }, { text: " : " }, { text: "1047", bold: true }],},
+          { text: [{ text: "SIZE", bold: true }, { text: " : " }, { text: "S", bold: true }],margin:[10,0,0,0]},
+        ],
+        style: "row"
+      };
+
+      let fourthRow = { text: [{ text: "ST. PROS.", bold: true, fontSize: 10 }], style: "row"};
+
+      let fifthRow = {
+        style: 'table',
+        table: {
+          //headerRows: 1,
+          body: [
+            [{ text: 'Z', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
+            [{ text: 'L', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
+          ]
+        },
+        layout: 'noBorders'
+      };
+
+      let pageBreak = {text: '', pageBreak: 'after'};
+
+      contentArr.push(firstRow);
+      contentArr.push(secondRow);
+      contentArr.push(thirdRow);
+      contentArr.push(fourthRow);
+      contentArr.push(fifthRow);
+      this.bundleAddaData.length - 1 != index ? contentArr.push(pageBreak) : "";
+
+    });
     const docDefinition: any = {
       //pageOrientation: "portrait",
       pageMargins: [10, 12, 10, 12],
@@ -134,8 +188,8 @@ export class AddaBundleComponent {
         width: 340,
         height: 170
       },
-
-      content: [
+      content: contentArr,
+      /*content: [
         {
           columns: [
             { text: [{ text: "DATE", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
@@ -173,44 +227,7 @@ export class AddaBundleComponent {
           layout: 'noBorders'
         },
         {text: '', pageBreak: 'after'},
-        // {
-        //   columns: [
-        //     { text: [{ text: "DATE", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
-        //     { text: [{ text: "ADDA NO.", bold: true }, { text: " : " }, { text: "2974", bold: true }],},
-        //     { text: [{ text: "SR NO.", bold: true }, { text: " : " }, { text: "1", bold: true }],},
-        //   ],
-        //   style: "row"
-        // },
-        // {
-        //   columns: [
-        //     { text: [{ text: "BUNDLE NO.", bold: true }, { text: " : " }, { text: "545434", bold: true }],},
-        //     { text: [{ text: "PRODUCT", bold: true }, { text: " : " }, { text: "T-SHIRT H/S", bold: true }],},
-        //     { text: [{ text: "QTY", bold: true }, { text: " : " }, { text: "40", bold: true }],},
-        //   ],
-        //   style: "row"
-        // },
-        // {
-        //   columns: [
-        //     { text: [{ text: "COLOR", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
-        //     { text: [{ text: "DESIGN NO.", bold: true }, { text: " : " }, { text: "1047", bold: true }],},
-        //     { text: [{ text: "SIZE", bold: true }, { text: " : " }, { text: "S", bold: true }],},
-        //   ],
-        //   style: "row"
-        // },
-        // { text: [{ text: "ST. PROS.", bold: true, fontSize: 10 }], style: "row"},
-        // {
-        //   style: 'table',
-        //   table: {
-        //     //headerRows: 1,
-        //     body: [
-        //       [{ text: 'Z', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
-        //       [{ text: 'L', style: 'tableHeader' }, { text: 'F', style: 'tableHeader' }, { text: 'Z', style: 'tableHeader' }],
-        //     ]
-        //   },
-        //   layout: 'noBorders'
-        // },
-        
-      ],
+      ],*/
       styles: {
         row: { margin: [2, 2, 0, 8], fontSize: 8.5},
         table: { margin: [0, 0, 0, 10], bold: true },
