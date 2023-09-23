@@ -172,7 +172,7 @@ export class AddaBundleComponent {
           },
           layout: 'noBorders'
         },
-        {text: '', pageBreak: 'after'},
+        // {text: '', pageBreak: 'after'},
         // {
         //   columns: [
         //     { text: [{ text: "DATE", bold: true }, { text: " : " }, { text: "22-09-2023", bold: true }],},
