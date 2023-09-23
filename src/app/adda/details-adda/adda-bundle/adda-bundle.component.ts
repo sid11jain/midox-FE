@@ -226,7 +226,7 @@ export class AddaBundleComponent {
           },
           layout: 'noBorders'
         },
-        {text: '', pageBreak: 'after'},
+        // {text: '', pageBreak: 'after'},
       ],*/
       styles: {
         row: { margin: [2, 2, 0, 8], fontSize: 8.5},

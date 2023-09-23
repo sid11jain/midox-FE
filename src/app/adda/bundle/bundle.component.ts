@@ -40,6 +40,11 @@ export class BundleComponent {
   myControlEmployee = new FormControl('');
   optionsEmployee: any[] = ['One', 'Two', 'Three'];
   bundleAddaData: any;
+
+  
+  filteredOptionsAdda!: Observable<any[]>;
+  myControlAdda = new FormControl('');
+  optionsAdda: any[] = ['One', 'Two', 'Three'];
   
   constructor(private commonService: CommonService) { }
 
@@ -49,8 +54,13 @@ export class BundleComponent {
     // let temp = await this.commonService.getDataFn1({ "addaId": 3 }, "bundle", "get-bundles");
     // console.log(temp);
     
-    let addaId = 3;
-    this.detailAddaData = await this.commonService.getDataFn1({ "addaId": addaId }, "adda", "get-addas");
+    
+    this.detailAddaData = await this.commonService.getDataFn1({}, "adda", "get-addas");
+    this.optionsAdda = [...this.detailAddaData];
+    this.filteredOptionsAdda = this.myControlAdda.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterAdda(value || '')),
+    );
       this.showSpinner = false;
       // this.getBundleData(3);
   }
@@ -76,18 +86,31 @@ export class BundleComponent {
     return this.optionsEmployee.filter((val: any) => val?.empName?.toLowerCase().includes(filterValue));
   }
 
+  private _filterAdda(value: any): any {
+    console.log(value);
+    let filterValue: any;
+    filterValue = value.toLowerCase();
+    return this.optionsAdda.filter((val: any) => val?.addaNo?.toLowerCase().includes(filterValue));
+  }
+
   
+  async optionSelectedAdda(event: any) {
+    let selectedOptionValue = event.option.value;
+    
+    let addaObj = this.detailAddaData.find((option: any) => option.addaNo === selectedOptionValue);
+    let addaId = addaObj.addaId;
+    console.log('addaId:', addaId);
+    this.getBundleData(addaId);
+
+  }
+
   async optionSelectedEmployee(event: any, data: any) {
     const selectedOptionValue = event.option.value;
     console.log('Selected Option Value:', selectedOptionValue);
     let employeeObj = this.employeeData.find((option: any) => option.empName === selectedOptionValue);
-    // console.log('Selected Option:', employeeObj);
     let currentEmployeeId = employeeObj.empId;
-    // console.log("Row data ", data);
     let bundleId = data.bundleId;
     let tempObj = { "bundleId": bundleId, "currentEmployeeId": currentEmployeeId }
-    // console.log("currentEmployeeId ",currentEmployeeId);
-    // console.log("bundleId ",bundleId);
     console.log("tempObj ", tempObj);
     this.showSpinner = true;
     this.myControlEmployee.reset();
