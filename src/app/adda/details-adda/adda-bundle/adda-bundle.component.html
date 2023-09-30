@@ -95,7 +95,8 @@
 																					>
 																					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedEmployee($event,data.data)" >
 																	<mat-option *ngFor="let option of filteredOptionsEmployee | async" [value]="option.empName">
-																			{{option.empName}}
+																			{{option.empName}} <br> <span class="employeeIdOptions">Emp id: {{option.empId}}</span>
+																			<!-- {{option.empName}} (Id: {{option.empId}}) -->
 																	</mat-option>
 															</mat-autocomplete>
 													<!-- </mat-form-field> -->
