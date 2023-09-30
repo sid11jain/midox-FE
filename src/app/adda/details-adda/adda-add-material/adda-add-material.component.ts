@@ -27,6 +27,7 @@ export class AddaAddMaterialComponent {
   stockDataObj:any;
   stockDataFull:any;
   maxQuantiy:any;
+  maxQuantityunit:any;
   addaId:any;
   dialogTitle:string = "Adda Material";
   addaMaterialId:string = "";
@@ -107,6 +108,7 @@ export class AddaAddMaterialComponent {
         quantity: this.forEditAddaMaterial.quantity,
       });
       this.maxQuantiy = this.forEditAddaMaterial.stockDetails.availableQuantity;
+      this.maxQuantityunit = this.forEditAddaMaterial.stockDetails.unit.displayValue;
     }
     else{
       this.myControl.enable();    
@@ -135,6 +137,7 @@ export class AddaAddMaterialComponent {
     this.stockDataObj = this.stockDataFull.find((option: any) => option.stockName === selectedOptionValue);
     console.log('Selected Option:', this.stockDataObj);
     this.maxQuantiy = this.stockDataObj.availableQuantity;
+    this.maxQuantityunit = this.stockDataObj.unit.displayValue;
     this.addaMaterialForm?.get('stockId')?.patchValue(this.stockDataObj.stockId);  
     this.addaMaterialForm?.get('addaId')?.patchValue(this.addaId);  
   }
@@ -144,6 +147,7 @@ export class AddaAddMaterialComponent {
     this.addaMaterialForm.reset();
     this.myControl.reset();
     this.maxQuantiy = -1;
+    this.maxQuantityunit = null;
   }
 
 }

@@ -51,7 +51,7 @@
   
             <div class="form-group col-6">
                 <label for="quantity">Quantity* 
-                  <span *ngIf="maxQuantiy >= 0">(Available qty:{{maxQuantiy}})</span>
+                  <span *ngIf="maxQuantiy >= 0">(Available qty: {{maxQuantiy}} {{maxQuantityunit}})</span>
                 </label>
                 <input type="number" id="quantity" formControlName="quantity" class="form-control">
                 <div *ngIf="addaMaterialForm.get('quantity')?.invalid && addaMaterialForm.get('quantity')?.touched" class="invalid-red">

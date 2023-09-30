@@ -105,8 +105,10 @@
 
           <dxi-column caption="Job Card" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
           <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-          	<mat-icon class="me-2" (click)="exportPdf(data)">print</mat-icon>
-          </div>
+            <button mat-icon-button (click)="exportPdf(data)" [disabled]="data.data.currentEmployeeId? false:true">
+              <mat-icon class="me-2">print</mat-icon>
+            </button>
+          </div> 
                         
           <dxo-search-panel [visible]="true"></dxo-search-panel>
           <dxo-paging [pageSize]="10"> </dxo-paging>              
