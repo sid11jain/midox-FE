@@ -12,9 +12,18 @@
         // background-color: lightgreen;
     }
 }
-
-.cloths{
-    // background-color: red;
-    max-height: 30vh;
-    overflow: auto;
+.table {
+    .its-card{
+        height: 58vh;
+    }
+    .cloths{
+        // background-color: red;
+        max-height: 48vh;
+        overflow: auto;
+    
+        .pattern-name {
+            font-size: 14px;
+        }
+    }
 }
+

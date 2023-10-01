@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule} from '@angular/material/menu';
 import { NgChartsModule } from 'ng2-charts';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DxDataGridModule } from 'devextreme-angular';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
@@ -18,6 +18,16 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import {NgFor, AsyncPipe} from '@angular/common';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -36,11 +46,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule, 
-    MatInputModule, 
     MatNativeDateModule, 
     MatDatepickerModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    // BrowserAnimationsModule,
+    FormsModule,
+    
+    MatAutocompleteModule,
+    NgFor,
+    AsyncPipe,
   ],
   exports: [
     CommonModule,
@@ -60,7 +75,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     MatNativeDateModule, 
     MatDatepickerModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatAutocompleteModule
   ]
 })
 export class SharedModule { }

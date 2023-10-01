@@ -38,23 +38,12 @@
               
               <dxi-column caption="Edit / Details" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                <!-- <a [routerLink]="['../add-adda']" routerLinkActive="sub-active" (click)="getSelectedData(data)">
-                  <mat-icon class="icon-mat">history</mat-icon>
-                </a>     -->
-
                 <a data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData(data)">
-                <!-- Edit Adda -->
-                <mat-icon class="me-2">edit</mat-icon>
+                  <mat-icon class="me-2">edit</mat-icon>
                 </a>  
-                <!-- <button class="btn btn-sm me-2" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="getSelectedData(data)">
-                <mat-icon>edit</mat-icon>
-                </button>   -->
-                
-                
-                <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>           
-                <!-- <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon class="icon-mat">remove_red_eye</mat-icon></a>            -->
-                <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
-  
+                <a [routerLink]="['../details-adda', data?.data?.addaId]" routerLinkActive="sub-active">
+                  <mat-icon class="icon-mat">remove_red_eye</mat-icon>
+                </a>           
               </div>
       
               <dxo-search-panel [visible]="true"></dxo-search-panel>

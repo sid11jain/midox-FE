@@ -69,11 +69,15 @@ export class AddEmployeeComponent implements OnInit {
       this.showSpinner = false;
     }
     this.editedMaterialIndex = null;
-    this.employeeForm.reset();    
+    this.employeeForm.reset(); 
+    
+    document.getElementById("addEmployeeAccordian")?.click();  
   }
 
   edit(data: any, index:number): void {    
     // this.deleteBtnDisabled = true;
+    
+    document.getElementById("addEmployeeAccordian")?.click();
     this.editedMaterialIndex = index;
     this.employeeId = data?.empId;
     console.log(data);
