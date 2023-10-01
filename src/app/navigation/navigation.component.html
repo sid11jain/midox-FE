@@ -86,17 +86,17 @@
         
           </div>
           </mat-menu>
-        <a [routerLink]="['/adda/view-adda']" class="d-flex mb-link" routerLinkActive="active">
-        <!-- <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda"> -->
+        <!-- <a [routerLink]="['/adda/view-adda']" class="d-flex mb-link" routerLinkActive="active"> -->
+        <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda">
             <span class="material-symbols-outlined me-3">
                 speaker_notes
             </span>
             <li class="fs-14">Adda</li>
         </a>
 
-        <!-- <mat-menu #menuAdda="matMenu"> -->
+        <mat-menu #menuAdda="matMenu">
           
-          <!-- <div class="mtb-10 mlr-10 a-tag"> -->
+          <div class="mtb-10 mlr-10 a-tag">
             <!-- <a [routerLink]="['adda/add-adda']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon-mat" fontIcon="home"></mat-icon>
               <span>
@@ -108,12 +108,12 @@
               <a [routerLink]="['adda/add-adda']" class="submenu-link" routerLinkActive="sub-active">Add Adda</a>
             </button> -->
 
-            <!-- <a [routerLink]="['adda/view-adda']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+            <a [routerLink]="['adda/view-adda']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat">notifications_off</mat-icon>
               <span>
                 View Adda
               </span>
-            </a> -->
+            </a>
             <!-- <button mat-menu-item class="midox-menu">
               <mat-icon>notifications_off</mat-icon>
               <a [routerLink]="['adda/view-adda']" class="submenu-link" routerLinkActive="sub-active">View</a>
@@ -141,12 +141,12 @@
               <a [routerLink]="['adda/add-pattern']" class="submenu-link" routerLinkActive="sub-active">Add Pattern</a>
             </button> -->
             
-            <!-- <a [routerLink]="['adda/bundle']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+            <a [routerLink]="['adda/bundle']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
               <span>
-                Add Bundle
+                View Bundle
               </span>
-            </a> -->
+            </a>
             <!-- <button mat-menu-item class="midox-menu">
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
               <a [routerLink]="['adda/bundle']" class="submenu-link" routerLinkActive="sub-active">Bundle</a>
@@ -155,8 +155,8 @@
               <mat-icon>notifications_off</mat-icon>
               <a [routerLink]="['inventory/dispatch-history']">Dispatch History</a>
             </button> -->
-          <!-- </div>
-        </mat-menu> -->
+          </div>
+        </mat-menu>
 
         <!-- <a [routerLink]="['/employee']" class="d-flex mb-link" routerLinkActive="active"> -->
             <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuEmployee">

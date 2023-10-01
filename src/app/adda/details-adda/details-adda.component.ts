@@ -13,15 +13,20 @@ export class DetailsAddaComponent {
   detailAddaData:any;
   addaPatternsData:any;
   addaMaterialData:any;
+  brandId:any;
+  addaId:any;
+  
+  dialogTitle:string = "Adda";
+  editAddaMaterialData:any = "";
+  editAddaPatternData:any = "";
   
   constructor(private commonService: CommonService, private route: ActivatedRoute){  }
 
   async ngOnInit(){    
     await this.route.params.subscribe(async (params) => {
-      const addaId = params['addaId'];
-      console.log('Received ID:', addaId);
-      this.detailAddaData = await this.commonService.getDataFn1({"addaId":addaId}, "adda", "get-addas");
-      
+      this.addaId = params['addaId'];
+      this.detailAddaData = await this.commonService.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
+      this.brandId = this.detailAddaData[0].brandDetails.brandId;
       this.addaMaterialData = [...this.detailAddaData[0].addaMaterials];
       this.addaPatternsData = [...this.detailAddaData[0].addaPatterns];
       console.log("addaMaterialData ",this.addaMaterialData);
@@ -31,12 +36,76 @@ export class DetailsAddaComponent {
     
   }
 
-  addMaterialFn(){
-    console.log("addMaterialFn called");    
+  
+  getSelectedData(rowData:any) {
+    console.log("rowData ", rowData);   
+    // this.sendAddaAddMaterialdata(rowData);
+    this.editAddaMaterialData = rowData?.data;
+
   }
 
-  addPaternFn(){
-    console.log("addPaternFn called");    
+  getSelectedData1(rowData:any) {
+    console.log("rowData ", rowData);   
+    // this.sendAddaAddMaterialdata(rowData);
+    this.editAddaPatternData = rowData?.data;
+
   }
+
+  // addMaterialFn(){
+  //   console.log("addMaterialFn called");    
+  // }
+
+  // addPaternFn(){
+  //   console.log("addPaternFn called");    
+  // }
+  
+  async deleteMaterial(data1: any){
+    console.log(data1.addaMaterialId);    
+    this.showSpinner = true; 
+    let temp = await this.commonService.deleteDataFn1({"addaMaterialId": data1.addaMaterialId}, "adda", "delete-material", this.dialogTitle);
+    console.log(temp);
+    if(temp){
+      this.ngOnInit();
+    }
+    else{
+      this.showSpinner = false;      
+    }    
+  }
+
+  async deletePattern(data2: any){  
+    this.showSpinner = true; 
+    let temp = await this.commonService.deleteDataFn1({"patternId": data2.patternId}, "adda", "delete-pattern", this.dialogTitle);
+    console.log(temp);
+    if(temp){
+      this.ngOnInit();
+    }
+    else{
+      this.showSpinner = false;      
+    }
+  }
+
+  // editMaterial(data3:any){
+  //   console.log("Edit ",data3);
+    
+  // }
+
+  // editPattern(data4:any){
+  //   console.log("Edit ",data4);
+    
+  // }
+
+  
+  dataFromAddaMaterial(data: any) {
+    console.log(data);
+    this.showSpinner = true;
+    this.ngOnInit();    
+  }
+
+  dataFromAddaPattern(data: any) {
+    console.log(data);
+    this.showSpinner = true;
+    this.ngOnInit();    
+  }
+
 
 }

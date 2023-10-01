@@ -103,6 +103,20 @@ export class CommonService {
     );
   }
 
+  deleteSupplierOrBrandSettingsData(data:any, key1:string, key2:string): Observable<any> {
+    // this.payloadUrl = `${this.baseUrl}groups/save-entity/${type}`;
+    this.payloadUrl = `${this.baseUrl}${key1}/${key2}`;
+    
+    let options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      body: data, // Pass the data as the request body
+      observe: 'response' as 'body'
+    };
+    return this.http.delete(this.payloadUrl, options).pipe(
+      catchError(this.handleError('addAllSettingsData', []))
+    );
+  }
+
   addSupplierOrBrandSettingsData(data:any, key1:string, key2:string): Observable<any> {
     // this.payloadUrl = `${this.baseUrl}groups/save-entity/${type}`;
     this.payloadUrl = `${this.baseUrl}${key1}/${key2}`;
@@ -268,12 +282,13 @@ export class CommonService {
     }
   }
 
-  // Key1 -> Module(Adda/design)     Key2 -> edit/delete    key3 -> get-design/get-addas
+  // Key1 -> Module(Adda/design)     Key2 -> edit/add    key3 -> get-design/get-addas
   async addDataFn1(data:any, key1:string, key2: string, key3: string, dialogTitle:string){
     console.log("Post API Call");    
     try{
       let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();        
       let dialogMessage = dialogTitle; 
+      
       if (response?.status === 200 || response?.status === 201) {
         let responseData = await this.getDataFn1({},key1,key3);
         dialogMessage += ' saved successfully.';         
@@ -293,22 +308,33 @@ export class CommonService {
     }
   }
 
-  // addEditSupplierApi(data:any, key1:string, key2: string){
-  //   // this.common.addSupplierOrBrandSettingsData(data,key1,key2).subscribe(async (responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);    
-  //       this.getSupplier({});    
-  //       this.dialogMessage = `Supplier ${key2} successfully.`; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);    
-  //       this.dialogMessage = `Supplier failed to ${key2}.`; 
-  //     }      
-  //     this.showSpinner = false;  
-  //     // To open modal
-  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
-  //   });
-  // }
+  // Key1 -> Module(Adda/design)     Key2 -> edit/delete    key3 -> get-design/get-addas
+  async deleteDataFn1(data:any, key1:string, key2: string, dialogTitle:string){
+    console.log("Delete API Call");    
+    try{
+      let response = await this.deleteSupplierOrBrandSettingsData(data,key1,key2).toPromise();        
+      let dialogMessage = dialogTitle; 
+      if (response?.status === 200 || response?.status === 201) {
+        // let responseData = await this.getDataFn1({},key1,key3);
+        dialogMessage += ' delete successfully.';         
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);    
+        return true;      
+        // return responseData;      
+      }
+      else{
+        console.log("Error code: ",response?.status);   
+        dialogMessage += ' failed to delete.';             
+        // To open modal
+        this.openDialog(dialogTitle,dialogMessage);  
+        return false
+      }        
+    }
+    catch(error){
+      console.log("Error ", error);  
+      return false;    
+    }
+  }
+
 
 }
