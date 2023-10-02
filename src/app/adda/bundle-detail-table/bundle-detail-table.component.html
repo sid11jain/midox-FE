@@ -1,9 +1,9 @@
-<div class="its-card hv-55">
+<div class="bundle-detail-table">
     <h6 class="card-header ps-3 d-flex justify-content-between">
     <span>Bundle Information</span> 
     <button class="btn btn-warning btn-xs" (click)="printStickerFn()">Print Sticker</button>
     </h6>
-    <div class="finish-goods card-body">
+    <div class="finish-goods card-body" [style]="{'height': cssValue}">
 			<div class="flex-center">
 					<mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
 			</div> 
@@ -79,4 +79,4 @@
       </dx-data-grid>       
      </div>
     </div>
-   </div>
+</div>

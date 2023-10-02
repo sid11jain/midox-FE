@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -26,6 +26,7 @@ export class BundleDetailTableComponent {
   employeeData: any = [];
   patternId:any;
   
+  
   filteredOptionsEmployee!: Observable<any[]>;
   myControlEmployee = new FormControl('');
   optionsEmployee: any[] = ['One', 'Two', 'Three'];
@@ -39,12 +40,14 @@ export class BundleDetailTableComponent {
 
   showSpinner:boolean = true;
   statusForm!: FormGroup;
-  @Input() bundleDataFromParent = {};
+  @Input() bundleDataFromParent:any = {};
+  @Input() cssValue: any = "48vh";
 
   constructor(private formBuilder: FormBuilder, private commonService: CommonService) { }
 
 
   async ngOnInit(){
+    this.showSpinner = true;
     this.statusForm = this.formBuilder.group({
       status: ['PROC_STAT_TBS', Validators.required]
     });
@@ -61,6 +64,10 @@ export class BundleDetailTableComponent {
     this.showSpinner = false;
 
   }
+
+  ngOnChanges(){    
+    this.ngOnInit();
+  }
   
   async statusChangefn(val: any, data: any) {
     // console.log(val.target.value);
@@ -74,7 +81,7 @@ export class BundleDetailTableComponent {
   }
   
   private _filter(value: any): any {
-    console.log(value);
+    // console.log(value);
     let filterValue: any;
     filterValue = value.toLowerCase();
     return this.optionsEmployee.filter((val: any) => val?.empName?.toLowerCase().includes(filterValue));
@@ -106,7 +113,12 @@ export class BundleDetailTableComponent {
   async printStickerFn() {
     // console.log("All Bundle : ", this.bundleAddaData);
     this.showSpinner = true;
-    let stickerCardPdfData = await this.commonService.getDataFn1({"patternId": this.patternId }, "bundle", "card");
+    
+    let stickerObj:any = {"patternId": this.patternId };
+    if(this.bundleDataFromParent?.addaId){
+      stickerObj = {"addaId": this.bundleDataFromParent.addaId };
+    }
+    let stickerCardPdfData = await this.commonService.getDataFn1(stickerObj, "bundle", "card");
     let fontSize = 6;
     let size = 8;
     let fontSizeRow1 = size;
@@ -308,7 +320,7 @@ export class BundleDetailTableComponent {
         },
         {
           style: "row",
-          text: [{ text: "Assign Date", bold: true }, { text: " :   " }, { text: jobCardPdfData[0]?.assignDate }],
+          text: [{ text: "Assign Date", bold: true }, { text: " :   " }, { text: moment(jobCardPdfData[0]?.assignDate).format('DD/MM/YYYY') }],
 
         },
         {
@@ -319,7 +331,7 @@ export class BundleDetailTableComponent {
         {
           style: "row",
           // text: [{ text: "Last Modified By", bold: true }, { text: " :   " }, { text: `${jobCardPdfData[0]?.lastModifiedBy?.empName} ${jobCardPdfData[0]?.lastModifiedAt}`}],
-          text: [{ text: "Last Modified By", bold: true }, { text: " :   " }, { text: `${jobCardPdfData[0]?.lastModifiedBy?.empName} ${moment(jobCardPdfData[0]?.lastModifiedAt).format('DD/MM/YYYY')}`}],
+          text: [{ text: "Last Modified By", bold: true }, { text: " :   " }, { text: `${jobCardPdfData[0]?.lastModifiedBy?.empName}, ${moment(jobCardPdfData[0]?.lastModifiedAt).format('DD/MM/YYYY')}`}],
 
         }
       ],
