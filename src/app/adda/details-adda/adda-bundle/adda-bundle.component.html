@@ -39,10 +39,11 @@
     <div class="row">
      <div class="col-8 p-0"> 
         <!-- Bundle detail table data  -->
-        <div class="its-card hv-55 temp12">
+        <!-- <div class="its-card hv-55 temp12"> -->
 
-          <app-bundle-detail-table [cssValue]="'48vh'" [bundleDataFromParent]="bundleDetailObj"></app-bundle-detail-table>                 
-        </div>
+          <!-- <app-bundle-detail-table [cssValue]="'48vh'" [bundleDataFromParent]="bundleDetailObj"></app-bundle-detail-table>                  -->
+          <app-bundle-detail-table [cssValue]="{'parent': '55vh','body':'48vh'}" [bundleDataFromParent]="bundleDetailObj"></app-bundle-detail-table>                 
+        <!-- </div> -->
       
      </div>
      <div class="col-4 p-0">

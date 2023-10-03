@@ -9,6 +9,7 @@ import { StickerComponent } from './sticker/sticker.component';
 import { ViewAddaComponent } from './view-adda/view-adda.component';
 import { DetailsAddaComponent } from './details-adda/details-adda.component';
 import { AddaBundleComponent } from './details-adda/adda-bundle/adda-bundle.component';
+import { BundleDetailTableComponent } from './bundle-detail-table/bundle-detail-table.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'add-adda', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   // { path: 'details-adda', component:  DetailsAddaComponent},
   { path: 'details-adda/:addaId', component:  DetailsAddaComponent},
   { path: 'bundle-adda/:addaId/:patternId/:brandId', component:  AddaBundleComponent},
+  { path: 'detail-bundle', component:  BundleDetailTableComponent},
 ];
 
 @NgModule({

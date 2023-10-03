@@ -1,13 +1,13 @@
-<div class="bundle-detail-table">
+<div class="its-card bundle-detail-table" [style]="{'height': cssValue.parent}">
     <h6 class="card-header ps-3 d-flex justify-content-between">
     <span>Bundle Information</span> 
     <button class="btn btn-warning btn-xs" (click)="printStickerFn()">Print Sticker</button>
     </h6>
-    <div class="finish-goods card-body" [style]="{'height': cssValue}">
+    <div class="finish-goods card-body" [style]="{'height': cssValue.body}">
 			<div class="flex-center">
 					<mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
 			</div> 
-     <div class="cloths mt-10" *ngIf=!showSpinner>        
+     <div class="cloths mt-10" *ngIf=!showSpinner>         
       <dx-data-grid id="gridContainer"
         [dataSource]="bundleAddaData"
         [showBorders]="true"

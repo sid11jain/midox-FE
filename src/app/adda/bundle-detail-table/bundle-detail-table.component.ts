@@ -13,6 +13,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocomplete } from '@angular/material/autocomplete';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -41,12 +42,25 @@ export class BundleDetailTableComponent {
   showSpinner:boolean = true;
   statusForm!: FormGroup;
   @Input() bundleDataFromParent:any = {};
-  @Input() cssValue: any = "48vh";
+  // @Input() cssValue: any = "48vh";
+  @Input() cssValue: any = {'parent': '55vh','body':'48vh'};
 
-  constructor(private formBuilder: FormBuilder, private commonService: CommonService) { }
+  constructor(private formBuilder: FormBuilder, private commonService: CommonService, private route: ActivatedRoute) { }
 
 
   async ngOnInit(){
+    this.route.params.subscribe((params:any) => {
+      if (params.data) {
+        const data = JSON.parse(params.data);
+        console.log(data); 
+        this.bundleDataFromParent = data;
+        // this.cssValue = "85vh";
+        this.cssValue = {'parent': '95vh','body':'85vh'};
+      }
+      // else{
+      //   this.cssValue = "48vh";
+      // }
+    });
     this.showSpinner = true;
     this.statusForm = this.formBuilder.group({
       status: ['PROC_STAT_TBS', Validators.required]

@@ -3,6 +3,27 @@
         <img src="assets/logo.png" alt="logo" class="midox">
     </a>
     <ul class="row tab-list">
+      <!-- <h5>Hello</h5> -->
+      
+			<div class="form-group">
+				<!-- <mat-form-field class="example-full-width"> -->
+						<!-- <mat-label>Select Adda*</mat-label> -->
+						<input type="text"
+												placeholder="Select Adda"
+												aria-label="Number"
+												matInput
+												[formControl]="myControlAdda"
+												[matAutocomplete]="auto" class="form-control"
+												>
+												<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)" >
+								<mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option.addaNo">
+										{{option.addaNo}}
+								</mat-option>
+						</mat-autocomplete>
+				<!-- </mat-form-field> -->
+		</div>
+
+
         <a [routerLink]="['/dashboard']" class="d-flex mb-link" routerLinkActive="active">
             <span class="material-symbols-outlined me-3">
                 dashboard
