@@ -111,10 +111,11 @@
                                  <dxi-column caption="Name" cellTemplate="cellTemplateHyperlink" alignment="left"></dxi-column>  
                                  <div *dxTemplate="let data of 'cellTemplateHyperlink'">
                                      <a [routerLink]="['../../bundle-adda', addaId, data?.data?.patternId, brandId]" routerLinkActive="sub-active" class="pattern-name">
-                                         <p>{{data.data.color.displayValue}}</p>
+                                         <p>{{data.data.patternName}}</p>
                                      </a>     
                                  </div>
      
+                                 <dxi-column dataField="color.displayValue" caption="Colour"></dxi-column>
                                  <dxi-column dataField="quantity" caption="Qty"></dxi-column>
                                  <dxi-column dataField="size.displayValue" caption="Unit"></dxi-column>  
                                  <dxi-column dataField="bundleSize" caption="Bundle Qty"></dxi-column>
