@@ -149,4 +149,11 @@ export class AddDesignComponent {
     });
   }
 
+  clear(){
+    this.designReactiveForm.reset();
+    this.editedMaterialIndex = null;
+    this.processBtnDisabled = false;
+    this.ngOnInit();
+  }
+
 }
