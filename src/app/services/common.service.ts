@@ -64,6 +64,13 @@ export class CommonService {
     );
   }
 
+  getSearchBundle(params:any): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}${params}`;
+    return this.http.get(this.payloadUrl, this.httpOptions).pipe(
+      catchError(this.handleError('getSearchBundle', []))
+    );
+  }
+
   getStockHistory(payload:any): Observable<any> {
     this.payloadUrl = `${this.baseUrl}stockHistory/get-history-with-criteria`;
     return this.http.post(this.payloadUrl, payload, this.httpOptions).pipe(
@@ -172,6 +179,23 @@ export class CommonService {
   //     // this.showSpinner = false;
   //   });
   // }
+
+  async getBundleSearchFn(key:string, params:string){
+    console.log("Get API Call");    
+    try{
+      let response = await this.getSearchBundle(key+'/'+params).toPromise();  
+      if (response?.status === 200) {
+        console.log(key,response.body);        
+        return response?.body;      
+      }
+      else{
+        console.log("Error code: ",response?.status);        
+      }      
+    }
+    catch(error){
+      console.log("Error ", error);      
+    }
+  }
 
   async getDataFn(key:string){
     console.log("Get API Call");    

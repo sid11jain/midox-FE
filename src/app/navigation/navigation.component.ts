@@ -35,6 +35,8 @@ export class NavigationComponent {
     // console.log(value);
     let filterValue: any;
     filterValue = value.toLowerCase();
+    
+    // let filterBundleOptions = await this.common.getBundleSearchFn("search", `${filterValue}`);
     return this.optionsAdda.filter((val: any) => val?.addaNo?.toLowerCase().includes(filterValue));
   }
 
