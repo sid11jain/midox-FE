@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonService } from '../services/common.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { map, startWith, switchMap,catchError  } from 'rxjs/operators';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -14,30 +14,42 @@ export class NavigationComponent {
   
   filteredOptionsAdda!: Observable<any[]>;
   myControlAdda = new FormControl('');
-  optionsAdda: any[] = ['One', 'Two', 'Three'];
-  detailAddaData: any;
+  // detailAddaData: any;
 
   constructor(private common: CommonService, private router: Router){
   }
-
-  async ngOnInit(){
-
-    
-    this.detailAddaData = await this.common.getDataFn1({}, "adda", "get-addas");
-    this.optionsAdda = [...this.detailAddaData];
+  
+  async ngOnInit() {
     this.filteredOptionsAdda = this.myControlAdda.valueChanges.pipe(
       startWith(''),
-      map(value => this._filterAdda(value || '')),
+      switchMap(value => this._filterAdda(value || '')),
     );
   }
 
-  private _filterAdda(value: any): any {
-    // console.log(value);
-    let filterValue: any;
-    filterValue = value.toLowerCase();
-    
-    // let filterBundleOptions = await this.common.getBundleSearchFn("search", `${filterValue}`);
-    return this.optionsAdda.filter((val: any) => val?.addaNo?.toLowerCase().includes(filterValue));
+  private _filterAdda(value: any): Observable<any[]> {
+    let filterValue:any = "bil";
+    // filterValue = value.toLowerCase();
+    if(!value || value.length < 3){
+      filterValue = null;
+      return of([] as any[]);
+    }
+    else{
+      filterValue = value;
+      if(value?.name){
+        filterValue = value.name;
+      }
+      return from(this.common.getBundleSearchFn("search", filterValue)).pipe(
+        catchError((error: any) => {
+          console.error("Error while filtering bundle options:", error);
+          return of([] as any[]); // Return an empty array as an Observable or handle the error as needed
+        }),
+        switchMap((filterBundleOptions: any[]) => {
+          // Filter the bundle options based on addaNo
+          return of(filterBundleOptions);
+        })
+      );
+    }
+
   }
 
   stockHistoryClick(){
@@ -47,8 +59,21 @@ export class NavigationComponent {
   async optionSelectedAdda(event: any) {
     
     // this.showTable = false;
-    let selectedOptionValue = event.option.value;
+    let selectedOptionValue = event?.option?.value;
     console.log(selectedOptionValue);
+    this.myControlAdda.setValue(selectedOptionValue?.name);
+
+    if(selectedOptionValue?.type == "EMPLOYEE"){
+      this.sendObjectToRoute({ "employeeId": selectedOptionValue?.id });
+    }
+    else if(selectedOptionValue?.type == "ADDA"){
+      this.sendObjectToRoute({ "addaId": selectedOptionValue?.id });
+
+    }
+    else{
+      // BUNDLE
+      this.sendObjectToRoute({ "bundleId": selectedOptionValue?.id });
+    }
     
     // let addaObj = this.detailAddaData.find((option: any) => option.addaNo === selectedOptionValue);
     // let addaId = addaObj.addaId;
@@ -58,8 +83,8 @@ export class NavigationComponent {
     
     // this.showTable = true;
     // this.showSpinner = false;
-    this.sendObjectToRoute({ "addaId": 3 });
-    this.myControlAdda.reset();
+    // this.sendObjectToRoute({ "addaId": 3 });
+    // this.myControlAdda.reset();
   }
 
   sendObjectToRoute(routeData:any) {
