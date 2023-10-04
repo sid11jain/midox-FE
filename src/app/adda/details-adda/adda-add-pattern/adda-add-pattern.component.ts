@@ -21,6 +21,7 @@ export class AddaAddPatternComponent {
   dialogTitle:string = "Adda Pattern";
   addaPatternTitle:string = "Add Adda Pattern";
   patternId:string = "";
+  patternName:string = "";
 
   // To send data from child to parent
   @Output() forDetailAddReloadPattern = new EventEmitter<any>();
@@ -65,13 +66,14 @@ export class AddaAddPatternComponent {
     if(this.forEditAddaPattern){
       let tempObj = {...this.patternAddaAddForm.value};
       tempObj.patternId = this.patternId;
+      tempObj.patternName = this.patternName;
       console.log("Edit ",tempObj);    
-      let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.dialogTitle);
+      let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.addaPatternTitle);
     }
     else{
       this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
       console.log("Add ",this.patternAddaAddForm.value);
-      let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.dialogTitle);
+      let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
     }    
     this.resetForm();
     this.showSpinner = false;
@@ -94,6 +96,7 @@ export class AddaAddPatternComponent {
       this.addaPatternTitle = "Edit Adda Pattern";
       console.log("Edit"); 
       this.patternId = this.forEditAddaPattern.patternId; 
+      this.patternName = this.forEditAddaPattern.patternName; 
       // this.addaMaterialForm.get('stockId')?.disable();
       this.patternAddaAddForm.patchValue({
         addaId: this.addaId,

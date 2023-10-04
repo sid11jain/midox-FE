@@ -73,11 +73,11 @@ export class AddaAddMaterialComponent {
     let tempObj = {...this.addaMaterialForm.value};
     tempObj.addaMaterialId = this.addaMaterialId;
     console.log("Edit ",tempObj);    
-    let temp = await this.common.addDataFn1(tempObj, "adda", "update-material", "get-addas", this.dialogTitle);
+    let temp = await this.common.addDataFn1(tempObj, "adda", "update-material", "get-addas", this.addaMaterialTitle);
     }
     else{
       console.log("Add ",this.addaMaterialForm.value);
-      let temp = await this.common.addDataFn1(this.addaMaterialForm?.value, "adda", "add-material", "get-addas", this.dialogTitle);
+      let temp = await this.common.addDataFn1(this.addaMaterialForm?.value, "adda", "add-material", "get-addas", this.addaMaterialTitle);
     }    
     this.resetForm();
     this.showSpinner = false;

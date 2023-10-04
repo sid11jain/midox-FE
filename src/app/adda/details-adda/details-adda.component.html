@@ -60,7 +60,7 @@
                                  <dxo-group-panel [visible]="true"></dxo-group-panel>
                                  <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
                          
-                                 <dxi-column dataField="stockDetails.stockName" caption="Name"></dxi-column>
+                                 <dxi-column dataField="stockDetails.stockName" caption="Name" [width]="150"></dxi-column>
                                  <dxi-column dataField="stockDetails.unit.displayValue" caption="Unit"></dxi-column>  
                                  <dxi-column dataField="quantity" caption="Qty"></dxi-column>
                                  
@@ -108,7 +108,7 @@
                                  <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
                          
                                  <!-- <dxi-column dataField="color.displayValue" caption="Name"></dxi-column> -->
-                                 <dxi-column caption="Name" cellTemplate="cellTemplateHyperlink" alignment="left"></dxi-column>  
+                                 <dxi-column caption="Name" cellTemplate="cellTemplateHyperlink" alignment="left" [width]="150"></dxi-column>  
                                  <div *dxTemplate="let data of 'cellTemplateHyperlink'">
                                      <a [routerLink]="['../../bundle-adda', addaId, data?.data?.patternId, brandId]" routerLinkActive="sub-active" class="pattern-name">
                                          <p>{{data.data.patternName}}</p>
