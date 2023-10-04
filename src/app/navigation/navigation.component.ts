@@ -84,7 +84,7 @@ export class NavigationComponent {
     // this.showTable = true;
     // this.showSpinner = false;
     // this.sendObjectToRoute({ "addaId": 3 });
-    // this.myControlAdda.reset();
+    this.myControlAdda.reset();
   }
 
   sendObjectToRoute(routeData:any) {

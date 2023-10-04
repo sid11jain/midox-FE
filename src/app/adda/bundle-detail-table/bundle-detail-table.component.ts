@@ -56,11 +56,16 @@ export class BundleDetailTableComponent {
         this.bundleDataFromParent = data;
         // this.cssValue = "85vh";
         this.cssValue = {'parent': '95vh','body':'85vh'};
+        this.onInitPart2();
       }
-      // else{
-      //   this.cssValue = "48vh";
-      // }
+      else{
+        // this.cssValue = "48vh";
+        this.onInitPart2();
+      }
     });
+  }
+
+  async onInitPart2(){    
     this.showSpinner = true;
     this.statusForm = this.formBuilder.group({
       status: ['PROC_STAT_TBS', Validators.required]
@@ -79,7 +84,7 @@ export class BundleDetailTableComponent {
 
   }
 
-  ngOnChanges(){    
+  ngOnChanges(){
     this.ngOnInit();
   }
   

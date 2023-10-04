@@ -17,7 +17,8 @@
 												>
 												<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)" >
 								<mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
-										{{option?.name}} {{option?.type}}
+										<!-- {{option?.name}} {{option?.type}} -->
+										{{option?.name}} <br> <span class="employeeIdOptions">{{option.type}}</span>
 								</mat-option>
 								<!-- <mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option?.addaNo">
 										{{option?.addaNo}} Hi
