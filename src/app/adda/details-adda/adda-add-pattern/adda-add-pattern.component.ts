@@ -27,6 +27,8 @@ export class AddaAddPatternComponent {
   
   //To get data from parent for edit
   @Input() forEditAddaPattern:any = '';
+  detailAddaData:any;
+  remainingQtyAdda:any;
   
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog,  private route: ActivatedRoute) {  }
 
@@ -35,8 +37,7 @@ export class AddaAddPatternComponent {
     await this.route.params.subscribe(async (params) => {
       this.addaId = params['addaId'];
     })
-    console.log("Adda ID ", this.addaId);
-    
+    console.log("Adda ID ", this.addaId);    
 
     this.patternAddaAddForm = this.formBuilder.group({
       // addaId: [this.addaId],
@@ -79,7 +80,11 @@ export class AddaAddPatternComponent {
     document.getElementById("addAddaPatternBtn")?.click();    
   }
 
-  ngOnChanges(){
+  async ngOnChanges(){
+    
+    this.detailAddaData = await this.common.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
+    this.remainingQtyAdda = this.detailAddaData[0]?.remainingQtyForPattern;
+    console.log("remainingQtyAdda ", this.remainingQtyAdda);
     console.log("forEditAddaPattern ",this.forEditAddaPattern);    
     this.resetForm();
     // this.initForm();
