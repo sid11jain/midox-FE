@@ -26,6 +26,8 @@ export class CommonService {
   employeePaymentData = new BehaviorSubject('');
   isStockHistoryClick = new BehaviorSubject(false);
 
+  dialogTitle:string = "";
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
     observe: 'response' as 'body'
@@ -143,6 +145,8 @@ export class CommonService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
+      
+      this.openDialog(this.dialogTitle,error?.error?.message);  
       return of(result as T);
     };
   }
@@ -309,6 +313,7 @@ export class CommonService {
   // Key1 -> Module(Adda/design)     Key2 -> edit/add    key3 -> get-design/get-addas
   async addDataFn1(data:any, key1:string, key2: string, key3: string, dialogTitle:string){
     console.log("Post API Call");    
+    this.dialogTitle = dialogTitle;
     try{
       let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();        
       let dialogMessage = dialogTitle; 
@@ -320,11 +325,17 @@ export class CommonService {
         this.openDialog(dialogTitle,dialogMessage);    
         return responseData;      
       }
+      else if(response?.status === 403 || response?.status === 404){
+        console.log("Error code: ",response?.status); 
+        console.log("Error code: ",response); 
+        this.openDialog(dialogTitle,response?.message);
+        // return false  
+      }
       else{
         console.log("Error code: ",response?.status);   
         dialogMessage += ' failed to saved.';             
         // To open modal
-        this.openDialog(dialogTitle,dialogMessage);  
+        // this.openDialog(dialogTitle,dialogMessage);  
       }        
     }
     catch(error){
@@ -345,6 +356,11 @@ export class CommonService {
         this.openDialog(dialogTitle,dialogMessage);    
         return true;      
         // return responseData;      
+      }
+      else if(response?.status === 403 || response?.status === 404){
+        console.log("Error code: ",response?.status); 
+        this.openDialog(dialogTitle,response?.message);
+        return false  
       }
       else{
         console.log("Error code: ",response?.status);   
