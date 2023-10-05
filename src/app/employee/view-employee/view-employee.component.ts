@@ -8,360 +8,54 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class ViewEmployeeComponent {
   showSpinner:boolean = true;
-  
+  employeeOutstandingData:any;
+  employeeDataForPayment:any;
+
+
   constructor(private commonService: CommonService){  }
 
-  ngOnInit(){
-    setTimeout(() => {
-      this.showSpinner = false 
-    }, 1000);
+  async ngOnInit(){
+    this.showSpinner = true; 
+    this.employeeOutstandingData = await this.commonService.getDataFn1({}, "employee", "outstandings");
+
+    let obj = {
+      "employeeId":6,
+     "paymentMode": "PAY_CASH",
+     "paidBy" : 5,
+     "paymentDate":"2023-10-03",
+     "amountPaid" : 1,
+     "details" : "Add some remarks"
+    }
+    // let temp1 = await this.commonService.getDataFn1(obj, "employee", "pay");
+    // localhost:8080/midoxapp/employee/pay
+    
+    // let obj1 = {
+    //   "employeeId":19
+    // }
+    // let temp = await this.commonService.getDataFn1({}, "employee", "pay-history");
+    // let temp = await this.commonService.getDataFn1(obj1, "employee", "pay-history");
+    // localhost:8080/midoxapp/employee/pay-history
+    // this.commonService.getBundleSearchFn("employee/get", '6')
+    this.showSpinner = false 
   }
 
-  sendViewEmployeedata(data:any){
-    this.commonService.employeeJobHistoryData.next(data);    
-  }
+  // sendViewEmployeedata(data:any){
+  //   this.commonService.employeeJobHistoryData.next(data);    
+  // }
 
   getSelectedData(rowData:any) {
     console.log("rowData ", rowData);   
-    this.sendViewEmployeedata(rowData);
+    // this.sendViewEmployeedata(rowData);
   }
 
-  viewEmployeeData: any = [
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "166",
-      employeeName: "Mahendr",
-      jobPending: 35,
-      paid: 15000,
-      paymentDue: 12000,
-      dobEmployee: "2022-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Dbc House, abc city, dex state, India 452101",
-      employeeMobile: "2234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-    {
-      unique_id: "165",
-      employeeName: "Bilal",
-      jobPending: 25,
-      paid: 5000,
-      paymentDue: 2000,
-      dobEmployee: "2023-06-01",
-      employeeAdhaar: "123456781199",
-      gender: "Male",
-      employeeAddress: "Abc House, abc city, dex state, India 452101",
-      employeeMobile: "1234456789",
-    },
-  ]
+  getRowDataForPay(rowData:any) {  
+    this.employeeDataForPayment = rowData;
+  }
+
+  dataFromPayEmployee(data: any) {
+    console.log(data);
+    this.ngOnInit();    
+  }
+  
+
 } 

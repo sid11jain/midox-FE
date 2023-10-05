@@ -7,7 +7,8 @@ import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 import { JobHistoryComponent } from './job-history/job-history.component';
 import { PaymentEmployeeComponent } from './payment-employee/payment-employee.component';
 import { SharedModule } from '../shared/shared/shared.module';
-import { PaymentHistorySingleEmployeeComponent } from './payment-history-single-employee/payment-history-single-employee.component'; 
+import { PaymentHistorySingleEmployeeComponent } from './payment-history-single-employee/payment-history-single-employee.component';
+import { PayEmployeeComponent } from './pay-employee/pay-employee.component'; 
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PaymentHistorySingleEmployeeComponent } from './payment-history-single-
     ViewEmployeeComponent,
     JobHistoryComponent,
     PaymentEmployeeComponent,
-    PaymentHistorySingleEmployeeComponent
+    PaymentHistorySingleEmployeeComponent,
+    PayEmployeeComponent
   ],
   imports: [
     CommonModule,

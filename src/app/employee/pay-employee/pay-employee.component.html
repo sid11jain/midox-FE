@@ -1,0 +1,113 @@
+
+<div class="modal-content"> 
+    <div class="its-card">
+      <h3 class="card-header ps-3 d-flex justify-content-between">
+        <span>{{payEmployeeTitle}}</span>
+        <button type="button" class="btn-close" (click)="resetForm()" id="addAddaPatternBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+      </h3>
+    
+      <div class="modal-body">
+        <div class="finish-goods card-body flex-center">        
+            <div class="flex-center">
+              <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+            </div> 
+            <div class="add-material-adda" *ngIf="!showSpinner">              
+              <div [formGroup]="payEmployeeForm">
+                <div class="row"> 
+                  <!-- Payment Mode -->
+                  <div class="form-group col-4">
+                    <label for="paymentMode">Payment Mode:*</label>
+                    <select id="paymentMode" formControlName="paymentMode" class="form-control">              
+                      <option value="">Select</option>
+                      <option *ngFor="let option of paymentModeOptions" [value]="option.entityCd">{{ option?.displayValue }}</option>
+                    </select>
+                    <div *ngIf="payEmployeeForm.get('paymentMode')?.invalid && payEmployeeForm.get('paymentMode')?.touched">
+                      <span style="color: red;">Payment mode is required.</span>
+                    </div>
+                  </div>
+                  
+                  <!-- Amount paid -->
+                  <div class="form-group col-4">
+                    <label for="amountPaid">Amount*</label>
+                    <input type="number" id="amountPaid" formControlName="amountPaid" class="form-control">
+                    <div *ngIf="payEmployeeForm.get('amountPaid')?.invalid && payEmployeeForm.get('amountPaid')?.touched" class="invalid-red">
+                      <div *ngIf="payEmployeeForm.get('amountPaid')?.errors?.['required']">Amount is required.</div>
+                      <div *ngIf="payEmployeeForm.get('amountPaid')?.errors?.['min']">Amount must be at least 1.</div>
+                    </div>
+                  </div>
+									
+									<!-- Payment date -->
+									<div class="form-group col-4">
+										<label for="paymentDate">Payment Date</label>
+										<input type="date" class="form-control" id="paymentDate" formControlName="paymentDate">
+										<!-- <div *ngIf="userForm.controls.date.invalid && (userForm.controls.date.dirty || userForm.controls.date.touched)">
+											<div *ngIf="userForm.controls.date.errors.required" class="invalid-red">
+												Date is required.
+											</div>
+										</div> -->
+										<!-- <div *ngIf="payEmployeeForm.get('paymentDate')?.invalid && payEmployeeForm.get('paymentDate')?.touched" class="invalid-red">
+                      <div *ngIf="payEmployeeForm.get('paymentDate')?.errors?.['required']">Payment date is required.</div>
+                    </div> -->
+									</div>
+
+									<!-- Employee list -->
+									<div class="form-group mt-2 col-4">
+										<!-- <mat-form-field class="example-full-width"> -->
+											<mat-label>Paid By:*</mat-label>
+											<input type="text"
+														placeholder="Select employee"
+														aria-label="Number"
+														matInput
+														[formControl]="myControl"
+														[matAutocomplete]="auto" class="form-control"
+														>
+														<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelected($event)" >
+												<mat-option *ngFor="let option of filteredOptions | async" [value]="option?.empName">
+													{{option?.empName}}
+												</mat-option>
+											</mat-autocomplete>
+										<!-- </mat-form-field> -->
+									</div>
+
+                  
+									<!-- Details -->
+									<!-- <div class="form-group mt-2 col-4"> -->
+									<div class="form-group mt-2 col-4">
+										<label for="details">Details:*</label>
+										<input type="text" id="details" formControlName="details" class="form-control">
+										<div *ngIf="payEmployeeForm.get('details')?.invalid && payEmployeeForm.get('details')?.touched">
+											<div *ngIf="payEmployeeForm.get('details')?.hasError('required')">
+												<span style="color: red;">Details is required.</span>
+											</div>
+											<div *ngIf="payEmployeeForm.get('details')?.hasError('minlength')">
+												<span style="color: red;">Details must be at least 3 characters long.</span>
+											</div>
+										</div>
+									</div>
+
+									
+
+  
+  
+                  
+                <div class="row">
+                  <div class="col-12 text-end">
+                    <button type="submit" (click)="onSubmit()" [disabled]="payEmployeeForm.invalid" mat-flat-button color="primary">
+                      Save
+                    </button>
+                  </div>
+                </div>
+                  <!-- <div class="form-group mt-3">
+                  </div>           -->
+                </div>            
+              </div>
+            </div>
+          </div>
+      </div>
+      
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+    </div>
