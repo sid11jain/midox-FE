@@ -39,15 +39,7 @@
 									<!-- Payment date -->
 									<div class="form-group col-4">
 										<label for="paymentDate">Payment Date</label>
-										<input type="date" class="form-control" id="paymentDate" formControlName="paymentDate">
-										<!-- <div *ngIf="userForm.controls.date.invalid && (userForm.controls.date.dirty || userForm.controls.date.touched)">
-											<div *ngIf="userForm.controls.date.errors.required" class="invalid-red">
-												Date is required.
-											</div>
-										</div> -->
-										<!-- <div *ngIf="payEmployeeForm.get('paymentDate')?.invalid && payEmployeeForm.get('paymentDate')?.touched" class="invalid-red">
-                      <div *ngIf="payEmployeeForm.get('paymentDate')?.errors?.['required']">Payment date is required.</div>
-                    </div> -->
+										<input type="date" class="form-control" id="paymentDate" formControlName="paymentDate" [max]="todayDate">
 									</div>
 
 									<!-- Employee list -->

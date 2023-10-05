@@ -24,11 +24,16 @@ export class PayEmployeeComponent {
   
   payEmployeeForm!: FormGroup;
   options: any[] = ['One', 'Two', 'Three'];
+  todayDate: string; // This will hold today's date in the format 'YYYY-MM-DD'
+
 
   // To send data from child to parent
   @Output() forOutstandingPageReload = new EventEmitter<any>();
 
-  constructor(private formBuilder: FormBuilder, private common: CommonService){}
+  constructor(private formBuilder: FormBuilder, private common: CommonService){
+    this.todayDate = new Date().toISOString().split('T')[0]; // Get today's date in 'YYYY-MM-DD' format
+    
+  }
 
   async ngOnInit(){      
     this.showSpinner = true;      
