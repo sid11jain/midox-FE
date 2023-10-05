@@ -30,21 +30,17 @@ export class PayEmployeeComponent {
 
   constructor(private formBuilder: FormBuilder, private common: CommonService){}
 
-  async ngOnInit(){  
-    
+  async ngOnInit(){      
     this.showSpinner = true;      
     this.paymentModeOptions = await this.common.getDataFn("MID_PAY");
     this.allEmployeeList = await this.common.getDataFn1({}, "employee", "get-employees");
     
     this.payEmployeeForm = this.formBuilder.group({
-      // addaId: [this.addaId],
       paymentMode: ['', Validators.required],
       paidBy: ['', Validators.required],
       paymentDate: [''],
       amountPaid: ['', [Validators.required, Validators.min(1)]],
       details: ['', [Validators.required, Validators.minLength(3)]],
-      // quantity: ['', [Validators.required, Validators.min(1)]],
-      // bundleSize: ['', [Validators.required, Validators.min(1)]],
     });
 
     this.options = [...this.allEmployeeList];
@@ -68,9 +64,6 @@ export class PayEmployeeComponent {
     this.selectedEmployeeObj = this.allEmployeeList.find((option: any) => option?.empName === selectedOptionValue);
     console.log('Selected Option:', this.selectedEmployeeObj);
     let empIdPaidBy = this.selectedEmployeeObj?.empId;
-    // this.maxQuantiy = this.stockDataObj.availableQuantity;
-    // this.maxQuantityunit = this.stockDataObj.unit.displayValue;
-    // this.addaMaterialForm?.get('stockId')?.patchValue(this.stockDataObj.stockId);  
     this.payEmployeeForm?.get('paidBy')?.patchValue(empIdPaidBy);  
   }
 
@@ -83,25 +76,10 @@ export class PayEmployeeComponent {
     let payEmpObj = {...this.payEmployeeForm.value};
     payEmpObj.employeeId = this.employeeDataForPayment?.employeeId?.empId;
     console.log("payEmpObj ",payEmpObj);    
-    // let temp1 = await this.common.getDataFn1(payEmpObj, "employee", "pay");
-      let temp = await this.common.addDataFn1(payEmpObj, "employee", "pay", "get-employees", this.payEmployeeTitle);
-    
-    // if(this.forEditAddaPattern){
-    //   let tempObj = {...this.patternAddaAddForm.value};
-    //   tempObj.patternId = this.patternId;
-    //   tempObj.patternName = this.patternName;
-    //   console.log("Edit ",tempObj);    
-    //   let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.addaPatternTitle);
-    // }
-    // else{
-    //   this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
-    //   console.log("Add ",this.patternAddaAddForm.value);
-    //   let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
-    // }    
+    let temp = await this.common.addDataFn1(payEmpObj, "employee", "pay", "get-employees", this.payEmployeeTitle);
     this.resetForm();
     this.showSpinner = false;
     this.forOutstandingPageReload.emit(true);
-    // this.ngOnInit();
     document.getElementById("addAddaPatternBtn")?.click();    
   }
 
