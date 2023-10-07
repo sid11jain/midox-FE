@@ -17,21 +17,18 @@ export class JobHistoryComponent {
   }
 
   async ngOnInit(){
-    // setTimeout(() => {
-    //   this.showSpinner = false 
-    // }, 1000);
-    
+    this.showSpinner = true; 
     this.allEmployeesJobHistoryDetails = await this.commonService.getDataFn1({}, "job", "history");
-      this.showSpinner = false 
+    this.showSpinner = false;
   }
 
   // sendJobHistoryEmployeeData(data:any){
   //   this.commonService.employeePaymentData.next(data);    
   // }
 
-  getSelectedData(rowData:any) {
-    console.log("rowData ", rowData);   
-    // this.sendJobHistoryEmployeeData(rowData);
-  }
+  // getSelectedData(rowData:any) {
+  //   console.log("rowData ", rowData);   
+  //   // this.sendJobHistoryEmployeeData(rowData);
+  // }
  
 }

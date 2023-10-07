@@ -1,0 +1,113 @@
+<div class="its-card">
+    <h3 class="card-header ps-3">Employees Job History</h3>
+    <!-- Employee personal detail -->
+    <div class="accordion card-body" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <strong>Employee personal detail</strong>
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="row">
+                  <div class="col-3"><strong class="heading-strong">Name:</strong> {{employeePersonalDetails?.empName}}</div>
+                  <div class="col-3"><strong class="heading-strong">Mob:</strong> {{employeePersonalDetails?.contactNo}}</div>
+                  <div class="col-3"><strong class="heading-strong">Designation:</strong> {{employeePersonalDetails?.designation}}</div>
+                  <div class="col-3"><strong class="heading-strong">Email:</strong> {{employeePersonalDetails?.email}}</div>
+                  <div class="col-3"><strong class="heading-strong">DOB:</strong> {{employeePersonalDetails?.empDOB}}</div>
+                  <div class="col-3"><strong class="heading-strong">Emp Id:</strong> {{employeePersonalDetails?.empId}}</div>
+                  <div class="col-3"><strong class="heading-strong">Gender:</strong> {{employeePersonalDetails?.gender}}</div>
+                  <div class="col-3"><strong class="heading-strong">Adhaar:</strong> {{employeePersonalDetails?.identificationNo}}</div>
+                  <div class="col-3"><strong class="heading-strong">Joining Date:</strong> {{employeePersonalDetails?.joiningDate}}</div>
+                <div class="col-3"><strong class="heading-strong">Address:</strong> {{employeePersonalDetails?.address}}</div>
+                <div class="col-3"><strong class="heading-strong">Description:</strong> {{employeePersonalDetails?.description}}</div>
+                <div class="col-3"><strong class="heading-strong">status:</strong> {{employeePersonalDetails?.status}}</div>
+  
+                <!-- <div class="col-6"><strong class="heading-strong">Name:</strong> {{employeePersonalDetails?.}}</div> -->
+                <!-- <div class="col-6"><strong class="heading-strong">Address:</strong> {{employeeJobHistoryDetails?.data?.employeeAddress}}</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- Employee personal detail -->
+    <!-- <div class="accordion card-body" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <strong>Employee personal detail</strong>
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="row">
+              <div class="col-6"><strong class="heading-strong">Name:</strong> {{employeeJobHistoryDetails?.data?.employeeName}}</div>
+              <div class="col-6"><strong class="heading-strong">DOB:</strong> {{employeeJobHistoryDetails?.data?.dobEmployee}}</div>
+              <div class="col-6"><strong class="heading-strong">Mob:</strong> {{employeeJobHistoryDetails?.data?.employeeMobile}}</div>
+              <div class="col-6"><strong class="heading-strong">Adhaar:</strong> {{employeeJobHistoryDetails?.data?.employeeAdhaar}}</div>
+              <div class="col-6"><strong class="heading-strong">Gender:</strong> {{employeeJobHistoryDetails?.data?.gender}}</div>
+              <div class="col-6"><strong class="heading-strong">Address:</strong> {{employeeJobHistoryDetails?.data?.employeeAddress}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  -->
+
+    <div class="view-employee card-body flex-center">
+      <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+    
+      <div *ngIf=!showSpinner>
+          <div class="cloths mt-10">
+            <dx-data-grid id="gridContainer"
+                    [dataSource]="employeeJobHistory"
+                    [showBorders]="true"
+                    [rowAlternationEnabled]="true"
+                    [allowColumnResizing]="true"
+                    [allowColumnReordering]="true"
+                  >
+              <dxo-scrolling mode="virtual"></dxo-scrolling>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+  
+              <dxo-group-panel [visible]="true"></dxo-group-panel>
+              <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+      
+              <dxi-column dataField="employeeId.empName" caption="Emp Name"></dxi-column>
+              <dxi-column dataField="employeeId.empId" caption="Emp Id" [visible]="false"></dxi-column>
+              <dxi-column dataField="bundleName" caption="Bundle Name"></dxi-column>
+              <dxi-column dataField="bundleHistoryId" caption="Bundle History Id" [visible]="false"></dxi-column>
+              <dxi-column dataField="jobHistoryId" caption="Job History Id"></dxi-column>
+              <dxi-column dataField="processCd.displayValue" caption="Process"></dxi-column>
+              <dxi-column dataField="quantity" caption="Quantity"></dxi-column>
+              <dxi-column dataField="assignDate" caption="Assign Date"></dxi-column>
+              <dxi-column dataField="completionDate" caption="Completion Date"></dxi-column>
+              <dxi-column dataField="status.displayValue" caption="Status"></dxi-column>
+              <dxi-column dataField="paidWage" caption="Paid Wage"></dxi-column>
+              <dxi-column dataField="totalWage" caption="Total Wage"></dxi-column>
+              <dxi-column dataField="paymentStatus.displayValue" caption="Payment Status"></dxi-column>
+              <dxi-column dataField="details" caption="Details" [visible]="false"></dxi-column>
+
+
+              <!-- <dxi-column dataField="" caption=""></dxi-column> -->
+              <!-- <dxi-column dataField="bundle" caption="Bundle"></dxi-column>
+              <dxi-column dataField="jobName" caption="Job Name"></dxi-column>
+              <dxi-column dataField="wageToProvide" caption="Wage to provide"></dxi-column>
+              <dxi-column dataField="status" caption="Status"></dxi-column> -->
+              
+              
+              <!-- <dxi-column caption="For Payment" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+              <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+                <a [routerLink]="['../payment']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>           
+  
+              </div>
+       -->
+              <dxo-search-panel [visible]="true"></dxo-search-panel>
+              <dxo-paging [pageSize]="10"> </dxo-paging>              
+            </dx-data-grid>       
+          </div>
+        </div>
+    </div>
+  
+  </div>

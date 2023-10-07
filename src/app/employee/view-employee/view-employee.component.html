@@ -33,9 +33,12 @@
               
               <dxi-column caption="Job History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                <a [routerLink]="['../job-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>           
+                <!-- <a [routerLink]="['../job-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>            -->
                 <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
   
+                <a [routerLink]="['../job-history-employee', data?.data?.employeeId?.empId]" routerLinkActive="sub-active">
+                  <mat-icon>history</mat-icon>
+                </a>
               </div>
 
               <dxi-column caption="Payment History" cellTemplate="cellTemplateHyperlink1" alignment="center"></dxi-column>  
