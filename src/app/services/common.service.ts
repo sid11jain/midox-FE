@@ -145,8 +145,12 @@ export class CommonService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      
-      this.openDialog(this.dialogTitle,error?.error?.message);  
+      if(error?.error?.message){
+        this.openDialog(this.dialogTitle,error?.error?.message);  
+      }
+      else{
+        this.openDialog(this.dialogTitle,"Failed"); 
+      }
       return of(result as T);
     };
   }
