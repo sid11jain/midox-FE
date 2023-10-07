@@ -18,14 +18,14 @@ export class ViewEmployeeComponent {
     this.showSpinner = true; 
     this.employeeOutstandingData = await this.commonService.getDataFn1({}, "employee", "outstandings");
 
-    let obj = {
-      "employeeId":6,
-     "paymentMode": "PAY_CASH",
-     "paidBy" : 5,
-     "paymentDate":"2023-10-03",
-     "amountPaid" : 1,
-     "details" : "Add some remarks"
-    }
+    // let obj = {
+    //   "employeeId":6,
+    //  "paymentMode": "PAY_CASH",
+    //  "paidBy" : 5,
+    //  "paymentDate":"2023-10-03",
+    //  "amountPaid" : 1,
+    //  "details" : "Add some remarks"
+    // }
     // let temp1 = await this.commonService.getDataFn1(obj, "employee", "pay");
     // localhost:8080/midoxapp/employee/pay
     

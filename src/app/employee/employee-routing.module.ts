@@ -6,6 +6,7 @@ import { PaymentEmployeeComponent } from './payment-employee/payment-employee.co
 import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 import { PaymentHistorySingleEmployeeComponent } from './payment-history-single-employee/payment-history-single-employee.component';
 import { JobHistorySingleEmployeeComponent } from './job-history-single-employee/job-history-single-employee.component';
+import { OutstandingEmployeeComponent } from './outstanding-employee/outstanding-employee.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'add-employee', pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'job-history-employee/:employeeId', component:  JobHistorySingleEmployeeComponent},
   { path: 'payment-history', component:  PaymentEmployeeComponent},
   { path: 'payment-history-employee/:employeeId', component:  PaymentHistorySingleEmployeeComponent},
-  { path: 'outstanding', component:  ViewEmployeeComponent}
+  // { path: 'outstanding', component:  ViewEmployeeComponent}
+  { path: 'outstanding', component:  OutstandingEmployeeComponent}
   // { path: 'view-employee', component:  ViewEmployeeComponent}
 ];
 

@@ -1,0 +1,83 @@
+<div class="its-card">
+    <h3 class="card-header ps-3">Employee Outstanding</h3>
+  
+    <div class="view-employee card-body flex-center">
+      <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+    
+      <div *ngIf=!showSpinner>
+          <div class="cloths mt-10">
+            <dx-data-grid id="gridContainer"
+                    [dataSource]="employeeOutstandingData"
+                    [showBorders]="true"
+                    [rowAlternationEnabled]="true"
+                    [allowColumnResizing]="true"
+                    [allowColumnReordering]="true"
+                  >
+              <dxo-scrolling mode="virtual"></dxo-scrolling>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-column-chooser [enabled]="true" mode="select" [allowSearch]="true"></dxo-column-chooser>
+  
+              <dxo-group-panel [visible]="true"></dxo-group-panel>
+              <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+      
+              <dxi-column dataField="employeeId.empName" caption="Employee Name"></dxi-column>
+              <dxi-column dataField="employeeId.empId" caption="Employee Id"></dxi-column>
+              <dxi-column dataField="pendingJob" caption="Job Pending"></dxi-column>
+              <dxi-column dataField="paymentId" caption="Payment Id"></dxi-column>
+              <dxi-column dataField="outstanding" caption="Payment Due"></dxi-column>
+              <dxi-column dataField="totalPaid" caption="Total Paid"></dxi-column>
+              <!-- <dxi-column dataField="paymentHistories" caption="Payment Histories"></dxi-column> -->
+              <!-- <dxi-column dataField="paymentId" caption="Payment Id" [visible]="false"></dxi-column> -->
+              
+              
+              <dxi-column caption="Job History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+              <div *dxTemplate="let data of 'cellTemplateHyperlink'">
+                <!-- <a [routerLink]="['../job-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>            -->
+                <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
+  
+                <a [routerLink]="['../job-history-employee', data?.data?.employeeId?.empId]" routerLinkActive="sub-active">
+                  <mat-icon>history</mat-icon>
+                </a>
+              </div>
+
+              <dxi-column caption="Payment History" cellTemplate="cellTemplateHyperlink1" alignment="center"></dxi-column>  
+              <div *dxTemplate="let data of 'cellTemplateHyperlink1'">
+                <!-- <a [routerLink]="['../job-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>            -->
+                <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
+  
+                <a [routerLink]="['../payment-history-employee', data?.data?.employeeId?.empId]" routerLinkActive="sub-active">
+                  <mat-icon>history</mat-icon>
+                  <!-- <mat-icon>remove_red_eye</mat-icon> -->
+                  <!-- <mat-icon class="icon-mat">remove_red_eye</mat-icon> -->
+                </a>    
+              </div>
+
+              <dxi-column caption="Pay" cellTemplate="cellTemplateHyperlink2" alignment="center"></dxi-column>  
+              <div *dxTemplate="let data2 of 'cellTemplateHyperlink2'">
+                <!-- <a [routerLink]="['../job-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>            -->
+                <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
+                <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModalPattern"> -->
+                <a data-bs-toggle="modal" data-bs-target="#exampleModalPattern" (click)="getRowDataForPay(data2?.data)">
+                  <mat-icon>payment</mat-icon>
+                  <!-- <mat-icon class="me-2">edit</mat-icon> -->
+                  </a>   
+              </div>
+      
+              <dxo-search-panel [visible]="true"></dxo-search-panel>
+              <dxo-paging [pageSize]="10"> </dxo-paging>              
+            </dx-data-grid>       
+          </div>
+        </div>
+    </div>
+  
+  </div>
+
+  
+  <!-- For Pay Employee modal -->
+  <div class="modal fade" id="exampleModalPattern" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <!-- <app-adda-add-pattern [forEditAddaPattern]="editAddaPatternData" (forDetailAddReloadPattern)="dataFromAddaPattern($event)"></app-adda-add-pattern> -->
+        <app-pay-employee [employeeDataForPayment]="employeeDataForPayment" (forOutstandingPageReload)="dataFromPayEmployee($event)"></app-pay-employee>
+    </div>
+  </div>
