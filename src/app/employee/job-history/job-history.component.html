@@ -1,7 +1,7 @@
 <div class="its-card">
-    <h3 class="card-header ps-3">Employee Job History</h3>
+    <h3 class="card-header ps-3">Employees Job History</h3>
   <!-- Employee personal detail -->
-    <div class="accordion card-body" id="accordionExample">
+    <!-- <div class="accordion card-body" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>  -->
 
     <div class="view-employee card-body flex-center">
       <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
@@ -29,7 +29,7 @@
       <div *ngIf=!showSpinner>
           <div class="cloths mt-10">
             <dx-data-grid id="gridContainer"
-                    [dataSource]="jobHitoryEmployeeData"
+                    [dataSource]="allEmployeesJobHistoryDetails"
                     [showBorders]="true"
                     [rowAlternationEnabled]="true"
                     [allowColumnResizing]="true"
@@ -43,20 +43,35 @@
               <dxo-group-panel [visible]="true"></dxo-group-panel>
               <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
       
-              <dxi-column dataField="job" caption="Job"></dxi-column>
-              <dxi-column dataField="bundle" caption="Bundle"></dxi-column>
+              <dxi-column dataField="employeeId.empName" caption="Emp Name"></dxi-column>
+              <dxi-column dataField="employeeId.empId" caption="Emp Id" [visible]="false"></dxi-column>
+              <dxi-column dataField="bundleName" caption="Bundle Name"></dxi-column>
+              <dxi-column dataField="bundleHistoryId" caption="Bundle History Id" [visible]="false"></dxi-column>
+              <dxi-column dataField="jobHistoryId" caption="Job History Id"></dxi-column>
+              <dxi-column dataField="processCd.displayValue" caption="Process"></dxi-column>
+              <dxi-column dataField="quantity" caption="Quantity"></dxi-column>
+              <dxi-column dataField="assignDate" caption="Assign Date"></dxi-column>
+              <dxi-column dataField="completionDate" caption="Completion Date"></dxi-column>
+              <dxi-column dataField="status.displayValue" caption="Status"></dxi-column>
+              <dxi-column dataField="paidWage" caption="Paid Wage"></dxi-column>
+              <dxi-column dataField="totalWage" caption="Total Wage"></dxi-column>
+              <dxi-column dataField="paymentStatus.displayValue" caption="Payment Status"></dxi-column>
+              <dxi-column dataField="details" caption="Details" [visible]="false"></dxi-column>
+
+
+              <!-- <dxi-column dataField="" caption=""></dxi-column> -->
+              <!-- <dxi-column dataField="bundle" caption="Bundle"></dxi-column>
               <dxi-column dataField="jobName" caption="Job Name"></dxi-column>
               <dxi-column dataField="wageToProvide" caption="Wage to provide"></dxi-column>
-              <dxi-column dataField="status" caption="Status"></dxi-column>
+              <dxi-column dataField="status" caption="Status"></dxi-column> -->
               
               
-              <dxi-column caption="For Payment" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
+              <!-- <dxi-column caption="For Payment" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">
                 <a [routerLink]="['../payment']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>           
-                <!-- <a routerLinkActive="sub-active" (click)="getSelectedData(data)">Add/View</a>            -->
   
               </div>
-      
+       -->
               <dxo-search-panel [visible]="true"></dxo-search-panel>
               <dxo-paging [pageSize]="10"> </dxo-paging>              
             </dx-data-grid>       
