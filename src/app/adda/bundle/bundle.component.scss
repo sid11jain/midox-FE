@@ -2,3 +2,8 @@
     overflow: auto;
     height: 85vh;
 }
+
+:host ::ng-deep app-bundle-detail-table {
+    width: 78vw !important;
+    display: block;
+}
