@@ -3,6 +3,31 @@
         <img src="assets/logo.png" alt="logo" class="midox">
     </a>
     <ul class="row tab-list">
+      <!-- <h5>Hello</h5> -->
+      
+			<div class="form-group mb-10">
+				<!-- <mat-form-field class="example-full-width"> -->
+						<!-- <mat-label>Select Adda*</mat-label> -->
+						<input type="text"
+												placeholder="Search Bundle"
+												aria-label="Number"
+												matInput
+												[formControl]="myControlAdda"
+												[matAutocomplete]="auto" class="form-control"
+												>
+												<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)" >
+								<mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
+										<!-- {{option?.name}} {{option?.type}} -->
+										{{option?.name}} <br> <span class="employeeIdOptions">{{option.type}}</span>
+								</mat-option>
+								<!-- <mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option?.addaNo">
+										{{option?.addaNo}} Hi
+								</mat-option> -->
+						</mat-autocomplete>
+				<!-- </mat-form-field> -->
+		</div>
+
+
         <a [routerLink]="['/dashboard']" class="d-flex mb-link" routerLinkActive="active">
             <span class="material-symbols-outlined me-3">
                 dashboard
@@ -173,17 +198,17 @@
             <a [routerLink]="['employee/add-employee']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
               <span>
-                Add Employee
+                Add/View
               </span>
             </a>
             <!-- <button mat-menu-item>
                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
               <a [routerLink]="['employee/add-employee']" class="submenu-link" routerLinkActive="sub-active">Add</a>
             </button> -->
-            <a [routerLink]="['employee/view-employee']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+            <a [routerLink]="['employee/outstanding']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat">notifications_off</mat-icon>
               <span>
-                View Employee
+                Outstanding
               </span>
             </a>
             <!-- <button mat-menu-item>
@@ -201,9 +226,9 @@
 
 
 
-            <a [routerLink]="['employee/payment']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+            <a [routerLink]="['employee/payment-history']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat">notifications_off</mat-icon>
-              <span>Payment</span>
+              <span>Payment History</span>
             </a>
             <!-- <button mat-menu-item>
               <mat-icon>notifications_off</mat-icon>

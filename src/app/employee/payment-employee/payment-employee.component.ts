@@ -8,12 +8,18 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class PaymentEmployeeComponent {
   showSpinner:boolean = true;
-  employeePaymentDetails: any = [];
+  employeePaymentHistory: any = [];
   constructor(private commonService: CommonService){ 
-    commonService.employeePaymentData.subscribe((val:any) => {
-      this.employeePaymentDetails = val;
-      console.log(this.employeePaymentDetails);
+    // commonService.employeePaymentData.subscribe((val:any) => {
+    //   this.employeePaymentDetails = val;
+    //   console.log(this.employeePaymentDetails);
       
-    });
+    // });
+  }
+
+  async ngOnInit(){
+    this.showSpinner = true; 
+    this.employeePaymentHistory = await this.commonService.getDataFn1({}, "employee", "pay-history");
+    this.showSpinner = false 
   }
 }
