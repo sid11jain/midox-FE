@@ -5,7 +5,7 @@
     <ul class="row tab-list">
       <!-- <h5>Hello</h5> -->
       
-			<div class="form-group mb-10">
+			<div class="form-group mb-20">
 				<!-- <mat-form-field class="example-full-width"> -->
 						<!-- <mat-label>Select Adda*</mat-label> -->
 						<input type="text"
@@ -14,6 +14,7 @@
 												matInput
 												[formControl]="myControlAdda"
 												[matAutocomplete]="auto" class="form-control"
+                        style="box-shadow: none;height: 32px;"
 												>
 												<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)" >
 								<mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
