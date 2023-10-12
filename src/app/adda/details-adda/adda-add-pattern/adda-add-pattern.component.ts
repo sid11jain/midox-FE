@@ -74,7 +74,9 @@ export class AddaAddPatternComponent {
       this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
       console.log("Add ",this.patternAddaAddForm.value);
       let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
-    }    
+    }  
+    
+    await this.updateRemainingQtyFn();  
     this.resetForm();
     this.showSpinner = false;
     this.forDetailAddReloadPattern.emit(true);
@@ -82,12 +84,15 @@ export class AddaAddPatternComponent {
     document.getElementById("addAddaPatternBtn")?.click();    
   }
 
-  async ngOnChanges(){
-    
+  async updateRemainingQtyFn(){
     this.detailAddaData = await this.common.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
     this.remainingQtyAdda = this.detailAddaData[0]?.remainingQtyForPattern;
     console.log("remainingQtyAdda ", this.remainingQtyAdda);
     console.log("forEditAddaPattern ",this.forEditAddaPattern);    
+  }
+
+  async ngOnChanges(){
+    await this.updateRemainingQtyFn();
     this.resetForm();
     // this.initForm();
     // this.ngOnInit();
