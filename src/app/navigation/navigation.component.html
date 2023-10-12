@@ -252,7 +252,8 @@
             </span>
             <li class="fs-14">Profile</li>
         </a>
-        <a [routerLink]="['/logout']" class="d-flex mb-30 mt-3" routerLinkActive="active">
+        <!-- <a [routerLink]="['/logout']" class="d-flex mb-30 mt-3" routerLinkActive="active"> -->
+        <a class="d-flex mb-30 mt-3 pointer" (click)="logoutFn()" routerLinkActive="active">
             <span class="material-symbols-outlined me-3">
                 logout
             </span>

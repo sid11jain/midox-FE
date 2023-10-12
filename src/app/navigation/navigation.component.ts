@@ -90,4 +90,9 @@ export class NavigationComponent {
   sendObjectToRoute(routeData:any) {
     this.router.navigate(['adda/detail-bundle', { data: JSON.stringify(routeData) }]);
   }
+
+  logoutFn(){
+    console.log("Logout");
+    
+  }
 }
