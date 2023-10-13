@@ -21,7 +21,7 @@ export class AddaBundleComponent {
     this.showSpinner = true;
     await this.route.params.subscribe(async (params) => {
       const patternId = params['patternId'];
-      const brandId = params['brandId'];
+      // const brandId = params['brandId'];
       const addaId = params['addaId'];
       // console.log('Received ID:', patternId);
       this.bundleDetailObj = { "patternId": patternId }

@@ -110,7 +110,8 @@
                                  <!-- <dxi-column dataField="color.displayValue" caption="Name"></dxi-column> -->
                                  <dxi-column caption="Name" cellTemplate="cellTemplateHyperlink" alignment="left" [width]="150"></dxi-column>  
                                  <div *dxTemplate="let data of 'cellTemplateHyperlink'">
-                                     <a [routerLink]="['../../bundle-adda', addaId, data?.data?.patternId, brandId]" routerLinkActive="sub-active" class="pattern-name">
+                                     <!-- <a [routerLink]="['../../bundle-adda', addaId, data?.data?.patternId, brandId]" routerLinkActive="sub-active" class="pattern-name"> -->
+                                     <a [routerLink]="['../../bundle-adda', addaId, data?.data?.patternId]" routerLinkActive="sub-active" class="pattern-name">
                                          <p>{{data.data.patternName}}</p>
                                      </a>     
                                  </div>
