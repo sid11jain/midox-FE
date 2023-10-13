@@ -330,7 +330,8 @@ export class BundleDetailTableComponent {
         },
         {
           style: "row",
-          text: [{ text: "Wage to Provide", bold: true }, { text: " :   " }, { text: jobCardPdfData[0]?.wageToProvide }],
+          // text: [{ text: "Wage to Provide", bold: true }, { text: " :   " }, { text: jobCardPdfData[0]?.wageToProvide }],
+          text: [{ text: "Wage to Provide", bold: true }, { text: " :   " }, { text: jobCardPdfData[0]?.quantity*jobCardPdfData[0]?.rate  }],
 
         },
         {
