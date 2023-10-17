@@ -144,24 +144,20 @@ export class BundleDetailTableComponent {
     let fontSizeRow2 = size;
     let fontSizeRow3 = size;
     let contentArr:any = [];
-    
     // this.bundleAddaData.forEach((data:any, index:number) => {
-    stickerCardPdfData.forEach((data:any, index:number) => {
-      console.log(data);
-      
-      let stProsList =  data?.stPros;
+    stickerCardPdfData.forEach((data:any, index:number) => {      
+      let stProsList = data?.stPros;
       let countNo = 0;
       let rowList = [];
       let stProsListArr = [];
       if(stProsList) {
-        for (let index = 0; index < stProsList.length; index++) {
+        for (let index = 0; index < stProsList?.length; index++) {
           countNo += 1;
           const textPros = stProsList[index];
-          
           let prosObj = { text: textPros, style: 'tableHeader', bold: true, fontSize: fontSize };
           rowList.push(prosObj);
-          if(countNo > 3 || stProsList.length-1 == index){
-            stProsListArr.push(rowList);
+          if(countNo > 3 || stProsList?.length-1 == index){
+            stProsListArr?.push(rowList);
             rowList = [];
             countNo = 0;
           } 
@@ -202,13 +198,15 @@ export class BundleDetailTableComponent {
         style: 'table',
         table: {
           //headerRows: 1,
-          body:  stProsListArr
-          // [
-          //   [{ text: data?.stPros[0], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[1], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[2], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[3], style: 'tableHeader', bold: true, fontSize: fontSize }],
-          //   [{ text: data?.stPros[4], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[5], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[6], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[7], style: 'tableHeader', bold: true, fontSize: fontSize }],
-          //   [{ text: data?.stPros[8], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[9], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[10], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[11], style: 'tableHeader', bold: true, fontSize: fontSize }],
-          //   [{ text: data?.stPros[12], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[13], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[14], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[15], style: 'tableHeader', bold: true, fontSize: fontSize }],
-          // ]
+          // body:  stProsListArr
+          // body:  [stProsListArr]
+          body:
+          [
+            [{ text: data?.stPros[0], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[1], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[2], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[3], style: 'tableHeader', bold: true, fontSize: fontSize }],
+            [{ text: data?.stPros[4], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[5], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[6], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[7], style: 'tableHeader', bold: true, fontSize: fontSize }],
+            [{ text: data?.stPros[8], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[9], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[10], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[11], style: 'tableHeader', bold: true, fontSize: fontSize }],
+            [{ text: data?.stPros[12], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[13], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[14], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[15], style: 'tableHeader', bold: true, fontSize: fontSize }],
+          ]
         },
         layout: 'noBorders'
       };
@@ -220,7 +218,8 @@ export class BundleDetailTableComponent {
       contentArr.push(thirdRow);
       contentArr.push(fourthRow);
       contentArr.push(fifthRow);
-      this.bundleAddaData.length - 1 != index ? contentArr.push(pageBreak) : "";
+      // this.bundleAddaData.length - 1 != index ? contentArr.push(pageBreak) : "";
+      stickerCardPdfData.length - 1 != index ? contentArr.push(pageBreak) : "";
 
     });
     const docDefinition: any = {
