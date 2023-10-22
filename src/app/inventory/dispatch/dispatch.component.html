@@ -1,4 +1,89 @@
-<div class="its-card">
+
+<div class="modal-content"> 
+  <div class="its-card">
+    <h3 class="card-header ps-3 d-flex justify-content-between">
+      <span>{{dispatchTitle}}</span>
+      <button type="button" class="btn-close" (click)="resetForm()" id="addAddaPatternBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+    </h3>
+  
+    <div class="modal-body">
+      <div class="finish-goods card-body flex-center">        
+          <div class="flex-center">
+            <mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+          </div> 
+          <div class="add-material-adda" *ngIf="!showSpinner">              
+            <div [formGroup]="dispatchInventoryForm">
+              <div class="row"> 
+                <!-- dispatchNo -->
+                <div class="form-group col-6">
+                  <label for="dispatchNo">Dispatch No:*</label>
+                  <input type="text" id="dispatchNo" formControlName="dispatchNo" class="form-control">
+                  <div *ngIf="dispatchInventoryForm.get('dispatchNo')?.invalid && dispatchInventoryForm.get('dispatchNo')?.touched">
+                    <div *ngIf="dispatchInventoryForm.get('dispatchNo')?.hasError('required')">
+                      <span style="color: red;">Dispatch no is required.</span>
+                    </div>
+                    <div *ngIf="dispatchInventoryForm.get('dispatchNo')?.hasError('minlength')">
+                      <span style="color: red;">Dispatch no must be at least 3 characters long.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- vehicle No -->
+                <div class="form-group col-6">
+                  <label for="vehicleNo">Vehicle No:*</label>
+                  <input type="text" id="vehicleNo" formControlName="vehicleNo" class="form-control">
+                  <div *ngIf="dispatchInventoryForm.get('vehicleNo')?.invalid && dispatchInventoryForm.get('vehicleNo')?.touched">
+                    <div *ngIf="dispatchInventoryForm.get('vehicleNo')?.hasError('required')">
+                      <span style="color: red;">Vehicle no is required.</span>
+                    </div>
+                    <div *ngIf="dispatchInventoryForm.get('vehicleNo')?.hasError('minlength')">
+                      <span style="color: red;">Vehicle no must be at least 3 characters long.</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Quantity paid -->
+                <div class="form-group mt-2 col-6">
+                  <label for="quantity">Quantity* (Available Qty: {{dispatchLimit}})</label>
+                  <input type="number" id="quantity" formControlName="quantity" class="form-control">
+                  <div *ngIf="dispatchInventoryForm.get('quantity')?.invalid && dispatchInventoryForm.get('quantity')?.touched" class="invalid-red">
+                    <div *ngIf="dispatchInventoryForm.get('quantity')?.errors?.['required']">Quantity is required.</div>
+                    <div *ngIf="dispatchInventoryForm.get('quantity')?.errors?.['min']">Quantity must be at least 1.</div>
+                  </div>
+                </div>                
+
+                <!-- Remarks -->
+                <div class="form-group mt-2 col-6">
+                  <label for="remarks">Remarks:*</label>
+                  <input type="text" id="remarks" formControlName="remarks" class="form-control">
+                  <div *ngIf="dispatchInventoryForm.get('remarks')?.invalid && dispatchInventoryForm.get('remarks')?.touched">
+                    <div *ngIf="dispatchInventoryForm.get('remarks')?.hasError('required')">
+                      <span style="color: red;">Remarks is required.</span>
+                    </div>
+                    <div *ngIf="dispatchInventoryForm.get('remarks')?.hasError('minlength')">
+                      <span style="color: red;">Remarks must be at least 3 characters long.</span>
+                    </div>
+                  </div>
+                </div>
+
+              <div class="row">
+                <div class="col-12 text-end">
+                  <button type="submit" (click)="onSubmit()" [disabled]="dispatchInventoryForm.invalid" mat-flat-button color="primary">
+                    Save
+                  </button>
+                </div>
+              </div>
+              </div>            
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+
+
+<!-- <div class="its-card">
   <h3 class="card-header ps-3">Dispatch Goods</h3>
   <div class="row">
     <form [formGroup]="dispatchInventoryForm" (ngSubmit)="onSubmit()">
@@ -60,4 +145,4 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->
