@@ -19,6 +19,7 @@ export class AddAddaComponent implements OnInit {
   @Output() forViewAddReload = new EventEmitter<any>();
 
   addaId:any = 0;
+  addaNo:any;
   addAddaForm!:FormGroup;
   showSpinner:boolean = true;
   addaTitle:string = "Add ADDA";
@@ -51,9 +52,9 @@ export class AddAddaComponent implements OnInit {
       console.log("Edit");
       this.addAddaForm.get('status')?.enable();
       this.addaId = this.forEditAdda?.addaId;
+      this.addaNo = this.forEditAdda?.addaNo;
       // this.addAddaForm.patchValue(this.forEditAdda);
       this.addAddaForm.patchValue({
-        addaNo: this.forEditAdda.addaNo,
         brandId: this.forEditAdda.brandDetails.brandId,
         designId: this.forEditAdda.designNo,
         quantity: this.forEditAdda.quantity,
@@ -72,7 +73,6 @@ export class AddAddaComponent implements OnInit {
 
   initForm(): void {
     this.addAddaForm = this.formBuilder.group({
-      addaNo: ['', [Validators.required, Validators.minLength(3)]],
       brandId: ['', Validators.required],
       designId: ['', Validators.required],
       quantity: ['', [Validators.required, Validators.min(1)]],
@@ -101,7 +101,6 @@ export class AddAddaComponent implements OnInit {
     this.common.addSupplierOrBrandSettingsData(data,"brand","get-brands").subscribe(async (responseData:any)=>{
       let response = responseData?.body;   
       if (responseData.status === 200) {
-        console.log(response);     
         this.brandNamesData = response;
       }
       else{
@@ -117,22 +116,12 @@ export class AddAddaComponent implements OnInit {
     }
     this.showSpinner = true;
     console.log('Dispatch Inventory Form values:', this.addAddaForm.value);
-  //   let temp1:any = {
-  //     addaNo:"Adda third Taes1t133",
-  //     brandId:"5",
-  //     designId:"1",
-  //     quantity:"1000",
-  //     remarks:"remark third adda ",
-  //     completionDate: "2023-10-25",
-  //     status:"PROC_STAT_TBS"
-  //     // status:null
-  
-  // }
 
   if(this.forEditAdda){
     console.log("Edit API Called");
     console.log(this.addAddaForm?.value);
     this.addAddaForm.value.addaId = this.addaId;
+    this.addAddaForm.value.addaNo = this.addaNo;
     let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "edit", "get-addas", this.dialogTitle);
     }
     else{

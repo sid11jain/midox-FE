@@ -14,7 +14,7 @@
       <div class="row add-adda">
                 
         <!-- addaNo -->
-        <div class="form-group col-3">
+        <!-- <div class="form-group col-3">
           <label for="addaNo">Adda no</label>
           <input type="text" id="addaNo" formControlName="addaNo" class="form-control"/>
           <div *ngIf="addAddaForm.get('addaNo')?.invalid && addAddaForm.get('addaNo')?.touched" class="error invalid-red">
@@ -25,10 +25,10 @@
               Adda no must be at least 3 characters long.
             </div>
           </div>
-        </div>
+        </div> -->
         
         <!-- Brand -->
-        <div class="form-group col-3">
+        <div class="form-group col-4">
           <label for="brandId">Brand</label>
           <select id="brandId" formControlName="brandId" class="form-control" required (change)="getDesignFn($event.target)">
             <option value="">Select</option>
@@ -44,7 +44,7 @@
         </div>
 
         <!-- Design number -->
-        <div class="form-group col-3">
+        <div class="form-group col-4">
           <label for="designId">Design</label>
           <select id="designId" formControlName="designId" class="form-control" required>
             <option value="">Select</option>
@@ -60,7 +60,7 @@
         </div>
         
         <!-- Quantity -->
-        <div class="form-group col-3">
+        <div class="form-group col-4">
           <label for="quantity">Quantity</label>
           <input type="number" id="quantity" formControlName="quantity" class="form-control">
           <div *ngIf="addAddaForm.get('quantity')?.invalid && addAddaForm.get('quantity')?.touched"
@@ -71,7 +71,7 @@
         </div>
 
         <!-- Remarks -->
-        <div class="form-group col-3">
+        <div class="form-group mt-2 col-4">
           <label for="remarks">Remarks</label>
           <textarea name="" id="remarks" cols="30" rows="1" formControlName="remarks" class="form-control"></textarea>          
           <div *ngIf="addAddaForm.get('remarks')?.invalid && addAddaForm.get('remarks')?.touched" class="error invalid-red">
@@ -85,7 +85,7 @@
         </div> 
 
         <!-- Completion date -->
-        <div class="form-group col-3">
+        <div class="form-group mt-2 col-4">
             <label for="completionDate">Completion date</label>
             <input type="date" id="completionDate" class="form-control" formControlName="completionDate" required>
             <div
@@ -97,7 +97,7 @@
         </div> 
 
         <!-- Status -->
-        <div class="form-group col-3">
+        <div class="form-group mt-2 col-4">
           <label for="status">Status </label>
             <select id="status" formControlName="status" class="form-control">
               <option value="">Select</option>
@@ -108,7 +108,7 @@
           </div>
         </div>
         
-        <div class="row">
+        <div class="row mt-2">
           <div class="col-12 text-end">
             <button type="submit" mat-flat-button color="primary" [disabled]="addAddaForm.invalid">Submit</button>
           </div>
