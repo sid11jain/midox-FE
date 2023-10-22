@@ -6,7 +6,7 @@
       <div *ngIf=!showSpinner>
           <div class="cloths mt-10">
             <dx-data-grid id="gridContainer"
-                    [dataSource]="viewFinishGoodsData"
+                    [dataSource]="disptachHistory"
                     [showBorders]="true"
                     [rowAlternationEnabled]="true"
                     [allowColumnResizing]="true"
@@ -20,11 +20,34 @@
               <dxo-group-panel [visible]="true"></dxo-group-panel>
               <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
       
+              <dxi-column dataField="dispatchDate" caption="Dispatch Date" alignment="center"></dxi-column>
+              <dxi-column dataField="dispatchId" caption="Dispatch Id" [visible]="false" alignment="center"></dxi-column>
+              <dxi-column dataField="dispatchNo" caption="Dispatch No" alignment="center"></dxi-column>
+              <dxi-column dataField="quantity" caption="Quantity" alignment="center"></dxi-column>
+              <dxi-column dataField="remarks" caption="Remarks" [visible]="false" alignment="center"></dxi-column>
+              <dxi-column dataField="vehicleNo" caption="Vehicle No" alignment="center"></dxi-column>
+
+              <dxi-column dataField="finishedGoods.addaNo" caption="Adda No" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.addaId" caption="Adda Id" [visible]="false" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.patternName" caption="Pattern Name" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.finishedGoodsId" caption="Finished Goods Id" [visible]="false" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.finishedQuantity" caption="Finished Qty" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.availableQuantity" caption="Available Qty" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.dispatchedQuantity" caption="Dispatched Qty" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.patternId" caption="Pattern Id" [visible]="false" alignment="center"></dxi-column>
+              <dxi-column dataField="finishedGoods.status.displayValue" caption="Status" alignment="center"></dxi-column>
+
+
+              <!-- <dxi-column dataField="finishedGoods." caption=""></dxi-column> -->
+              
+              <!-- <dxi-column dataField="" caption=""></dxi-column> -->
+              
+<!--               
               <dxi-column dataField="brand" caption="Brand"></dxi-column>
               <dxi-column dataField="product" caption="Product"></dxi-column>
               <dxi-column dataField="design" caption="Design"></dxi-column>
               <dxi-column dataField="dispatch_date" caption="Dispatch Date"></dxi-column>
-              <dxi-column dataField="avl_qty" caption="Quantity"></dxi-column>  
+              <dxi-column dataField="avl_qty" caption="Quantity"></dxi-column>   -->
       
               <dxo-search-panel [visible]="true"></dxo-search-panel>
               <dxo-paging [pageSize]="10"> </dxo-paging>              

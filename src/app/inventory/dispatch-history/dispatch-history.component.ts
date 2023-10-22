@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dispatch-history',
@@ -8,261 +9,28 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class DispatchHistoryComponent {
   showSpinner:boolean = true;
-  disptachDetails: any = [];
-  constructor(private commonService: CommonService){
-    commonService.dispatchData.subscribe((val:any) => {
-      this.disptachDetails = val;
-      console.log(this.disptachDetails);
+  // disptachDetails: any = [];
+  disptachHistory: any;
+  constructor(private commonService: CommonService, private route: ActivatedRoute){
+    // commonService.dispatchData.subscribe((val:any) => {
+    //   this.disptachDetails = val;
+    //   console.log(this.disptachDetails);
       
-    });
+    // });
   }
 
-  ngOnInit(){
-    setTimeout(() => {
-      this.showSpinner = false
-    }, 1000);
+  async ngOnInit(){
+    this.showSpinner = true;
+    
+    await this.route.params.subscribe(async (params) => {
+      let finishedGoodsId = params['finishedGoodsId'];
+      if(finishedGoodsId){     
+        this.disptachHistory = await this.commonService.getDataFn1({"finishedGoodsId":finishedGoodsId}, "finished-goods", "get-dispatches");
+      }
+      else{
+        this.disptachHistory = await this.commonService.getDataFn1({}, "finished-goods", "get-dispatches");
+      }
+      this.showSpinner = false;
+    })
   }
-
-  viewFinishGoodsData: any = [
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-    {
-      unique_id:"123",
-      brand:"Ciana",
-      product:"T-shirt",
-      design:"C-1002",
-      dispatch_date:"13 Sept 2022",
-      avl_qty:1500
-    },
-];
 }
