@@ -29,7 +29,7 @@ export class AddBrandComponent {
       brandName: ['', [Validators.required, Validators.minLength(3)]],
       contactPerson: ['', [Validators.required, Validators.minLength(3)]],
       contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10)]],
-      brandUID: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9]{15}$')]],
+      brandUID: ['', [Validators.pattern('^[A-Za-z0-9]{15}$')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       status: ['', Validators.required],
