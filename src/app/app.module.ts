@@ -13,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { MsgDialogComponent } from './shared/msg-dialog/msg-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [],  //{provide:MatDialogRef , useValue:{} },{ provide: MAT_DIALOG_DATA, useValue: {} }
   bootstrap: [AppComponent]

@@ -15,6 +15,7 @@
 												[formControl]="myControlAdda"
 												[matAutocomplete]="auto" class="form-control"
                         style="box-shadow: none;height: 32px;"
+                        matTooltip="Minimum 3 characters need to perform search"
 												>
 												<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)" >
 								<mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
