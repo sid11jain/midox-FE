@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: 'add-measurement-type', component:  AddMeasurementComponent}, 
       { path: 'add-brand', component:  AddBrandComponent}, 
       { path: 'add-size', component:  AddSizeComponent}, 
-      { path: 'sign-up', component:  SignupComponent}, 
+      { path: 'reset-password', component:  SignupComponent}, 
     ]
   }
 ];
