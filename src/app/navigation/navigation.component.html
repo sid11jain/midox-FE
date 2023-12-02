@@ -77,12 +77,12 @@
               <a [routerLink]="['inventory/stock-history']" class="submenu-link" routerLinkActive="sub-active">Stock History</a>
             </button> -->
 
-            <a [routerLink]="['inventory/finish-goods']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+            <!-- <a [routerLink]="['inventory/finish-goods']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat">check</mat-icon>
               <span>
                 Finish Goods
               </span>
-            </a>
+            </a> -->
             <!-- <button mat-menu-item class="midox-menu">
               <mat-icon class="icon-mat">check</mat-icon>
               <a [routerLink]="['inventory/finish-goods']" class="submenu-link" routerLinkActive="sub-active">Finish Goods</a>
@@ -99,12 +99,12 @@
               <a [routerLink]="['inventory/dispatch']" class="submenu-link" routerLinkActive="sub-active">Dispatch</a>
             </button> -->
 
-            <a [routerLink]="['inventory/dispatch-history', '']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+            <!-- <a [routerLink]="['inventory/dispatch-history', '']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
               <mat-icon class="icon-mat">history</mat-icon>
               <span>
                 Dispatch History
               </span>
-            </a>
+            </a> -->
             <!-- <button mat-menu-item class="midox-menu">
               <mat-icon class="icon-mat me-1">history</mat-icon>
               <a [routerLink]="['inventory/dispatch-history']" class="submenu-link" routerLinkActive="sub-active">Dispatch History</a>
@@ -237,6 +237,33 @@
             </button> -->
           </div>
         </mat-menu>
+
+        <!-- Dispatch -->
+        <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuDispatch">
+          <span class="material-symbols-outlined me-3">
+              local_shipping
+        </span>
+          <li class="fs-14">Dispatch</li>
+        </a>
+        
+        <mat-menu #menuDispatch="matMenu">
+          <div class="mtb-10 mlr-10 a-tag">
+            <a [routerLink]="['inventory/finish-goods']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+              <mat-icon class="icon-mat">check</mat-icon>
+              <span>
+                Finish Goods
+              </span>
+            </a>
+
+            <a [routerLink]="['inventory/dispatch-history', '']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+              <mat-icon class="icon-mat">history</mat-icon>
+              <span>
+                Dispatch History
+              </span>
+            </a>
+        
+          </div>
+          </mat-menu>
 
 
         <a [routerLink]="['/settings']" class="d-flex mb-30" routerLinkActive="active">
