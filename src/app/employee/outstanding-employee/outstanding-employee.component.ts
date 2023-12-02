@@ -27,4 +27,10 @@ export class OutstandingEmployeeComponent {
     console.log(data);
     this.ngOnInit();    
   }
+  
+  //For export to excel button
+  onExporting(e:any){
+    let fileName = "Outstanding Employee";
+    this.commonService.onExportingData(e,fileName);
+  }
 }

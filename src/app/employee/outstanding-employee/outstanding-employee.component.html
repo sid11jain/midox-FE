@@ -12,6 +12,7 @@
                     [rowAlternationEnabled]="true"
                     [allowColumnResizing]="true"
                     [allowColumnReordering]="true"
+                    (onExporting)="onExporting($event)"
                   >
               <dxo-scrolling mode="virtual"></dxo-scrolling>
               <dxo-filter-row [visible]="true"></dxo-filter-row>
@@ -66,7 +67,8 @@
               </div>
       
               <dxo-search-panel [visible]="true"></dxo-search-panel>
-              <dxo-paging [pageSize]="10"> </dxo-paging>              
+              <dxo-paging [pageSize]="10"> </dxo-paging>   
+              <dxo-export [enabled]="true" [allowExportSelectedData]="false"></dxo-export>              
             </dx-data-grid>       
           </div>
         </div>
