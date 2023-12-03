@@ -59,7 +59,7 @@
                     <!-- <span *ngIf="maxQuantiy >= 0">(Available qty: {{maxQuantiy}} {{maxQuantityunit}})</span> -->
                     <span>(Remaining qty: {{remainingQtyAdda}})</span>
                   </label>
-                  <input type="number" id="quantity" formControlName="quantity" class="form-control">
+                  <input type="number" id="quantity" formControlName="quantity" class="form-control" (blur)="onBlur()">
                   <div *ngIf="patternAddaAddForm.get('quantity')?.invalid && patternAddaAddForm.get('quantity')?.touched" class="invalid-red">
                     <div *ngIf="patternAddaAddForm.get('quantity')?.errors?.['required']">Quantity is required.</div>
                     <div *ngIf="patternAddaAddForm.get('quantity')?.errors?.['min']">Quantity must be at least 1.</div>
@@ -67,14 +67,24 @@
                 </div>
 
                 <!-- Bundle -->
-                <div class="form-group col-6">
+                <!-- <div class="form-group col-6">
                   <label for="bundleSize">Bundle Size*</label>
                   <input type="number" id="bundleSize" formControlName="bundleSize" class="form-control">
                   <div *ngIf="patternAddaAddForm.get('bundleSize')?.invalid && patternAddaAddForm.get('bundleSize')?.touched" class="invalid-red">
                     <div *ngIf="patternAddaAddForm.get('bundleSize')?.errors?.['required']">Bundle Size is required.</div>
                     <div *ngIf="patternAddaAddForm.get('bundleSize')?.errors?.['min']">Bundle Size must be at least 1.</div>
                   </div>
-                </div>
+                </div> -->
+                <div class="form-group col-6">
+                  <label for="bundleSize">Bundle Size:* <span *ngIf="showBundleAmount" class="bundle-count">({{bundleAmount}} bundle will create)</span></label>
+                  <select id="bundleSize" formControlName="bundleSize" class="form-control" matTooltip="Please insert quantity" (click)="getBundleData()">              
+                    <option value="">Select</option>
+                    <option *ngFor="let option of bundleDropdownData" [value]="option">{{ option }}</option>
+                  </select>
+                  <div *ngIf="patternAddaAddForm.get('bundleSize')?.invalid && patternAddaAddForm.get('bundleSize')?.touched">
+                    <span style="color: red;">Bundle Size is required.</span>
+                  </div>
+                </div>  
 
                 
               <div class="row">

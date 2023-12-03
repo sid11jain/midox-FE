@@ -15,6 +15,7 @@ export class AddaAddPatternComponent {
   patternAddaAddForm!: FormGroup;
   colorArray: any[] = [];
   sizeArray: any[] = [];
+  bundleDropdownData: any[] = [];
   key: string = "MID_COL";
   key1: string = "MID_SIZE";
   addaId:any;
@@ -22,6 +23,7 @@ export class AddaAddPatternComponent {
   addaPatternTitle:string = "Add Adda Pattern";
   patternId:string = "";
   patternName:string = "";
+  bundleAmount:number = 0;
 
   // To send data from child to parent
   @Output() forDetailAddReloadPattern = new EventEmitter<any>();
@@ -30,6 +32,7 @@ export class AddaAddPatternComponent {
   @Input() forEditAddaPattern:any = '';
   detailAddaData:any;
   remainingQtyAdda:any;
+  showBundleAmount:boolean= false;
   
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog,  private route: ActivatedRoute) {  }
 
@@ -48,12 +51,41 @@ export class AddaAddPatternComponent {
       quantity: ['', [Validators.required, Validators.min(1)]],
       bundleSize: ['', [Validators.required, Validators.min(1)]],
     });
+    this.patternAddaAddForm.get('bundleSize')?.disable();
     
     this.colorArray = await this.common.getDataFn(this.key);
     this.sizeArray = await this.common.getDataFn(this.key1);
     console.log("Color array ", this.colorArray);
     
     this.showSpinner = false; 
+    this.patternAddaAddForm?.get('quantity')?.valueChanges.subscribe(value => {
+      console.log('Input value changed:', value);
+      this.patternAddaAddForm.get('bundleSize')?.reset();
+      this.patternAddaAddForm.get('bundleSize')?.disable();
+      
+      this.showBundleAmount = false;
+    });
+  }
+
+  getBundleData(){
+    let bundleValue = this.patternAddaAddForm.get('bundleSize')?.value;
+    if(bundleValue){
+      const quantityValue = this.patternAddaAddForm.get('quantity')?.value;
+      this.bundleAmount = quantityValue / bundleValue;
+      this.showBundleAmount = true;
+    }
+  }
+
+  onBlur(): void {
+    const inputValue = this.patternAddaAddForm.get('quantity')?.value;
+    // console.log('Input value on blur:', inputValue);
+    if(inputValue){
+      this.bundleDropdownData = this.findFactors(inputValue);
+      console.log("bundleDropdownData ", this.bundleDropdownData);
+      this.patternAddaAddForm.get('bundleSize')?.enable();
+    }
+    
+    // Perform any other operations you want with the value
   }
 
   async onSubmit() {
@@ -120,4 +152,20 @@ export class AddaAddPatternComponent {
   resetForm(){
     this.patternAddaAddForm?.reset();
   }
+
+  findFactors(inputNumber:number) {
+    const factors = [];
+    for (let i = 1; i <= inputNumber; i++) {
+      if (inputNumber % i === 0) {
+        factors.push(i);
+      }
+    }
+    return factors;
+  }
+  
+  // // Example usage:
+  // const inputNumber = 10;
+  // const factors = findFactors(inputNumber);
+  // console.log(`Factors of ${inputNumber}:`, factors);
+  
 }
