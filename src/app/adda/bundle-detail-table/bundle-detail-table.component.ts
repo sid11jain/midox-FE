@@ -193,7 +193,8 @@ export class BundleDetailTableComponent {
       };
 
       let fourthRow = { text: [{ text: "ST. PROS.", bold: true, fontSize: fontSize }], style: "row"};
-
+      console.log(data?.stPros);
+      
       let fifthRow = {
         style: 'table',
         table: {
@@ -235,7 +236,7 @@ export class BundleDetailTableComponent {
         row: { margin: [2, 2, 0, 8], fontSize: 8.5},
         table: { margin: [0, 0, 0, 5], bold: true },
         // tableHeader: { margin: [60, 0, 30, 8]},
-        tableHeader: { margin: [30, 0, 30, 4]},
+        tableHeader: { margin: [20, 0, 20, 4]},
       }
     };
     pdfMake.createPdf(docDefinition).open();
