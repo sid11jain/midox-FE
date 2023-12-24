@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartDataset, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -10,13 +11,16 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class DashboardPageComponent {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
-
+  dashboardDetails:any = {};
   showSpinner:boolean = true;
+  constructor(private common: CommonService){
 
+  }
   ngOnInit(){
-    setTimeout(() => {
+    this.common.getDashboardData().subscribe((val:any) => {
       this.showSpinner = false
-    }, 2000);
+      this.dashboardDetails = val;
+    });
   }
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {

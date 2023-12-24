@@ -89,31 +89,30 @@ export class AddaAddPatternComponent {
   }
 
   async onSubmit() {
-    if (this.patternAddaAddForm.invalid) {
-      return;
-    }  
-    // console.log(this.patternAddaAddForm.value);
-    
-    this.showSpinner = true; 
-    if(this.forEditAddaPattern){
-      let tempObj = {...this.patternAddaAddForm.value};
-      tempObj.patternId = this.patternId;
-      tempObj.patternName = this.patternName;
-      console.log("Edit ",tempObj);    
-      let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.addaPatternTitle);
+    if (confirm("Are you sure to save Adda pattern information?")) {
+      if (this.patternAddaAddForm.invalid) {
+        return;
+      }
+      this.showSpinner = true;
+      if (this.forEditAddaPattern) {
+        let tempObj = { ...this.patternAddaAddForm.value };
+        tempObj.patternId = this.patternId;
+        tempObj.patternName = this.patternName;
+        console.log("Edit ", tempObj);
+        let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.addaPatternTitle);
+      }
+      else {
+        this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
+        console.log("Add ", this.patternAddaAddForm.value);
+        let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
+      }
+
+      await this.updateRemainingQtyFn();
+      this.resetForm();
+      this.showSpinner = false;
+      this.forDetailAddReloadPattern.emit(true);
+      document.getElementById("addAddaPatternBtn")?.click();
     }
-    else{
-      this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
-      console.log("Add ",this.patternAddaAddForm.value);
-      let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
-    }  
-    
-    await this.updateRemainingQtyFn();  
-    this.resetForm();
-    this.showSpinner = false;
-    this.forDetailAddReloadPattern.emit(true);
-    // this.ngOnInit();
-    document.getElementById("addAddaPatternBtn")?.click();    
   }
 
   async updateRemainingQtyFn(){

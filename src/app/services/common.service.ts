@@ -81,6 +81,14 @@ export class CommonService {
   }
 
   // Get
+
+  getDashboardData(): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}getDashboardData`;
+    return this.http.get(this.payloadUrl, this.httpOptions).pipe(
+      catchError(this.handleError('getDashboardData', []))
+    );
+  }
+
   getAllSettingsData(type:any): Observable<any> {
     this.payloadUrl = `${this.baseUrl}groups/get-entities/${type}`;
     return this.http.get(this.payloadUrl, this.httpOptions).pipe(
