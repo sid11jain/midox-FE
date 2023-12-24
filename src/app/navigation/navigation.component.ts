@@ -12,12 +12,12 @@ import * as _ from 'lodash';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-  isLogin:boolean = true;
-  token:any;
+  isLogin:boolean = false;
+  token:any = false;
   filteredOptionsAdda!: Observable<any[]>;
   myControlAdda = new FormControl('');
   // detailAddaData: any;
-  rolesList!:any[];
+  rolesList:any[] =[];
   isAdmin:boolean = false;
   isIM:boolean = false;  //Inventor manager
   isADM:boolean = false; //Adda manager
@@ -31,6 +31,9 @@ export class NavigationComponent {
     // });
     this.token = localStorage.getItem('token');
     this.rolesList = localStorage.getItem('roles') as any;
+    if(_.isEmpty(this.rolesList)){
+      this.rolesList = ['Admin', 'InventorManager', 'AddaManager', 'JobManager', 'DispatchManager', 'AccountManager']
+    }
   }
   
   ngOnInit() {
@@ -42,6 +45,14 @@ export class NavigationComponent {
     _.includes(this.rolesList, 'DispatchManager') ? this.isDM = true : this.isDM = false;
     _.includes(this.rolesList, 'AccountManager') ? this.isAM = true : this.isAM = false;
 
+    localStorage.setItem("isAdmin", this.isAdmin.toString());
+    localStorage.setItem("isIM", this.isIM.toString());
+    localStorage.setItem("isADM", this.isADM.toString());
+    localStorage.setItem("isJM", this.isJM.toString());
+    localStorage.setItem("isDM", this.isDM.toString());
+    localStorage.setItem("isAM", this.isAM.toString());
+    
+
     this.filteredOptionsAdda = this.myControlAdda.valueChanges.pipe(
       startWith(''),
       switchMap(value => this._filterAdda(value || '')),
@@ -49,8 +60,7 @@ export class NavigationComponent {
   }
 
   private _filterAdda(value: any): Observable<any[]> {
-    let filterValue:any = "bil";
-    // filterValue = value.toLowerCase();
+    let filterValue:any = "";
     if(!value || value.length < 3){
       filterValue = null;
       return of([] as any[]);
@@ -103,9 +113,10 @@ export class NavigationComponent {
   }
 
   logoutFn(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('roles');
+    localStorage.clear();
     //this.subscriber.unsubscribe();
-    this.router.navigate(['/login']);
+    setTimeout(()=>{
+      this.router.navigate(['/login']);
+    },300)
   }
 }

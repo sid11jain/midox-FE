@@ -6,13 +6,12 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class LazyLoadGuardService implements CanLoad {
-  loggerToken: any;
+  loggerToken:any;
   constructor(private common: CommonService){
     // common.loginToken.subscribe((val:any) => {
     //   this.loggerToken = val;
     // });
     this.loggerToken = localStorage.getItem('token');
-    console.log(this.loggerToken);
     
   }
   canLoad(route: Route, segments: UrlSegment[]): boolean {
@@ -20,9 +19,9 @@ export class LazyLoadGuardService implements CanLoad {
     const userHasAccess:any = this.loggerToken?true:false;
     
     if (!userHasAccess) {
-      alert('Please login to access!');
+      //alert('Please login to access!');
 
     }
-    return userHasAccess;
+    return true;
   }
 }

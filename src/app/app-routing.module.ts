@@ -7,6 +7,11 @@ import { LazyLoadGuardService } from './services/lazy-load-guard.service';
 
 const routes: Routes = [
   {
+    path:'',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
     path:'login', component: LoginComponent
   },
   {
@@ -16,7 +21,7 @@ const routes: Routes = [
     path:'profile', component: ProfileComponent
   },
   {
-    path:'', loadChildren:()=>import('./dashboard/dashboard.module').then(mod=>mod.DashboardModule),
+    path:'dashboard', loadChildren:()=>import('./dashboard/dashboard.module').then(mod=>mod.DashboardModule),
     canLoad: [LazyLoadGuardService],
   },
   {

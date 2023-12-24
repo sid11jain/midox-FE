@@ -13,13 +13,12 @@ export class LoginComponent implements OnInit {
   isLoginError:boolean = false;
 
   constructor(private formBuilder: FormBuilder, private commonService: CommonService, private router: Router) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('roles');
    // this.commonService.loginToken.unsubscribe();
     //this.commonService.loginToken.next(null);
    }
 
   ngOnInit(): void {
+    localStorage.clear();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -44,7 +43,10 @@ export class LoginComponent implements OnInit {
           }
           //this.commonService.loginToken.next(result?.token);
           localStorage.setItem('token', result?.token);
-          this.router.navigate(['/dashboard']);
+          setTimeout(()=>{
+            this.router.navigate(['/dashboard']);
+          }, 300);
+          
         }
       },
       error: (err: any) => {

@@ -1,309 +1,186 @@
 <div class="row navigation-row">
-    <a [routerLink]="['/']" class="logo-icon">
-        <img src="assets/logo.png" alt="logo" class="midox">
+  <a [routerLink]="['/']" class="logo-icon">
+    <img src="assets/logo.png" alt="logo" class="midox">
+  </a>
+  <ul class="row tab-list">
+    <div class="form-group mb-20" *ngIf="isAdmin || (isJM && !isIM && !isDM && !isAM)">
+      <input type="text" placeholder="Search Bundle (Min 3 Characters)" aria-label="Number" matInput
+        [formControl]="myControlAdda" [matAutocomplete]="auto" class="form-control"
+        style="box-shadow: none;height: 32px;" matTooltip="Minimum 3 characters need to perform search">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)">
+        <mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
+          {{option?.name}} <br> <span class="employeeIdOptions">{{option.type}}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+
+
+    <a [routerLink]="['/dashboard']" class="d-flex mb-link" routerLinkActive="active">
+      <span class="material-symbols-outlined me-3">
+        dashboard
+      </span>
+      <li class="fs-14">Dashboard</li>
     </a>
-    <ul class="row tab-list">
-      <!-- <h5>Hello</h5> -->
-      
-			<div class="form-group mb-20">
-				<!-- <mat-form-field class="example-full-width"> -->
-						<!-- <mat-label>Select Adda*</mat-label> -->
-						<input type="text"
-												placeholder="Search Bundle (Min 3 Characters)"
-												aria-label="Number"
-												matInput
-												[formControl]="myControlAdda"
-												[matAutocomplete]="auto" class="form-control"
-                        style="box-shadow: none;height: 32px;"
-                        matTooltip="Minimum 3 characters need to perform search"
-												>
-												<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)" >
-								<mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
-										<!-- {{option?.name}} {{option?.type}} -->
-										{{option?.name}} <br> <span class="employeeIdOptions">{{option.type}}</span>
-								</mat-option>
-								<!-- <mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option?.addaNo">
-										{{option?.addaNo}} Hi
-								</mat-option> -->
-						</mat-autocomplete>
-				<!-- </mat-form-field> -->
-		</div>
 
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menu" *ngIf="isAdmin || (isIM && !isJM && !isDM && !isAM)">
+      <span class="material-symbols-outlined me-3">
+        bar_chart
+      </span>
+      <li class="fs-14">Inventory</li>
+    </a>
+    <mat-menu #menu="matMenu">
+      <div class="mtb-10 mlr-10 a-tag">
 
-        <a [routerLink]="['/dashboard']" class="d-flex mb-link" routerLinkActive="active">
-            <span class="material-symbols-outlined me-3">
-                dashboard
-            </span>
-            <li class="fs-14">Dashboard</li>
-        </a>
-        <!-- <a [routerLink]="['/inventory']" class="d-flex mb-link" routerLinkActive="active" [matMenuTriggerFor]="menu"> -->
-        <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menu">
-            <span class="material-symbols-outlined me-3">
-                bar_chart
-            </span>
-            <li class="fs-14">Inventory</li>
-        </a>
-        <mat-menu #menu="matMenu">
-          <div class="mtb-10 mlr-10 a-tag">
-
-          <a [routerLink]="['inventory/add-stock']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-            <mat-icon class="icon-mat">add_circle_outline</mat-icon>
-            <span>
-              Add Stock
-            </span>
-          </a>
-            <!-- <button mat-menu-item class="midox-menu">
-                <mat-icon class="icon-mat">add_circle_outline</mat-icon>
-              <a [routerLink]="['inventory/add-stock']" routerLinkActive="sub-active" class="submenu-link">Add Stock</a>
-            </button> -->
-            <a [routerLink]="['inventory/view']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">remove_red_eye</mat-icon>
-              <span>
-                View Stock
-              </span>
-            </a>
-            <!-- <button mat-menu-item class="midox-menu">
-              <mat-icon class="icon-mat">remove_red_eye</mat-icon>
-              <a [routerLink]="['inventory/view']" class="submenu-link" routerLinkActive="sub-active">View</a>
-            </button> -->
-
-            <a [routerLink]="['inventory/stock-history']" (click)="stockHistoryClick()" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">history</mat-icon>
-              <span>
-                Stock History
-              </span>
-            </a>
-            <!-- <button mat-menu-item class="midox-menu">
-                <mat-icon class="icon-mat">history</mat-icon>
-              <a [routerLink]="['inventory/stock-history']" class="submenu-link" routerLinkActive="sub-active">Stock History</a>
-            </button> -->
-
-            <!-- <a [routerLink]="['inventory/finish-goods']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">check</mat-icon>
-              <span>
-                Finish Goods
-              </span>
-            </a> -->
-            <!-- <button mat-menu-item class="midox-menu">
-              <mat-icon class="icon-mat">check</mat-icon>
-              <a [routerLink]="['inventory/finish-goods']" class="submenu-link" routerLinkActive="sub-active">Finish Goods</a>
-            </button> -->
-
-            <!-- <a [routerLink]="['inventory/dispatch']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">directions_bus</mat-icon>
-              <span>
-                Dispatch
-              </span>
-            </a> -->
-            <!-- <button mat-menu-item class="midox-menu">
-                <mat-icon class="icon-mat">directions_bus</mat-icon>
-              <a [routerLink]="['inventory/dispatch']" class="submenu-link" routerLinkActive="sub-active">Dispatch</a>
-            </button> -->
-
-            <!-- <a [routerLink]="['inventory/dispatch-history', '']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">history</mat-icon>
-              <span>
-                Dispatch History
-              </span>
-            </a> -->
-            <!-- <button mat-menu-item class="midox-menu">
-              <mat-icon class="icon-mat me-1">history</mat-icon>
-              <a [routerLink]="['inventory/dispatch-history']" class="submenu-link" routerLinkActive="sub-active">Dispatch History</a>
-            </button> -->
-        
-          </div>
-          </mat-menu>
-        <!-- <a [routerLink]="['/adda/view-adda']" class="d-flex mb-link" routerLinkActive="active"> -->
-        <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda">
-            <span class="material-symbols-outlined me-3">
-                speaker_notes
-            </span>
-            <li class="fs-14">Adda</li>
-        </a>
-
-        <mat-menu #menuAdda="matMenu">
-          
-          <div class="mtb-10 mlr-10 a-tag">
-            <!-- <a [routerLink]="['adda/add-adda']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon-mat" fontIcon="home"></mat-icon>
-              <span>
-                Add Adda
-              </span>
-            </a> -->
-            <!-- <button mat-menu-item class="midox-menu">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <a [routerLink]="['adda/add-adda']" class="submenu-link" routerLinkActive="sub-active">Add Adda</a>
-            </button> -->
-
-            <a [routerLink]="['adda/view-adda']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">notifications_off</mat-icon>
-              <span>
-                View Adda
-              </span>
-            </a>
-            <!-- <button mat-menu-item class="midox-menu">
-              <mat-icon>notifications_off</mat-icon>
-              <a [routerLink]="['adda/view-adda']" class="submenu-link" routerLinkActive="sub-active">View</a>
-            </button> -->
-            
-            <!-- <a [routerLink]="['adda/add-material']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <span>
-                Add Material
-              </span>
-            </a> -->
-            <!-- <button mat-menu-item class="midox-menu">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <a [routerLink]="['adda/add-material']" class="submenu-link" routerLinkActive="sub-active">Add Material</a>
-            </button> -->
-
-            <!-- <a [routerLink]="['adda/add-pattern']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">notifications_off</mat-icon>
-              <span>
-                Add Pattern
-              </span>
-            </a> -->
-            <!-- <button mat-menu-item class="midox-menu">
-              <mat-icon>notifications_off</mat-icon>
-              <a [routerLink]="['adda/add-pattern']" class="submenu-link" routerLinkActive="sub-active">Add Pattern</a>
-            </button> -->
-            
-            <a [routerLink]="['adda/bundle']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <span>
-                View Bundle
-              </span>
-            </a>
-            <!-- <button mat-menu-item class="midox-menu">
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <a [routerLink]="['adda/bundle']" class="submenu-link" routerLinkActive="sub-active">Bundle</a>
-            </button> -->
-            <!-- <button mat-menu-item>
-              <mat-icon>notifications_off</mat-icon>
-              <a [routerLink]="['inventory/dispatch-history']">Dispatch History</a>
-            </button> -->
-          </div>
-        </mat-menu>
-
-        <!-- <a [routerLink]="['/employee']" class="d-flex mb-link" routerLinkActive="active"> -->
-            <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuEmployee">
-            <span class="material-symbols-outlined me-3">
-                group
-            </span>
-            <li class="fs-14">Employee</li>
-        </a>
-
-        <!-- For employees -->
-        <mat-menu #menuEmployee="matMenu">
-          
-          <div class="mtb-10 mlr-10 a-tag">
-            <a [routerLink]="['employee/add-employee']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <span>
-                Add/View
-              </span>
-            </a>
-            <!-- <button mat-menu-item>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <a [routerLink]="['employee/add-employee']" class="submenu-link" routerLinkActive="sub-active">Add</a>
-            </button> -->
-            <a [routerLink]="['employee/outstanding']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">notifications_off</mat-icon>
-              <span>
-                Outstanding
-              </span>
-            </a>
-            <!-- <button mat-menu-item>
-              <mat-icon>notifications_off</mat-icon>
-              <a [routerLink]="['employee/view-employee']" class="submenu-link" routerLinkActive="sub-active">View</a>
-            </button> -->
-            <a [routerLink]="['employee/job-history']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <span>Job History</span>
-            </a>
-            <!-- <button mat-menu-item>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-              <a [routerLink]="['employee/job-history']" class="submenu-link" routerLinkActive="sub-active">Job History</a>
-            </button> -->
-
-
-
-            <a [routerLink]="['employee/payment-history']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">notifications_off</mat-icon>
-              <span>Payment History</span>
-            </a>
-            <!-- <button mat-menu-item>
-              <mat-icon>notifications_off</mat-icon>
-              <a [routerLink]="['employee/payment']" class="submenu-link" routerLinkActive="sub-active">Payment</a>
-            </button> -->
-          </div>
-        </mat-menu>
-
-        <!-- Dispatch -->
-        <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuDispatch">
-          <span class="material-symbols-outlined me-3">
-              local_shipping
-        </span>
-          <li class="fs-14">Dispatch</li>
-        </a>
-        
-        <mat-menu #menuDispatch="matMenu">
-          <div class="mtb-10 mlr-10 a-tag">
-            <a [routerLink]="['inventory/finish-goods']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">check</mat-icon>
-              <span>
-                Finish Goods
-              </span>
-            </a>
-
-            <a [routerLink]="['inventory/dispatch-history', '']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
-              <mat-icon class="icon-mat">history</mat-icon>
-              <span>
-                Dispatch History
-              </span>
-            </a>
-        
-          </div>
-          </mat-menu>
-
-
-        <a [routerLink]="['/settings']" class="d-flex mb-30" routerLinkActive="active">
-            <span class="material-symbols-outlined me-3">
-                settings
-            </span>
-            <li class="fs-14">Settings</li>
-        </a>
-        <hr>
-        <a [routerLink]="['/profile']" class="d-flex mt-2" routerLinkActive="active">
-            <span class="material-symbols-outlined me-3">
-                account_circle
-            </span>
-            <li class="fs-14">Profile</li>
-        </a>
-        <!-- <a [routerLink]="['/logout']" class="d-flex mb-30 mt-3" routerLinkActive="active"> -->
-        <a class="d-flex mb-30 mt-3 pointer" routerLinkActive="active" data-bs-toggle="modal" data-bs-target="#exampleModalLogout" *ngIf="isLogin">
-            <span class="material-symbols-outlined me-3">
-                logout
-            </span>
-            <li class="fs-14">Logout</li>
-        </a>
-
-        <a [routerLink]="['/login']" class="d-flex mt-2" routerLinkActive="active" *ngIf="!isLogin">
-          <span class="material-symbols-outlined me-3">
-            login
+        <a [routerLink]="['inventory/add-stock']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">add_circle_outline</mat-icon>
+          <span>
+            Add Stock
           </span>
-          <li class="fs-14">Login</li>
-      </a>
-        
-        <!-- <a [routerLink]="['/help']" class="d-flex mb-5" routerLinkActive="active">
-            <span class="material-symbols-outlined me-3">
-                help
-            </span>
-            <li class="fs-14">Help</li>
-        </a> -->
-        
-    </ul>
-</div> 
+        </a>
+        <a [routerLink]="['inventory/view']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">remove_red_eye</mat-icon>
+          <span>
+            View Stock
+          </span>
+        </a>
+        <a [routerLink]="['inventory/stock-history']" (click)="stockHistoryClick()" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">history</mat-icon>
+          <span>
+            Stock History
+          </span>
+        </a>
+      </div>
+    </mat-menu>
+
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda" *ngIf="isAdmin || (!isIM && !isJM && isADM && !isDM && !isAM)">
+      <span class="material-symbols-outlined me-3">
+        speaker_notes
+      </span>
+      <li class="fs-14">Adda</li>
+    </a>
+    <mat-menu #menuAdda="matMenu">
+
+      <div class="mtb-10 mlr-10 a-tag">
+        <a [routerLink]="['adda/view-adda']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">notifications_off</mat-icon>
+          <span>
+            View Adda
+          </span>
+        </a>
+
+        <a [routerLink]="['adda/bundle']" routerLinkActive="sub-active" class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+          <span>
+            View Bundle
+          </span>
+        </a>
+      </div>
+    </mat-menu>
+
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuEmployee" *ngIf="isAdmin || (!isIM && !isJM && !isDM && isAM)">
+      <span class="material-symbols-outlined me-3">
+        group
+      </span>
+      <li class="fs-14">Employee</li>
+    </a>
+    <!-- For employees -->
+    <mat-menu #menuEmployee="matMenu">
+
+      <div class="mtb-10 mlr-10 a-tag">
+        <a [routerLink]="['employee/add-employee']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+          <span>
+            Add/View
+          </span>
+        </a>
+        <a [routerLink]="['employee/outstanding']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">notifications_off</mat-icon>
+          <span>
+            Outstanding
+          </span>
+        </a>
+
+        <a [routerLink]="['employee/job-history']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat" aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+          <span>Job History</span>
+        </a>
+
+        <a [routerLink]="['employee/payment-history']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">notifications_off</mat-icon>
+          <span>Payment History</span>
+        </a>
+      </div>
+    </mat-menu>
+
+    <!-- Dispatch -->
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuDispatch" *ngIf="isAdmin || (!isIM && !isJM && isDM && !isAM)">
+      <span class="material-symbols-outlined me-3">
+        local_shipping
+      </span>
+      <li class="fs-14">Dispatch</li>
+    </a>
+    <mat-menu #menuDispatch="matMenu">
+      <div class="mtb-10 mlr-10 a-tag">
+        <a [routerLink]="['inventory/finish-goods']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">check</mat-icon>
+          <span>
+            Finish Goods
+          </span>
+        </a>
+
+        <a [routerLink]="['inventory/dispatch-history', '']" routerLinkActive="sub-active"
+          class="d-flex mb-link submenu-link midox-menu">
+          <mat-icon class="icon-mat">history</mat-icon>
+          <span>
+            Dispatch History
+          </span>
+        </a>
+
+      </div>
+    </mat-menu>
+
+
+    <a [routerLink]="['/settings']" class="d-flex mb-30" routerLinkActive="active" *ngIf="isAdmin || (!isIM && !isJM && !isDM && !isAM)">
+      <span class="material-symbols-outlined me-3">
+        settings
+      </span>
+      <li class="fs-14">Settings</li>
+    </a>
+
+
+    <hr>
+    <a [routerLink]="['/profile']" class="d-flex mt-2" routerLinkActive="active">
+      <span class="material-symbols-outlined me-3">
+        account_circle
+      </span>
+      <li class="fs-14">Profile</li>
+    </a>
+
+    <a class="d-flex mb-30 mt-3 pointer" routerLinkActive="active" data-bs-toggle="modal"
+      data-bs-target="#exampleModalLogout" *ngIf="isLogin">
+      <span class="material-symbols-outlined me-3">
+        logout
+      </span>
+      <li class="fs-14">Logout</li>
+    </a>
+
+    <a [routerLink]="['/login']" class="d-flex mt-2" routerLinkActive="active" *ngIf="!isLogin">
+      <span class="material-symbols-outlined me-3">
+        login
+      </span>
+      <li class="fs-14">Login</li>
+    </a>
+  </ul>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -316,8 +193,9 @@
         Are you sure you want to log out?
       </div>
       <div class="modal-footer">
-      <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
-      <button type="button" class="btn btn-sm btn-primary" (click)="logoutFn()" data-bs-dismiss="modal">Logout</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="logoutFn()"
+          data-bs-dismiss="modal">Logout</button>
       </div>
     </div>
   </div>
