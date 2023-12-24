@@ -23,8 +23,8 @@
        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
        <dxi-column dataField="bundleName" caption="Bundle Name" [width]="150"></dxi-column>
        <dxi-column dataField="quantity" caption="Qty" [alignment]="'left'"></dxi-column>  
-       <dxi-column dataField="color" caption="Color" [alignment]="'left'"></dxi-column>  
-       <dxi-column dataField="size" caption="Size" [alignment]="'left'"></dxi-column>  
+       <dxi-column dataField="color.displayValue" caption="Color" [alignment]="'left'"></dxi-column>  
+       <dxi-column dataField="size.displayValue" caption="Size" [alignment]="'left'"></dxi-column>  
        <dxi-column caption="Status" cellTemplate="cellTemplateHyperlink2" alignment="left" [minWidth]="140"></dxi-column>  
        <div *dxTemplate="let data of 'cellTemplateHyperlink2'">
           <div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockStatus">
