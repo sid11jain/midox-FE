@@ -43,11 +43,8 @@ export class AddProductComponent {
     this.showSpinner = true;
     this.deleteBtnDisabled = false;
     let inputVal = this.productForm.value.name;
-    console.log("inputVal ", inputVal);
     if(this.editedProductIndex !== null){
       //For update
-      console.log("Update");
-      console.log("editObject ", this.editObject);
       let obj = {    
         "entityCd": "UNIT_KG8",
         "parentEntityCd": null,
@@ -58,7 +55,6 @@ export class AddProductComponent {
       obj.entityCd = this.editObject?.entityCd;
       obj.entityId = this.editObject?.entityId;
       obj.displayValue = inputVal;
-      // console.log("Obj ", obj);
       
       // this.editProduct(obj);
       
@@ -74,8 +70,7 @@ export class AddProductComponent {
       }
       // obj.entityCd = "PROD_"+currTime;
       obj.displayValue = inputVal;
-      let data = [obj]
-      console.log(data);    
+      let data = [obj]   
 
       // this.addProduct(data);
       
@@ -110,90 +105,4 @@ export class AddProductComponent {
     this.showSpinner = false;
   }
 
-  //API Call
-  // getProduct(){
-  //   console.log("API Call");
-    
-  //   this.common.getAllSettingsData("MID_PROD").subscribe((responseData:any)=>{
-  //     let response = responseData?.body;
-  //     if (responseData.status === 200) {
-  //       this.productArray = response;
-  //       console.log(response);       
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);         
-  //     }
-  //     this.showSpinner = false;
-  //   });
-  // }
-
-  // Delete
-  // deleteProduct(entityCd:any){
-  //   console.log("API Call");    
-  //   this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
-  //     // let response = responseData?.body;
-  //     console.log(responseData);        
-  //     if (responseData.status === 200) {
-  //       this.getProduct();
-  //       this.dialogMessage = 'Product delete successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Product failed to delete.';        
-  //     }
-  //     this.showSpinner = false; 
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Add
-  // addProduct(data:any){
-  //   console.log("Post API Call");
-  //   this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);       
-  //       this.getProduct();    
-        
-  //       this.dialogMessage = 'Product saved successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);    
-  //       this.dialogMessage = 'Product failed to save.'; 
-  //     }      
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Edit
-  // editProduct(data:any){
-  //   console.log("Edit API Call");
-  //   this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 200) {
-  //       console.log(response);       
-  //       this.getProduct();   
-  //       this.dialogMessage = 'Product update successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Product failed to update.';        
-  //     }
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  //Modal 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(MsgDialogComponent, {
-  //     width: '400px',
-  //     data: { title: this.dialogTitle, message: this.dialogMessage }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result:any) => {
-  //     console.log('The dialog was closed');
-  //   });
-  // }
 }

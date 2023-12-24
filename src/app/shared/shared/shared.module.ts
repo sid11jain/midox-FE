@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule} from '@angular/material/menu';
 import { NgChartsModule } from 'ng2-charts';
 import { MatIconModule } from '@angular/material/icon';
-// import { BrowserModule } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DxDataGridModule } from 'devextreme-angular';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,20 +14,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {NgFor, AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
-
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 
 @NgModule({
   declarations: [],

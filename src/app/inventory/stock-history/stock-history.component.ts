@@ -24,7 +24,6 @@ export class StockHistoryComponent implements OnDestroy {
   constructor(private formBuilder: FormBuilder, private commonService: CommonService){ 
     commonService.stockHistoryData.subscribe((val:any) => {
       this.stockHistoryDetails = val?.data;
-      console.log(this.stockHistoryDetails);
     });
     this.subscriber = commonService.isStockHistoryClick.subscribe((val:any) => {
       this.isCalendarVisible = val;
@@ -69,16 +68,8 @@ export class StockHistoryComponent implements OnDestroy {
     });
  
     this.dateSelectorGroup.controls['startDate'].valueChanges.subscribe(value => {
-      console.log('start date changes');
       if(value){
         this.displayStartDate = value;
-        // const endDate = moment(this.dateSelectorGroup.controls['endDate'].value);
-        // const startDate = moment(value);
-        // const difference = endDate.diff(startDate, 'days');
-        // console.log(difference);
-        // if(difference > 90){
-        //   this.displayEndDate = value;
-        // }
       }
       else{
         this.displayStartDate = "N/A"
@@ -86,13 +77,11 @@ export class StockHistoryComponent implements OnDestroy {
     });
  
     this.dateSelectorGroup.controls['endDate'].valueChanges.subscribe(value => {
-      console.log('end date changes');
       
       if(value){
         const endDate = moment(value);
         const startDate = moment(this.dateSelectorGroup.controls['startDate'].value);
         const difference = endDate.diff(startDate, 'days');
-        console.log(difference);
         if(difference < 90){
           this.displayEndDate = value;
         }else{
@@ -122,7 +111,6 @@ export class StockHistoryComponent implements OnDestroy {
       "toDate":endDate,
     }
     this.getStockHistory(stockObj);
-    console.log('Form values:', this.dateSelectorGroup.value);
     this.dateSelectorGroup.reset();
   }
 

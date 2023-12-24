@@ -24,7 +24,6 @@ export class DispatchComponent implements OnInit {
 
   ngOnChanges(){
     if(this.dataForDispatch){
-      console.log("dataForDispatch ", this.dataForDispatch);
       this.dispatchLimit = this.dataForDispatch?.availableQuantity;
       this.resetForm();
     }    
@@ -43,13 +42,9 @@ export class DispatchComponent implements OnInit {
     if (this.dispatchInventoryForm.invalid) {
       return;
     }
-    // const currentFullTimestamp = new Date();
-    // this.dispatchInventoryForm.patchValue({ currentFullTimestamp });
-    // console.log('Dispatch Inventory Form values:', this.dispatchInventoryForm.value);
     this.showSpinner = true; 
     let finalObj = {...this.dispatchInventoryForm.value};
     finalObj.finishedGoodsId = this.dataForDispatch?.finishedGoodsId;
-    console.log("final dispatch: ",finalObj);
     let temp = await this.common.addDataFn1(finalObj, "finished-goods", "dispatch", "get-dispatches", this.dispatchTitle);    
     this.resetForm();
     this.showSpinner = false; 

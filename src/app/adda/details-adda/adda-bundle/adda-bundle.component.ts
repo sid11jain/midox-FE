@@ -21,19 +21,11 @@ export class AddaBundleComponent {
     this.showSpinner = true;
     await this.route.params.subscribe(async (params) => {
       const patternId = params['patternId'];
-      // const brandId = params['brandId'];
       const addaId = params['addaId'];
-      // console.log('Received ID:', patternId);
       this.bundleDetailObj = { "patternId": patternId }
       this.detailAddaData = await this.commonService.getDataFn1({ "addaId": addaId }, "adda", "get-addas");
       this.bundleAddaData = await this.commonService.getDataFn1({ "patternId": patternId }, "bundle", "get-bundles");
       this.processData = this.detailAddaData[0].designDetails?.processes;
-      // this.processData = await this.commonService.getDataFn1({ "brandId": brandId }, "design", "get-designs");
-      // let designNo = this.detailAddaData[0]?.designNo;
-      // this.processData = await this.commonService.getDataFn1({ "brandId": brandId, "designNo": designNo}, "design", "get-designs");
-      // this.processData = this.processData[0].processes;
-      console.log("processData ", this.processData);
-
       this.showSpinner = false;
     });
   } 

@@ -10,8 +10,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm:any =  FormGroup;
+  isLoginError:boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private commonService: CommonService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private commonService: CommonService, private router: Router) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('roles');
+   // this.commonService.loginToken.unsubscribe();
+    //this.commonService.loginToken.next(null);
+   }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -26,19 +32,28 @@ export class LoginComponent implements OnInit {
     }
 
     // Display the form values in the console
-    console.log(this.loginForm.value);
     let username = this.loginForm?.value?.username;
     let password = this.loginForm?.value?.password;
-    this.commonService.login(username,password).subscribe((result:any) => {
-      console.log(result);
-      
-      if(result){
-        console.log("Login Succsess");
-        this.router.navigate(['/dashboard']);
-      }
-      else{
-        console.log("Login Failed");        
-      }
+    this.commonService.login(username,password).subscribe({
+      next: (result: any) =>{
+        if(result?.token){
+          const roles = result?.roles;
+          if(roles?.length){
+            //this.commonService.roles.next(roles);
+            localStorage.setItem('roles', roles);
+          }
+          //this.commonService.loginToken.next(result?.token);
+          localStorage.setItem('token', result?.token);
+          this.router.navigate(['/dashboard']);
+        }
+      },
+      error: (err: any) => {
+        console.error('Login Error: ' + err);
+        this.isLoginError = true;
+        setTimeout(() =>{
+          this.isLoginError = false;
+        },3000);
+      },
     })
   }
 

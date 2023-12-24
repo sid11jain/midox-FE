@@ -281,12 +281,19 @@
             <li class="fs-14">Profile</li>
         </a>
         <!-- <a [routerLink]="['/logout']" class="d-flex mb-30 mt-3" routerLinkActive="active"> -->
-        <a class="d-flex mb-30 mt-3 pointer" routerLinkActive="active" data-bs-toggle="modal" data-bs-target="#exampleModalLogout">
+        <a class="d-flex mb-30 mt-3 pointer" routerLinkActive="active" data-bs-toggle="modal" data-bs-target="#exampleModalLogout" *ngIf="isLogin">
             <span class="material-symbols-outlined me-3">
                 logout
             </span>
             <li class="fs-14">Logout</li>
         </a>
+
+        <a [routerLink]="['/login']" class="d-flex mt-2" routerLinkActive="active" *ngIf="!isLogin">
+          <span class="material-symbols-outlined me-3">
+            login
+          </span>
+          <li class="fs-14">Login</li>
+      </a>
         
         <!-- <a [routerLink]="['/help']" class="d-flex mb-5" routerLinkActive="active">
             <span class="material-symbols-outlined me-3">

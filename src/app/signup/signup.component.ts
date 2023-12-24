@@ -34,7 +34,6 @@ export class SignupComponent implements OnInit {
     }
     const currentFullTimestamp = new Date();
     this.signupForm.patchValue({ currentFullTimestamp });
-    console.log(this.signupForm.value);
     this.onClear();
   }
 

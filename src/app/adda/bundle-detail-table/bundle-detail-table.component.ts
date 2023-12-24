@@ -52,7 +52,6 @@ export class BundleDetailTableComponent {
     this.route.params.subscribe((params:any) => {
       if (params.data) {
         const data = JSON.parse(params.data);
-        console.log(data); 
         this.bundleDataFromParent = data;
         // this.cssValue = "85vh";
         this.cssValue = {'parent': '95vh','body':'85vh'};
@@ -89,10 +88,8 @@ export class BundleDetailTableComponent {
   }
   
   async statusChangefn(val: any, data: any) {
-    // console.log(val.target.value);
     this.showSpinner = true;
     let tempObj = { "bundleId": data.bundleId, "currentProcessStatus": val.target.value };
-    console.log(tempObj);
 
     this.statusForm.reset();
     let temp = await this.commonService.addDataFn1(tempObj, "bundle", "update-status", "get-bundles", this.dialogTitle);
@@ -100,7 +97,6 @@ export class BundleDetailTableComponent {
   }
   
   private _filter(value: any): any {
-    // console.log(value);
     let filterValue: any;
     filterValue = value.toLowerCase();
     return this.optionsEmployee.filter((val: any) => val?.empName?.toLowerCase().includes(filterValue));
@@ -108,29 +104,18 @@ export class BundleDetailTableComponent {
 
   async optionSelectedEmployee(event: any, data: any) {
     const selectedOptionValue = event.option.value;
-    console.log('Selected Option Value:', selectedOptionValue);
     let employeeObj = this.employeeData.find((option: any) => option.empName === selectedOptionValue);
-    // console.log('Selected Option:', employeeObj);
     let currentEmployeeId = employeeObj.empId;
-    // console.log("Row data ", data);
     let bundleId = data.bundleId;
-    let tempObj = { "bundleId": bundleId, "currentEmployeeId": currentEmployeeId }
-    // console.log("currentEmployeeId ",currentEmployeeId);
-    // console.log("bundleId ",bundleId);
-    console.log("tempObj ", tempObj);
+    let tempObj = { "bundleId": bundleId, "currentEmployeeId": currentEmployeeId };
     this.showSpinner = true;
     this.myControlEmployee.reset();
     let temp = await this.commonService.addDataFn1(tempObj, "bundle", "assign-employee", "get-bundles", this.dialogTitle);
     this.ngOnInit();
 
-
-    // this.maxQuantiy = this.stockDataObj.availableQuantity;
-    // this.addaMaterialForm?.get('stockId')?.patchValue(this.stockDataObj.stockId);  
-    // this.addaMaterialForm?.get('addaId')?.patchValue(this.addaId);  
   }
   
   async printStickerFn() {
-    // console.log("All Bundle : ", this.bundleAddaData);
     this.showSpinner = true;
     
     let stickerObj:any = {"patternId": this.patternId };
@@ -193,14 +178,11 @@ export class BundleDetailTableComponent {
       };
 
       let fourthRow = { text: [{ text: "ST. PROS.", bold: true, fontSize: fontSize }], style: "row"};
-      console.log(data?.stPros);
+
       
       let fifthRow = {
         style: 'table',
         table: {
-          //headerRows: 1,
-          // body:  stProsListArr
-          // body:  [stProsListArr]
           body:
           [
             [{ text: data?.stPros[0], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[1], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[2], style: 'tableHeader', bold: true, fontSize: fontSize }, { text: data?.stPros[3], style: 'tableHeader', bold: true, fontSize: fontSize }],
@@ -246,30 +228,11 @@ export class BundleDetailTableComponent {
   async exportPdf(detail: any){
     
     this.showSpinner = true;
-    console.log("Row  detail ", detail);
-
-    // let jobCardPdfData = await this.commonService.getDataFn1({ "exclude_status": detail.status.entityCd, "bundleHistoryId": detail.bundleId }, "job", "card");
-    // let jobCardPdfData = await this.commonService.getDataFn1({"bundleHistoryId": detail.bundleId }, "job", "card");
     let jobCardPdfData = await this.commonService.getDataFn1({"bundleId": detail.bundleId }, "job", "card");
-    // console.log("jobCardPdfData ",jobCardPdfData);
-
-    // console.log("PDF detail ", this.detailAddaData);
-    // console.log("processData ", this.processData);
     const docDefinition: any = {
       pageOrientation: "portrait",
       pageMargins: [40, 30, 20, 20],
       pageSize: "A6",
-      //   header: {
-      //     margin: 25.5,
-      //     columns: [
-      //         {
-      //             image: logo,
-      //             height: 106.4,
-      //             width: 540
-      //             // alignment: 'center'
-      //         }
-      //     ]
-      // },
 
       footer: function (currentPage: any, pageCount: any) {
         return [{ text: 'Page ' + currentPage.toString() + ' of ' + pageCount, alignment: 'center', fontSize: 9 }];

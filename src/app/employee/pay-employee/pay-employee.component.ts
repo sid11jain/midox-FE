@@ -57,7 +57,6 @@ export class PayEmployeeComponent {
   }
 
   private _filter(value: any): any {
-    // console.log(value);
     let filterValue:any;
     filterValue = value.toLowerCase();
     return this.options.filter((val:any) => val?.empName?.toLowerCase().includes(filterValue));
@@ -65,9 +64,7 @@ export class PayEmployeeComponent {
 
   optionSelected(event: any): void {
     const selectedOptionValue = event.option.value;
-    // console.log('Selected Option Value:', selectedOptionValue);
     this.selectedEmployeeObj = this.allEmployeeList.find((option: any) => option?.empName === selectedOptionValue);
-    console.log('Selected Option:', this.selectedEmployeeObj);
     let empIdPaidBy = this.selectedEmployeeObj?.empId;
     this.payEmployeeForm?.get('paidBy')?.patchValue(empIdPaidBy);  
   }
@@ -75,12 +72,10 @@ export class PayEmployeeComponent {
   async onSubmit() {
     if (this.payEmployeeForm.invalid) {
       return;
-    }  
-    // console.log(this.payEmployeeForm.value);    
+    }     
     this.showSpinner = true; 
     let payEmpObj = {...this.payEmployeeForm.value};
     payEmpObj.employeeId = this.employeeDataForPayment?.employeeId?.empId;
-    console.log("payEmpObj ",payEmpObj);    
     let temp = await this.common.addDataFn1(payEmpObj, "employee", "pay", "get-employees", this.payEmployeeTitle);
     this.resetForm();
     this.showSpinner = false;
@@ -95,7 +90,6 @@ export class PayEmployeeComponent {
 
   ngOnChanges(){
     if(this.employeeDataForPayment){
-      console.log("employeeDataForPayment ", this.employeeDataForPayment);
       this.resetForm();
     }    
   }

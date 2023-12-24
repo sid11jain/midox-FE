@@ -14,6 +14,8 @@ import { MsgDialogComponent } from './shared/msg-dialog/msg-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { LoggingInterceptor } from './services/logging.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatIconModule,
     MatTooltipModule
   ],
-  providers: [],  //{provide:MatDialogRef , useValue:{} },{ provide: MAT_DIALOG_DATA, useValue: {} }
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

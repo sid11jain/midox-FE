@@ -58,15 +58,12 @@ export class AddDesignComponent {
     const selectControl1 = this.designReactiveForm.get('brandId');    
     const selectControl2 = this.designReactiveForm.get('productCd');
     selectControl1?.enable();
-    selectControl2?.enable();
-
-    console.log("Form: ",this.designReactiveForm.value);   
+    selectControl2?.enable();  
 
     if(this.editedMaterialIndex !== null){
       //For update
       let editObj = this.designReactiveForm?.value;
       editObj.designId = this.designId;
-      console.log("editObj : ",editObj);
       let temp = await this.common.addDataFn1(this.designReactiveForm?.value, "design", "edit", "get-designs", this.dialogTitle);
       if(temp){
         this.formEntries = temp;
@@ -91,16 +88,11 @@ export class AddDesignComponent {
     this.editedMaterialIndex = index;
     let entry:any = {};
     entry = {...this.formEntries[index]};
-    console.log("edit ",entry);
     this.designId = entry?.designId;
     entry.productCd = entry?.productCd?.entityCd;
     entry.brandId = entry?.brandDetails?.brandId;
     
     this.designReactiveForm.patchValue(entry);
-
-    console.log("edit : ",this.designReactiveForm.value);
-    
-    
     const selectControl1 = this.designReactiveForm.get('brandId');
     const selectControl2 = this.designReactiveForm.get('productCd');
     selectControl1?.disable();
@@ -108,15 +100,11 @@ export class AddDesignComponent {
   }
 
   changeSpinner(data: boolean) {
-    // this.items.push(newItem);
-    console.log(data);
-    
     this.showSpinnerTable = data;
   }
 
   // Modal open
   selectProcess(data:any){
-    // console.log(data);
     this.modalValue = data;    
   }
 
@@ -125,8 +113,7 @@ export class AddDesignComponent {
     this.common.getAllSettingsData("MID_PROD").subscribe((responseData:any)=>{
       let response = responseData?.body;
       if (responseData.status === 200) {
-        this.productDropdownValues = response;
-        console.log(response);        
+        this.productDropdownValues = response;        
       }
       else{
         console.log("Error code: ",responseData?.status);        
@@ -138,8 +125,7 @@ export class AddDesignComponent {
   getBrand(data:any){
     this.common.addSupplierOrBrandSettingsData(data,"brand","get-brands").subscribe(async (responseData:any)=>{
       let response = responseData?.body;   
-      if (responseData.status === 200) {
-        console.log("Brand",response);     
+      if (responseData.status === 200) {    
         this.brandDropdownValues = response;
       }
       else{

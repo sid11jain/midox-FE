@@ -33,23 +33,18 @@ export class AddAddaComponent implements OnInit {
   dialogTitle:string = "ADDA"
   brandNamesData:any=[]; 
   designNumberData:any=[]; 
-  // productData:any=["One","Two","Three","Four","Five"]; 
-  // managingInfoData:any=["One","Two","Three","Four","Five"]; 
-  // employeeNameData:any=["One","Two","Three","Four","Five"]; 
 
   constructor(private formBuilder: FormBuilder, private common: CommonService) { 
     this.initForm();
   }
 
-  ngOnChanges(){
-    console.log("forEditAdda ",this.forEditAdda);    
+  ngOnChanges(){  
     this.addAddaForm.reset();
     this.initForm();
     this.ngOnInit();
 
     if(this.forEditAdda){
       this.addaTitle = "Edit ADDA";
-      console.log("Edit");
       this.addAddaForm.get('status')?.enable();
       this.addaId = this.forEditAdda?.addaId;
       this.addaNo = this.forEditAdda?.addaNo;
@@ -64,7 +59,6 @@ export class AddAddaComponent implements OnInit {
       });
     }
     else{
-      console.log("Add");
       this.addaTitle = "Add ADDA";
     }
     
@@ -90,8 +84,7 @@ export class AddAddaComponent implements OnInit {
   
   async getDesignFn(data:any){
     //Once I pass design id then it will send design values
-    this.addAddaForm.get('designId')?.disable(); 
-    console.log("Fn brandId ",data.value);
+    this.addAddaForm.get('designId')?.disable();
     this.designNumberData = [];
     this.designNumberData = await this.common.getDataFn1({"brandId": data.value}, "design", "get-designs");       
     this.addAddaForm.get('designId')?.enable(); 
@@ -115,17 +108,13 @@ export class AddAddaComponent implements OnInit {
       return;
     }
     this.showSpinner = true;
-    console.log('Dispatch Inventory Form values:', this.addAddaForm.value);
 
   if(this.forEditAdda){
-    console.log("Edit API Called");
-    console.log(this.addAddaForm?.value);
     this.addAddaForm.value.addaId = this.addaId;
     this.addAddaForm.value.addaNo = this.addaNo;
     let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "edit", "get-addas", this.dialogTitle);
     }
     else{
-      console.log("Add API Called");
       let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "add", "get-addas", this.dialogTitle);
     }
     

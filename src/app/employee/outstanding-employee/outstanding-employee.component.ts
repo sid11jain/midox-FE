@@ -24,7 +24,6 @@ export class OutstandingEmployeeComponent {
   }
 
   dataFromPayEmployee(data: any) {
-    console.log(data);
     this.ngOnInit();    
   }
   

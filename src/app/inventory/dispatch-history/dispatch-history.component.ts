@@ -12,11 +12,6 @@ export class DispatchHistoryComponent {
   // disptachDetails: any = [];
   disptachHistory: any;
   constructor(private commonService: CommonService, private route: ActivatedRoute){
-    // commonService.dispatchData.subscribe((val:any) => {
-    //   this.disptachDetails = val;
-    //   console.log(this.disptachDetails);
-      
-    // });
   }
 
   async ngOnInit(){

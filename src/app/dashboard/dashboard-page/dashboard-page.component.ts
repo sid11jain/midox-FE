@@ -12,6 +12,14 @@ import { CommonService } from 'src/app/services/common.service';
 export class DashboardPageComponent {
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   dashboardDetails:any = {};
+
+  bundlePieDetails:any = {};
+  clothPieDetails:any = {};
+
+  addaCompletedDetails:any = {};
+  accessoriesDetails:any = {};
+  bundleBarDetails:any = {};
+  dispatchSTackedDetails:any = {};
   showSpinner:boolean = true;
   constructor(private common: CommonService){
 
@@ -40,6 +48,7 @@ export class DashboardPageComponent {
       },
     }
   };
+
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [ [ 'Flopped' , '(3000)'], [ 'Booked' , '2000']],
     datasets: [ {
@@ -48,16 +57,24 @@ export class DashboardPageComponent {
       backgroundColor: ['#919ee5', '#3F51B5'],
     } ]
   };
+
+  public clothpieChartData: ChartData<'pie', number[], string | string[]> = {
+    labels: [ [ 'Flopped' , '(3000)'], [ 'Booked' , '2000']],
+    datasets: [ {
+      data: [ 300, 500 ],
+      //borderColor: '#36A2EB',
+      backgroundColor: ['#919ee5', '#3F51B5'],
+    } ]
+  };
+
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [ DatalabelsPlugin ];
 
-  // events
+  // // events
   public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
   }
 
   public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
   }
 
   //bar chart
@@ -84,7 +101,7 @@ export class DashboardPageComponent {
   public barChartPlugins = [
     DatalabelsPlugin
   ];
-  public barChartData: ChartData<'bar'> = {
+  public addaPerMonthBarChartData: ChartData<'bar'> = {
     labels: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
     datasets: [
       { 
@@ -97,6 +114,21 @@ export class DashboardPageComponent {
     ],
     
   };
+
+  public accessoriesBarChartData: ChartData<'bar'> = {
+    labels: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+    datasets: [
+      { 
+        data: [ 65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56 ],
+        backgroundColor: [
+          '#3F51B5'
+        ],
+      },
+      
+    ],
+    
+  };
+
   public barBundleChartData: ChartData<'bar'> = {
     labels: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
     datasets: [

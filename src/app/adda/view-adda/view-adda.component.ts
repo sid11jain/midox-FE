@@ -23,14 +23,11 @@ export class ViewAddaComponent {
   }
 
   getSelectedData(rowData:any) {
-    console.log("rowData ", rowData);   
-    // this.sendAddaAddMaterialdata(rowData);
     this.editAddaData = rowData?.data;
 
   }
 
   dataFromAddAdda(data: any) {
-    console.log(data);
     this.showSpinner = true;
     this.ngOnInit();    
   }

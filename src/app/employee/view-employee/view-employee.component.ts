@@ -44,7 +44,6 @@ export class ViewEmployeeComponent {
   // }
 
   getSelectedData(rowData:any) {
-    console.log("rowData ", rowData);   
     // this.sendViewEmployeedata(rowData);
   }
 
@@ -53,7 +52,6 @@ export class ViewEmployeeComponent {
   }
 
   dataFromPayEmployee(data: any) {
-    console.log(data);
     this.ngOnInit();    
   }
   

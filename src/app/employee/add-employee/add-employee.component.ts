@@ -46,13 +46,11 @@ export class AddEmployeeComponent implements OnInit {
     if (this.employeeForm.invalid) {
       return;
     }
-    console.log('Emp Form values:', this.employeeForm.value);
     this.showSpinner = true;
     if(this.editedMaterialIndex !== null){
       //For update
       let tempObj = this.employeeForm?.value;
       tempObj.empId = this.employeeId;
-      console.log(tempObj);
       
       let temp = await this.common.addDataFn1(this.employeeForm?.value, "employee", "edit", "get-employees", this.dialogTitle);
       if(temp){
@@ -80,7 +78,6 @@ export class AddEmployeeComponent implements OnInit {
     document.getElementById("addEmployeeAccordian")?.click();
     this.editedMaterialIndex = index;
     this.employeeId = data?.empId;
-    console.log(data);
     
     
     this.employeeForm.patchValue({

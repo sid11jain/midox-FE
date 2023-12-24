@@ -10,10 +10,6 @@ export class JobHistoryComponent {
   showSpinner:boolean = true;
   allEmployeesJobHistoryDetails: any = [];
   constructor(private commonService: CommonService){ 
-    // commonService.employeeJobHistoryData.subscribe((val:any) => {
-    //   this.employeeJobHistoryDetails = val;
-    //   console.log(this.employeeJobHistoryDetails);      
-    // });
   }
  
   async ngOnInit(){
@@ -27,14 +23,5 @@ export class JobHistoryComponent {
     let fileName = "Job History";
     this.commonService.onExportingData(e,fileName);
   }
-
-  // sendJobHistoryEmployeeData(data:any){
-  //   this.commonService.employeePaymentData.next(data);    
-  // }
-
-  // getSelectedData(rowData:any) {
-  //   console.log("rowData ", rowData);   
-  //   // this.sendJobHistoryEmployeeData(rowData);
-  // }
  
 }

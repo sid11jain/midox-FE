@@ -40,8 +40,7 @@ export class AddaAddPatternComponent {
     
     await this.route.params.subscribe(async (params) => {
       this.addaId = params['addaId'];
-    })
-    console.log("Adda ID ", this.addaId);    
+    })   
 
     this.patternAddaAddForm = this.formBuilder.group({
       // addaId: [this.addaId],
@@ -55,11 +54,9 @@ export class AddaAddPatternComponent {
     
     this.colorArray = await this.common.getDataFn(this.key);
     this.sizeArray = await this.common.getDataFn(this.key1);
-    console.log("Color array ", this.colorArray);
     
     this.showSpinner = false; 
     this.patternAddaAddForm?.get('quantity')?.valueChanges.subscribe(value => {
-      console.log('Input value changed:', value);
       this.patternAddaAddForm.get('bundleSize')?.reset();
       this.patternAddaAddForm.get('bundleSize')?.disable();
       
@@ -78,10 +75,8 @@ export class AddaAddPatternComponent {
 
   onBlur(): void {
     const inputValue = this.patternAddaAddForm.get('quantity')?.value;
-    // console.log('Input value on blur:', inputValue);
     if(inputValue){
       this.bundleDropdownData = this.findFactors(inputValue);
-      console.log("bundleDropdownData ", this.bundleDropdownData);
       this.patternAddaAddForm.get('bundleSize')?.enable();
     }
     
@@ -98,12 +93,10 @@ export class AddaAddPatternComponent {
         let tempObj = { ...this.patternAddaAddForm.value };
         tempObj.patternId = this.patternId;
         tempObj.patternName = this.patternName;
-        console.log("Edit ", tempObj);
         let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.addaPatternTitle);
       }
       else {
         this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
-        console.log("Add ", this.patternAddaAddForm.value);
         let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
       }
 
@@ -117,9 +110,7 @@ export class AddaAddPatternComponent {
 
   async updateRemainingQtyFn(){
     this.detailAddaData = await this.common.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
-    this.remainingQtyAdda = this.detailAddaData[0]?.remainingQtyForPattern;
-    console.log("remainingQtyAdda ", this.remainingQtyAdda);
-    console.log("forEditAddaPattern ",this.forEditAddaPattern);    
+    this.remainingQtyAdda = this.detailAddaData[0]?.remainingQtyForPattern;  
   }
 
   async ngOnChanges(){
@@ -130,7 +121,6 @@ export class AddaAddPatternComponent {
 
     if(this.forEditAddaPattern){
       this.addaPatternTitle = "Edit Adda Pattern";
-      console.log("Edit"); 
       this.patternId = this.forEditAddaPattern.patternId; 
       this.patternName = this.forEditAddaPattern.patternName; 
       // this.addaMaterialForm.get('stockId')?.disable();
@@ -143,7 +133,6 @@ export class AddaAddPatternComponent {
       });
     }
     else{
-      console.log("Add");
       this.addaPatternTitle = "Add Adda Pattern";
     }
   }
@@ -161,10 +150,5 @@ export class AddaAddPatternComponent {
     }
     return factors;
   }
-  
-  // // Example usage:
-  // const inputNumber = 10;
-  // const factors = findFactors(inputNumber);
-  // console.log(`Factors of ${inputNumber}:`, factors);
   
 }

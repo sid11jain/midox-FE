@@ -29,7 +29,6 @@ export class FinishGoodsComponent {
   }
 
   dataFromDispatch(data: any) {
-    console.log(data);
     this.ngOnInit();    
   }
 }

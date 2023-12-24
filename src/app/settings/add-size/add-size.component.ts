@@ -40,11 +40,8 @@ export class AddSizeComponent {
     this.showSpinner = true; 
     this.deleteBtnDisabled = false;
     let inputVal = this.materialForm.value.name;
-    console.log("inputVal ", inputVal);
     if(this.editedMaterialIndex !== null){
       //For update
-      console.log("Update");
-      console.log("editObject ", this.editObject);
       let obj = {    
         "entityCd": "",
         "parentEntityCd": null,
@@ -66,8 +63,7 @@ export class AddSizeComponent {
         "displayValue": ""
       }
       obj.displayValue = inputVal;
-      let data = [obj]
-      console.log(data);  
+      let data = [obj];  
       // this.addMaterial(data);     
 
       // Post API call

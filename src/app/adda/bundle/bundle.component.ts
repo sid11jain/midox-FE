@@ -45,7 +45,6 @@ export class BundleComponent {
   }
 
   private _filterAdda(value: any): any {
-    // console.log(value);
     let filterValue: any;
     filterValue = value.toLowerCase();
     return this.optionsAdda.filter((val: any) => val?.addaNo?.toLowerCase().includes(filterValue));
@@ -57,7 +56,6 @@ export class BundleComponent {
     
     let addaObj = this.detailAddaData.find((option: any) => option.addaNo === selectedOptionValue);
     let addaId = addaObj.addaId;
-    console.log('addaId:', addaId);
     
     this.bundleDetailObj = { "addaId": addaId };
     
