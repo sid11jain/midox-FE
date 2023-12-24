@@ -380,5 +380,18 @@ export class CommonService {
     }
   }
 
+  // Authentication Auth Service
+  login(username:string, password:string): Observable<any>{
+    // this.payloadUrl = `${this.baseUrl}groups/edit-entity`;
+    let apiUrl = `${this.baseUrl}authenticate`;
+    const loginData = {
+      username: username,
+      password: password
+    };
+
+    return this.http.post<any>(apiUrl, loginData);
+
+  }
+
 
 }
