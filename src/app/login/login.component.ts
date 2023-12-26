@@ -37,9 +37,9 @@ export class LoginComponent implements OnInit {
       next: (result: any) =>{
         if(result?.token){
           const roles = result?.roles;
-          if(roles?.length){
+          if(roles?.length){  
             //this.commonService.roles.next(roles);
-            localStorage.setItem('roles', roles);
+            localStorage.setItem('roles', JSON.stringify(roles));
           }
           //this.commonService.loginToken.next(result?.token);
           localStorage.setItem('token', result?.token);

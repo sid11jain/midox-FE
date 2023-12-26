@@ -23,5 +23,7 @@ export class SettingsPageComponent implements OnInit {
     this.isJM = JSON.parse(localStorage.getItem("isJM") as any);
     this.isDM = JSON.parse(localStorage.getItem("isDM") as any);
     this.isAM = JSON.parse(localStorage.getItem("isAM") as any);
+
+    
   }
 }

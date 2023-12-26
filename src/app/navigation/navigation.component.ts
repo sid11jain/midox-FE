@@ -30,8 +30,11 @@ export class NavigationComponent {
     //   this.rolesList = val;
     // });
     this.token = localStorage.getItem('token');
-    this.rolesList = localStorage.getItem('roles') as any;
+
+    this.rolesList = JSON.parse(localStorage.getItem('roles') as any);
+    
     if(_.isEmpty(this.rolesList)){
+      //this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT'];
       this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT']
     }
   }
@@ -45,12 +48,12 @@ export class NavigationComponent {
     _.includes(this.rolesList, 'ROLE_DISPATCH') ? this.isDM = true : this.isDM = false;
     _.includes(this.rolesList, 'ROLE_ACCOUNT') ? this.isAM = true : this.isAM = false;
 
-    localStorage.setItem("isAdmin", this.isAdmin.toString());
-    localStorage.setItem("isIM", this.isIM.toString());
-    localStorage.setItem("isADM", this.isADM.toString());
-    localStorage.setItem("isJM", this.isJM.toString());
-    localStorage.setItem("isDM", this.isDM.toString());
-    localStorage.setItem("isAM", this.isAM.toString());
+    localStorage.setItem("isAdmin", JSON.stringify(this.isAdmin));
+    localStorage.setItem("isIM", JSON.stringify(this.isIM));
+    localStorage.setItem("isADM", JSON.stringify(this.isADM));
+    localStorage.setItem("isJM", JSON.stringify(this.isJM));
+    localStorage.setItem("isDM", JSON.stringify(this.isDM));
+    localStorage.setItem("isAM", JSON.stringify(this.isAM));
     
 
     this.filteredOptionsAdda = this.myControlAdda.valueChanges.pipe(

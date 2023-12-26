@@ -3,10 +3,11 @@
     <img src="assets/logo.png" alt="logo" class="midox">
   </a>
   <ul class="row tab-list">
-    <div class="form-group mb-20" *ngIf="isAdmin || (isJM && !isIM && !isDM && !isAM)">
+    <div class="form-group mb-20">
       <input type="text" placeholder="Search Bundle (Min 3 Characters)" aria-label="Number" matInput
         [formControl]="myControlAdda" [matAutocomplete]="auto" class="form-control"
-        style="box-shadow: none;height: 32px;" matTooltip="Minimum 3 characters need to perform search">
+        style="box-shadow: none;height: 32px;" matTooltip="Minimum 3 characters need to perform search" 
+        [ngClass]="isAdmin || (isJM && !isIM && !isDM && !isAM) ? '' : 'event-none'">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)">
         <mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
           {{option?.name}} <br> <span class="employeeIdOptions">{{option.type}}</span>
@@ -22,7 +23,8 @@
       <li class="fs-14">Dashboard</li>
     </a>
 
-    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menu" *ngIf="isAdmin || (isIM && !isJM && !isDM && !isAM)">
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menu" 
+    [ngClass]="isAdmin || (isIM && !isJM && !isDM && !isAM)? '' : 'event-none'" >
       <span class="material-symbols-outlined me-3">
         bar_chart
       </span>
@@ -55,7 +57,8 @@
       </div>
     </mat-menu>
 
-    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda" *ngIf="isAdmin || (!isIM && !isJM && isADM && !isDM && !isAM)">
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda" 
+    [ngClass]="isAdmin || (!isIM && !isJM && isADM && !isDM && !isAM)?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         speaker_notes
       </span>
@@ -81,7 +84,8 @@
       </div>
     </mat-menu>
 
-    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuEmployee" *ngIf="isAdmin || (!isIM && !isJM && !isDM && isAM)">
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuEmployee" 
+    [ngClass]="isAdmin || (!isIM && !isJM && !isDM && isAM)?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         group
       </span>
@@ -121,7 +125,8 @@
     </mat-menu>
 
     <!-- Dispatch -->
-    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuDispatch" *ngIf="isAdmin || (!isIM && !isJM && isDM && !isAM)">
+    <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuDispatch" 
+    [ngClass]="isAdmin || (!isIM && !isJM && isDM && !isAM)?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         local_shipping
       </span>
@@ -149,7 +154,8 @@
     </mat-menu>
 
 
-    <a [routerLink]="['/settings']" class="d-flex mb-30" routerLinkActive="active" *ngIf="isAdmin || (!isIM && !isJM && !isDM && !isAM)">
+    <a [routerLink]="['/settings']" class="d-flex mb-30" routerLinkActive="active" 
+    [ngClass]="isAdmin || (!isIM && !isJM && !isDM && !isAM)?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         settings
       </span>

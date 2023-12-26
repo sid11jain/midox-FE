@@ -134,3 +134,8 @@ a {
 .mat-icon {
   cursor: pointer;
 }
+
+.event-none {
+  pointer-events: none;
+  opacity: 0.6;
+}

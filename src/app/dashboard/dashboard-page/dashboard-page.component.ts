@@ -25,10 +25,11 @@ export class DashboardPageComponent {
 
   }
   ngOnInit(){
-    this.common.getDashboardData().subscribe((val:any) => {
-      this.showSpinner = false
-      this.dashboardDetails = val;
-    });
+    this.showSpinner = false;
+    // this.common.getDashboardData().subscribe((val:any) => {
+    //   this.showSpinner = false;
+    //   this.dashboardDetails = val;
+    // });
   }
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
