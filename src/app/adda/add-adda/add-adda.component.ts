@@ -140,7 +140,7 @@ export class AddAddaComponent implements OnInit {
     if(this.forEditAdda){
       finalObject.addaId = this.addaId;
       finalObject.addaNo = this.addaNo;
-      let temp = await this.common.addDataFn1(finalObject, "adda", "edit", "get-addas", this.dialogTitle);
+      let temp = await this.common.addDataFn1(finalObject, "adda", "update", "get-addas", this.dialogTitle);
     }
     else{
       let temp = await this.common.addDataFn1(finalObject, "adda", "add", "get-addas", this.dialogTitle);
