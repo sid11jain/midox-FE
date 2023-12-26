@@ -32,6 +32,7 @@ export class AddAddaComponent implements OnInit {
   ];
   dialogTitle:string = "ADDA"
   brandNamesData:any=[]; 
+  employeeData:any=[]; 
   designNumberData:any=[]; 
 
   constructor(private formBuilder: FormBuilder, private common: CommonService) { 
@@ -41,7 +42,10 @@ export class AddAddaComponent implements OnInit {
   ngOnChanges(){  
     this.addAddaForm.reset();
     this.initForm();
-    this.ngOnInit();
+    // this.ngOnInit();
+    this.getBrand({});    
+    this.addAddaForm.get('status')?.disable(); 
+    this.addAddaForm.get('designId')?.disable(); 
 
     if(this.forEditAdda){
       this.addaTitle = "Edit ADDA";
@@ -55,14 +59,25 @@ export class AddAddaComponent implements OnInit {
         quantity: this.forEditAdda.quantity,
         remarks: this.forEditAdda.remarks,
         completionDate: this.forEditAdda.completionDate,
-        status: this.forEditAdda.status.entityCd
+        status: this.forEditAdda.status.entityCd,
+        dryingBy: this.forEditAdda?.addaInfo?.dryingBy?.empId,
+        cuttingBy: this.forEditAdda?.addaInfo?.cuttingBy?.empId,
+        tieBy: this.forEditAdda?.addaInfo?.tieBy?.empId,
+        custom: this.forEditAdda?.addaInfo?.custom?.empId,
+        grossWeight: this.forEditAdda?.addaInfo?.grossWeight,
+        netWeight: this.forEditAdda?.addaInfo?.netWeight,
+        wastageWeight: this.forEditAdda?.addaInfo?.wastageWeight,
+        wastagePercent: this.forEditAdda?.addaInfo?.wastagePercent,
+        ribWeight: this.forEditAdda?.addaInfo?.ribWeight,
+        paipinWeight: this.forEditAdda?.addaInfo?.paipinWeight,
+        ribNetWeight: this.forEditAdda?.addaInfo?.ribNetWeight,
       });
+      console.log(this.employeeData);
+      
     }
     else{
       this.addaTitle = "Add ADDA";
     }
-    
-
   }
 
   initForm(): void {
@@ -72,14 +87,26 @@ export class AddAddaComponent implements OnInit {
       quantity: ['', [Validators.required, Validators.min(1)]],
       remarks: ['', [Validators.required, Validators.minLength(3)]],
       completionDate: ['', Validators.required],
-      status: ['PROC_STAT_TBS', Validators.required]
+      status: ['PROC_STAT_TBS', Validators.required],
+      dryingBy: [''],
+      cuttingBy: [''],
+      tieBy: [''],
+      custom: [''],
+      grossWeight: [''],
+      netWeight: [''],
+      wastageWeight: [''],
+      wastagePercent: [''],
+      ribWeight: [''],
+      paipinWeight: [''],
+      ribNetWeight: [''],      
     });
   }
 
   async ngOnInit() {    
     this.addAddaForm.get('status')?.disable(); 
     this.addAddaForm.get('designId')?.disable(); 
-    this.getBrand({});
+    this.getBrand({});    
+    this.employeeData = await this.common.getDataFn1({}, "employee", "get-employees");
   }
   
   async getDesignFn(data:any){
@@ -109,19 +136,44 @@ export class AddAddaComponent implements OnInit {
     }
     this.showSpinner = true;
 
-  if(this.forEditAdda){
-    this.addAddaForm.value.addaId = this.addaId;
-    this.addAddaForm.value.addaNo = this.addaNo;
-    let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "edit", "get-addas", this.dialogTitle);
+    let finalObject:any = this.transformObject(this.addAddaForm?.value);
+    if(this.forEditAdda){
+      finalObject.addaId = this.addaId;
+      finalObject.addaNo = this.addaNo;
+      let temp = await this.common.addDataFn1(finalObject, "adda", "edit", "get-addas", this.dialogTitle);
     }
     else{
-      let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "add", "get-addas", this.dialogTitle);
+      let temp = await this.common.addDataFn1(finalObject, "adda", "add", "get-addas", this.dialogTitle);
     }
     
     this.showSpinner = false;
     this.addAddaForm.reset();
     document.getElementById("addAddaModalBtn")?.click();
     this.forViewAddReload.emit(true);
+  }
+
+  transformObject(originalObject: any): any {
+    return {
+      brandId: originalObject.brandId,
+      designId: originalObject.designId,
+      quantity: originalObject.quantity,
+      remarks: originalObject.remarks,
+      completionDate: originalObject.completionDate,
+      status: originalObject.status,
+      addaInfo: {
+        dryingBy: originalObject.dryingBy,
+        cuttingBy: originalObject.cuttingBy,
+        tieBy: originalObject.tieBy,
+        custom: originalObject.custom,
+        grossWeight: originalObject.grossWeight,
+        netWeight: originalObject.netWeight,
+        wastageWeight: originalObject.wastageWeight,
+        wastagePercent: originalObject.wastagePercent,
+        ribWeight: originalObject.ribWeight,
+        paipinWeight: originalObject.paipinWeight,
+        ribNetWeight: originalObject.ribNetWeight,
+      },
+    };
   }
 
  

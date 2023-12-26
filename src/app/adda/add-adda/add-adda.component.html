@@ -28,8 +28,8 @@
         </div> -->
         
         <!-- Brand -->
-        <div class="form-group col-4">
-          <label for="brandId">Brand</label>
+        <div class="form-group col-3">
+          <label for="brandId">Brand*</label>
           <select id="brandId" formControlName="brandId" class="form-control" required (change)="getDesignFn($event.target)">
             <option value="">Select</option>
             <option *ngFor="let option of brandNamesData" [value]="option?.brandId">{{ option?.brandName }}</option>
@@ -44,8 +44,8 @@
         </div>
 
         <!-- Design number -->
-        <div class="form-group col-4">
-          <label for="designId">Design</label>
+        <div class="form-group col-3">
+          <label for="designId">Design*</label>
           <select id="designId" formControlName="designId" class="form-control" required>
             <option value="">Select</option>
             <option *ngFor="let option of designNumberData" [value]="option?.designId">{{ option?.designNo }}</option>
@@ -60,8 +60,8 @@
         </div>
         
         <!-- Quantity -->
-        <div class="form-group col-4">
-          <label for="quantity">Quantity</label>
+        <div class="form-group col-3">
+          <label for="quantity">Quantity*</label>
           <input type="number" id="quantity" formControlName="quantity" class="form-control">
           <div *ngIf="addAddaForm.get('quantity')?.invalid && addAddaForm.get('quantity')?.touched"
             class="invalid-red">
@@ -71,8 +71,8 @@
         </div>
 
         <!-- Remarks -->
-        <div class="form-group mt-2 col-4">
-          <label for="remarks">Remarks</label>
+        <div class="form-group col-3">
+          <label for="remarks">Remarks*</label>
           <textarea name="" id="remarks" cols="30" rows="1" formControlName="remarks" class="form-control"></textarea>          
           <div *ngIf="addAddaForm.get('remarks')?.invalid && addAddaForm.get('remarks')?.touched" class="error invalid-red">
             <div *ngIf="addAddaForm.get('remarks')?.errors?.['required']">
@@ -85,8 +85,8 @@
         </div> 
 
         <!-- Completion date -->
-        <div class="form-group mt-2 col-4">
-            <label for="completionDate">Completion date</label>
+        <div class="form-group col-3">
+            <label for="completionDate">Completion date*</label>
             <input type="date" id="completionDate" class="form-control" formControlName="completionDate" required>
             <div
               *ngIf="addAddaForm.get('completionDate')?.invalid && (addAddaForm.get('completionDate')?.dirty || addAddaForm.get('completionDate')?.touched)">
@@ -97,14 +97,155 @@
         </div> 
 
         <!-- Status -->
-        <div class="form-group mt-2 col-4">
-          <label for="status">Status </label>
+        <div class="form-group col-3">
+          <label for="status">Status* </label>
             <select id="status" formControlName="status" class="form-control">
               <option value="">Select</option>
               <option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd">{{ option?.displayValue }}</option>
             </select>
           <div *ngIf="addAddaForm.get('status')?.invalid && addAddaForm.get('status')?.touched" class="error invalid-red">
             Please select a valid input.
+          </div>
+        </div>
+        
+        <!-- dryingBy -->
+        <div class="form-group col-3">
+          <label for="dryingBy">Drying By</label>
+          <select id="dryingBy" formControlName="dryingBy" class="form-control">
+            <option value="">Select</option>
+            <option *ngFor="let option of employeeData" [value]="option?.empId">{{ option?.empName }}</option>
+          </select>
+          <div
+            *ngIf="addAddaForm.get('dryingBy')?.invalid && (addAddaForm.get('dryingBy')?.dirty || addAddaForm.get('dryingBy')?.touched)"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('dryingBy')?.errors?.['required']">
+              Drying By is required.
+            </div>
+          </div>
+        </div>
+        
+        <!-- cuttingBy -->
+        <div class="form-group col-3">
+          <label for="cuttingBy">Cutting By</label>
+          <select id="cuttingBy" formControlName="cuttingBy" class="form-control">
+            <option value="">Select</option>
+            <option *ngFor="let option of employeeData" [value]="option?.empId">{{ option?.empName }}</option>
+          </select>
+          <div
+            *ngIf="addAddaForm.get('cuttingBy')?.invalid && (addAddaForm.get('cuttingBy')?.dirty || addAddaForm.get('cuttingBy')?.touched)"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('cuttingBy')?.errors?.['required']">
+              Cutting By is required.
+            </div>
+          </div>
+        </div>
+        
+        <!-- tieBy -->
+        <div class="form-group col-3">
+          <label for="tieBy">Tie By</label>
+          <select id="tieBy" formControlName="tieBy" class="form-control">
+            <option value="">Select</option>
+            <option *ngFor="let option of employeeData" [value]="option?.empId">{{ option?.empName }}</option>
+          </select>
+          <div
+            *ngIf="addAddaForm.get('tieBy')?.invalid && (addAddaForm.get('tieBy')?.dirty || addAddaForm.get('tieBy')?.touched)"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('tieBy')?.errors?.['required']">
+              Tie By is required.
+            </div>
+          </div>
+        </div>
+        
+        <!-- custom -->
+        <div class="form-group col-3">
+          <label for="custom">Custom</label>
+          <select id="custom" formControlName="custom" class="form-control">
+            <option value="">Select</option>
+            <option *ngFor="let option of employeeData" [value]="option?.empId">{{ option?.empName }}</option>
+          </select>
+          <div
+            *ngIf="addAddaForm.get('custom')?.invalid && (addAddaForm.get('custom')?.dirty || addAddaForm.get('custom')?.touched)"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('custom')?.errors?.['required']">
+              Custom is required.
+            </div>
+          </div>
+        </div>
+        
+        <!-- grossWeight -->
+        <div class="form-group col-3">
+          <label for="grossWeight">Gross Weight</label>
+          <input type="number" id="grossWeight" formControlName="grossWeight" class="form-control">
+          <div *ngIf="addAddaForm.get('grossWeight')?.invalid && addAddaForm.get('grossWeight')?.touched"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('grossWeight')?.errors?.['required']">Gross Weight is required.</div>
+            <div *ngIf="addAddaForm.get('grossWeight')?.errors?.['min']">Gross Weight must be at least 1.</div>
+          </div>
+        </div>
+        
+        <!-- netWeight -->
+        <div class="form-group col-3">
+          <label for="netWeight">Net Weight</label>
+          <input type="number" id="netWeight" formControlName="netWeight" class="form-control">
+          <div *ngIf="addAddaForm.get('netWeight')?.invalid && addAddaForm.get('netWeight')?.touched"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('netWeight')?.errors?.['required']">Net Weight is required.</div>
+            <div *ngIf="addAddaForm.get('netWeight')?.errors?.['min']">Net Weight must be at least 1.</div>
+          </div>
+        </div>
+        
+        <!-- wastageWeight -->
+        <div class="form-group col-3">
+          <label for="wastageWeight">Wastage Weight</label>
+          <input type="number" id="wastageWeight" formControlName="wastageWeight" class="form-control">
+          <div *ngIf="addAddaForm.get('wastageWeight')?.invalid && addAddaForm.get('wastageWeight')?.touched"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('wastageWeight')?.errors?.['required']">Wastage Weight is required.</div>
+            <div *ngIf="addAddaForm.get('wastageWeight')?.errors?.['min']">Wastage Weight must be at least 1.</div>
+          </div>
+        </div>
+        
+        <!-- wastagePercent -->
+        <div class="form-group col-3">
+          <label for="wastagePercent">Wastage Percent</label>
+          <input type="number" id="wastagePercent" formControlName="wastagePercent" class="form-control">
+          <div *ngIf="addAddaForm.get('wastagePercent')?.invalid && addAddaForm.get('wastagePercent')?.touched"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('wastagePercent')?.errors?.['required']">Wastage Percent is required.</div>
+            <div *ngIf="addAddaForm.get('wastagePercent')?.errors?.['min']">Wastage Percent must be at least 1.</div>
+          </div>
+        </div>
+        
+        <!-- ribWeight -->
+        <div class="form-group col-3">
+          <label for="ribWeight">Rib Weight</label>
+          <input type="number" id="ribWeight" formControlName="ribWeight" class="form-control">
+          <div *ngIf="addAddaForm.get('ribWeight')?.invalid && addAddaForm.get('ribWeight')?.touched"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('ribWeight')?.errors?.['required']">Rib Weight is required.</div>
+            <div *ngIf="addAddaForm.get('ribWeight')?.errors?.['min']">Rib Weight must be at least 1.</div>
+          </div>
+        </div>
+        
+        <!-- paipinWeight -->
+        <div class="form-group col-3">
+          <label for="paipinWeight">Paipin Weight</label>
+          <input type="number" id="paipinWeight" formControlName="paipinWeight" class="form-control">
+          <div *ngIf="addAddaForm.get('paipinWeight')?.invalid && addAddaForm.get('paipinWeight')?.touched"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('paipinWeight')?.errors?.['required']">Paipin Weight is required.</div>
+            <div *ngIf="addAddaForm.get('paipinWeight')?.errors?.['min']">Paipin Weight must be at least 1.</div>
+          </div>
+        </div>
+        
+        <!-- ribNetWeight -->
+        <div class="form-group col-3">
+          <label for="ribNetWeight">Rib Net Weight</label>
+          <input type="number" id="ribNetWeight" formControlName="ribNetWeight" class="form-control">
+          <div *ngIf="addAddaForm.get('ribNetWeight')?.invalid && addAddaForm.get('ribNetWeight')?.touched"
+            class="invalid-red">
+            <div *ngIf="addAddaForm.get('ribNetWeight')?.errors?.['required']">Rib Net Weight is required.</div>
+            <div *ngIf="addAddaForm.get('ribNetWeight')?.errors?.['min']">Rib Net Weight must be at least 1.</div>
           </div>
         </div>
         
