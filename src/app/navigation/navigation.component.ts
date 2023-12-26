@@ -32,18 +32,18 @@ export class NavigationComponent {
     this.token = localStorage.getItem('token');
     this.rolesList = localStorage.getItem('roles') as any;
     if(_.isEmpty(this.rolesList)){
-      this.rolesList = ['Admin', 'InventorManager', 'AddaManager', 'JobManager', 'DispatchManager', 'AccountManager']
+      this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT']
     }
   }
   
   ngOnInit() {
     this.token ? this.isLogin = false : this.isLogin = true;
-    _.includes(this.rolesList, 'Admin') ? this.isAdmin = true : this.isAdmin = false;
-    _.includes(this.rolesList, 'InventorManager') ? this.isIM = true : this.isIM = false;
-    _.includes(this.rolesList, 'AddaManager') ? this.isADM = true : this.isADM = false;
-    _.includes(this.rolesList, 'JobManager') ? this.isJM = true : this.isJM = false;
-    _.includes(this.rolesList, 'DispatchManager') ? this.isDM = true : this.isDM = false;
-    _.includes(this.rolesList, 'AccountManager') ? this.isAM = true : this.isAM = false;
+    _.includes(this.rolesList, 'ROLE_ADMIN') ? this.isAdmin = true : this.isAdmin = false;
+    _.includes(this.rolesList, 'ROLE_INVENTORY') ? this.isIM = true : this.isIM = false;
+    _.includes(this.rolesList, 'ROLE_ADDA') ? this.isADM = true : this.isADM = false;
+    _.includes(this.rolesList, 'ROLE_JOB') ? this.isJM = true : this.isJM = false;
+    _.includes(this.rolesList, 'ROLE_DISPATCH') ? this.isDM = true : this.isDM = false;
+    _.includes(this.rolesList, 'ROLE_ACCOUNT') ? this.isAM = true : this.isAM = false;
 
     localStorage.setItem("isAdmin", this.isAdmin.toString());
     localStorage.setItem("isIM", this.isIM.toString());
