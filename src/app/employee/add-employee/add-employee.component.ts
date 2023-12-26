@@ -19,6 +19,7 @@ export class AddEmployeeComponent implements OnInit {
   showSpinner:boolean = true;
   dialogTitle:string = "Employee";
   editedMaterialIndex: number | null = null;
+  employeeDataForRole:any="";
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) { }
 
@@ -94,5 +95,8 @@ export class AddEmployeeComponent implements OnInit {
       description: data.description
     });
   }
- 
+
+  roleSelection(data: any, index:number){
+    this.employeeDataForRole = data;
+  }
 }
