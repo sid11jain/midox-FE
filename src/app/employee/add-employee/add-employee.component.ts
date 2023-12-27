@@ -20,6 +20,7 @@ export class AddEmployeeComponent implements OnInit {
   dialogTitle:string = "Employee";
   editedMaterialIndex: number | null = null;
   employeeDataForRole:any="";
+  timeInMiliSeconds:any;
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) { }
 
@@ -98,5 +99,11 @@ export class AddEmployeeComponent implements OnInit {
 
   roleSelection(data: any, index:number){
     this.employeeDataForRole = data;
+    this.timeInMiliSeconds = new Date().getTime();
+  }
+
+  dataFromAddaMaterial(data: any) {
+    this.showSpinner = true;
+    this.ngOnInit();    
   }
 }

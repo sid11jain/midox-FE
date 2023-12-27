@@ -269,7 +269,7 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <!-- <app-adda-add-material [forEditAddaMaterial]="editAddaMaterialData" (forDetailAddReloadMaterial)="dataFromAddaMaterial($event)"></app-adda-add-material> -->
-        <app-add-employee-roles [employeeDataForRole]="employeeDataForRole"></app-add-employee-roles>
+        <app-add-employee-roles [employeeDataForRole]="employeeDataForRole" [timeInMiliSeconds]="timeInMiliSeconds" (forDetailAddReloadMaterial)="dataFromAddaMaterial($event)"></app-add-employee-roles>
       <!-- <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
