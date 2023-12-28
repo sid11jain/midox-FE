@@ -39,7 +39,7 @@
               <!-- <mat-form-field> -->
                 <mat-label>Select Roles</mat-label>
                 <mat-select formControlName="roles" multiple class="form-control">
-                  <mat-option *ngFor="let val of roleList" [value]="val.key">{{val.value}}</mat-option>
+                  <mat-option *ngFor="let val of roleList" [value]="val?.entityCd">{{val?.displayValue}}</mat-option>
                 </mat-select>
               <!-- </mat-form-field> -->
             </div>

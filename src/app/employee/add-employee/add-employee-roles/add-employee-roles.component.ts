@@ -15,37 +15,39 @@ export class AddEmployeeRolesComponent implements OnInit {
 
   @Input() employeeDataForRole:any = "";
   @Input() timeInMiliSeconds:any = "";
-  showSpinner:boolean = false;
+  showSpinner:boolean = true;
   addaEmployeeRolesTitle = "Add Employee Roles";
   
   toppings = new FormControl('');
   // toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  roleList:any = [
-    {key:{"role":"ROLE_ACCOUNT"}, value: "Account"},
-    {key:{"role":"ROLE_DISPATCH"}, value: "Dispatch"},
-    {key:{"role":"ROLE_JOB"}, value: "Job"},
-    {key:{"role":"ROLE_ADDA"}, value: "Adda"},
-    {key:{"role":"ROLE_INVENTORY"}, value: "Inventory"},
-    {key:{"role":"ROLE_ADMIN"}, value: "Admin"},
-  ]
+  // roleList:any = [
+  //   {key: "ROLE_ACCOUNT", value: "Account"},
+  //   {key: "ROLE_DISPATCH", value: "Dispatch"},
+  //   {key: "ROLE_JOB", value: "Job"},
+  //   {key: "ROLE_ADDA", value: "Adda"},
+  //   {key: "ROLE_INVENTORY", value: "Inventory"},
+  //   {key: "ROLE_ADMIN", value: "Admin"},
+  // ];
   employeeDetails:any;
+  roleList:any;
   forEditEmployeeRoles:boolean = false;
 
   addaEmployeeRolesForm: FormGroup;
-
   
   // To send data from child to parent
   @Output() forDetailAddReloadMaterial = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog,  private route: ActivatedRoute) {
     this.addaEmployeeRolesForm = this.formBuilder.group({
-      empId: [''],
+      employeeId: [''],
       roles: [[], Validators.required],
     });
   }
 
-  ngOnInit(){
-
+  async ngOnInit(){
+    this.showSpinner = true;
+    this.roleList = await this.common.getDataFn("MID_ROLE");    
+    this.showSpinner = false;
   }
 
   async onSubmit() {
@@ -76,13 +78,25 @@ export class AddEmployeeRolesComponent implements OnInit {
     this.addaEmployeeRolesForm.reset();
   }
 
-  ngOnChanges(){
+  async ngOnChanges(){
+    this.showSpinner = true;
     this.resetForm();
     console.log(this.employeeDataForRole);
     this.employeeDetails = this.employeeDataForRole;
     this.addaEmployeeRolesForm.patchValue({
-      empId: this.employeeDataForRole?.empId,
-    })    
+      employeeId: this.employeeDataForRole?.empId,
+    })   
+    
+    if(this.employeeDetails?.empId){
+      let empRolesData = await this.common.getBundleSearchFn("employee/get-roles", this.employeeDetails?.empId)
+      console.log("employeeData ",empRolesData); 
+      if(empRolesData.length > 0){
+        this.addaEmployeeRolesForm.patchValue({
+          roles: empRolesData,
+        })
+      }
+    }
+    this.showSpinner = false;
   }
 
 }
