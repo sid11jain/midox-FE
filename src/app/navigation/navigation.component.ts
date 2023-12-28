@@ -12,7 +12,6 @@ import * as _ from 'lodash';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-  isLogin:boolean = false;
   token:any = false;
   filteredOptionsAdda!: Observable<any[]>;
   myControlAdda = new FormControl('');
@@ -24,23 +23,24 @@ export class NavigationComponent {
   isJM:boolean = false; //Job Manager
   isDM:boolean = false; //Dispatch Manager
   isAM:boolean = false; //Account Manager
+  isLogin:boolean = false;
+  subscriber: Subscription;
 
   constructor(private common: CommonService, private router: Router){
-    // this.subscriber = common.roles.subscribe((val:any) => {
-    //   this.rolesList = val;
-    // });
-    this.token = localStorage.getItem('token');
-
-    this.rolesList = JSON.parse(localStorage.getItem('roles') as any);
+    this.subscriber = common.isOnLoginPage.subscribe((val:any) => {
+      this.isLogin = val;
+    });
+    this.token = <string>sessionStorage.getItem('token');
     
-    if(_.isEmpty(this.rolesList)){
-      //this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT'];
-      this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT']
-    }
+    this.rolesList = JSON.parse(<string>sessionStorage.getItem('roles'));
+    console.log("rolesList", this.rolesList);
+    // if(!_.isEmpty(this.rolesList)){
+    //   //this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT'];
+    //   this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT']
+    // }
   }
   
   ngOnInit() {
-    this.token ? this.isLogin = false : this.isLogin = true;
     _.includes(this.rolesList, 'ROLE_ADMIN') ? this.isAdmin = true : this.isAdmin = false;
     _.includes(this.rolesList, 'ROLE_INVENTORY') ? this.isIM = true : this.isIM = false;
     _.includes(this.rolesList, 'ROLE_ADDA') ? this.isADM = true : this.isADM = false;
@@ -48,18 +48,29 @@ export class NavigationComponent {
     _.includes(this.rolesList, 'ROLE_DISPATCH') ? this.isDM = true : this.isDM = false;
     _.includes(this.rolesList, 'ROLE_ACCOUNT') ? this.isAM = true : this.isAM = false;
 
-    localStorage.setItem("isAdmin", JSON.stringify(this.isAdmin));
-    localStorage.setItem("isIM", JSON.stringify(this.isIM));
-    localStorage.setItem("isADM", JSON.stringify(this.isADM));
-    localStorage.setItem("isJM", JSON.stringify(this.isJM));
-    localStorage.setItem("isDM", JSON.stringify(this.isDM));
-    localStorage.setItem("isAM", JSON.stringify(this.isAM));
+    console.log('this.isAdmin', this.isAdmin);
+    console.log('this.isIM', this.isIM);
+    console.log('this.isADM', this.isADM);
+    console.log('this.isJM', this.isJM);
+    console.log('this.isDM', this.isDM);
+    console.log('this.isAM ', this.isAM );
+    
+    sessionStorage.setItem("isAdmin", JSON.stringify(this.isAdmin));
+    sessionStorage.setItem("isIM", JSON.stringify(this.isIM));
+    sessionStorage.setItem("isADM", JSON.stringify(this.isADM));
+    sessionStorage.setItem("isJM", JSON.stringify(this.isJM));
+    sessionStorage.setItem("isDM", JSON.stringify(this.isDM));
+    sessionStorage.setItem("isAM", JSON.stringify(this.isAM));
     
 
     this.filteredOptionsAdda = this.myControlAdda.valueChanges.pipe(
       startWith(''),
       switchMap(value => this._filterAdda(value || '')),
     );
+  }
+
+  ngOnDestroy(){
+    this.subscriber.unsubscribe();
   }
 
   private _filterAdda(value: any): Observable<any[]> {
@@ -116,7 +127,7 @@ export class NavigationComponent {
   }
 
   logoutFn(){
-    localStorage.clear();
+    sessionStorage.clear();
     //this.subscriber.unsubscribe();
     setTimeout(()=>{
       this.router.navigate(['/login']);

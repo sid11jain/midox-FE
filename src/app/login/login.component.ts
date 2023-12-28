@@ -14,11 +14,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private commonService: CommonService, private router: Router) {
    // this.commonService.loginToken.unsubscribe();
-    //this.commonService.loginToken.next(null);
+    this.commonService.isOnLoginPage.next(true);
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('roles');
    }
 
   ngOnInit(): void {
-    localStorage.clear();
+    sessionStorage.clear();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -36,13 +38,14 @@ export class LoginComponent implements OnInit {
     this.commonService.login(username,password).subscribe({
       next: (result: any) =>{
         if(result?.token){
+          this.commonService.isOnLoginPage.next(false);
           const roles = result?.roles;
           if(roles?.length){  
             //this.commonService.roles.next(roles);
-            localStorage.setItem('roles', JSON.stringify(roles));
+            sessionStorage.setItem('roles', JSON.stringify(roles));
           }
           //this.commonService.loginToken.next(result?.token);
-          localStorage.setItem('token', result?.token);
+          sessionStorage.setItem('token', result?.token);
           setTimeout(()=>{
             this.router.navigate(['/dashboard']);
           }, 300);

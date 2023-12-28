@@ -4,7 +4,7 @@
     <!-- <div class="row pt-3"> -->
       
     <div class="row settings-comp">
-      <div class="accordion card-body" id="accordionExample">
+      <div class="accordion card-body" id="accordionExample" *ngIf="isAdmin">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" id="addEmployeeAccordian" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -204,8 +204,8 @@
           <dxi-column dataField="address" caption="Address"[visible]="false"></dxi-column>
           <dxi-column dataField="description" caption="Description"[visible]="false"></dxi-column>
           
-          <dxi-column caption="Edit/Role" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
-          <div *dxTemplate="let data of 'cellTemplateHyperlink'; let i = index">
+          <dxi-column caption="Edit/Role" cellTemplate="cellTemplateHyperlink" alignment="center" *ngIf="isAdmin"></dxi-column>  
+          <div *dxTemplate="let data of 'cellTemplateHyperlink'; let i = index"> 
             <button mat-icon-button (click)="edit(data.data,i)" class="btn btn-sm me-2 btn-primary">
               <mat-icon class="me-2">edit</mat-icon>
             </button>

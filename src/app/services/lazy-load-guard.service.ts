@@ -8,7 +8,7 @@ import { CommonService } from './common.service';
 export class LazyLoadGuardService implements CanLoad {
   loggerToken:any;
   constructor(private common: CommonService){
-    this.loggerToken = localStorage.getItem('token');
+    this.loggerToken = sessionStorage.getItem('token');
     
   }
   canLoad(route: Route, segments: UrlSegment[]): boolean {

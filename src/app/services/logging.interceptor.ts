@@ -17,7 +17,7 @@ export class LoggingInterceptor implements HttpInterceptor {
     // common.loginToken.subscribe((val:any) => {
     //   this.loggerToken = val;
     // });
-    this.loggerToken = localStorage.getItem('token');
+    this.loggerToken = sessionStorage.getItem('token');
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

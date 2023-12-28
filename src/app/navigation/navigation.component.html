@@ -7,7 +7,7 @@
       <input type="text" placeholder="Search Bundle (Min 3 Characters)" aria-label="Number" matInput
         [formControl]="myControlAdda" [matAutocomplete]="auto" class="form-control"
         style="box-shadow: none;height: 32px;" matTooltip="Minimum 3 characters need to perform search" 
-        [ngClass]="isAdmin || (isJM && !isIM && !isDM && !isAM) ? '' : 'event-none'">
+        [ngClass]="isAdmin || isJM? '' : 'event-none'">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedAdda($event)">
         <mat-option *ngFor="let option of filteredOptionsAdda | async" [value]="option">
           {{option?.name}} <br> <span class="employeeIdOptions">{{option.type}}</span>
@@ -24,7 +24,7 @@
     </a>
 
     <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menu" 
-    [ngClass]="isAdmin || (isIM && !isJM && !isDM && !isAM)? '' : 'event-none'" >
+    [ngClass]="isAdmin || isIM ? '' : 'event-none'" >
       <span class="material-symbols-outlined me-3">
         bar_chart
       </span>
@@ -58,7 +58,7 @@
     </mat-menu>
 
     <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuAdda" 
-    [ngClass]="isAdmin || (!isIM && !isJM && isADM && !isDM && !isAM)?'':'event-none'">
+    [ngClass]="isAdmin || isADM?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         speaker_notes
       </span>
@@ -85,7 +85,7 @@
     </mat-menu>
 
     <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuEmployee" 
-    [ngClass]="isAdmin || (!isIM && !isJM && !isDM && isAM)?'':'event-none'">
+    [ngClass]="isAdmin || isAM?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         group
       </span>
@@ -126,7 +126,7 @@
 
     <!-- Dispatch -->
     <a class="d-flex mb-link cursor-pointer" routerLinkActive="active" [matMenuTriggerFor]="menuDispatch" 
-    [ngClass]="isAdmin || (!isIM && !isJM && isDM && !isAM)?'':'event-none'">
+    [ngClass]="isAdmin || isDM?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         local_shipping
       </span>
@@ -155,7 +155,7 @@
 
 
     <a [routerLink]="['/settings']" class="d-flex mb-30" routerLinkActive="active" 
-    [ngClass]="isAdmin || (!isIM && !isJM && !isDM && !isAM)?'':'event-none'">
+    [ngClass]="isAdmin || isIM || isADM?'':'event-none'">
       <span class="material-symbols-outlined me-3">
         settings
       </span>
@@ -164,7 +164,7 @@
 
 
     <hr>
-    <a [routerLink]="['/profile']" class="d-flex mt-2" routerLinkActive="active">
+    <a [routerLink]="['/profile']" class="d-flex mt-2" routerLinkActive="active" [ngClass]="'event-none'">
       <span class="material-symbols-outlined me-3">
         account_circle
       </span>
@@ -172,14 +172,14 @@
     </a>
 
     <a class="d-flex mb-30 mt-3 pointer" routerLinkActive="active" data-bs-toggle="modal"
-      data-bs-target="#exampleModalLogout" *ngIf="isLogin">
+      data-bs-target="#exampleModalLogout" *ngIf="!isLogin">
       <span class="material-symbols-outlined me-3">
         logout
       </span>
       <li class="fs-14">Logout</li>
     </a>
 
-    <a [routerLink]="['/login']" class="d-flex mt-2" routerLinkActive="active" *ngIf="!isLogin">
+    <a [routerLink]="['/login']" class="d-flex mt-2 login-link" routerLinkActive="active" *ngIf="isLogin">
       <span class="material-symbols-outlined me-3">
         login
       </span>

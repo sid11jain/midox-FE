@@ -25,6 +25,7 @@ export class CommonService {
   employeeJobHistoryData = new BehaviorSubject('');
   employeePaymentData = new BehaviorSubject('');
   isStockHistoryClick = new BehaviorSubject(false);
+  isOnLoginPage = new BehaviorSubject(false);
   // loginToken:any;
   // roles:any;
 

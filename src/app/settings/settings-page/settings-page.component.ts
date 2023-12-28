@@ -17,12 +17,12 @@ export class SettingsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAdmin = JSON.parse(localStorage.getItem("isAdmin") as any);
-    this.isIM = JSON.parse(localStorage.getItem("isIM") as any);
-    this.isADM = JSON.parse(localStorage.getItem("isADM") as any);
-    this.isJM = JSON.parse(localStorage.getItem("isJM") as any);
-    this.isDM = JSON.parse(localStorage.getItem("isDM") as any);
-    this.isAM = JSON.parse(localStorage.getItem("isAM") as any);
+    this.isAdmin = JSON.parse(sessionStorage.getItem("isAdmin") as any);
+    this.isIM = JSON.parse(sessionStorage.getItem("isIM") as any);
+    this.isADM = JSON.parse(sessionStorage.getItem("isADM") as any);
+    this.isJM = JSON.parse(sessionStorage.getItem("isJM") as any);
+    this.isDM = JSON.parse(sessionStorage.getItem("isDM") as any);
+    this.isAM = JSON.parse(sessionStorage.getItem("isAM") as any);
 
     
   }

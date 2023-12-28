@@ -22,9 +22,23 @@ export class AddEmployeeComponent implements OnInit {
   employeeDataForRole:any="";
   timeInMiliSeconds:any;
 
+  isAdmin!:boolean;
+  isIM!:boolean;
+  isADM!:boolean;
+  isJM!:boolean;
+  isDM!:boolean;
+  isAM!:boolean;
+
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog) { }
 
   async ngOnInit() {
+    this.isAdmin = JSON.parse(sessionStorage.getItem("isAdmin") as any);
+    this.isIM = JSON.parse(sessionStorage.getItem("isIM") as any);
+    this.isADM = JSON.parse(sessionStorage.getItem("isADM") as any);
+    this.isJM = JSON.parse(sessionStorage.getItem("isJM") as any);
+    this.isDM = JSON.parse(sessionStorage.getItem("isDM") as any);
+    this.isAM = JSON.parse(sessionStorage.getItem("isAM") as any);
+    
     this.employeeForm = this.formBuilder.group({
       empName: ['', [Validators.required, Validators.minLength(3)]],
       joiningDate: ['', Validators.required],

@@ -39,11 +39,15 @@ const routes: Routes = [
   {
     path:'settings', loadChildren:()=>import('./settings/settings.module').then(mod=>mod.SettingsModule),
     canLoad: [LazyLoadGuardService]
-  }
+  },
+  {
+    path:'**',
+    redirectTo: 'login'
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
