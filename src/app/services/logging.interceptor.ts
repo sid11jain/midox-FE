@@ -24,9 +24,14 @@ export class LoggingInterceptor implements HttpInterceptor {
      //add auth header with bearer token if account is logged in and request is to the api url
      const isApiUrl = request.url.startsWith(environment.apiEndpoint);
      if (this.loggerToken && isApiUrl) {
+        // request = request.clone({
+        //      setHeaders: { Authorization: `Bearer ${this.loggerToken}` }
+        // });
         request = request.clone({
-             setHeaders: { Authorization: `Bearer ${this.loggerToken}` }
-        });
+          headers: request.headers.set(
+              "Authorization",
+              `Bearer ${this.loggerToken}`  
+          ),})
      }
 
      return next.handle(request);
