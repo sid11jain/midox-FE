@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private commonService: CommonService, private router: Router) {
    // this.commonService.loginToken.unsubscribe();
     this.commonService.isOnLoginPage.next(true);
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('roles');
+    // sessionStorage.removeItem('token');
+    // sessionStorage.removeItem('roles');
    }
 
   ngOnInit(): void {

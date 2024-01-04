@@ -86,8 +86,8 @@ export class CommonService {
   // Get
 
   getDashboardData(): Observable<any> {
-    this.payloadUrl = `${this.baseUrl}getDashboardData`;
-    return this.http.get(this.payloadUrl, this.httpOptions).pipe(
+    this.payloadUrl = `${this.baseUrl}search/dashboard`;
+    return this.http.post(this.payloadUrl, {}, this.httpOptions).pipe(
       catchError(this.handleError('getDashboardData', []))
     );
   }
