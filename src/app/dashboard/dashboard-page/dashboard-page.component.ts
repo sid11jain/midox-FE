@@ -80,11 +80,11 @@ export class DashboardPageComponent {
  
 
   public clothpieChartData: any = {
-    labels: [ [ 'Flopped' , this.clothPieDetails?.flopped], [ 'Booked' , this.clothPieDetails?.booked]],
+    labels: [ ],
     datasets: [ {
-      data: [ this.clothPieDetails?.flopped, this.clothPieDetails?.booked ],
+      data: [ ],
       //borderColor: '#36A2EB',
-      backgroundColor: ['#919ee5', '#3F51B5'],
+      backgroundColor: ['#919ee5', '#3F512B5',  '#20c99'],
     } ]
   };
 

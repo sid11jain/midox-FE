@@ -17,11 +17,12 @@ export class LoggingInterceptor implements HttpInterceptor {
     // common.loginToken.subscribe((val:any) => {
     //   this.loggerToken = val;
     // });
-    this.loggerToken = sessionStorage.getItem('token');
+    
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
      //add auth header with bearer token if account is logged in and request is to the api url
+     this.loggerToken = <string>sessionStorage.getItem('token');
      const isApiUrl = request.url.startsWith(environment.apiEndpoint);
      if (this.loggerToken && isApiUrl) {
         // request = request.clone({

@@ -16,6 +16,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { LoggingInterceptor } from './services/logging.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginLayoutComponent } from './shared/login-layout/login-layout.component';
+import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     SignupComponent,
     NavigationComponent,
     ProfileComponent,
-    MsgDialogComponent
+    MsgDialogComponent,
+    LoginLayoutComponent,
+    HomeLayoutComponent
   ],
   imports: [
     BrowserModule,

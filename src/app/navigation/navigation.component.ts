@@ -25,15 +25,24 @@ export class NavigationComponent {
   isAM:boolean = false; //Account Manager
   isLogin:boolean = false;
   subscriber: Subscription;
+  // subscriberToken: Subscription;
+  // subscriberRoles: Subscription;
 
   constructor(private common: CommonService, private router: Router){
     this.subscriber = common.isOnLoginPage.subscribe((val:any) => {
       this.isLogin = val;
     });
+
     this.token = <string>sessionStorage.getItem('token');
-    
-    this.rolesList = JSON.parse(<string>sessionStorage.getItem('roles'));
-    console.log("rolesList", this.rolesList);
+    this.rolesList = JSON.parse(sessionStorage.getItem('roles') as any);
+   
+    // this.subscriberToken = common.loginToken.subscribe((val:any) => {
+    //   this.token = val;
+    // });
+
+    // this.subscriberRoles = common.roles.subscribe((val:any) => {
+    //   this.rolesList = val;
+    // });
     // if(!_.isEmpty(this.rolesList)){
     //   //this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT'];
     //   this.rolesList = ['ROLE_ADMIN', 'ROLE_INVENTORY', 'ROLE_ADDA', 'ROLE_JOB', 'ROLE_DISPATCH', 'ROLE_ACCOUNT']
@@ -41,6 +50,13 @@ export class NavigationComponent {
   }
   
   ngOnInit() {
+    // if(!this.token){
+    //   this.token = sessionStorage.getItem('token');
+    //   this.rolesList = JSON.parse(sessionStorage.getItem('roles') as any);
+    // }
+    // console.log("tokenNav", this.token);
+    // console.log("rolesListNAV", this.rolesList);
+
     _.includes(this.rolesList, 'ROLE_ADMIN') ? this.isAdmin = true : this.isAdmin = false;
     _.includes(this.rolesList, 'ROLE_INVENTORY') ? this.isIM = true : this.isIM = false;
     _.includes(this.rolesList, 'ROLE_ADDA') ? this.isADM = true : this.isADM = false;
@@ -71,6 +87,8 @@ export class NavigationComponent {
 
   ngOnDestroy(){
     this.subscriber.unsubscribe();
+    // this.subscriberToken.unsubscribe();
+    // this.subscriberToken.unsubscribe();
   }
 
   private _filterAdda(value: any): Observable<any[]> {

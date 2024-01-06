@@ -13,8 +13,10 @@ export class LoginComponent implements OnInit {
   isLoginError:boolean = false;
 
   constructor(private formBuilder: FormBuilder, private commonService: CommonService, private router: Router) {
-   // this.commonService.loginToken.unsubscribe();
+    // this.commonService.loginToken.unsubscribe();
+    // this.commonService.roles.unsubscribe();
     this.commonService.isOnLoginPage.next(true);
+    sessionStorage.clear();
     // sessionStorage.removeItem('token');
     // sessionStorage.removeItem('roles');
    }

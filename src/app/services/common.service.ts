@@ -26,8 +26,9 @@ export class CommonService {
   employeePaymentData = new BehaviorSubject('');
   isStockHistoryClick = new BehaviorSubject(false);
   isOnLoginPage = new BehaviorSubject(false);
-  // loginToken:any;
-  // roles:any;
+
+  // loginToken:any = new Subject();
+  // roles:any = new Subject();
 
   dialogTitle:string = "";
 
