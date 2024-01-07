@@ -13,6 +13,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { MsgDialogComponent } from './shared/msg-dialog/msg-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { LoggingInterceptor } from './services/logging.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginLayoutComponent } from './shared/login-layout/login-layout.component';
+import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
+
 
 @NgModule({
   declarations: [
@@ -21,16 +27,21 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     SignupComponent,
     NavigationComponent,
     ProfileComponent,
-    MsgDialogComponent
+    MsgDialogComponent,
+    LoginLayoutComponent,
+    HomeLayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
-  providers: [],  //{provide:MatDialogRef , useValue:{} },{ provide: MAT_DIALOG_DATA, useValue: {} }
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

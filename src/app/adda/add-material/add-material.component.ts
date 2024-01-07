@@ -20,7 +20,6 @@ export class AddMaterialComponent {
   constructor(private commonService: CommonService, private formBuilder: FormBuilder){ 
     commonService.addMaterialData.subscribe((val:any) => {
       this.addMaterialDetails = val;
-      console.log(this.addMaterialDetails);
       
     });
 
@@ -38,7 +37,6 @@ export class AddMaterialComponent {
     if (this.form.valid) {
       this.editButton = false;
       this.data.push(this.form.value);
-      console.log(this.data);
       this.dataSource.data = this.data;
       this.form.reset();
     }
@@ -58,7 +56,6 @@ export class AddMaterialComponent {
   }
 
   submitForm(){
-    console.log(this.data);
     
   }
 

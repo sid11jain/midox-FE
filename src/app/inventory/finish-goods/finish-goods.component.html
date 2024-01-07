@@ -7,8 +7,7 @@
     <div *ngIf=!showSpinner>
         <div class="cloths mt-10">
           <dx-data-grid id="gridContainer" #grid
-                  [dataSource]="viewFinishGoodsData"
-                  keyExpr="unique_id"
+                  [dataSource]="finishGoodApiData"
                   [showBorders]="true"
                   [rowAlternationEnabled]="true"
                   [allowColumnResizing]="true"
@@ -24,7 +23,36 @@
             <dxo-group-panel [visible]="true"></dxo-group-panel>
             <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
     
-            <dxi-column dataField="brand" caption="Brand" alignment="center"></dxi-column>
+            <dxi-column dataField="addaNo" caption="Adda No" alignment="center"></dxi-column>
+            <dxi-column dataField="addaId" caption="Adda Id" alignment="center" [visible]="false"></dxi-column>
+            <dxi-column dataField="patternName" caption="Pattern Name" alignment="center"></dxi-column>
+
+            <dxi-column dataField="finishedGoodsId" caption="Finished Goods Id" alignment="center" [visible]="false"></dxi-column>
+            <dxi-column dataField="finishedQuantity" caption="Finished Quantity" alignment="center"></dxi-column>
+            <dxi-column dataField="availableQuantity" caption="Available Qty" alignment="center"></dxi-column>
+            <dxi-column dataField="dispatchedQuantity" caption="Dispatched Qty" alignment="center"></dxi-column>
+            <dxi-column dataField="patternId" caption="Pattern Id" alignment="center" [visible]="false"></dxi-column>
+            <dxi-column dataField="status.displayValue" caption="Status" alignment="center"></dxi-column>
+            
+            <!-- <dxi-column dataField="" caption="Dispatch" alignment="center"></dxi-column> -->
+            <dxi-column caption="Dispatch" cellTemplate="cellTemplateHyperlink2" alignment="center"></dxi-column>  
+            <div *dxTemplate="let data2 of 'cellTemplateHyperlink2'">
+              <a data-bs-toggle="modal" data-bs-target="#exampleModalDispatch" (click)="getRowDataForPay(data2?.data)">      
+                <mat-icon class="a-tag-clr">shopping_cart</mat-icon>
+                </a>   
+            </div>            
+            
+            <!-- <dxi-column dataField="" caption="Dispatch History" alignment="center"></dxi-column> -->
+            <dxi-column caption="Dispatch History" cellTemplate="cellTemplateHyperlink1" alignment="center"></dxi-column>  
+            <div *dxTemplate="let data of 'cellTemplateHyperlink1'">
+              <a [routerLink]="['../dispatch-history', data?.data?.finishedGoodsId]" routerLinkActive="sub-active">
+                <mat-icon>history</mat-icon>
+              </a>    
+            </div>
+
+            <!-- <dxi-column dataField="" caption="" alignment="center"></dxi-column> -->
+
+            <!-- <dxi-column dataField="brand" caption="Brand" alignment="center"></dxi-column>
             <dxi-column dataField="product" caption="Product" alignment="center"></dxi-column>
             <dxi-column dataField="design" caption="Design" alignment="center"></dxi-column>
             <dxi-column dataField="avl_qty" caption="Quantity" alignment="center"></dxi-column>  
@@ -32,7 +60,7 @@
             <dxi-column caption="Dispatch History" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
             <div *dxTemplate="let data of 'cellTemplateHyperlink'" >
               <a [routerLink]="['../dispatch-history']" routerLinkActive="sub-active" (click)="getSelectedData(data)"><mat-icon>remove_red_eye</mat-icon></a>           
-            </div>
+            </div> -->
     
             <dxo-search-panel [visible]="true"></dxo-search-panel>
             <dxo-paging [pageSize]="10"> </dxo-paging>              
@@ -42,3 +70,13 @@
   </div>
 
 </div>
+
+  <!-- For Dispatch modal -->
+  <div class="modal fade" id="exampleModalDispatch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <!-- <app-adda-add-pattern [forEditAddaPattern]="editAddaPatternData" (forDetailAddReloadPattern)="dataFromAddaPattern($event)"></app-adda-add-pattern> -->
+        <!-- <app-pay-employee [employeeDataForPayment]="employeeDataForPayment" (forOutstandingPageReload)="dataFromPayEmployee($event)"></app-pay-employee> -->
+        <app-dispatch [dataForDispatch]="dataForDispatch" (forFinishGoodPageReload)="dataFromDispatch($event)"></app-dispatch>
+        <!-- <app-dispatch [dataForDispatch]="dataForDispatch" (forFinishGoodPageReload)="dataFromDispatch($event)"></app-dispatch> -->
+    </div>
+  </div>

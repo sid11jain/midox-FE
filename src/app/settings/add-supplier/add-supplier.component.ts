@@ -28,7 +28,7 @@ export class AddSupplierComponent {
       supplierName: ['', [Validators.required, Validators.minLength(3)]],
       contactPerson: ['', [Validators.required, Validators.minLength(3)]],
       contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10)]],
-      supplierUID: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9]{15}$')]],
+      supplierUID: ['', [Validators.pattern('^[A-Za-z0-9]{15}$')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       status: ['', Validators.required],
@@ -45,14 +45,12 @@ export class AddSupplierComponent {
       return;
     }
     
-    this.showSpinner = true;
-    console.log('Form values:', this.supplierForm.value);    
+    this.showSpinner = true;   
     
     if(this.editedMaterialIndex !== null){
       //For update
       let tempObj = this.supplierForm?.value;
       tempObj.supplierId = this.supplierId;
-      console.log(tempObj);
       this.addEditSupplierApi(tempObj,"supplier","edit");     
     }
     else{
@@ -68,8 +66,7 @@ export class AddSupplierComponent {
   getSupplier(data:any){
     this.common.addSupplierOrBrandSettingsData(data,"supplier","get-suppliers").subscribe(async (responseData:any)=>{
       let response = responseData?.body;   
-      if (responseData.status === 200) {
-        console.log(response);     
+      if (responseData.status === 200) {  
         this.suppliers = response;
       }
       else{
@@ -82,8 +79,7 @@ export class AddSupplierComponent {
   addEditSupplierApi(data:any, key1:string, key2: string){
     this.common.addSupplierOrBrandSettingsData(data,key1,key2).subscribe(async (responseData:any)=>{
       let response = responseData?.body;   
-      if (responseData.status === 201) {
-        console.log(response);    
+      if (responseData.status === 201) {    
         this.getSupplier({});    
         this.dialogMessage = `Supplier ${key2} successfully.`; 
       }
@@ -100,7 +96,6 @@ export class AddSupplierComponent {
   edit(supplier: any, index:number): void {    
     this.deleteBtnDisabled = true;
     this.editedMaterialIndex = index;
-    console.log("supplier ",supplier);
     this.supplierId = supplier?.supplierId;
     
     this.supplierForm.patchValue({
@@ -114,34 +109,5 @@ export class AddSupplierComponent {
       description: supplier.description
     });
   }
-
-  // addSupplier(data:any){
-  //   this.common.addSupplierOrBrandSettingsData(data,"supplier","add").subscribe(async (responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);    
-  //       this.getSupplier({});    
-  //       this.dialogMessage = 'Supplier saved successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);    
-  //       this.dialogMessage = 'Supplier failed to save.'; 
-  //     }      
-  //     this.showSpinner = false;  
-  //     // To open modal
-  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
-  //   });
-  // }
-
-  
-
-  // deleteSupplier(supplier: any): void {
-  //   // Implement the delete functionality here
-  //   console.log('Deleting supplier:', supplier);
-  //   const index = this.suppliers.indexOf(supplier);
-  //   if (index !== -1) {
-  //     this.suppliers.splice(index, 1);
-  //   }
-  // }
 
 }

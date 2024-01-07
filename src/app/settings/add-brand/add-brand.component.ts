@@ -29,7 +29,7 @@ export class AddBrandComponent {
       brandName: ['', [Validators.required, Validators.minLength(3)]],
       contactPerson: ['', [Validators.required, Validators.minLength(3)]],
       contactNo: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10)]],
-      brandUID: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9]{15}$')]],
+      brandUID: ['', [Validators.pattern('^[A-Za-z0-9]{15}$')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       status: ['', Validators.required],
@@ -46,14 +46,12 @@ export class AddBrandComponent {
       return;
     }
     
-    this.showSpinner = true;
-    console.log('Form values:', this.brandForm.value);    
+    this.showSpinner = true;  
     
     if(this.editedMaterialIndex !== null){
       //For update
       let tempObj = this.brandForm?.value;
       tempObj.brandId = this.brandId;
-      console.log(tempObj);
       this.addEditBrandApi(tempObj,"brand","edit");     
     }
     else{
@@ -69,8 +67,7 @@ export class AddBrandComponent {
   getBrand(data:any){
     this.common.addSupplierOrBrandSettingsData(data,"brand","get-brands").subscribe(async (responseData:any)=>{
       let response = responseData?.body;   
-      if (responseData.status === 200) {
-        console.log(response);     
+      if (responseData.status === 200) {    
         this.brands = response;
       }
       else{
@@ -83,13 +80,11 @@ export class AddBrandComponent {
   addEditBrandApi(data:any, key1:string, key2: string){
     this.common.addSupplierOrBrandSettingsData(data,key1,key2).subscribe(async (responseData:any)=>{
       let response = responseData?.body;   
-      if (responseData.status === 201) {
-        console.log(response);    
+      if (responseData.status === 201) {  
         this.getBrand({});    
         this.dialogMessage = `${this.dialogTitle} ${key2} successfully.`; 
       }
-      else{
-        console.log("Error code: ",responseData?.status);    
+      else{    
         this.dialogMessage = `${this.dialogTitle} failed to ${key2}.`; 
       }      
       this.showSpinner = false;  
@@ -101,7 +96,6 @@ export class AddBrandComponent {
   edit(editData: any, index:number): void {    
     this.deleteBtnDisabled = true;
     this.editedMaterialIndex = index;
-    console.log("brand ",editData);
     this.brandId = editData?.brandId;
     
     this.brandForm.patchValue({

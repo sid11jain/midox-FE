@@ -83,17 +83,13 @@ export class AddColorfabricComponent {
     this.showSpinner = true;
     
     const selectControl = this.colorFabricForm.get('name');
-    selectControl?.enable();
-    console.log(this.colorFabricForm.value);    
+    selectControl?.enable();    
     
     this.deleteBtnDisabled = false;
     let colorVal = this.colorFabricForm?.value?.name;
     let colorCodeVal = this.colorFabricForm?.value?.code;
-    console.log("colorCodeVal ", colorCodeVal);
     if(this.editedColorFabricIndex !== null){
       //For update
-      console.log("Update");
-      console.log("editObject ", this.editObject);
       let obj = {    
         "entityCd": "",
         "parentEntityCd": "",
@@ -105,9 +101,6 @@ export class AddColorfabricComponent {
       obj.parentEntityCd = this.editObject?.parentEntityCd;
       obj.entityId = this.editObject?.entityId;
       obj.displayValue = colorCodeVal;
-      // console.log("Obj ", obj);
-      
-      // this.editColourFabricCode(obj);
       
       this.colorFabricArray = await this.common.editDataFn(obj,this.dialogTitle,this.key);
       this.showSpinner = false;
@@ -122,8 +115,7 @@ export class AddColorfabricComponent {
       // obj.entityCd = "CFC_"+currTime;
       obj.parentEntityCd = colorVal;
       obj.displayValue = colorCodeVal;
-      let data = [obj]
-      console.log(data);    
+      let data = [obj]  
 
       // this.addColourFabricCode(data);
       
@@ -162,104 +154,5 @@ export class AddColorfabricComponent {
     this.showSpinner = false;
   }
 
-  //API Call Get color name
-  // getColorName(){    
-  //   this.common.getAllSettingsData("MID_COL").subscribe((responseData:any)=>{
-  //     let response = responseData?.body;
-  //     if (responseData.status === 200) {
-  //       this.dropDownValue = response;
-  //       console.log(response);        
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);        
-  //     }
-  //     this.showSpinner = false;
-  //   });
-  // }
-
-  //API Call Get color Fabric code
-  // getColorFabricCode(){    
-  //   this.common.getAllSettingsData("MID_CFC").subscribe((responseData:any)=>{
-  //     let response = responseData?.body;
-  //     if (responseData.status === 200) {
-  //       this.colorFabricArray = response;
-  //       console.log(response);        
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);        
-  //     }
-  //     this.showSpinnerTable = false;
-  //   });
-  // }
   
-  // Delete
-  // deleteColourFabricCode(entityCd:any){
-  //   console.log("API Call");    
-  //   this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
-  //     // let response = responseData?.body;
-  //     console.log(responseData);        
-  //     if (responseData.status === 200) {
-  //       this.getColorFabricCode();
-  //       this.dialogMessage = 'Colour fabric code delete successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Colour fabric code failed to delete.';        
-  //     }
-  //     this.showSpinner = false; 
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Add
-  // addColourFabricCode(data:any){
-  //   console.log("Post API Call");
-  //   this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);       
-  //       this.getColorFabricCode();    
-        
-  //       this.dialogMessage = 'Colour fabric code saved successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);    
-  //       this.dialogMessage = 'Colour fabric code failed to save.'; 
-  //     }      
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Edit
-  // editColourFabricCode(data:any){
-  //   console.log("Edit API Call");
-  //   this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 200) {
-  //       console.log(response);       
-  //       this.getColorFabricCode();   
-  //       this.dialogMessage = 'Colour fabric code update successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Colour fabric code failed to update.';        
-  //     }
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  //Modal 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(MsgDialogComponent, {
-  //     width: '400px',
-  //     data: { title: this.dialogTitle, message: this.dialogMessage }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result:any) => {
-  //     console.log('The dialog was closed');
-  //   });
-  // }
-
 }

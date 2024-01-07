@@ -10,11 +10,6 @@ export class PaymentEmployeeComponent {
   showSpinner:boolean = true;
   employeePaymentHistory: any = [];
   constructor(private commonService: CommonService){ 
-    // commonService.employeePaymentData.subscribe((val:any) => {
-    //   this.employeePaymentDetails = val;
-    //   console.log(this.employeePaymentDetails);
-      
-    // });
   }
 
   async ngOnInit(){

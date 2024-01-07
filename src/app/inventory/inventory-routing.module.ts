@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'add-stock', pathMatch: 'full'},
   { path: 'add-stock', component:  AddStockComponent},
   { path: 'dispatch', component:  DispatchComponent},
-  { path: 'dispatch-history', component:  DispatchHistoryComponent},
+  { path: 'dispatch-history/:finishedGoodsId', component:  DispatchHistoryComponent},  
   { path: 'finish-goods', component:  FinishGoodsComponent},
   { path: 'stock-history', component:  StockHistoryComponent},
   { path: 'view', component:  ViewComponent}

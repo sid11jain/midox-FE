@@ -15,6 +15,7 @@ export class AddaAddPatternComponent {
   patternAddaAddForm!: FormGroup;
   colorArray: any[] = [];
   sizeArray: any[] = [];
+  bundleDropdownData: any[] = [];
   key: string = "MID_COL";
   key1: string = "MID_SIZE";
   addaId:any;
@@ -22,6 +23,7 @@ export class AddaAddPatternComponent {
   addaPatternTitle:string = "Add Adda Pattern";
   patternId:string = "";
   patternName:string = "";
+  bundleAmount:number = 0;
 
   // To send data from child to parent
   @Output() forDetailAddReloadPattern = new EventEmitter<any>();
@@ -30,6 +32,7 @@ export class AddaAddPatternComponent {
   @Input() forEditAddaPattern:any = '';
   detailAddaData:any;
   remainingQtyAdda:any;
+  showBundleAmount:boolean= false;
   
   constructor(private formBuilder: FormBuilder, private common: CommonService, public dialog: MatDialog,  private route: ActivatedRoute) {  }
 
@@ -37,8 +40,7 @@ export class AddaAddPatternComponent {
     
     await this.route.params.subscribe(async (params) => {
       this.addaId = params['addaId'];
-    })
-    console.log("Adda ID ", this.addaId);    
+    })   
 
     this.patternAddaAddForm = this.formBuilder.group({
       // addaId: [this.addaId],
@@ -48,53 +50,77 @@ export class AddaAddPatternComponent {
       quantity: ['', [Validators.required, Validators.min(1)]],
       bundleSize: ['', [Validators.required, Validators.min(1)]],
     });
+    this.patternAddaAddForm.get('bundleSize')?.disable();
     
     this.colorArray = await this.common.getDataFn(this.key);
     this.sizeArray = await this.common.getDataFn(this.key1);
-    console.log("Color array ", this.colorArray);
     
     this.showSpinner = false; 
+    this.patternAddaAddForm?.get('quantity')?.valueChanges.subscribe(value => {
+      this.patternAddaAddForm.get('bundleSize')?.reset();
+      this.patternAddaAddForm.get('bundleSize')?.disable();
+      
+      this.showBundleAmount = false;
+    });
+  }
+
+  getBundleData(){
+    let bundleValue = this.patternAddaAddForm.get('bundleSize')?.value;
+    if(bundleValue){
+      const quantityValue = this.patternAddaAddForm.get('quantity')?.value;
+      this.bundleAmount = quantityValue / bundleValue;
+      this.showBundleAmount = true;
+    }
+  }
+
+  onBlur(): void {
+    const inputValue = this.patternAddaAddForm.get('quantity')?.value;
+    if(inputValue){
+      this.bundleDropdownData = this.findFactors(inputValue);
+      this.patternAddaAddForm.get('bundleSize')?.enable();
+    }
+    
+    // Perform any other operations you want with the value
   }
 
   async onSubmit() {
-    if (this.patternAddaAddForm.invalid) {
-      return;
-    }  
-    // console.log(this.patternAddaAddForm.value);
-    
-    this.showSpinner = true; 
-    if(this.forEditAddaPattern){
-      let tempObj = {...this.patternAddaAddForm.value};
-      tempObj.patternId = this.patternId;
-      tempObj.patternName = this.patternName;
-      console.log("Edit ",tempObj);    
-      let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.addaPatternTitle);
+    if (confirm("Are you sure to save Adda pattern information?")) {
+      if (this.patternAddaAddForm.invalid) {
+        return;
+      }
+      this.showSpinner = true;
+      if (this.forEditAddaPattern) {
+        let tempObj = { ...this.patternAddaAddForm.value };
+        tempObj.patternId = this.patternId;
+        tempObj.patternName = this.patternName;
+        let temp = await this.common.addDataFn1(tempObj, "adda", "update-pattern", "get-addas", this.addaPatternTitle);
+      }
+      else {
+        this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
+        let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
+      }
+
+      await this.updateRemainingQtyFn();
+      this.resetForm();
+      this.showSpinner = false;
+      this.forDetailAddReloadPattern.emit(true);
+      document.getElementById("addAddaPatternBtn")?.click();
     }
-    else{
-      this.patternAddaAddForm.controls['addaId'].patchValue(this.addaId);
-      console.log("Add ",this.patternAddaAddForm.value);
-      let temp = await this.common.addDataFn1(this.patternAddaAddForm?.value, "adda", "add-pattern", "get-addas", this.addaPatternTitle);
-    }    
-    this.resetForm();
-    this.showSpinner = false;
-    this.forDetailAddReloadPattern.emit(true);
-    // this.ngOnInit();
-    document.getElementById("addAddaPatternBtn")?.click();    
+  }
+
+  async updateRemainingQtyFn(){
+    this.detailAddaData = await this.common.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
+    this.remainingQtyAdda = this.detailAddaData[0]?.remainingQtyForPattern;  
   }
 
   async ngOnChanges(){
-    
-    this.detailAddaData = await this.common.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
-    this.remainingQtyAdda = this.detailAddaData[0]?.remainingQtyForPattern;
-    console.log("remainingQtyAdda ", this.remainingQtyAdda);
-    console.log("forEditAddaPattern ",this.forEditAddaPattern);    
+    await this.updateRemainingQtyFn();
     this.resetForm();
     // this.initForm();
     // this.ngOnInit();
 
     if(this.forEditAddaPattern){
       this.addaPatternTitle = "Edit Adda Pattern";
-      console.log("Edit"); 
       this.patternId = this.forEditAddaPattern.patternId; 
       this.patternName = this.forEditAddaPattern.patternName; 
       // this.addaMaterialForm.get('stockId')?.disable();
@@ -107,7 +133,6 @@ export class AddaAddPatternComponent {
       });
     }
     else{
-      console.log("Add");
       this.addaPatternTitle = "Add Adda Pattern";
     }
   }
@@ -115,4 +140,15 @@ export class AddaAddPatternComponent {
   resetForm(){
     this.patternAddaAddForm?.reset();
   }
+
+  findFactors(inputNumber:number) {
+    const factors = [];
+    for (let i = 1; i <= inputNumber; i++) {
+      if (inputNumber % i === 0) {
+        factors.push(i);
+      }
+    }
+    return factors;
+  }
+  
 }

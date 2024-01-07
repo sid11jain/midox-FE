@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'view-adda', component:  ViewAddaComponent},
   // { path: 'details-adda', component:  DetailsAddaComponent},
   { path: 'details-adda/:addaId', component:  DetailsAddaComponent},
-  { path: 'bundle-adda/:addaId/:patternId/:brandId', component:  AddaBundleComponent},
+  // { path: 'bundle-adda/:addaId/:patternId/:brandId', component:  AddaBundleComponent},
+  { path: 'bundle-adda/:addaId/:patternId', component:  AddaBundleComponent},
   { path: 'detail-bundle', component:  BundleDetailTableComponent},
 ];
 

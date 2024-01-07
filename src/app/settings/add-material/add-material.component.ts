@@ -40,11 +40,8 @@ export class AddMaterialComponent {
     this.showSpinner = true; 
     this.deleteBtnDisabled = false;
     let inputVal = this.materialForm.value.name;
-    console.log("inputVal ", inputVal);
     if(this.editedMaterialIndex !== null){
       //For update
-      console.log("Update");
-      console.log("editObject ", this.editObject);
       let obj = {    
         "entityCd": "",
         "parentEntityCd": null,
@@ -66,9 +63,7 @@ export class AddMaterialComponent {
         "displayValue": ""
       }
       obj.displayValue = inputVal;
-      let data = [obj]
-      console.log(data);  
-      // this.addMaterial(data);     
+      let data = [obj]     
 
       // Post API call
       this.materials = await this.common.addDataFn(data,this.dialogTitle,this.key);
@@ -97,98 +92,5 @@ export class AddMaterialComponent {
     this.materials = await this.common.deleteDataFn(entityCd,this.dialogTitle,this.key);
     this.showSpinner = false;
   }  
-
-  //API call
-
-  // getMaterial(){
-  //   console.log("API Call");    
-  //   // this.common.getAllSettingsData("MID_MAT").subscribe((responseData:any)=>{
-  //   //   let response = responseData?.body;
-  //   //   if (responseData.status === 200) {
-  //   //     this.materials = response;
-  //   //     console.log(response);        
-  //   //   }
-  //   //   else{
-  //   //     console.log("Error code: ",responseData?.status);        
-  //   //   }
-  //   //   this.showSpinner = false;
-  //   // });
-  // }
-  
-  // Delete
-  
-  // deleteMaterial(entityCd:any){
-  //   console.log("API Call");    
-  //   this.common.deleteAllSettingsData(entityCd).subscribe(async (responseData:any)=>{
-  //     // let response = responseData?.body;
-  //     console.log(responseData);        
-  //     if (responseData.status === 200) {
-  //       // this.getMaterial();    
-        
-  //       //Get API Calling
-  //       this.materials = await this.common.getDataFn("MID_MAT");
-  //       this.showSpinner = false;
-  //       this.dialogMessage = 'Material delete successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Material failed to delete.';        
-  //     }
-  //     this.showSpinner = false; 
-      
-  //     // To open modal
-  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
-  //   });
-  // }
-
-  // Add
-  // addMaterial(data:any){
-  //   console.log("Post API Call");
-  //   this.common.addAllSettingsData(data).subscribe(async (responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);       
-  //       // this.getMaterial();     
-
-  //       //Get API calling
-  //       this.materials = await this.common.getDataFn("MID_MAT");
-  //       this.showSpinner = false;        
-  //       this.dialogMessage = 'Material saved successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);    
-  //       this.dialogMessage = 'Material failed to save.'; 
-  //     }      
-  //     this.showSpinner = false;  
-
-  //     // To open modal
-  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
-  //   });
-  // }
-
-  // Edit
-  // editMaterial(data:any){
-  //   console.log("Edit API Call");
-  //   this.common.editAllSettingsData(data).subscribe(async (responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 200) {
-  //       console.log(response);       
-  //       // this.getMaterial();   
-
-  //       //Get API Calling
-  //       this.materials = await this.common.getDataFn("MID_MAT");
-  //       this.showSpinner = false;
-  //       this.dialogMessage = 'Material update successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Material failed to update.';        
-  //     }
-  //     this.showSpinner = false;  
-
-  //     // To open modal
-  //     this.common.openDialog(this.dialogTitle,this.dialogMessage);
-  //   });
-  // }
 
 }

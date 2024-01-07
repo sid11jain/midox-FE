@@ -4,7 +4,7 @@
     <!-- <div class="row pt-3"> -->
       
     <div class="row settings-comp">
-      <div class="accordion card-body" id="accordionExample">
+      <div class="accordion card-body" id="accordionExample" *ngIf="isAdmin">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" id="addEmployeeAccordian" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -204,10 +204,15 @@
           <dxi-column dataField="address" caption="Address"[visible]="false"></dxi-column>
           <dxi-column dataField="description" caption="Description"[visible]="false"></dxi-column>
           
-          <dxi-column caption="Edit" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
-          <div *dxTemplate="let data of 'cellTemplateHyperlink'; let i = index">
+          <dxi-column caption="Edit/Role" cellTemplate="cellTemplateHyperlink" alignment="center" *ngIf="isAdmin"></dxi-column>  
+          <div *dxTemplate="let data of 'cellTemplateHyperlink'; let i = index"> 
             <button mat-icon-button (click)="edit(data.data,i)" class="btn btn-sm me-2 btn-primary">
               <mat-icon class="me-2">edit</mat-icon>
+            </button>
+            <!-- <button class="btn btn-warning btn-xs" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getSelectedData('')">Add Material</button>     -->
+
+            <button mat-icon-button  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="roleSelection(data.data,i)" class="btn btn-sm me-2 btn-primary">
+              <mat-icon class="icon-mat">remove_red_eye</mat-icon>                         
             </button>
           </div>
   
@@ -259,3 +264,25 @@
     </div>
   </div>
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <!-- <app-adda-add-material [forEditAddaMaterial]="editAddaMaterialData" (forDetailAddReloadMaterial)="dataFromAddaMaterial($event)"></app-adda-add-material> -->
+        <app-add-employee-roles [employeeDataForRole]="employeeDataForRole" [timeInMiliSeconds]="timeInMiliSeconds" (forDetailAddReloadMaterial)="dataFromAddaMaterial($event)"></app-add-employee-roles>
+      <!-- <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div> -->
+    </div>
+  </div>
+

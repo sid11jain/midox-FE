@@ -42,11 +42,8 @@ export class AddColorComponent {
     
     this.deleteBtnDisabled = false;
     let inputVal = this.colorForm.value.name;
-    console.log("inputVal ", inputVal);
     if(this.editedColorIndex !== null){
       //For update
-      console.log("Update");
-      console.log("editObject ", this.editObject);
       let obj = {    
         "entityCd": "UNIT_KG8",
         "parentEntityCd": null,
@@ -57,7 +54,6 @@ export class AddColorComponent {
       obj.entityCd = this.editObject?.entityCd;
       obj.entityId = this.editObject?.entityId;
       obj.displayValue = inputVal;
-      // console.log("Obj ", obj);
       
       // this.editColor(obj);      
       this.colorArray = await this.common.editDataFn(obj,this.dialogTitle,this.key);
@@ -72,8 +68,7 @@ export class AddColorComponent {
       }
       // obj.entityCd = "COL_"+currTime;
       obj.displayValue = inputVal;
-      let data = [obj]
-      console.log(data);    
+      let data = [obj]   
 
       // this.addColor(data);
       
@@ -105,92 +100,4 @@ export class AddColorComponent {
     this.colorArray = await this.common.deleteDataFn(entityCd,this.dialogTitle,this.key);
     this.showSpinner = false;
   }
-
-  //API Call
-  // getColor(){
-  //   console.log("API Call");
-    
-  //   this.common.getAllSettingsData("MID_COL").subscribe((responseData:any)=>{
-  //     let response = responseData?.body;
-  //     if (responseData.status === 200) {
-  //       this.colorArray = response;
-  //       console.log(response);        
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);        
-  //     }
-  //     this.showSpinner = false;
-  //   });
-  // }
-  
-  // Delete
-  // deleteColor(entityCd:any){
-  //   console.log("API Call");    
-  //   this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
-  //     // let response = responseData?.body;
-  //     console.log(responseData);        
-  //     if (responseData.status === 200) {
-  //       this.getColor();
-  //       this.dialogMessage = 'Colour delete successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Colour failed to delete.';        
-  //     }
-  //     this.showSpinner = false; 
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Add
-  // addColor(data:any){
-  //   console.log("Post API Call");
-  //   this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);       
-  //       this.getColor();    
-        
-  //       this.dialogMessage = 'Colour saved successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);    
-  //       this.dialogMessage = 'Colour failed to save.'; 
-  //     }      
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Edit
-  // editColor(data:any){
-  //   console.log("Edit API Call");
-  //   this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 200) {
-  //       console.log(response);       
-  //       this.getColor();   
-  //       this.dialogMessage = 'Colour update successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Colour failed to update.';        
-  //     }
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  //Modal 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(MsgDialogComponent, {
-  //     width: '400px',
-  //     data: { title: this.dialogTitle, message: this.dialogMessage }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result:any) => {
-  //     console.log('The dialog was closed');
-  //   });
-  // }
-
 }

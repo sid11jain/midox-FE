@@ -27,8 +27,6 @@ export class ProfileComponent implements OnInit {
     }
     const currentFullTimestamp = new Date();
     this.profileForm.patchValue({ currentFullTimestamp });
-    
-    console.log('Profile Form values:', this.profileForm.value);
   }
 
 }

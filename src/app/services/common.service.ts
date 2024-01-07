@@ -25,6 +25,10 @@ export class CommonService {
   employeeJobHistoryData = new BehaviorSubject('');
   employeePaymentData = new BehaviorSubject('');
   isStockHistoryClick = new BehaviorSubject(false);
+  isOnLoginPage = new BehaviorSubject(false);
+
+  // loginToken:any = new Subject();
+  // roles:any = new Subject();
 
   dialogTitle:string = "";
 
@@ -81,6 +85,14 @@ export class CommonService {
   }
 
   // Get
+
+  getDashboardData(): Observable<any> {
+    this.payloadUrl = `${this.baseUrl}search/dashboard`;
+    return this.http.post(this.payloadUrl, {}, this.httpOptions).pipe(
+      catchError(this.handleError('getDashboardData', []))
+    );
+  }
+
   getAllSettingsData(type:any): Observable<any> {
     this.payloadUrl = `${this.baseUrl}groups/get-entities/${type}`;
     return this.http.get(this.payloadUrl, this.httpOptions).pipe(
@@ -170,30 +182,12 @@ export class CommonService {
     });
   }
 
-  // Get api call function for setting pages
   
-  // async getDataFn1(key:string){
-  //   // console.log("Get API Call");    
-  //   await (await this.getAllSettingsData(key)).subscribe((responseData:any)=>{
-  //     let response:any = "";
-  //     if (responseData?.status === 200) {
-  //       response = responseData?.body;
-  //       console.log("response ",response);        
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);        
-  //     }
-  //     return response;
-  //     // this.showSpinner = false;
-  //   });
-  // }
-
   async getBundleSearchFn(key:string, params:string){
-    console.log("Get API Call");    
+    
     try{
       let response = await this.getSearchBundle(key+'/'+params).toPromise();  
-      if (response?.status === 200) {
-        console.log(key,response.body);        
+      if (response?.status === 200) {      
         return response?.body;      
       }
       else{
@@ -205,12 +199,10 @@ export class CommonService {
     }
   }
 
-  async getDataFn(key:string){
-    console.log("Get API Call");    
+  async getDataFn(key:string){    
     try{
       let response = await this.getAllSettingsData(key).toPromise();   
-      if (response?.status === 200) {
-        console.log(response.body);        
+      if (response?.status === 200) {      
         return response?.body;      
       }
       else{
@@ -222,12 +214,10 @@ export class CommonService {
     }
   }
 
-  async getDataFn1(data:any, key1:string, key2:string){
-    console.log("Get API Call");    
+  async getDataFn1(data:any, key1:string, key2:string){   
     try{
       let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();   
-      if (response?.status === 200) {
-        console.log(key2, " : ",response.body);        
+      if (response?.status === 200) {       
         return response?.body;      
       }
       else{
@@ -265,8 +255,7 @@ export class CommonService {
   }
   
   // Delete api call function for setting pages
-  async deleteDataFn(entityCd:any, dialogTitle:string, key:string){
-    console.log("Delete API Call");    
+  async deleteDataFn(entityCd:any, dialogTitle:string, key:string){  
     try{
       let response = await this.deleteAllSettingsData(entityCd).toPromise();        
       let dialogMessage = dialogTitle; 
@@ -291,7 +280,6 @@ export class CommonService {
   
   // Post  api call function for setting pages
   async addDataFn(data:any, dialogTitle:string, key:string){
-    console.log("Post API Call");    
     try{
       let response = await this.addAllSettingsData(data).toPromise();        
       let dialogMessage = dialogTitle; 
@@ -316,7 +304,7 @@ export class CommonService {
 
   // Key1 -> Module(Adda/design)     Key2 -> edit/add    key3 -> get-design/get-addas
   async addDataFn1(data:any, key1:string, key2: string, key3: string, dialogTitle:string){
-    console.log("Post API Call");    
+   
     this.dialogTitle = dialogTitle;
     try{
       let response = await this.addSupplierOrBrandSettingsData(data,key1,key2).toPromise();        
@@ -348,8 +336,7 @@ export class CommonService {
   }
 
   // Key1 -> Module(Adda/design)     Key2 -> edit/delete    key3 -> get-design/get-addas
-  async deleteDataFn1(data:any, key1:string, key2: string, dialogTitle:string){
-    console.log("Delete API Call");    
+  async deleteDataFn1(data:any, key1:string, key2: string, dialogTitle:string){ 
     try{
       let response = await this.deleteSupplierOrBrandSettingsData(data,key1,key2).toPromise();        
       let dialogMessage = dialogTitle; 
@@ -378,6 +365,19 @@ export class CommonService {
       console.log("Error ", error);  
       return false;    
     }
+  }
+
+  // Authentication Auth Service
+  login(username:string, password:string): Observable<any>{
+    // this.payloadUrl = `${this.baseUrl}groups/edit-entity`;
+    let apiUrl = `${this.baseUrl}authenticate`;
+    const loginData = {
+      username: username,
+      password: password
+    };
+
+    return this.http.post<any>(apiUrl, loginData);
+
   }
 
 

@@ -43,11 +43,8 @@ export class AddProcessComponent {
     this.showSpinner = true;
     this.deleteBtnDisabled = false;
     let inputVal = this.processForm.value.name;
-    console.log("inputVal ", inputVal);
     if(this.editedProcessIndex !== null){
       //For update
-      console.log("Update");
-      console.log("editObject ", this.editObject);
       let obj = {    
         "entityCd": "UNIT_KG8",
         "parentEntityCd": null,
@@ -58,9 +55,6 @@ export class AddProcessComponent {
       obj.entityCd = this.editObject?.entityCd;
       obj.entityId = this.editObject?.entityId;
       obj.displayValue = inputVal;
-      // console.log("Obj ", obj);
-      
-      // this.editProcess(obj);
       
       this.processArray = await this.common.editDataFn(obj,this.dialogTitle,this.key);
       this.showSpinner = false;
@@ -74,8 +68,7 @@ export class AddProcessComponent {
       }
       // obj.entityCd = "PROC_"+currTime;
       obj.displayValue = inputVal;
-      let data = [obj]
-      console.log(data);    
+      let data = [obj]    
 
       // this.addProcess(data);
       
@@ -108,90 +101,4 @@ export class AddProcessComponent {
     this.showSpinner = false;
   }
 
-  //API Call
-  // getProcess(){
-  //   console.log("API Call");
-    
-  //   this.common.getAllSettingsData("MID_PROC").subscribe((responseData:any)=>{
-  //     let response = responseData?.body;
-  //     if (responseData.status === 200) {
-  //       this.processArray = response;
-  //       console.log(response);        
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);        
-  //     }
-  //     this.showSpinner = false;
-  //   });
-  // }
-  
-  // Delete
-  // deleteProcess(entityCd:any){
-  //   console.log("API Call");    
-  //   this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
-  //     // let response = responseData?.body;
-  //     console.log(responseData);        
-  //     if (responseData.status === 200) {
-  //       this.getProcess();
-  //       this.dialogMessage = 'Process delete successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Process failed to delete.';        
-  //     }
-  //     this.showSpinner = false; 
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Add
-  // addProcess(data:any){
-  //   console.log("Post API Call");
-  //   this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);       
-  //       this.getProcess();    
-        
-  //       this.dialogMessage = 'Process saved successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);    
-  //       this.dialogMessage = 'Process failed to save.'; 
-  //     }      
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Edit
-  // editProcess(data:any){
-  //   console.log("Edit API Call");
-  //   this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 200) {
-  //       console.log(response);       
-  //       this.getProcess();   
-  //       this.dialogMessage = 'Process update successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogMessage = 'Process failed to update.';        
-  //     }
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  //Modal 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(MsgDialogComponent, {
-  //     width: '400px',
-  //     data: { title: this.dialogTitle, message: this.dialogMessage }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result:any) => {
-  //     console.log('The dialog was closed');
-  //   });
-  // }
-}
+  }

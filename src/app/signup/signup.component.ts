@@ -13,13 +13,14 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(6)]],
-      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      // fullName: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      isAdmin: [false],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      // isAdmin: [false],
       dob: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10)]],
-      currentFullTimestamp: [''],
+      // mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10)]],
+      // currentFullTimestamp: [''],
     });
   }
 
@@ -33,7 +34,6 @@ export class SignupComponent implements OnInit {
     }
     const currentFullTimestamp = new Date();
     this.signupForm.patchValue({ currentFullTimestamp });
-    console.log(this.signupForm.value);
     this.onClear();
   }
 

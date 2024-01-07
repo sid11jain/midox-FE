@@ -134,3 +134,16 @@ a {
 .mat-icon {
   cursor: pointer;
 }
+
+.event-none {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full, .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
+  background: #3F51B5 !important;
+}
+
+.btn.mdc-icon-button:hover {
+  background-color: #fff !important;
+}

@@ -10,7 +10,8 @@ import { SharedModule } from '../shared/shared/shared.module';
 import { PaymentHistorySingleEmployeeComponent } from './payment-history-single-employee/payment-history-single-employee.component';
 import { PayEmployeeComponent } from './pay-employee/pay-employee.component';
 import { JobHistorySingleEmployeeComponent } from './job-history-single-employee/job-history-single-employee.component';
-import { OutstandingEmployeeComponent } from './outstanding-employee/outstanding-employee.component'; 
+import { OutstandingEmployeeComponent } from './outstanding-employee/outstanding-employee.component';
+import { AddEmployeeRolesComponent } from './add-employee/add-employee-roles/add-employee-roles.component'; 
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { OutstandingEmployeeComponent } from './outstanding-employee/outstanding
     PaymentHistorySingleEmployeeComponent,
     PayEmployeeComponent,
     JobHistorySingleEmployeeComponent,
-    OutstandingEmployeeComponent
+    OutstandingEmployeeComponent,
+    AddEmployeeRolesComponent
   ],
   imports: [
     CommonModule,

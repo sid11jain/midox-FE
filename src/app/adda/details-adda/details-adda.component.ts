@@ -13,7 +13,7 @@ export class DetailsAddaComponent {
   detailAddaData:any;
   addaPatternsData:any;
   addaMaterialData:any;
-  brandId:any;
+  // brandId:any;
   addaId:any;
   
   dialogTitle:string = "Adda";
@@ -26,11 +26,9 @@ export class DetailsAddaComponent {
     await this.route.params.subscribe(async (params) => {
       this.addaId = params['addaId'];
       this.detailAddaData = await this.commonService.getDataFn1({"addaId":this.addaId}, "adda", "get-addas");
-      this.brandId = this.detailAddaData[0].brandDetails.brandId;
+      // this.brandId = this.detailAddaData[0].brandDetails.brandId;
       this.addaMaterialData = [...this.detailAddaData[0].addaMaterials];
       this.addaPatternsData = [...this.detailAddaData[0].addaPatterns];
-      console.log("addaMaterialData ",this.addaMaterialData);
-      console.log("addaPatternsData ",this.addaPatternsData);
       this.showSpinner = false;      
     });
     
@@ -38,32 +36,19 @@ export class DetailsAddaComponent {
 
   
   getSelectedData(rowData:any) {
-    console.log("rowData ", rowData);   
-    // this.sendAddaAddMaterialdata(rowData);
     this.editAddaMaterialData = rowData?.data;
 
   }
 
   getSelectedData1(rowData:any) {
-    console.log("rowData ", rowData);   
-    // this.sendAddaAddMaterialdata(rowData);
     this.editAddaPatternData = rowData?.data;
 
   }
-
-  // addMaterialFn(){
-  //   console.log("addMaterialFn called");    
-  // }
-
-  // addPaternFn(){
-  //   console.log("addPaternFn called");    
-  // }
   
-  async deleteMaterial(data1: any){
-    console.log(data1.addaMaterialId);    
+  async deleteMaterial(data1: any){  
     this.showSpinner = true; 
     let temp = await this.commonService.deleteDataFn1({"addaMaterialId": data1.addaMaterialId}, "adda", "delete-material", this.dialogTitle);
-    console.log(temp);
+
     if(temp){
       this.ngOnInit();
     }
@@ -75,7 +60,7 @@ export class DetailsAddaComponent {
   async deletePattern(data2: any){  
     this.showSpinner = true; 
     let temp = await this.commonService.deleteDataFn1({"patternId": data2.patternId}, "adda", "delete-pattern", this.dialogTitle);
-    console.log(temp);
+  
     if(temp){
       this.ngOnInit();
     }
@@ -84,25 +69,14 @@ export class DetailsAddaComponent {
     }
   }
 
-  // editMaterial(data3:any){
-  //   console.log("Edit ",data3);
-    
-  // }
-
-  // editPattern(data4:any){
-  //   console.log("Edit ",data4);
-    
-  // }
 
   
   dataFromAddaMaterial(data: any) {
-    console.log(data);
     this.showSpinner = true;
     this.ngOnInit();    
   }
 
   dataFromAddaPattern(data: any) {
-    console.log(data);
     this.showSpinner = true;
     this.ngOnInit();    
   }

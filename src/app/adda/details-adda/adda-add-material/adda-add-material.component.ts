@@ -72,11 +72,9 @@ export class AddaAddMaterialComponent {
   if(this.forEditAddaMaterial){
     let tempObj = {...this.addaMaterialForm.value};
     tempObj.addaMaterialId = this.addaMaterialId;
-    console.log("Edit ",tempObj);    
     let temp = await this.common.addDataFn1(tempObj, "adda", "update-material", "get-addas", this.addaMaterialTitle);
     }
     else{
-      console.log("Add ",this.addaMaterialForm.value);
       let temp = await this.common.addDataFn1(this.addaMaterialForm?.value, "adda", "add-material", "get-addas", this.addaMaterialTitle);
     }    
     this.resetForm();
@@ -87,15 +85,13 @@ export class AddaAddMaterialComponent {
   }
 
   
-  ngOnChanges(){
-    console.log("forEditAddaMaterial ",this.forEditAddaMaterial);    
+  ngOnChanges(){  
     this.resetForm();
     // this.initForm();
     this.ngOnInit();
 
     if(this.forEditAddaMaterial){
       this.addaMaterialTitle = "Edit Adda Material";
-      console.log("Edit"); 
       this.addaMaterialId = this.forEditAddaMaterial.addaMaterialId; 
       this.myControl.setValue(this.forEditAddaMaterial.stockDetails.stockName); 
       this.myControl.disable();    
@@ -112,20 +108,12 @@ export class AddaAddMaterialComponent {
     }
     else{
       this.myControl.enable();    
-      console.log("Add");
       this.addaMaterialTitle = "Add Adda Material";
     }
   }
 
   private _filter(value: any): any {
-    console.log(value);
     let filterValue:any;
-    // if(value.stockName){
-    //   filterValue = value.stockName.toLowerCase();
-    // }
-    // else{
-    //   filterValue = value.toLowerCase();
-    // }
     filterValue = value.toLowerCase();
 
     return this.options.filter((val:any) => val?.stockName?.toLowerCase().includes(filterValue));
@@ -133,9 +121,7 @@ export class AddaAddMaterialComponent {
 
   optionSelected(event: any): void {
     const selectedOptionValue = event.option.value;
-    console.log('Selected Option Value:', selectedOptionValue);
     this.stockDataObj = this.stockDataFull.find((option: any) => option.stockName === selectedOptionValue);
-    console.log('Selected Option:', this.stockDataObj);
     this.maxQuantiy = this.stockDataObj.availableQuantity;
     this.maxQuantityunit = this.stockDataObj.unit.displayValue;
     this.addaMaterialForm?.get('stockId')?.patchValue(this.stockDataObj.stockId);  

@@ -34,7 +34,7 @@
               <dxi-column dataField="productCd.displayValue" caption="Product"></dxi-column>
               <dxi-column dataField="designNo" caption="Design Number"></dxi-column>  
               <dxi-column dataField="quantity" caption="Quantity"></dxi-column>  
-              <dxi-column dataField="status.displayValue" caption="Status"></dxi-column>  
+              <dxi-column dataField="status.displayValue" caption="Status"  selectedFilterOperation="notcontains" [filterValue]="'Finished'"></dxi-column>  
               
               <dxi-column caption="Edit / Details" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
               <div *dxTemplate="let data of 'cellTemplateHyperlink'">

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonService } from '../services/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +10,19 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm:any =  FormGroup;
+  isLoginError:boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private commonService: CommonService, private router: Router) {
+    // this.commonService.loginToken.unsubscribe();
+    // this.commonService.roles.unsubscribe();
+    this.commonService.isOnLoginPage.next(true);
+    sessionStorage.clear();
+    // sessionStorage.removeItem('token');
+    // sessionStorage.removeItem('roles');
+   }
 
   ngOnInit(): void {
+    sessionStorage.clear();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -24,7 +35,33 @@ export class LoginComponent implements OnInit {
     }
 
     // Display the form values in the console
-    console.log(this.loginForm.value);
+    let username = this.loginForm?.value?.username;
+    let password = this.loginForm?.value?.password;
+    this.commonService.login(username,password).subscribe({
+      next: (result: any) =>{
+        if(result?.token){
+          this.commonService.isOnLoginPage.next(false);
+          const roles = result?.roles;
+          if(roles?.length){  
+            //this.commonService.roles.next(roles);
+            sessionStorage.setItem('roles', JSON.stringify(roles));
+          }
+          //this.commonService.loginToken.next(result?.token);
+          sessionStorage.setItem('token', result?.token);
+          setTimeout(()=>{
+            this.router.navigate(['/dashboard']);
+          }, 300);
+          
+        }
+      },
+      error: (err: any) => {
+        console.error('Login Error: ' + err);
+        this.isLoginError = true;
+        setTimeout(() =>{
+          this.isLoginError = false;
+        },3000);
+      },
+    })
   }
 
 }

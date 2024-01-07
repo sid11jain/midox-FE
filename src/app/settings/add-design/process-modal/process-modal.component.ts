@@ -39,7 +39,6 @@ export class ProcessModalComponent {
   }  
 
   ngOnChanges(){      
-    console.log("modalValue ",this.modalValue.processes);
     this.processModalData = {};
     this.processModalData = Object.assign({}, this.modalValue);
     this.processModalData = this.processModalData.processes;
@@ -50,7 +49,6 @@ export class ProcessModalComponent {
     else{
       this.addAPI = false;
     }
-    console.log("addAPI : ", this.addAPI);  
       for(let i=0; i<n; i++){
         if(this.processModalData[i]?.processCd?.displayValue){
           this.processModalData[i].processCdDisplayValue = this.processModalData[i].processCd.displayValue;
@@ -59,7 +57,6 @@ export class ProcessModalComponent {
           this.processModalData[i].updatedBy = this.processModalData[i].updatedBy.empId;
         }
       }  
-    console.log("Process data ",this.processModalData);
   }
 
   ngOnInit(){
@@ -89,7 +86,6 @@ export class ProcessModalComponent {
       this.processModalData[this.editedProcessModalIndex].status = status;
       this.processModalData[this.editedProcessModalIndex].priority = priority;
       this.editedProcessModalIndex = null;
-      console.log("Update ",this.processModalData);
       
     } else {
       let val:any = { 
@@ -101,7 +97,6 @@ export class ProcessModalComponent {
       };
       val.processCdDisplayValue = this.selectedOption?.displayValue;
       this.processModalData.push(val);
-      console.log("Add ",this.processModalData);
     }
     this.processModalForm.reset();
   }
@@ -109,11 +104,9 @@ export class ProcessModalComponent {
   onOptionSelected(selectElement: HTMLSelectElement) {
     let selectedIndex = selectElement.selectedIndex-1;
     this.selectedOption = this.processDropdownValues[selectedIndex];
-    console.log('Selected Option Label:', this.selectedOption.displayValue);
   }
 
   edit(data: any, index: number) {
-    console.log("data ",data);
     
     this.deleteBtnDisabled = true;
     this.editedProcessModalIndex = index;
@@ -132,19 +125,16 @@ export class ProcessModalComponent {
     document.getElementById("closeModalButton")?.click();
     
     let finalData = {designId:this.modalValue?.designId, processes:this.processModalData};
-    console.log("final processModalData: ",finalData);
     
     if(this.addAPI){
-      // Add
-      console.log("add");      
+      // Add     
       let temp = await this.common.addDataFn1(finalData, "design", "add-processes", "get-designs", this.dialogTitle);
-      console.log("Process ",temp);
+    
     }
     else{
       // Update
-      console.log("Update");
       let temp = await this.common.addDataFn1(finalData, "design", "update-processes", "get-designs", this.dialogTitle);
-      console.log("Process ",temp);
+
     }
     this.newItemEvent.emit(false);
   }
@@ -153,8 +143,7 @@ export class ProcessModalComponent {
     this.common.getAllSettingsData("MID_PROC").subscribe((responseData:any)=>{
       let response = responseData?.body;
       if (responseData.status === 200) {
-        this.processDropdownValues = response;
-        console.log(response);        
+        this.processDropdownValues = response;    
       }
       else{
         console.log("Error code: ",responseData?.status);        

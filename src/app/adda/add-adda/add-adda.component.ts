@@ -19,6 +19,7 @@ export class AddAddaComponent implements OnInit {
   @Output() forViewAddReload = new EventEmitter<any>();
 
   addaId:any = 0;
+  addaNo:any;
   addAddaForm!:FormGroup;
   showSpinner:boolean = true;
   addaTitle:string = "Add ADDA";
@@ -31,67 +32,86 @@ export class AddAddaComponent implements OnInit {
   ];
   dialogTitle:string = "ADDA"
   brandNamesData:any=[]; 
+  employeeData:any=[]; 
   designNumberData:any=[]; 
-  // productData:any=["One","Two","Three","Four","Five"]; 
-  // managingInfoData:any=["One","Two","Three","Four","Five"]; 
-  // employeeNameData:any=["One","Two","Three","Four","Five"]; 
 
   constructor(private formBuilder: FormBuilder, private common: CommonService) { 
     this.initForm();
   }
 
-  ngOnChanges(){
-    console.log("forEditAdda ",this.forEditAdda);    
+  ngOnChanges(){  
     this.addAddaForm.reset();
     this.initForm();
-    this.ngOnInit();
+    // this.ngOnInit();
+    this.getBrand({});    
+    this.addAddaForm.get('status')?.disable(); 
+    this.addAddaForm.get('designId')?.disable(); 
 
     if(this.forEditAdda){
       this.addaTitle = "Edit ADDA";
-      console.log("Edit");
       this.addAddaForm.get('status')?.enable();
       this.addaId = this.forEditAdda?.addaId;
+      this.addaNo = this.forEditAdda?.addaNo;
       // this.addAddaForm.patchValue(this.forEditAdda);
       this.addAddaForm.patchValue({
-        addaNo: this.forEditAdda.addaNo,
         brandId: this.forEditAdda.brandDetails.brandId,
         designId: this.forEditAdda.designNo,
         quantity: this.forEditAdda.quantity,
         remarks: this.forEditAdda.remarks,
         completionDate: this.forEditAdda.completionDate,
-        status: this.forEditAdda.status.entityCd
+        status: this.forEditAdda.status.entityCd,
+        dryingBy: this.forEditAdda?.addaInfo?.dryingBy?.empId,
+        cuttingBy: this.forEditAdda?.addaInfo?.cuttingBy?.empId,
+        tieBy: this.forEditAdda?.addaInfo?.tieBy?.empId,
+        custom: this.forEditAdda?.addaInfo?.custom?.empId,
+        grossWeight: this.forEditAdda?.addaInfo?.grossWeight,
+        netWeight: this.forEditAdda?.addaInfo?.netWeight,
+        wastageWeight: this.forEditAdda?.addaInfo?.wastageWeight,
+        wastagePercent: this.forEditAdda?.addaInfo?.wastagePercent,
+        ribWeight: this.forEditAdda?.addaInfo?.ribWeight,
+        paipinWeight: this.forEditAdda?.addaInfo?.paipinWeight,
+        ribNetWeight: this.forEditAdda?.addaInfo?.ribNetWeight,
       });
+      console.log(this.employeeData);
+      
     }
     else{
-      console.log("Add");
       this.addaTitle = "Add ADDA";
     }
-    
-
   }
 
   initForm(): void {
     this.addAddaForm = this.formBuilder.group({
-      addaNo: ['', [Validators.required, Validators.minLength(3)]],
       brandId: ['', Validators.required],
       designId: ['', Validators.required],
       quantity: ['', [Validators.required, Validators.min(1)]],
       remarks: ['', [Validators.required, Validators.minLength(3)]],
       completionDate: ['', Validators.required],
-      status: ['PROC_STAT_TBS', Validators.required]
+      status: ['PROC_STAT_TBS', Validators.required],
+      dryingBy: [''],
+      cuttingBy: [''],
+      tieBy: [''],
+      custom: [''],
+      grossWeight: [''],
+      netWeight: [''],
+      wastageWeight: [''],
+      wastagePercent: [''],
+      ribWeight: [''],
+      paipinWeight: [''],
+      ribNetWeight: [''],      
     });
   }
 
   async ngOnInit() {    
     this.addAddaForm.get('status')?.disable(); 
     this.addAddaForm.get('designId')?.disable(); 
-    this.getBrand({});
+    this.getBrand({});    
+    this.employeeData = await this.common.getDataFn1({}, "employee", "get-employees");
   }
   
   async getDesignFn(data:any){
     //Once I pass design id then it will send design values
-    this.addAddaForm.get('designId')?.disable(); 
-    console.log("Fn brandId ",data.value);
+    this.addAddaForm.get('designId')?.disable();
     this.designNumberData = [];
     this.designNumberData = await this.common.getDataFn1({"brandId": data.value}, "design", "get-designs");       
     this.addAddaForm.get('designId')?.enable(); 
@@ -101,7 +121,6 @@ export class AddAddaComponent implements OnInit {
     this.common.addSupplierOrBrandSettingsData(data,"brand","get-brands").subscribe(async (responseData:any)=>{
       let response = responseData?.body;   
       if (responseData.status === 200) {
-        console.log(response);     
         this.brandNamesData = response;
       }
       else{
@@ -116,34 +135,45 @@ export class AddAddaComponent implements OnInit {
       return;
     }
     this.showSpinner = true;
-    console.log('Dispatch Inventory Form values:', this.addAddaForm.value);
-  //   let temp1:any = {
-  //     addaNo:"Adda third Taes1t133",
-  //     brandId:"5",
-  //     designId:"1",
-  //     quantity:"1000",
-  //     remarks:"remark third adda ",
-  //     completionDate: "2023-10-25",
-  //     status:"PROC_STAT_TBS"
-  //     // status:null
-  
-  // }
 
-  if(this.forEditAdda){
-    console.log("Edit API Called");
-    console.log(this.addAddaForm?.value);
-    this.addAddaForm.value.addaId = this.addaId;
-    let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "edit", "get-addas", this.dialogTitle);
+    let finalObject:any = this.transformObject(this.addAddaForm?.value);
+    if(this.forEditAdda){
+      finalObject.addaId = this.addaId;
+      finalObject.addaNo = this.addaNo;
+      let temp = await this.common.addDataFn1(finalObject, "adda", "update", "get-addas", this.dialogTitle);
     }
     else{
-      console.log("Add API Called");
-      let temp = await this.common.addDataFn1(this.addAddaForm?.value, "adda", "add", "get-addas", this.dialogTitle);
+      let temp = await this.common.addDataFn1(finalObject, "adda", "add", "get-addas", this.dialogTitle);
     }
     
     this.showSpinner = false;
     this.addAddaForm.reset();
     document.getElementById("addAddaModalBtn")?.click();
     this.forViewAddReload.emit(true);
+  }
+
+  transformObject(originalObject: any): any {
+    return {
+      brandId: originalObject.brandId,
+      designId: originalObject.designId,
+      quantity: originalObject.quantity,
+      remarks: originalObject.remarks,
+      completionDate: originalObject.completionDate,
+      status: originalObject.status,
+      addaInfo: {
+        dryingBy: originalObject.dryingBy,
+        cuttingBy: originalObject.cuttingBy,
+        tieBy: originalObject.tieBy,
+        custom: originalObject.custom,
+        grossWeight: originalObject.grossWeight,
+        netWeight: originalObject.netWeight,
+        wastageWeight: originalObject.wastageWeight,
+        wastagePercent: originalObject.wastagePercent,
+        ribWeight: originalObject.ribWeight,
+        paipinWeight: originalObject.paipinWeight,
+        ribNetWeight: originalObject.ribNetWeight,
+      },
+    };
   }
 
  

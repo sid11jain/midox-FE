@@ -12,6 +12,7 @@ import { AddMeasurementComponent } from './add-measurement/add-measurement.compo
 import { AddBrandComponent } from './add-brand/add-brand.component';
 import { SignupComponent } from '../signup/signup.component';
 import { AddColorComponent } from './add-color/add-color.component';
+import { AddSizeComponent } from './add-size/add-size.component';
 
 const routes: Routes = [
   { path: '',
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'add-supplier', component:  AddSupplierComponent}, 
       { path: 'add-measurement-type', component:  AddMeasurementComponent}, 
       { path: 'add-brand', component:  AddBrandComponent}, 
-      { path: 'sign-up', component:  SignupComponent}, 
+      { path: 'add-size', component:  AddSizeComponent}, 
+      { path: 'reset-password', component:  SignupComponent}, 
     ]
   }
 ];

@@ -5,7 +5,7 @@
     </h6>
     <div class="finish-goods card-body" [style]="{'height': cssValue.body}">
 			<div class="flex-center">
-					<mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
+				<mat-spinner *ngIf=showSpinner diameter=125></mat-spinner>
 			</div> 
      <div class="cloths mt-10" *ngIf=!showSpinner>         
       <dx-data-grid id="gridContainer"
@@ -23,49 +23,41 @@
        <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
        <dxi-column dataField="bundleName" caption="Bundle Name" [width]="150"></dxi-column>
        <dxi-column dataField="quantity" caption="Qty" [alignment]="'left'"></dxi-column>  
+       <dxi-column dataField="color.displayValue" caption="Color" [alignment]="'left'"></dxi-column>  
+       <dxi-column dataField="size.displayValue" caption="Size" [alignment]="'left'"></dxi-column>  
        <dxi-column caption="Status" cellTemplate="cellTemplateHyperlink2" alignment="left" [minWidth]="140"></dxi-column>  
        <div *dxTemplate="let data of 'cellTemplateHyperlink2'">
-                                         <div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockStatus">
-                                         
-                                         <form>
-                                             <div class="form-group">
-                                                         <select id="status" class="form-control" (change)="statusChangefn($event, data.data)">
-                                                                 <option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd" [selected]="option?.entityCd == data?.data?.currentProcessStatus?.entityCd">{{ option?.displayValue }}</option>
-                                                         </select>
-                                             </div>
-
-                                         </form>
-                                     </div>
-                                     <ng-template class="dropdown" #elseBlockStatus>						
-                                             {{data?.data?.currentProcessStatus?.displayValue? data?.data?.currentProcessStatus?.displayValue:'Completed'}}
-                                     </ng-template>
+          <div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockStatus">
+            <form>
+              <div class="form-group">
+                <select id="status" class="form-control" (change)="statusChangefn($event, data.data)">
+                  <option *ngFor="let option of statusDropDownValue" [value]="option?.entityCd" [selected]="option?.entityCd == data?.data?.currentProcessStatus?.entityCd">{{ option?.displayValue }}</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <ng-template class="dropdown" #elseBlockStatus>						
+            {{data?.data?.currentProcessStatus?.displayValue? data?.data?.currentProcessStatus?.displayValue:'Completed'}}
+          </ng-template>
        </div>
 
        <dxi-column dataField="currentProcessCd.displayValue" caption="Process" [width]="150"></dxi-column>
        <dxi-column caption="Select Employee" cellTemplate="cellTemplateHyperlink1" alignment="center" [minWidth]="170"></dxi-column>  
        <div *dxTemplate="let data of 'cellTemplateHyperlink1'">
-                     <div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockEmployee">{{data.data.currentEmployeeId.empName}}</div>
-                     <ng-template class="dropdown" #elseBlockEmployee>												
-           <div class="form-group" *ngIf="data.data.currentProcessCd != null">
-                         <!-- <mat-form-field class="example-full-width"> -->
-                             <!-- <mat-label>Stock Name*</mat-label> -->
-                             <input type="text"
-                                         placeholder="Select Employee"
-                                         aria-label="Number"
-                                         matInput
-                                         [formControl]="myControlEmployee"
-                                         [matAutocomplete]="auto" class="form-control"
-                                         >
-                                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedEmployee($event,data.data)" >
-                                 <mat-option *ngFor="let option of filteredOptionsEmployee | async" [value]="option.empName">
-                                     {{option.empName}} <br> <span class="employeeIdOptions">Emp id: {{option.empId}}</span>
-                                     <!-- {{option.empName}} (Id: {{option.empId}}) -->
-                                 </mat-option>
-                             </mat-autocomplete>
-                         <!-- </mat-form-field> -->
-           </div>
-                     </ng-template>
-       </div>
+          <div class="employee-name" *ngIf="data.data.currentEmployeeId; else elseBlockEmployee">
+            {{data.data.currentEmployeeId.empName}}
+          </div>
+          <ng-template class="dropdown" #elseBlockEmployee>												
+            <div class="form-group" *ngIf="data.data.currentProcessCd != null">
+                <input type="text" placeholder="Select Employee" aria-label="Number" matInput [formControl]="myControlEmployee" [matAutocomplete]="auto" class="form-control">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="optionSelectedEmployee($event,data.data)" >
+                    <mat-option *ngFor="let option of filteredOptionsEmployee | async" [value]="option.empName">
+                      {{option.empName}} <br> <span class="employeeIdOptions">Emp id: {{option.empId}}</span>
+                    </mat-option>
+                  </mat-autocomplete>
+            </div>
+          </ng-template>
+        </div>
 
        <dxi-column caption="Job Card" cellTemplate="cellTemplateHyperlink" alignment="center"></dxi-column>  
        <div *dxTemplate="let data of 'cellTemplateHyperlink'">

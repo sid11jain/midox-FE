@@ -44,11 +44,8 @@ export class AddMeasurementComponent {
     this.showSpinner = true;    
     this.deleteBtnDisabled = false;
     let inputVal = this.measurementTypeForm.value.name;
-    console.log("inputVal ", inputVal);
     if(this.editedMeasurementTypeIndex !== null){
       //For update
-      console.log("Update");
-      console.log("editObject ", this.editObject);
       let obj = {    
         "entityCd": "UNIT_KG8",
         "parentEntityCd": null,
@@ -59,9 +56,6 @@ export class AddMeasurementComponent {
       obj.entityCd = this.editObject?.entityCd;
       obj.entityId = this.editObject?.entityId;
       obj.displayValue = inputVal;
-      // console.log("Obj ", obj);
-      
-      // this.editMeasurementType(obj);
       
       this.measurementTypeArray = await this.common.editDataFn(obj,this.dialogTitle,this.key);
       this.showSpinner = false;
@@ -75,8 +69,7 @@ export class AddMeasurementComponent {
       }
       // obj.entityCd = "UNIT_"+currTime;
       obj.displayValue = inputVal;
-      let data = [obj]
-      console.log(data);    
+      let data = [obj]  
 
       // this.addMeasurementType(data);
       
@@ -110,101 +103,4 @@ export class AddMeasurementComponent {
     this.showSpinner = false;
   }
 
-  //API Call
-
-  // Get
-  // getMeasrurementType(){    
-  //   this.common.getAllSettingsData("MID_UNIT").subscribe((responseData:any)=>{
-  //     let response = responseData?.body;
-  //     if (responseData.status === 200) {
-  //       this.measurementTypeArray = response;
-  //       console.log(response);    
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);        
-  //     }
-  //     this.showSpinner = false;
-  //   });
-  // }
-
-  // Delete
-  // deleteMeasurementType(entityCd:any){
-  //   console.log("API Call");    
-  //   this.common.deleteAllSettingsData(entityCd).subscribe((responseData:any)=>{
-  //     // let response = responseData?.body;
-  //     console.log(responseData);        
-  //     if (responseData.status === 200) {
-  //       // this.materials = response;
-  //       // console.log(response);        
-        
-  //       this.getMeasrurementType();
-  //       this.dialogTitle = 'Measurement Unit';
-  //       this.dialogMessage = 'Measurement unit delete successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogTitle = 'Measurement Unit';
-  //       this.dialogMessage = 'Measurement unit failed to delete.';        
-  //     }
-  //     this.showSpinner = false; 
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Add
-  // addMeasurementType(data:any){
-  //   console.log("Post API Call");
-  //   this.common.addAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 201) {
-  //       console.log(response);       
-  //       this.getMeasrurementType();    
-        
-  //       this.dialogTitle = 'Measurement Unit';
-  //       this.dialogMessage = 'Measurement unit saved successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status);      
-        
-  //       this.dialogTitle = 'Measurement Unit';
-  //       this.dialogMessage = 'Measurement unit failed to save.'; 
-  //     }      
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  // Edit
-  // editMeasurementType(data:any){
-  //   console.log("Edit API Call");
-  //   this.common.editAllSettingsData(data).subscribe((responseData:any)=>{
-  //     let response = responseData?.body;   
-  //     if (responseData.status === 200) {
-  //       console.log(response);       
-  //       this.getMeasrurementType();   
-        
-  //       this.dialogTitle = 'Measurement Unit';
-  //       this.dialogMessage = 'Measurement unit update successfully.'; 
-  //     }
-  //     else{
-  //       console.log("Error code: ",responseData?.status); 
-  //       this.dialogTitle = 'Measurement Unit';
-  //       this.dialogMessage = 'Measurement unit failed to update.';        
-  //     }
-  //     this.showSpinner = false;  
-  //     this.openDialog();
-  //   });
-  // }
-
-  //Modal 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(MsgDialogComponent, {
-  //     width: '400px',
-  //     data: { title: this.dialogTitle, message: this.dialogMessage }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result:any) => {
-  //     console.log('The dialog was closed');
-  //   });
-  // }
-}
+  }

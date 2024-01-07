@@ -94,11 +94,6 @@ export class AddStockComponent implements OnInit {
     if (this.userForm.invalid) {
       return;
     }
-    
-    // const currentFullTimestamp = new Date();
-    // this.userForm.patchValue({ currentFullTimestamp });
-    
-    console.log('Form values:', this.userForm.value);
     this.userForm.reset();
   }
 
@@ -112,7 +107,6 @@ export class AddStockComponent implements OnInit {
     }
     this.addStocksList.push(data);
 
-    console.log("Add stock data ",this.addStocksList);
     this.userForm.reset();
     let dataObj = {
       billNumber: data.billNumber,
@@ -138,7 +132,6 @@ export class AddStockComponent implements OnInit {
   }
 
   materialBtnClick(material:any){
-    console.log(material);
     
     const selectedMaterialValue = material.value as string;    
     if(selectedMaterialValue == 'MAT_CLOTH'){
@@ -160,15 +153,7 @@ export class AddStockComponent implements OnInit {
 
   submitForm(){
     this.showSpinner = true;
-    this.userForm.reset();
-    console.log("Form value : ", this.addStocksList);    
-
-    // // Extracting the common keys and the remaining fields
-    // const commonKeys = ['billNumber', 'date', 'packingSlipNumber', 'supplier'];
-    // const extractedData:any = {
-    //     common: {},
-    //     data: []
-    // };
+    this.userForm.reset();   
     let newDataList:any = [];
     this.addStocksList.forEach((item:any) => {
         let newObj:any = {}
@@ -189,24 +174,8 @@ export class AddStockComponent implements OnInit {
         };
 
         newDataList.push(newObj);
-
-        // Object.entries(item).forEach(([key, value]) => {
-        //     if (commonKeys.includes(key)) {
-        //         commonData[key] = value;
-        //     } else {
-        //         remainingData[key] = value;
-        //     }
-        // });
-
-    //     extractedData.common = commonData;
-    //     extractedData.data.push(remainingData);
      });
-
-    // console.log("Final Data : ",extractedData);
     
-    
-
-    console.log("newDataList", newDataList);
       
     this.common.addStocks(newDataList).subscribe((responseData)=>{
       let response = responseData.body;
@@ -242,13 +211,12 @@ export class AddStockComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
     });
   }
 
   fnForRedirectSettings(data1:any){ 
-    const pageURL = data1.value as string;  
-    console.log(pageURL);    
+    const pageURL = data1.value as string; 
     if(pageURL == "add-color-fabric" || pageURL == "add-supplier" || pageURL == "add-subcategory" || pageURL == "add-measurement-type" ){      
       this.route.navigate([`./settings/${pageURL}`]);
     }
